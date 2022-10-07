@@ -1,8 +1,7 @@
 <template>
   <div>
-    <!--<NuxtWelcome />-->
-    <v-btn>
-      <v-icon large icon="mdi-domain" />
-    </v-btn>
+    <NuxtLayout name="default">
+      <NuxtPage/>
+    </NuxtLayout>
   </div>
 </template>
