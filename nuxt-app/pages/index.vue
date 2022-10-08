@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-btn>
+        <v-btn @click="firstStore.n++">
             <v-icon large icon="mdi-domain" />
         </v-btn>
         {{firstStore.n}}
@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import {useFirstStore} from '~/stores/first.js'
+import { useFirstStore } from '~/stores/first.js'
 
 const firstStore = useFirstStore()
 </script>
