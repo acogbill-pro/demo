@@ -1,23 +1,25 @@
 <template>
     <div>
-        <v-btn @click="logger()">
+        <v-btn @click="increment()">
             <v-icon large icon="mdi-domain" />
         </v-btn>
-        {{firstStore.n}}
+        {{analytics.n}}
     </div>
 </template>
 
 <script setup>
-import { useFirstStore } from '~/stores/first.js'
 import { useAnalytics } from '~/stores/analytics.js'
-
-const firstStore = useFirstStore()
 const analytics = useAnalytics()
 
-function logger() {
-    console.log('log!')
-    console.log(analytics)
+
+
+function increment() {
+    analytics.increment()
 }
+
+onMounted(() => {
+    analytics.page('Actual page!')
+})
 </script>
 
 <style lang="scss" scoped>
