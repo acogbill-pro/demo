@@ -1,9 +1,11 @@
 <template>
     <div class="default-layout">
         <v-app>
+            <AppNavBar />
             <v-main>
                 <slot />
             </v-main>
+            <AppFooter />
         </v-app>
     </div>
 </template>

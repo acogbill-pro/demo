@@ -1,7 +1,9 @@
 <template>
     <div>
-        <AppMain />
-
+        <v-btn @click="increment()">
+            <v-icon large icon="mdi-domain" />
+        </v-btn>
+        {{analytics.n}}
     </div>
 </template>
 
@@ -9,9 +11,9 @@
 import { useAnalytics } from '~/stores/analytics.js'
 const analytics = useAnalytics()
 
-onMounted(() => {
-    analytics.page('Main page')
-})
+function increment() {
+    analytics.increment()
+}
 </script>
 
 <style lang="scss" scoped>
