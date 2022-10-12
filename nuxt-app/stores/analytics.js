@@ -4,7 +4,7 @@ import {defineStore} from 'pinia'
 
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
-      n: 0//new Analytics('DtDvPaJzJ7sw0EJD6RkYKO9BkPIhFh97'),
+      n: 0,
     }),
   
     getters: {
@@ -13,17 +13,21 @@ export const useAnalytics = defineStore('analyticsStore', {
     },
   
     actions: {
+      init(writeKey) {
+        this.analytics._writeKey = writeKey;
+        this.analytics.load(writeKey);
+      },
       increment(amount = 1) {
         this.n += amount
         this.track("Incremented")
       },
       page(pageTitle) {
-        this.analytics?.page(pageTitle)
+        this.analytics.page(pageTitle)
       },
-      track(eventName) {
-        this.analytics?.track(eventName)
+      track(eventName, traitsObject = null) {
+        this.analytics.track(eventName, traitsObject)
       },
-      identify(user_id = null, traitsObject) {
+      identify(user_id = null, traitsObject = null) {
         if (user_id) {
           this.analytics.identify(user_id, traitsObject)
         } else {

@@ -1,10 +1,14 @@
 <template>
-    <div>
-        <v-btn @click="increment()">
-            <v-icon large icon="mdi-domain" />
-        </v-btn>
-        {{analytics.n}}
-    </div>
+    <v-container>
+        <v-row>
+            <v-col>
+                <v-btn @click="increment()">
+                    <v-icon large icon="mdi-domain" />
+                </v-btn>
+                {{analytics.n}}
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script setup>

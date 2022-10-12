@@ -12,6 +12,8 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
+import { useAnalytics } from '~/stores/analytics.js'
+const analytics = useAnalytics()
 
 const route = useRoute()
 
@@ -32,6 +34,13 @@ useHead({
             src: "static/js/analytics.js"
         }
     ]
+})
+
+onMounted(() => {
+    const runtimeConfig = useRuntimeConfig()
+    const writeKey = runtimeConfig.public.segmentWriteKey
+    //console.log(writeKey)
+    //analytics.init(writeKey)
 })
 </script>
 
