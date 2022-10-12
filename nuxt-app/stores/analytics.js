@@ -23,5 +23,12 @@ export const useAnalytics = defineStore('analyticsStore', {
       track(eventName) {
         this.analytics?.track(eventName)
       },
-    },
+      identify(user_id = null, traitsObject) {
+        if (user_id) {
+          this.analytics.identify(user_id, traitsObject)
+        } else {
+          this.analytics.identify(traitsObject)
+        }
+      },
+    }
   })

@@ -5,7 +5,7 @@ const topLinks = [
         url: '/login',
     },
 ]
-//undoRedoStore.startSaving()
+/*undoRedoStore.startSaving()
 const undoable = ref(false)
 const redoable = ref(false)
 const drawer = ref(false)
@@ -14,7 +14,7 @@ function undo() {
 }
 function redo() {
     console.log('would redo')
-}
+}*/
 </script>
 
 <template>
@@ -46,7 +46,6 @@ function redo() {
         </v-app-bar>
     </div>
 </template>
-
 
 
 <style lang="scss" scoped>

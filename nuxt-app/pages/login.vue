@@ -3,14 +3,12 @@ import { useAnalytics } from '~/stores/analytics.js'
 const analytics = useAnalytics()
 
 onMounted(() => {
-    analytics.page('Login')
+    analytics.page('Login Page')
 })
 </script>
 
 <template>
-    <div>
-
-    </div>
+    <LoginRegister />
 </template>
 
 <style lang="scss" scoped>
