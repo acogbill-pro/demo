@@ -13,10 +13,10 @@ export const useAnalytics = defineStore('analyticsStore', {
     },
   
     actions: {
-      init(writeKey) {
+      /*init(writeKey) {
         this.analytics._writeKey = writeKey;
         this.analytics.load(writeKey);
-      },
+      },*/
       increment(amount = 1) {
         this.n += amount
         this.track("Incremented")

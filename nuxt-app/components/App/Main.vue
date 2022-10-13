@@ -2,10 +2,10 @@
     <v-container>
         <v-row>
             <v-col>
-                <v-btn @click="increment()">
-                    <v-icon large icon="mdi-domain" />
-                </v-btn>
-                {{analytics.n}}
+                <AppIncrement />
+            </v-col>
+            <v-col>
+                <AppProfile />
             </v-col>
         </v-row>
     </v-container>
@@ -14,10 +14,6 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
 const analytics = useAnalytics()
-
-function increment() {
-    analytics.increment()
-}
 </script>
 
 <style lang="scss" scoped>

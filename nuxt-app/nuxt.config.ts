@@ -19,6 +19,9 @@ export default defineNuxtConfig({
       public: {
         // to use: runtimeConfig.public.varName
         segmentWriteKey: process.env.SEGMENT_WRITE_KEY,
+        profilesSpaceID: process.env.PROFILES_SPACE_ID,
+        profilesAccessToken: process.env.PROFILES_ACCESS_TOKEN,
+        justCORSurl: process.env.JUST_CORS,
       }
     }
 })
