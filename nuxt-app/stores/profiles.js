@@ -5,12 +5,15 @@ import { Buffer } from 'buffer'
 
 export const useProfiles = defineStore('profilesStore', {
     state: () => ({
-      traits: [],
+      traits: {},
     }),
   
     getters: {
       analytics: (state) => window.analytics? window.analytics : null, // TODO: add some validation
       double: (state) => state.n * 2,
+      hasTraits: (state) => {
+        return Object.keys(state.traits).length > 0
+      },
     },
   
     actions: {

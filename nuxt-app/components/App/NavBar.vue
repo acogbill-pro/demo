@@ -1,7 +1,7 @@
 <script setup>
 const topLinks = [
     {
-        label: 'Register',
+        label: 'Login',
         url: '/login',
     },
 ]

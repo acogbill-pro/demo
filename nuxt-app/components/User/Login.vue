@@ -1,43 +1,44 @@
 <template>
-    <v-container>
-        <v-row>
-            <v-col>
-                <v-form ref="form" v-model="valid" lazy-validation>
-                    <v-text-field v-model="fname" :counter="10" :rules="nameRules" label="First Name" required>
-                    </v-text-field>
+    <v-card>
+        <v-card-title>Login</v-card-title>
 
-                    <v-text-field v-model="lname" :counter="10" :rules="nameRules" label="Last Name" required>
-                    </v-text-field>
+        <v-form ref="form" v-model="valid" lazy-validation>
+            <v-card-text>
+                <v-text-field v-model="fname" :counter="10" :rules="nameRules" label="First Name" required>
+                </v-text-field>
 
-                    <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                <v-text-field v-model="lname" :counter="10" :rules="nameRules" label="Last Name" required>
+                </v-text-field>
 
-                    <v-text-field v-model="phone" :rules="phoneRules" label="Phone" required></v-text-field>
+                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
 
-                    <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
+                <v-text-field v-model="phone" :rules="phoneRules" label="Phone" required></v-text-field>
+
+                <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
         </v-select>-->
 
-                    <!--<v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?"
+                <!--<v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?"
             required></v-checkbox>-->
+            </v-card-text>
+            <v-card-actions>
 
-                    <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit">
-                        Submit
-                    </v-btn>
+                <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit">
+                    Submit
+                </v-btn>
 
-                    <v-btn color="warning" class="mr-4" @click="reset">
-                        Reset Form
-                    </v-btn>
-                    <v-btn variant="plain" @click="prePop()">
-                        Populate
-                    </v-btn>
+                <v-btn color="warning" class="mr-4" @click="reset">
+                    Reset Form
+                </v-btn>
+                <v-btn variant="plain" @click="prePop()">
+                    Populate
+                </v-btn>
 
-                    <!--<v-btn color="warning" @click="resetValidation">
+                <!--<v-btn color="warning" @click="resetValidation">
             Reset Validation
         </v-btn>-->
-                </v-form>
-            </v-col>
-        </v-row>
-    </v-container>
-
+            </v-card-actions>
+        </v-form>
+    </v-card>
 </template>
 
 <script setup>
