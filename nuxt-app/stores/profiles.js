@@ -3,15 +3,16 @@
 import {defineStore} from 'pinia'
 import { Buffer } from 'buffer'
 
-export const useProfiles = defineStore('profilesStore', {
+export const useProfileStore = defineStore('profilesStore', {
     state: () => ({
       traits: {},
     }),
   
     getters: {
-      analytics: (state) => window.analytics? window.analytics : null, // TODO: add some validation
+      analytics: (state) => window.analytics, // TODO: add some validation
       double: (state) => state.n * 2,
       hasTraits: (state) => {
+        console.log('checking for traits')
         return Object.keys(state.traits).length > 0
       },
     },

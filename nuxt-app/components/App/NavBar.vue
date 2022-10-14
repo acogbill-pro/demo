@@ -1,7 +1,12 @@
 <script setup>
+import { useProfileStore } from '~/stores/profiles'
+const profile = useProfileStore()
+
+const linkText = computed(() => profile.hasTraits ? 'Account' : 'Login')
+
 const topLinks = [
     {
-        label: 'Login',
+        label: linkText.value,
         url: '/login',
     },
 ]

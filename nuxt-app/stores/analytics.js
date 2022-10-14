@@ -1,6 +1,7 @@
 // Wrapper store for analytics.js
   
 import {defineStore} from 'pinia'
+import {useProfileStore} from '~/stores/profiles'
 
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
@@ -28,8 +29,10 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.analytics.track(eventName, traitsObject)
       },
       identify(user_id = null, traitsObject = null) {
+        const profile = useProfileStore()
         if (user_id) {
           this.analytics.identify(user_id, traitsObject)
+          profile.loadProfileForUser(user_id)
         } else {
           this.analytics.identify(traitsObject)
         }

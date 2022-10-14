@@ -1,6 +1,6 @@
 <script setup>
-import { useProfiles } from '~/stores/profiles.js'
-const profiles = useProfiles()
+import { useProfileStore } from '~/stores/profiles.js'
+const profiles = useProfileStore()
 
 function loadProfile() {
     profiles.loadProfileForUser('Andy_Cogbill_id')

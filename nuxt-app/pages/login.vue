@@ -1,15 +1,14 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfiles } from '~/stores/profiles.js'
+import { useProfileStore } from '~/stores/profiles.js'
 const analytics = useAnalytics()
-const profile = useProfiles()
+const profile = useProfileStore()
 
 onMounted(() => {
     analytics.page('Login Page')
 })
 
 const isLoggedIn = computed(() => {
-    console.log(profile.hasTraits)
     return profile.hasTraits
 })
 </script>
@@ -26,7 +25,7 @@ const isLoggedIn = computed(() => {
 
         </v-row>
         <v-row v-else>
-            User is logged in
+            Logged in as {{profile.traits.fname}} {{profile.traits.lname}}
         </v-row>
     </v-container>
 </template>
