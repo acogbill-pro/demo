@@ -28,7 +28,7 @@ export const useAnalytics = defineStore('analyticsStore', {
       track(eventName, traitsObject = null) {
         this.analytics.track(eventName, traitsObject)
       },
-      identify(user_id = null, traitsObject = null) {
+      identify(user_id = null, traitsObject = {}) {
         const profile = useProfileStore()
         if (user_id) {
           this.analytics.identify(user_id, traitsObject)

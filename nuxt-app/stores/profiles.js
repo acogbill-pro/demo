@@ -12,7 +12,7 @@ export const useProfileStore = defineStore('profilesStore', {
       analytics: (state) => window.analytics, // TODO: add some validation
       double: (state) => state.n * 2,
       hasTraits: (state) => {
-        console.log('checking for traits')
+        //console.log('checking for traits')
         return Object.keys(state.traits).length > 0
       },
     },
@@ -37,9 +37,13 @@ export const useProfileStore = defineStore('profilesStore', {
         //console.log(requestURL)
         fetch(requestURL, options)
         .then((response) => response.json())
-        .then((data) => (this.traits = data.traits))
+        .then((data) => (this.traits = data.traits !== null ? data.traits : {}))
         //.then((data) => console.log(data))
         .catch((error) => console.log(error));
       },
+      unload() {
+        this.traits = {}
+        this.analytics.reset()
+      }
     }
   })

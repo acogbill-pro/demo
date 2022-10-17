@@ -18,9 +18,9 @@ const analytics = useAnalytics()
 const route = useRoute()
 
 useHead({
-    title: 'Segment App Home',
+    //title: 'Segment App Home',
     // or, instead:
-    // titleTemplate: (title) => `My App - ${title}`,
+    titleTemplate: (title) => `Cogbill Demo App - ${title}`,
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     charset: 'utf-8',
     meta: [

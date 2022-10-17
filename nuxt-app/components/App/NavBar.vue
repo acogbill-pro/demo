@@ -7,7 +7,7 @@ const linkText = computed(() => profile.hasTraits ? 'Account' : 'Login')
 const topLinks = [
     {
         label: linkText.value,
-        url: '/login',
+        url: '/account',
     },
 ]
 /*undoRedoStore.startSaving()
@@ -27,7 +27,7 @@ function redo() {
         <v-app-bar id="nav" app color="primary" dark nuxt>
             <v-toolbar-title>
                 <h1>
-                    Segment.app
+                    CogbillDemo.app
                     <NuxtLink to="/">
                         <v-icon align="center" small color="white">
                             {{ 'mdi-call-split mdi-rotate-180' }}

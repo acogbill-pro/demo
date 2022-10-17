@@ -26,7 +26,7 @@
                 </v-btn>
 
                 <v-btn color="warning" class="mr-4" @click="reset">
-                    Reset Form
+                    Reset
                 </v-btn>
                 <v-btn variant="plain" @click="prePop()">
                     Populate
