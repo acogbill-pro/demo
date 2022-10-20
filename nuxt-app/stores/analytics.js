@@ -4,13 +4,10 @@ import {defineStore} from 'pinia'
 import {useProfileStore} from '~/stores/profiles'
 
 export const useAnalytics = defineStore('analyticsStore', {
-    state: () => ({
-      n: 0,
-    }),
+    state: () => ({}),
   
     getters: {
       analytics: (state) => window.analytics? window.analytics : null, // TODO: add some validation
-      double: (state) => state.n * 2,
     },
   
     actions: {
@@ -18,14 +15,12 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.analytics._writeKey = writeKey;
         this.analytics.load(writeKey);
       },*/
-      increment(amount = 1) {
-        this.n += amount
-        this.track("Incremented")
-      },
       page(pageTitle) {
         this.analytics.page(pageTitle)
       },
       track(eventName, traitsObject = null) {
+        console.log('calling Analytics with Track - ' + eventName)
+        console.log(this.analytics.track)
         this.analytics.track(eventName, traitsObject)
       },
       identify(user_id = null, traitsObject = {}) {

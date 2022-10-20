@@ -1,18 +1,18 @@
 <script setup>
-import { useAnalytics } from '~/stores/analytics.js'
-const analytics = useAnalytics()
+import { useMainStore } from '~/stores/main.js'
+const store = useMainStore()
 
 function increment() {
-    analytics.increment()
+    store.increment()
 }
 </script>
 
 <template>
     <div>
         <v-btn @click="increment()">
-            <v-icon large icon="mdi-domain" />
+            <v-icon large icon="mdi-plus" />
         </v-btn>
-        {{analytics.n}}
+        {{store.n}}
     </div>
 </template>
 
