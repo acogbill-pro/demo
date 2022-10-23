@@ -11,10 +11,6 @@ export const useAnalytics = defineStore('analyticsStore', {
     },
   
     actions: {
-      /*init(writeKey) {
-        this.analytics._writeKey = writeKey;
-        this.analytics.load(writeKey);
-      },*/
       page(pageTitle) {
         this.analytics.page(pageTitle)
       },

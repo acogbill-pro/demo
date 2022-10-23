@@ -2,6 +2,9 @@
     <v-container>
         <v-row>
             <v-col>
+                <AppProductList />
+            </v-col>
+            <v-col>
                 <AppIncrement />
             </v-col>
             <v-col>

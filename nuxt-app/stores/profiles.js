@@ -2,6 +2,7 @@
   
 import {defineStore} from 'pinia'
 import { Buffer } from 'buffer'
+import { useAnalytics } from '~/stores/analytics'
 
 export const useProfileStore = defineStore('profilesStore', {
     state: () => ({
@@ -9,8 +10,6 @@ export const useProfileStore = defineStore('profilesStore', {
     }),
   
     getters: {
-      analytics: (state) => window.analytics, // TODO: add some validation
-      double: (state) => state.n * 2,
       hasTraits: (state) => {
         //console.log('checking for traits')
         return Object.keys(state.traits).length > 0
@@ -42,8 +41,9 @@ export const useProfileStore = defineStore('profilesStore', {
         .catch((error) => console.log(error));
       },
       unload() {
+        const analytics = useAnalytics()
         this.traits = {}
-        this.analytics.reset()
+        analytics.reset()
       }
     }
   })
