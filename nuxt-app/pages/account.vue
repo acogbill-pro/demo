@@ -13,7 +13,7 @@ useHead({
 })
 
 onMounted(() => {
-    //analytics.page('Login Page')
+    analytics.page('Login Page')
 })
 
 const isLoggedIn = computed(() => {

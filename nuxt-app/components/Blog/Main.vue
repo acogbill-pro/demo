@@ -2,10 +2,10 @@
     <v-container>
         <v-row>
             <v-col>
-                <AppIncrement />
+                <BlogIncrement />
             </v-col>
             <v-col>
-                <AppProfile />
+                <BlogProfile />
             </v-col>
         </v-row>
     </v-container>

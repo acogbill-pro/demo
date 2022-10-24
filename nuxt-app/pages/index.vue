@@ -11,13 +11,13 @@ useHead({
 })
 
 onMounted(() => {
-    //analytics.page('Main page')
+    analytics.page('Main page')
 })
 </script>
 
 <template>
     <div>
-        <AppMain />
+        <BlogMain />
     </div>
 </template>
 

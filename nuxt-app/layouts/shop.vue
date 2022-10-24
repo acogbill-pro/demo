@@ -1,21 +1,18 @@
 <template>
     <div class="default-layout">
         <v-app>
-            <AppShopNavBar />
+            <ShopNavBar />
             <v-main>
                 <slot />
             </v-main>
-            <AppFooter />
+            <ShopFooter />
         </v-app>
     </div>
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
-import { useAnalytics } from '~/stores/analytics.js'
-const analytics = useAnalytics()
-
-const route = useRoute()
+/*import { useRoute } from 'vue-router'
+const route = useRoute()*/
 
 useHead({
     //title: 'Segment App Home',
@@ -31,17 +28,13 @@ useHead({
     },
     script: [
         {
-            src: "static/js/analytics.js"
+            src: 'static/js/analytics-shop.js',
+            type: 'text/javascript',
         }
     ]
 })
 
-onMounted(() => {
-    //const runtimeConfig = useRuntimeConfig()
-    // const writeKey = runtimeConfig.public.segmentWriteKey
-    //console.log(writeKey)
-    //analytics.init(writeKey)
-})
+//onMounted(() => {})
 </script>
 
 <style lang="scss" scoped>

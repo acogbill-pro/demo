@@ -11,7 +11,7 @@ useHead({
 })
 
 onMounted(() => {
-    //analytics.page('Product Listing Page')
+    analytics.page('Product Listing Page')
 })
 </script>
 
@@ -19,12 +19,12 @@ onMounted(() => {
     <v-container>
         <v-row>
             <v-col>
-                <AppProductList category='Category 1' />
+                <ShopProductList category='Category 1' />
             </v-col>
         </v-row>
         <v-row>
             <v-col>
-                <AppProductList category='Category 2' />
+                <ShopProductList category='Category 2' />
             </v-col>
         </v-row>
     </v-container>

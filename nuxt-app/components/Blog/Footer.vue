@@ -1,6 +1,6 @@
 <template>
     <div>
-        Footer
+        Blog Footer
     </div>
 </template>
 

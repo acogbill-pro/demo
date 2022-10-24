@@ -28,12 +28,12 @@ function onIntersect(isIntersecting, entries, observer) {
 
 <template>
     <div>
-        <AppProductCard v-for="product in productsToShow" :key="product.SKU" :sku="product.SKU" />
+        <ShopProductCard v-for="product in productsToShow" :key="product.SKU" :sku="product.SKU" />
         <v-spacer v-intersect="{
-              handler: onIntersect,
-              options: {
+            handler: onIntersect,
+            options: {
                 threshold: [0, 0.5, 1.0]
-              }
+            }
         }">
         </v-spacer>
     </div>
