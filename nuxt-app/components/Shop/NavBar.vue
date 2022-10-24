@@ -29,7 +29,7 @@ function redo() {
 
 <template>
     <div>
-        <v-app-bar id="nav" app color="primary" dark nuxt>
+        <v-app-bar id="nav" app color="#f22f46" nuxt>
             <v-toolbar-title>
                 <h1>
                     ParentShop

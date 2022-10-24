@@ -1,10 +1,11 @@
 <template>
     <v-container>
         <v-row>
-            <v-col>
-                <BlogIncrement />
+            <v-col cols="8">
+                <BlogArticleList category="Category 1" />
+                <BlogArticleList category="Category 2" />
             </v-col>
-            <v-col>
+            <v-col cols="4">
                 <BlogProfile />
             </v-col>
         </v-row>
