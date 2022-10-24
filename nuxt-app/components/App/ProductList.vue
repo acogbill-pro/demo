@@ -2,7 +2,14 @@
 import { useProductCatalog } from '~/stores/products.js'
 const products = useProductCatalog()
 
-//1const linkText = computed(() => profile.hasTraits ? 'Account' : 'Login')
+const props = defineProps({
+    category: {
+        type: String,
+        default: 'Category 1',
+    }
+})
+
+const productsToShow = computed(() => products.all.filter(product => product.category === props.category))
 
 const reachedTheEnd = ref(false)
 
@@ -12,7 +19,7 @@ function onIntersect(isIntersecting, entries, observer) {
     // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
     if (isIntersecting && !reachedTheEnd.value && entries[0].intersectionRatio >= 0.5) {
         reachedTheEnd.value = true
-        console.log('reached the end')
+        console.log('Saw all products in Category ' + props.category)
     }
 }
 
@@ -21,26 +28,14 @@ function onIntersect(isIntersecting, entries, observer) {
 
 <template>
     <div>
-        <v-card v-for="product in products.all" :key="product.SKU">
-            <v-card-title>{{product.name}}</v-card-title>
-            <v-card-text>
-                {{product.description}}
-            </v-card-text>
-            <v-card-actions>
-                <v-btn>
-                    <v-icon icon="mdi-plus"></v-icon>
-                </v-btn>
-            </v-card-actions>
-        </v-card>
-        <v-card v-intersect="{
+        <AppProductCard v-for="product in productsToShow" :key="product.SKU" :sku="product.SKU" />
+        <v-spacer v-intersect="{
               handler: onIntersect,
               options: {
                 threshold: [0, 0.5, 1.0]
               }
         }">
-            <v-card-title>The End</v-card-title>
-
-        </v-card>
+        </v-spacer>
     </div>
 </template>
 

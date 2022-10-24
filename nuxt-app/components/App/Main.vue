@@ -2,7 +2,8 @@
     <v-container>
         <v-row>
             <v-col>
-                <AppProductList />
+                <AppProductList category='Category 1' />
+                <AppProductList category='Category 2' />
             </v-col>
             <v-col>
                 <AppIncrement />
