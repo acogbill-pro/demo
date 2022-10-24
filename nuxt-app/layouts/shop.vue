@@ -1,7 +1,7 @@
 <template>
     <div class="default-layout">
         <v-app>
-            <AppNavBar />
+            <AppShopNavBar />
             <v-main>
                 <slot />
             </v-main>
@@ -13,9 +13,9 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { useAnalytics } from '~/stores/analytics.js'
-//const analytics = useAnalytics()
+const analytics = useAnalytics()
 
-//const route = useRoute()
+const route = useRoute()
 
 useHead({
     //title: 'Segment App Home',
@@ -38,7 +38,7 @@ useHead({
 
 onMounted(() => {
     //const runtimeConfig = useRuntimeConfig()
-    //const writeKey = runtimeConfig.public.segmentWriteKey
+    // const writeKey = runtimeConfig.public.segmentWriteKey
     //console.log(writeKey)
     //analytics.init(writeKey)
 })

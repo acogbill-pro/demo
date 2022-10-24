@@ -4,12 +4,16 @@ import { useProfileStore } from '~/stores/profiles.js'
 const analytics = useAnalytics()
 const profile = useProfileStore()
 
+definePageMeta({
+    layout: "default",
+})
+
 useHead({
     title: 'Account Page'
 })
 
 onMounted(() => {
-    analytics.page('Login Page')
+    //analytics.page('Login Page')
 })
 
 const isLoggedIn = computed(() => {
@@ -34,7 +38,7 @@ function logout() {
         </v-row>
         <v-row v-else>
             <v-col>
-                <p>Logged in as {{profile.traits.fname}} {{profile.traits.lname}}</p>
+                <p>Logged in as {{ profile.traits.fname }} {{ profile.traits.lname }}</p>
             </v-col>
             <v-col>
                 <v-btn @click="logout()">Logout</v-btn>
