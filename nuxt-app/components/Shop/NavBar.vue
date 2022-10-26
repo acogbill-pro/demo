@@ -33,11 +33,11 @@ function redo() {
             <v-toolbar-title>
                 <h1>
                     ParentShop
-                    <NuxtLink to="/">
+                    <!--<NuxtLink to="/">
                         <v-icon small color="white">
                             {{ 'mdi-call-split mdi-rotate-180' }}
                         </v-icon>
-                    </NuxtLink>
+                    </NuxtLink>-->
                 </h1>
             </v-toolbar-title>
             <!--<v-btn color="secondary" text rounded dense :disabled="!undoable" @click="undo">
@@ -47,7 +47,9 @@ function redo() {
                 <v-icon>mdi-redo-variant</v-icon>
             </v-btn>
             <v-spacer />-->
-
+            <v-btn color="secondary" text rounded href="/" target="_blank">
+                Blog
+            </v-btn>
             <v-btn v-for="link in topLinks" :key="`${link.label}-nav-link`" color="secondary" text rounded
                 :to="link.url" nuxt>
                 {{ link.label }}

@@ -19,7 +19,7 @@ function onIntersect(isIntersecting, entries, observer) {
     // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
     if (isIntersecting && !reachedTheEnd.value && entries[0].intersectionRatio >= 0.5) {
         reachedTheEnd.value = true
-        console.log('Saw all products in Category ' + props.category)
+        console.log('Viewed all products in Category ' + props.category)
     }
 }
 
@@ -28,6 +28,7 @@ function onIntersect(isIntersecting, entries, observer) {
 
 <template>
     <div>
+        <h1 color="primary" class="my-10">{{ props.category }}</h1>
         <ShopProductCard v-for="product in productsToShow" :key="product.SKU" :sku="product.SKU" />
         <v-spacer v-intersect="{
             handler: onIntersect,

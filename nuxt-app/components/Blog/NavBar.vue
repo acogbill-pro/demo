@@ -5,10 +5,10 @@ const profile = useProfileStore()
 const linkText = computed(() => profile.hasTraits ? 'Account' : 'Login')
 
 const topLinks = [
-    {
+    /*{
         label: 'Products',
         url: '/products',
-    },
+    },*/
     {
         label: linkText.value,
         url: '/account',
@@ -33,11 +33,11 @@ function redo() {
             <v-toolbar-title>
                 <h1>
                     Growing Family Blog
-                    <NuxtLink to="/">
+                    <!--<NuxtLink to="/">
                         <v-icon small color="white">
                             {{ 'mdi-call-split mdi-rotate-180' }}
                         </v-icon>
-                    </NuxtLink>
+                    </NuxtLink>-->
                 </h1>
             </v-toolbar-title>
             <!--<v-btn color="secondary" text rounded dense :disabled="!undoable" @click="undo">
@@ -47,7 +47,9 @@ function redo() {
                 <v-icon>mdi-redo-variant</v-icon>
             </v-btn>
             <v-spacer />-->
-
+            <v-btn color="secondary" text rounded href="/shop" target="_blank">
+                Shop
+            </v-btn>
             <v-btn v-for="link in topLinks" :key="`${link.label}-nav-link`" color="secondary" text rounded
                 :to="link.url" nuxt>
                 {{ link.label }}

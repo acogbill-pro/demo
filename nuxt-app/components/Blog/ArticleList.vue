@@ -19,7 +19,7 @@ function onIntersect(isIntersecting, entries, observer) {
     // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
     if (isIntersecting && !reachedTheEnd.value && entries[0].intersectionRatio >= 0.5) {
         reachedTheEnd.value = true
-        console.log('Saw all articles in Category ' + props.category)
+        console.log('Viewed all articles in Category ' + props.category)
     }
 }
 
