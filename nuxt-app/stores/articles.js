@@ -1,7 +1,8 @@
 // Main store for app
   
 import {defineStore} from 'pinia'
-//import {useAnalytics} from '~/stores/analytics'
+import { useAnalytics } from '~/stores/analytics.js'
+import { useProfileStore } from '~/stores/profiles.js'
 
 export const useArticleCatalog = defineStore('articleCatalog', {
     state: () => ({
@@ -56,21 +57,21 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             priceUSD: 70,
         },
         {
-            ID: '0007',
+            ID: '0008',
             title: 'Article H',
             fullText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet justo donec enim. Placerat orci nulla pellentesque dignissim enim. Risus nullam eget felis eget nunc lobortis mattis aliquam faucibus. Rhoncus dolor purus non enim praesent. Sit amet luctus venenatis lectus. Tellus orci ac auctor augue mauris augue neque gravida. Sodales ut eu sem integer vitae. Tellus in metus vulputate eu. Viverra mauris in aliquam sem fringilla ut morbi. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Neque gravida in fermentum et sollicitudin ac.',
             category: 'Category 2',
             priceUSD: 80,
         },
         {
-            ID: '0008',
+            ID: '0009',
             title: 'Article I',
             fullText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet justo donec enim. Placerat orci nulla pellentesque dignissim enim. Risus nullam eget felis eget nunc lobortis mattis aliquam faucibus. Rhoncus dolor purus non enim praesent. Sit amet luctus venenatis lectus. Tellus orci ac auctor augue mauris augue neque gravida. Sodales ut eu sem integer vitae. Tellus in metus vulputate eu. Viverra mauris in aliquam sem fringilla ut morbi. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Neque gravida in fermentum et sollicitudin ac.',
             category: 'Category 2',
             priceUSD: 90,
         },
         {
-            ID: '0009',
+            ID: '0010',
             title: 'Article J',
             fullText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet justo donec enim. Placerat orci nulla pellentesque dignissim enim. Risus nullam eget felis eget nunc lobortis mattis aliquam faucibus. Rhoncus dolor purus non enim praesent. Sit amet luctus venenatis lectus. Tellus orci ac auctor augue mauris augue neque gravida. Sodales ut eu sem integer vitae. Tellus in metus vulputate eu. Viverra mauris in aliquam sem fringilla ut morbi. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Neque gravida in fermentum et sollicitudin ac.',
             category: 'Category 2',
@@ -90,6 +91,11 @@ export const useArticleCatalog = defineStore('articleCatalog', {
     actions: {
       addFavorite(withArticleID) {
         this.favoriteIDs.add(withArticleID)
+
+        const article = this.all.find(article => article.ID === withArticleID)
+
+        const analytics = useAnalytics()
+        analytics.track('Article Favorited', article)
       },
       removeFavorite(withArticleID) {
         this.favoriteIDs.delete(withArticleID)

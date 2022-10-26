@@ -19,7 +19,6 @@ export const useProfileStore = defineStore('profilesStore', {
     actions: {
       loadProfileForUser(userID) {
         const runtimeConfig = useRuntimeConfig()
-        const spaceID = runtimeConfig.public.profilesSpaceID
 
         const options = {
         method: "GET",
@@ -32,7 +31,7 @@ export const useProfileStore = defineStore('profilesStore', {
 
         const justCors = runtimeConfig.public.justCORSurl
 
-        const requestURL = justCors + 'https://profiles.segment.com/v1/spaces/' + spaceID + '/collections/users/profiles/user_id:' + userID + '/traits'
+        const requestURL = justCors + 'https://profiles.segment.com/v1/spaces/' + runtimeConfig.public.profilesSpaceID + '/collections/users/profiles/user_id:' + userID + '/traits'
         //console.log(requestURL)
         fetch(requestURL, options)
         .then((response) => response.json())

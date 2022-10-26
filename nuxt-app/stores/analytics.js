@@ -12,14 +12,15 @@ export const useAnalytics = defineStore('analyticsStore', {
   
     actions: {
       page(pageTitle) {
+        console.log('Page call for ' + pageTitle)
         this.analytics.page(pageTitle)
       },
       track(eventName, traitsObject = null) {
-        console.log('calling Analytics with Track - ' + eventName)
-        console.log(this.analytics.track)
+        console.log('Track call for ' + eventName)
         this.analytics.track(eventName, traitsObject)
       },
       identify(user_id = null, traitsObject = {}) {
+        console.log('Identify call for ' + user_id !== null ? user_id : 'anon')
         const profile = useProfileStore()
         if (user_id) {
           this.analytics.identify(user_id, traitsObject)

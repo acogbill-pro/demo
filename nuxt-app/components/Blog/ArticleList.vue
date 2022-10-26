@@ -28,7 +28,7 @@ function onIntersect(isIntersecting, entries, observer) {
 
 <template>
     <div>
-
+        <h1 color="primary" class="my-10">{{ props.category }}</h1>
         <BlogArticleCard v-for="article in articlesToShow" :key="article.ID" :article="article" />
         <v-spacer v-intersect="{
             handler: onIntersect,

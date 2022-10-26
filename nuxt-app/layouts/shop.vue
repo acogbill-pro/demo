@@ -13,6 +13,7 @@
 <script setup>
 /*import { useRoute } from 'vue-router'
 const route = useRoute()*/
+const runtimeConfig = useRuntimeConfig()
 
 useHead({
     //title: 'Segment App Home',
@@ -28,7 +29,7 @@ useHead({
     },
     script: [
         {
-            src: 'static/js/analytics-shop.js',
+            src: `https://cdn.segment.com/analytics.js/v1/${runtimeConfig.public.shopWriteKey}/analytics.min.js`,
             type: 'text/javascript',
         }
     ]

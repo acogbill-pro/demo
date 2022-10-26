@@ -1,5 +1,6 @@
 <script setup>
 import { useArticleCatalog } from '~/stores/articles.js'
+
 const articles = useArticleCatalog()
 
 const props = defineProps({
@@ -14,6 +15,7 @@ const isFavorite = computed(() => articles.favoriteIDs.has(props.article.ID))
 function favorite() {
     if (isFavorite.value) {
         articles.removeFavorite(props.article.ID)
+
     } else {
         articles.addFavorite(props.article.ID)
     }

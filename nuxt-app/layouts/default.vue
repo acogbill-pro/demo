@@ -13,6 +13,7 @@
 <script setup>
 //import { useRoute } from 'vue-router'
 //const route = useRoute()
+const runtimeConfig = useRuntimeConfig()
 
 useHead({
     //title: 'Segment App Home',
@@ -28,13 +29,15 @@ useHead({
     },
     script: [
         {
-            src: 'static/js/analytics-blog.js',
+            src: `https://cdn.segment.com/analytics.js/v1/${runtimeConfig.public.blogWriteKey}/analytics.min.js`,//'static/js/analytics-blog.js',
             type: 'text/javascript',
         }
     ]
 })
 
-//onMounted(() => { })
+onMounted(() => {
+    //console.log(analytics)
+})
 </script>
 
 <style lang="scss" scoped>

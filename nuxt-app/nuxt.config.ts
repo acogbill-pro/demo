@@ -18,10 +18,26 @@ export default defineNuxtConfig({
       privateAPIKey: process.env.SERVER_ONLY_KEY,
       public: {
         // to use: runtimeConfig.public.varName
-        segmentWriteKey: process.env.SEGMENT_WRITE_KEY,
+        blogWriteKey: process.env.BLOG_WRITE_KEY,
+        shopWriteKey: process.env.SHOP_WRITE_KEY,
         profilesSpaceID: process.env.PROFILES_SPACE_ID,
         profilesAccessToken: process.env.PROFILES_ACCESS_TOKEN,
         justCORSurl: process.env.JUST_CORS,
       }
-    }
+    },
+    head: {
+      "meta": [
+        {
+          "name": "viewport",
+          "content": "width=device-width, initial-scale=1"
+        },
+        {
+          "charset": "utf-8"
+        }
+      ],
+      "link": [],
+      "style": [],
+      "script": [],
+      "noscript": []
+    },
 })
