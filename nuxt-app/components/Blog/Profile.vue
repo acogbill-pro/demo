@@ -6,7 +6,7 @@ const profiles = useProfileStore()
 
 function loadProfile() {
     analytics.identify('Andy_Cogbill_id')
-    profiles.loadProfileForUser('Andy_Cogbill_id')
+    //profiles.loadProfileForUser('Andy_Cogbill_id')
 }
 </script>
 

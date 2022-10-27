@@ -3,9 +3,11 @@
 import {defineStore} from 'pinia'
 import { Buffer } from 'buffer'
 import { useAnalytics } from '~/stores/analytics'
+import { useArticleCatalog } from '~/stores/articles'
 
 export const useProfileStore = defineStore('profilesStore', {
     state: () => ({
+      userID: null,
       traits: {},
     }),
   
@@ -18,7 +20,10 @@ export const useProfileStore = defineStore('profilesStore', {
   
     actions: {
       loadProfileForUser(userID) {
+        this.userID = userID
+
         const runtimeConfig = useRuntimeConfig()
+        const articleStore = useArticleCatalog()
 
         const options = {
         method: "GET",
@@ -35,9 +40,14 @@ export const useProfileStore = defineStore('profilesStore', {
         //console.log(requestURL)
         fetch(requestURL, options)
         .then((response) => response.json())
-        .then((data) => (this.traits = data.traits !== null ? data.traits : {}))
+        .then((profile) => (this.traits = profile.traits !== null ? profile.traits : {}))
+        .then((traits) => articleStore.loadFavesAndScores(traits))
         //.then((data) => console.log(data))
         .catch((error) => console.log(error));
+      },
+      syncWithStore() {
+        const analytics = useAnalytics()
+        analytics.identify(this.userID, this.traits)
       },
       unload() {
         const analytics = useAnalytics()

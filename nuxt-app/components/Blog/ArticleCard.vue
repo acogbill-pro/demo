@@ -30,6 +30,7 @@ function favorite() {
         </v-card-text>
         <v-card-actions>
             <v-spacer />
+            <BlogArticleViewer :article="props.article" />
             <v-btn @click="favorite()">
                 <v-icon icon="mdi-heart" :color="isFavorite ? 'red' : 'gray'"></v-icon>
             </v-btn>
