@@ -1,30 +1,34 @@
 <script setup>
 import { useProductCatalog } from '~/stores/products.js'
-import { useAnalytics } from '~/stores/analytics';
+import { useCartStore } from '~/stores/cart';
 const products = useProductCatalog()
-const analytics = useAnalytics()
+const cart = useCartStore()
 
 const props = defineProps({
-    sku: {
-        type: String,
-        default: '0001',
+    product: {
+        type: Object,
+        default: {
+            SKU: '0001',
+            name: 'Loading',
+            description: 'Loading',
+            category: 'Loading',
+            priceUSD: 1,
+        },
     }
 })
 
-const product = computed(() => products.all.find(product => product.SKU === props.sku))
-
-const localizedPrice = computed(() => '$' + product.value.priceUSD) // TODO: Localize currency
+const localizedPrice = computed(() => '$' + props.product.priceUSD) // TODO: Localize currency
 
 function addToCart() {
-    analytics.track('Added to Cart', product.value)
+    cart.add(props.product.SKU, 1)
 }
 </script>
 
 <template>
     <v-card class="mb-10">
-        <v-card-title>{{ product.name }}</v-card-title>
+        <v-card-title>{{ props.product.name }}</v-card-title>
         <v-card-text>
-            {{ product.description }}
+            {{ props.product.description }}
         </v-card-text>
         <v-card-actions>
             <v-spacer />

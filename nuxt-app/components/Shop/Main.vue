@@ -2,7 +2,12 @@
     <v-container>
         <v-row>
             <v-col>
-                Shop
+                <ShopProductList category='Category 1' />
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col>
+                <ShopProductList category='Category 2' />
             </v-col>
         </v-row>
     </v-container>

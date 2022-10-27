@@ -1,5 +1,6 @@
 <script setup>
 import { useProfileStore } from '~/stores/profiles'
+
 const profile = useProfileStore()
 
 const linkText = computed(() => profile.hasTraits ? 'Account' : 'Login')
@@ -47,13 +48,13 @@ function redo() {
                 <v-icon>mdi-redo-variant</v-icon>
             </v-btn>
             <v-spacer />-->
-            <v-btn color="secondary" text rounded href="/" target="_blank">
+            <v-btn text rounded href="/" target="_blank">
                 Blog
             </v-btn>
-            <v-btn v-for="link in topLinks" :key="`${link.label}-nav-link`" color="secondary" text rounded
-                :to="link.url" nuxt>
+            <v-btn v-for="link in topLinks" :key="`${link.label}-nav-link`" text rounded :to="link.url" nuxt>
                 {{ link.label }}
             </v-btn>
+            <ShopCart />
             <!--<v-btn color="secondary" text rounded @click="emit('toggleTheme', 'nav bar')">Toggle Theme</v-btn>-->
         </v-app-bar>
     </div>
