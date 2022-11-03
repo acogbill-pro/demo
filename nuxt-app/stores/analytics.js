@@ -29,5 +29,8 @@ export const useAnalytics = defineStore('analyticsStore', {
           this.analytics.identify(traitsObject)
         }
       },
+      reset() {
+        this.analytics.reset()
+      }
     }
   })

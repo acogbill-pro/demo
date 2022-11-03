@@ -1,49 +1,7 @@
-<template>
-    <v-card>
-        <v-card-title>Register</v-card-title>
-        <v-form ref="form" v-model="valid" lazy-validation>
-            <v-card-text>
-                <v-text-field v-model="fname" :counter="10" :rules="nameRules" label="First Name" required>
-                </v-text-field>
-
-                <v-text-field v-model="lname" :counter="10" :rules="nameRules" label="Last Name" required>
-                </v-text-field>
-
-                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-
-                <v-text-field v-model="phone" :rules="phoneRules" label="Phone" required></v-text-field>
-
-                <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
-        </v-select>-->
-
-                <!--<v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?"
-            required></v-checkbox>-->
-            </v-card-text>
-            <v-card-actions>
-
-                <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit">
-                    Submit
-                </v-btn>
-
-                <v-btn color="warning" class="mr-4" @click="reset">
-                    Reset
-                </v-btn>
-                <v-btn variant="plain" @click="prePop()">
-                    Populate
-                </v-btn>
-
-                <!--<v-btn color="warning" @click="resetValidation">
-            Reset Validation
-        </v-btn>-->
-            </v-card-actions>
-        </v-form>
-    </v-card>
-
-
-</template>
-
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
+import firstNames from '~/static/json/firstNames.json'
+import lastNames from '~/static/json/lastNames.json'
 const analytics = useAnalytics()
 
 const form = ref(null)
@@ -94,6 +52,31 @@ function prePop() {
     phone.value = "608-788-7808"
 }
 
+function randomInt(max) {
+    return Math.ceil(Math.random() * max);
+}
+
+function randomPhoneNumber() {
+    let result = '';
+    let i = 0;
+
+    do {
+        result += (i === 3 || i === 7) ? '-' : `${randomInt(9)}`
+        i = i + 1;
+    } while (i < 12);
+
+    return result
+}
+
+function prePopRandom() {
+    const firstName = firstNames[randomInt(firstNames.length - 1)]
+    const lastName = lastNames[randomInt(lastNames.length - 1)]
+    fname.value = firstName
+    lname.value = lastName
+    email.value = (firstName + lastName + '@gmailx.com').toLowerCase()
+    phone.value = randomPhoneNumber()
+}
+
 function submit() {
     if (form.value.validate()) {
         analytics.identify(user_id.value, traitsObject.value)
@@ -113,6 +96,50 @@ function resetValidation() {
 
 
 </script>
+
+<template>
+    <v-card>
+        <v-card-title>Register</v-card-title>
+        <v-form ref="form" v-model="valid" lazy-validation>
+            <v-card-text>
+                <v-text-field v-model="fname" :counter="10" :rules="nameRules" label="First Name" required>
+                </v-text-field>
+
+                <v-text-field v-model="lname" :counter="10" :rules="nameRules" label="Last Name" required>
+                </v-text-field>
+
+                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+
+                <v-text-field v-model="phone" :rules="phoneRules" label="Phone" required></v-text-field>
+
+                <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
+        </v-select>-->
+
+                <!--<v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?"
+            required></v-checkbox>-->
+            </v-card-text>
+            <v-card-actions>
+
+                <v-btn :disabled="!valid" color="success" class="mr-4" @click="submit">
+                    Submit
+                </v-btn>
+
+                <v-btn color="warning" class="mr-4" @click="reset">
+                    Reset
+                </v-btn>
+                <v-btn variant="plain" @click="prePopRandom()">
+                    Populate
+                </v-btn>
+
+                <!--<v-btn color="warning" @click="resetValidation">
+            Reset Validation
+        </v-btn>-->
+            </v-card-actions>
+        </v-form>
+    </v-card>
+
+
+</template>
 
 <style lang="scss" scoped>
 
