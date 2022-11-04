@@ -5,10 +5,10 @@ const profile = useProfileStore()
 const linkText = computed(() => profile.hasTraits ? 'Account' : 'Login')
 
 const topLinks = [
-    /*{
-        label: 'Products',
-        url: '/products',
-    },*/
+    {
+        label: 'Blog',
+        url: '/',
+    },
     {
         label: linkText.value,
         url: '/account',

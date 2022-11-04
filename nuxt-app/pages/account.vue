@@ -16,9 +16,17 @@ onMounted(() => {
     analytics.page('Login Page')
 })
 
+const collapse = ref(false)
+
+function toggleCollapse() {
+    collapse.value = !collapse.value
+}
+
 const isLoggedIn = computed(() => {
     return profile.hasTraits
 })
+
+const loginTitle = computed(() => `Logged in as ${profile.traits.fname} ${profile.traits.lname}`)
 
 function logout() {
     profile.unload()
@@ -27,7 +35,7 @@ function logout() {
 
 <template>
     <v-container>
-        <v-row v-if="!isLoggedIn">
+        <v-row v-if="!isLoggedIn || !collapse">
             <v-col>
                 <UserLogin />
             </v-col>
@@ -38,11 +46,16 @@ function logout() {
         </v-row>
         <v-row v-else>
             <v-col>
-                <p>Logged in as {{ profile.traits.fname }} {{ profile.traits.lname }}</p>
+                <p>{{ loginTitle }}</p>
             </v-col>
             <v-col>
-                <v-btn @click="logout()">Logout</v-btn>
+
             </v-col>
+        </v-row>
+        <v-row v-if="isLoggedIn">
+            <v-btn @click="logout()">Logout</v-btn>
+            <v-btn v-if="!collapse" @click="toggleCollapse()">Hide Login</v-btn>
+            <v-btn v-else @click="toggleCollapse">Login Again</v-btn>
         </v-row>
     </v-container>
 </template>

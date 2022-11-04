@@ -23,8 +23,14 @@ export const useAnalytics = defineStore('analyticsStore', {
         console.log('Identify call for ' + user_id !== null ? user_id : 'anon')
         const profile = useProfileStore()
         if (user_id) {
+          profile.userID = user_id
+          profile.traits = traitsObject
+          console.log('Identify call for ' + user_id)
           this.analytics.identify(user_id, traitsObject)
-          profile.loadProfileForUser(user_id)
+          setTimeout(() => {
+            profile.startSyncing(5)
+          }, 2000)
+          
         } else {
           this.analytics.identify(traitsObject)
         }

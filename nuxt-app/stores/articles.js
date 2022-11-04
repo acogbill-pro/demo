@@ -46,35 +46,35 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             ID: '0006',
             title: 'Article F',
             fullText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet justo donec enim. Placerat orci nulla pellentesque dignissim enim. Risus nullam eget felis eget nunc lobortis mattis aliquam faucibus. Rhoncus dolor purus non enim praesent. Sit amet luctus venenatis lectus. Tellus orci ac auctor augue mauris augue neque gravida. Sodales ut eu sem integer vitae. Tellus in metus vulputate eu. Viverra mauris in aliquam sem fringilla ut morbi. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Neque gravida in fermentum et sollicitudin ac.',
-            category: 'Toddler',
+            category: 'Sleep',
             priceUSD: 60,
         },
         {
             ID: '0007',
             title: 'Article G',
             fullText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet justo donec enim. Placerat orci nulla pellentesque dignissim enim. Risus nullam eget felis eget nunc lobortis mattis aliquam faucibus. Rhoncus dolor purus non enim praesent. Sit amet luctus venenatis lectus. Tellus orci ac auctor augue mauris augue neque gravida. Sodales ut eu sem integer vitae. Tellus in metus vulputate eu. Viverra mauris in aliquam sem fringilla ut morbi. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Neque gravida in fermentum et sollicitudin ac.',
-            category: 'Toddler',
+            category: 'Sleep',
             priceUSD: 70,
         },
         {
             ID: '0008',
             title: 'Article H',
             fullText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet justo donec enim. Placerat orci nulla pellentesque dignissim enim. Risus nullam eget felis eget nunc lobortis mattis aliquam faucibus. Rhoncus dolor purus non enim praesent. Sit amet luctus venenatis lectus. Tellus orci ac auctor augue mauris augue neque gravida. Sodales ut eu sem integer vitae. Tellus in metus vulputate eu. Viverra mauris in aliquam sem fringilla ut morbi. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Neque gravida in fermentum et sollicitudin ac.',
-            category: 'Toddler',
+            category: 'Sleep',
             priceUSD: 80,
         },
         {
             ID: '0009',
             title: 'Article I',
             fullText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet justo donec enim. Placerat orci nulla pellentesque dignissim enim. Risus nullam eget felis eget nunc lobortis mattis aliquam faucibus. Rhoncus dolor purus non enim praesent. Sit amet luctus venenatis lectus. Tellus orci ac auctor augue mauris augue neque gravida. Sodales ut eu sem integer vitae. Tellus in metus vulputate eu. Viverra mauris in aliquam sem fringilla ut morbi. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Neque gravida in fermentum et sollicitudin ac.',
-            category: 'Toddler',
+            category: 'Sleep',
             priceUSD: 90,
         },
         {
             ID: '0010',
             title: 'Article J',
             fullText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sit amet justo donec enim. Placerat orci nulla pellentesque dignissim enim. Risus nullam eget felis eget nunc lobortis mattis aliquam faucibus. Rhoncus dolor purus non enim praesent. Sit amet luctus venenatis lectus. Tellus orci ac auctor augue mauris augue neque gravida. Sodales ut eu sem integer vitae. Tellus in metus vulputate eu. Viverra mauris in aliquam sem fringilla ut morbi. Risus viverra adipiscing at in tellus integer feugiat scelerisque varius. Neque gravida in fermentum et sollicitudin ac.',
-            category: 'Toddler',
+            category: 'Sleep',
             priceUSD: 100,
         },
       ],
@@ -94,7 +94,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
   
     actions: {
         loadFavesAndScores(withTraits) {
-            console.log('Would update client-side score data from Profile API')
+            // console.log('Would update client-side score data from Profile API')
         },
         markAsRead(withArticleID) {
             const analytics = useAnalytics()
@@ -108,7 +108,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
         },
         updateScores(withArticleID) {
             // could do a round-trip to an API to calculate scores first
-            console.log('Would update score data from client side')
+            // console.log('Would update score data from client side')
             
             const profiles = useProfileStore()
             profiles.syncWithStore()

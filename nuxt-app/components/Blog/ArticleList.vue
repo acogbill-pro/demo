@@ -1,6 +1,8 @@
 <script setup>
 import { useArticleCatalog } from '~/stores/articles.js'
+import { useAnalytics } from '~/stores/analytics'
 const articles = useArticleCatalog()
+const analytics = useAnalytics()
 
 const props = defineProps({
     category: {
@@ -19,7 +21,7 @@ function onIntersect(isIntersecting, entries, observer) {
     // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
     if (isIntersecting && !reachedTheEnd.value && entries[0].intersectionRatio >= 0.5) {
         reachedTheEnd.value = true
-        console.log('Viewed all articles in ' + props.category)
+        analytics.track('Viewed All Articles in Category', { category: props.category })
     }
 }
 

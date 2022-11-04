@@ -8,18 +8,55 @@ function loadProfile() {
     profiles.loadProfileForUser('Andy_Cogbill_id')
 }
 
+const profileLoaded = computed(() => {
+    return profiles.userID !== null
+})
+
+const isSyncing = computed({
+    get: () => profiles.isSyncing,
+    set: (value) => {
+        if (value === true) {
+            if (profiles.userID === null) {
+                analytics.reset()
+                analytics.identify('Andy_Cogbill_id')
+            }
+            profiles.startSyncing(10)
+        } else {
+            profiles.stopSyncing()
+        }
+    }
+})
+
 function resetProfile() {
-    analytics.reset()
+    profiles.unload()
 }
 </script>
 
 <template>
     <div>
-        <v-btn @click="loadProfile()" class="mb-5">Load Profile</v-btn>
-        <v-btn @click="resetProfile()" class="mb-5">Reset Profile</v-btn>
-        <ul>
-            <li v-for="[key, value] in Object.entries(profiles.traits)" :key="key">{{ key + ': ' + value }}</li>
-        </ul>
+        <h1 class="my-10">
+            Profile
+        </h1>
+        <v-card>
+            <v-card-title>
+                <span v-if="profileLoaded">{{ profiles.userID }}</span><span v-else> N/A</span>
+            </v-card-title>
+            <v-card-text>
+                <ul>
+                    <li v-for="[key, value] in Object.entries(profiles.traits)" :key="key">{{ key + ': ' + value }}</li>
+                </ul>
+            </v-card-text>
+            <v-card-actions>
+                <v-switch v-model="isSyncing" :loading="profiles.isLoading ? 'gray' : false" class="my-0">
+                    <template v-slot:label>
+                        <v-icon icon="mdi-cached" color="gray" />
+                    </template>
+                </v-switch>
+                <v-btn @click="resetProfile()" class="mb-5">
+                    <v-icon icon="mdi-delete" color="gray" />
+                </v-btn>
+            </v-card-actions>
+        </v-card>
     </div>
 </template>
 

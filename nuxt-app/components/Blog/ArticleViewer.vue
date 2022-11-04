@@ -28,33 +28,31 @@ function favorite() {
 </script>
 
 <template>
-    <div>
-        <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
-            <template v-slot:activator="{ props }">
-                <v-btn @click="readArticle" v-bind="props">
-                    Read Article
+    <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
+        <template v-slot:activator="{ props }">
+            <v-btn @click="readArticle" v-bind="props">
+                Read Article
+            </v-btn>
+        </template>
+        <v-card>
+            <v-toolbar dark color="primary">
+                <v-btn icon dark @click="dialog = false">
+                    <v-icon>mdi-close</v-icon>
                 </v-btn>
-            </template>
-            <v-card>
-                <v-toolbar dark color="primary">
-                    <v-btn icon dark @click="dialog = false">
-                        <v-icon>mdi-close</v-icon>
+                <v-toolbar-title>{{ props.article.title }}</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-toolbar-items>
+                    <v-btn dark text @click="favorite">
+                        <v-icon icon="mdi-heart" :color="isFavorite ? 'red' : 'gray'"></v-icon>
                     </v-btn>
-                    <v-toolbar-title>{{ props.article.title }}</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-toolbar-items>
-                        <v-btn dark text @click="favorite">
-                            <v-icon icon="mdi-heart" :color="isFavorite ? 'red' : 'gray'"></v-icon>
-                        </v-btn>
-                    </v-toolbar-items>
-                </v-toolbar>
-                <v-card-text>
-                    {{ props.article.fullText }}
-                </v-card-text>
-            </v-card>
+                </v-toolbar-items>
+            </v-toolbar>
+            <v-card-text>
+                {{ props.article.fullText }}
+            </v-card-text>
+        </v-card>
 
-        </v-dialog>
-    </div>
+    </v-dialog>
 </template>
 
 <style lang="scss" scoped>

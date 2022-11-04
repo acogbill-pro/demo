@@ -36,7 +36,7 @@ useHead({
 })
 
 onMounted(() => {
-    console.log('would reset')
+    //console.log('would reset')
 })
 </script>
 
