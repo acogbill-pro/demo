@@ -1,6 +1,8 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
+import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
+const profiles = useProfileStore()
 
 definePageMeta({
     layout: "default",
@@ -12,6 +14,8 @@ useHead({
 
 onMounted(() => {
     analytics.page('Main page')
+
+    profiles.persistUser()
 })
 </script>
 

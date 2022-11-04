@@ -7,8 +7,8 @@ const linkText = computed(() => profile.hasTraits ? 'Account' : 'Login')
 
 const topLinks = [
     {
-        label: 'Products',
-        url: '/products',
+        label: 'Shop',
+        url: '/shop',
     },
     {
         label: linkText.value,

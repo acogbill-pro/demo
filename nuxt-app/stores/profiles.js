@@ -53,6 +53,8 @@ export const useProfileStore = defineStore('profilesStore', {
 
         fetch(requestURL, options)
         .then((response) => {
+          this.isLoading = false  // stop all the downloading
+
           if (response.ok) {
             return response.json()
           } else if(response.status === 404) {
@@ -64,7 +66,6 @@ export const useProfileStore = defineStore('profilesStore', {
         })
         //.then((profile) => (this.traits = profile.traits !== null ? profile.traits : {}))
         .then((fetchedProfile) => {
-          this.isLoading = false // stop all the downloading
 
           /* Logic to only update traits if they changed */
           /*if (JSON.stringify(fetchedProfile.traits) !== JSON.stringify(this.traits) || userID !== this.userID) { // If the traits aren't the same OR it's a new user
@@ -89,7 +90,7 @@ export const useProfileStore = defineStore('profilesStore', {
           if (this.isSyncing && attemptsRemaining > 0) {
             setTimeout(() => {
               this.loadProfileForUser(userID, attemptsRemaining - 1)
-            }, 2000)
+            }, 5000)
           } else {
             this.isSyncing = false
           }
@@ -116,6 +117,15 @@ export const useProfileStore = defineStore('profilesStore', {
         console.log('would send Identify call with latest traits')
        // const analytics = useAnalytics()
         //analytics.identify(this.userID, this.traits)
+      },
+      persistUser() {
+        const analytics = useAnalytics()
+
+        if (analytics.userID !== null && this.userID === null) {
+          this.userID = analytics.userID
+
+          this.startSyncing(1)
+        }
       },
       unload() {
         this.isSyncing = false

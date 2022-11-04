@@ -20,7 +20,6 @@ const isSyncing = computed({
                 analytics.reset()
                 analytics.identify('Andy_Cogbill_id')
             }
-            profiles.startSyncing(10)
         } else {
             profiles.stopSyncing()
         }
@@ -30,6 +29,7 @@ const isSyncing = computed({
 function resetProfile() {
     profiles.unload()
 }
+
 </script>
 
 <template>

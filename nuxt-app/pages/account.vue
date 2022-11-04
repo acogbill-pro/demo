@@ -14,9 +14,11 @@ useHead({
 
 onMounted(() => {
     analytics.page('Login Page')
+
+    profile.persistUser()
 })
 
-const collapse = ref(false)
+const collapse = ref(true)
 
 function toggleCollapse() {
     collapse.value = !collapse.value
@@ -35,7 +37,7 @@ function logout() {
 
 <template>
     <v-container>
-        <v-row v-if="!isLoggedIn || !collapse">
+        <v-row v-if="!isLoggedIn || (isLoggedIn && !collapse)">
             <v-col>
                 <UserLogin />
             </v-col>

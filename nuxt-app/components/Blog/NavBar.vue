@@ -9,6 +9,10 @@ const topLinks = [
         label: 'Blog',
         url: '/',
     },
+    /*{ YES YOU HAVE TRIED THIS RECENTLY
+        label: 'ShopIN',
+        url: '/shop',
+    },*/
     {
         label: linkText.value,
         url: '/account',

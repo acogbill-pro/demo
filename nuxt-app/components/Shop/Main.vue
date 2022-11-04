@@ -3,11 +3,11 @@
         <v-row>
             <v-col>
                 <ShopProductList category='Category 1' />
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
                 <ShopProductList category='Category 2' />
+            </v-col>
+
+            <v-col>
+                <BlogProfile />
             </v-col>
         </v-row>
     </v-container>
