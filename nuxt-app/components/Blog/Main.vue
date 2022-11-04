@@ -2,12 +2,12 @@
     <v-no-ssr>
         <v-container>
             <v-row>
-                <v-col cols="8">
+                <v-col cols="7">
                     <BlogArticleList category="Pregnancy" />
                     <BlogArticleList category="Sleep" />
                 </v-col>
                 <v-col cols="1"></v-col>
-                <v-col cols="3">
+                <v-col cols="4">
                     <BlogProfile />
                 </v-col>
             </v-row>

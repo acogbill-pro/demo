@@ -5,7 +5,7 @@ const products = useProductCatalog()
 const props = defineProps({
     category: {
         type: String,
-        default: 'Category 1',
+        default: 'Sleep',
     }
 })
 

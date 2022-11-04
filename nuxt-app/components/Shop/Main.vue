@@ -1,16 +1,18 @@
 <template>
-    <v-container>
-        <v-row>
-            <v-col>
-                <ShopProductList category='Category 1' />
-                <ShopProductList category='Category 2' />
-            </v-col>
-
-            <v-col>
-                <BlogProfile />
-            </v-col>
-        </v-row>
-    </v-container>
+    <v-no-ssr>
+        <v-container>
+            <v-row>
+                <v-col cols="7">
+                    <ShopProductList category='Pregnancy' />
+                    <ShopProductList category='Sleep' />
+                </v-col>
+                <v-col cols="1"></v-col>
+                <v-col cols="4">
+                    <BlogProfile />
+                </v-col>
+            </v-row>
+        </v-container>
+    </v-no-ssr>
 </template>
 
 <script setup>

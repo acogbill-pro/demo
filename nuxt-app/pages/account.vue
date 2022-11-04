@@ -2,7 +2,7 @@
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 const analytics = useAnalytics()
-const profile = useProfileStore()
+const profiles = useProfileStore()
 
 definePageMeta({
     layout: "default",
@@ -15,7 +15,7 @@ useHead({
 onMounted(() => {
     analytics.page('Login Page')
 
-    profile.persistUser()
+    profiles.persistUser()
 })
 
 const collapse = ref(true)
@@ -25,13 +25,13 @@ function toggleCollapse() {
 }
 
 const isLoggedIn = computed(() => {
-    return profile.hasTraits
+    return profiles.hasTraits
 })
 
-const loginTitle = computed(() => `Logged in as ${profile.traits.fname} ${profile.traits.lname}`)
+const loginTitle = computed(() => `Logged in as ${profiles.traits.fname} ${profiles.traits.lname}`)
 
 function logout() {
-    profile.unload()
+    profiles.unload()
 }
 </script>
 

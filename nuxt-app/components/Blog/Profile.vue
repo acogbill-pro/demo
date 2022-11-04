@@ -19,6 +19,8 @@ const isSyncing = computed({
             if (profiles.userID === null) {
                 analytics.reset()
                 analytics.identify('Andy_Cogbill_id')
+            } else {
+                profiles.startSyncing(10)
             }
         } else {
             profiles.stopSyncing()
