@@ -25,7 +25,7 @@ export const useCartStore = defineStore('cartStore', {
         loadCart(withTraits) {
             console.log('Would update client-side cart data')
         },
-        updateScores(withArticleID) {
+        updateScores() {
             // could do a round-trip to an API to calculate scores first
             console.log('Would update score data from client side')
             
@@ -41,7 +41,6 @@ export const useCartStore = defineStore('cartStore', {
 
             const analytics = useAnalytics()
             analytics.track('Product Added to Cart', product)
-            console.log(product.name + ' added to Cart')
         },
         remove(withSKU) {
             this.contents.delete(withSKU)

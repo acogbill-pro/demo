@@ -10,7 +10,7 @@ const props = defineProps({
     }
 })
 
-const isFavorite = computed(() => articles.favoriteIDs.has(props.article.ID))
+const isFavorite = computed(() => articles.favorites.has(props.article.ID))
 
 function favorite() {
     if (isFavorite.value) {

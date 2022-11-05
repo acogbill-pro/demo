@@ -78,14 +78,48 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             priceUSD: 100,
         },
       ],
-      favoriteIDs: new Set(), // ID Strings
-      categoryScores: new Map(), // 'Category Name' => 0 (Number)
+      favorites: new Set(), // ID Strings
+      articlesRead: new Set(), // ID Strings
+      //categoryScores: new Map(), // 'Category Name' => 0 (Number)
     }),
   
     getters: {
-      //getArticle: (state) => (withID) => state.all.find(article => article.ID === withID),
+      categoryScores: (state) => {
+
+        // process all traits into scores
+        // could make a call to anotoher API to pull / build these scores
+
+        const favesAsArray = Array.from(state?.favorites) ?? []
+
+        const favesScoreMap = favesAsArray.reduce(
+            function (acc, obj) { 
+                const article = state.all.find(article => article.ID === obj)
+                return acc.set(article.category, acc.has(article.category) ? acc.get(article.category) + 1 : 1)
+            }, 
+        new Map([]))
+
+        return favesScoreMap
+        },
+        scoresAsObject: (state) => {
+            return Object.fromEntries(state.categoryScores)
+        },
       recommendedCategory: (state) => {
-        return [...state.categoryScores.entries()].reduce((a, e) => e[1] > a[1] ? e : a)[0] // 'Category Name'
+        const scoreArray = Array.from(state.categoryScores.entries()) // [[key, value]]
+        const topCategory = scoreArray.reduce((a, e) => e[1] > a[1] ? e : a, [null, null])[0]
+        return topCategory
+      },
+      categories: (state) => {
+        return state.all.reduce(function (acc, obj) { return acc.add(obj.category); }, new Set())
+      },
+      categoriesWithoutRecommended: (state) => {
+        if (state.recommendedCategory !== null) {
+            const setToReturn = new Set(state.categories)
+            setToReturn.delete(state.recommendedCategory)
+            return setToReturn
+        } else {
+            return state.categories
+        }
+        
       },
       recommendedArticle: (state) => {
         return state.all.filter(article => article.category === state.recommendedCategory)[0] // TODO: Filter out favorites, pick the best, etc.
@@ -97,24 +131,22 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             // console.log('Would update client-side score data from Profile API')
         },
         markAsRead(withArticleID) {
-            const analytics = useAnalytics()
+            this.articlesRead.add(withArticleID)
 
             const article = this.all.find(article => article.ID === withArticleID)
 
+            const analytics = useAnalytics()
             analytics.page('Article Page')
             analytics.track('Article Read', article)
-
-            this.updateScores(withArticleID)
         },
-        updateScores(withArticleID) {
-            // could do a round-trip to an API to calculate scores first
-            // console.log('Would update score data from client side')
-            
+        syncScores() {  
+            const analytics = useAnalytics()
             const profiles = useProfileStore()
-            profiles.syncWithStore()
+
+            analytics.identify(profiles.userID, this.scoresAsObject)
         },
         addFavorite(withArticleID) {
-            this.favoriteIDs.add(withArticleID)
+            this.favorites.add(withArticleID)
 
             const article = this.all.find(article => article.ID === withArticleID)
 
@@ -122,7 +154,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             analytics.track('Article Favorited', article)
         },
         removeFavorite(withArticleID) {
-            this.favoriteIDs.delete(withArticleID)
+            this.favorites.delete(withArticleID)
         },
     }
   })

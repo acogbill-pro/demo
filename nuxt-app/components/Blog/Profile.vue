@@ -45,7 +45,8 @@ function resetProfile() {
             </v-card-title>
             <v-card-text>
                 <ul>
-                    <li v-for="[key, value] in Object.entries(profiles.traits)" :key="key">{{ key + ': ' + value }}</li>
+                    <li v-for="[key, value] in Object.entries(profiles.cleanTraits)" :key="key">{{ key + ': ' + value }}
+                    </li>
                 </ul>
             </v-card-text>
             <v-card-actions>

@@ -1,19 +1,10 @@
-<template>
-    <div class="default-layout">
-        <v-app>
-            <ShopNavBar />
-            <v-main>
-                <slot />
-            </v-main>
-            <ShopFooter />
-        </v-app>
-    </div>
-</template>
-
 <script setup>
+import { useAnalytics } from '~/stores/analytics'
+const analytics = useAnalytics()
 /*import { useRoute } from 'vue-router'
 const route = useRoute()*/
 const runtimeConfig = useRuntimeConfig()
+
 
 useHead({
     //title: 'Segment App Home',
@@ -35,8 +26,22 @@ useHead({
     ]
 })
 
-//onMounted(() => {})
+onMounted(() => {
+    analytics.activateWatcher()
+})
 </script>
+
+<template>
+    <div class="default-layout">
+        <v-app>
+            <ShopNavBar />
+            <v-main>
+                <slot />
+            </v-main>
+            <ShopFooter />
+        </v-app>
+    </div>
+</template>
 
 <style lang="scss" scoped>
 

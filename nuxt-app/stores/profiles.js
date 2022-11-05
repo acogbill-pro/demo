@@ -12,6 +12,7 @@ export const useProfileStore = defineStore('profilesStore', {
       isSyncing: false,
       isLoading: false,
       traits: {},
+      traitBlacklist: ['incrementers', 'phone', 'email'],
     }),
   
     getters: {
@@ -22,6 +23,21 @@ export const useProfileStore = defineStore('profilesStore', {
           return false
         }
         
+      },
+      cleanTraits: (state) => {
+
+        const removeProperty = (obj, prop) => {
+          let {[prop]: omit, ...res} = obj
+          return res
+        }
+
+        var traitsToReturn = state.traits
+
+        for (let i = 0; i < state.traitBlacklist.length; i++) {
+          traitsToReturn = removeProperty(traitsToReturn, state.traitBlacklist[i])
+        }
+
+        return traitsToReturn
       },
     },
   
@@ -114,7 +130,7 @@ export const useProfileStore = defineStore('profilesStore', {
         this.isLoading = false
       },
       syncWithStore() {
-        console.log('would send Identify call with latest traits')
+        //console.log('would send Identify call with latest traits')
        // const analytics = useAnalytics()
         //analytics.identify(this.userID, this.traits)
       },
@@ -130,10 +146,16 @@ export const useProfileStore = defineStore('profilesStore', {
       unload() {
         this.isSyncing = false
 
+        const analytics = useAnalytics()
+
+        if (this.userID !== null) {
+          console.log('calling identify from unload')
+          analytics.identify(this.userID, {favorited_pregnancy_articles: 0, favorited_sleep_articles: 0})
+        }
+
         this.userID = null
         this.traits = {}
 
-        const analytics = useAnalytics()
         analytics.reset()
       }
     }

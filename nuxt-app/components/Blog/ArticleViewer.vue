@@ -15,7 +15,7 @@ function readArticle() {
     articles.markAsRead(props.article.ID)
 }
 
-const isFavorite = computed(() => articles.favoriteIDs.has(props.article.ID))
+const isFavorite = computed(() => articles.favorites.has(props.article.ID))
 
 function favorite() {
     if (isFavorite.value) {
@@ -36,14 +36,14 @@ function favorite() {
         </template>
         <v-card>
             <v-toolbar dark color="primary">
-                <v-btn icon dark @click="dialog = false">
-                    <v-icon>mdi-close</v-icon>
+                <v-btn dark text @click="favorite">
+                    <v-icon icon="mdi-heart" :color="isFavorite ? 'red' : 'gray'"></v-icon>
                 </v-btn>
                 <v-toolbar-title>{{ props.article.title }}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                    <v-btn dark text @click="favorite">
-                        <v-icon icon="mdi-heart" :color="isFavorite ? 'red' : 'gray'"></v-icon>
+                    <v-btn icon dark @click="dialog = false">
+                        <v-icon>mdi-close</v-icon>
                     </v-btn>
                 </v-toolbar-items>
             </v-toolbar>

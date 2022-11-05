@@ -12,6 +12,10 @@
 
 <script setup>
 //import { useRoute } from 'vue-router'
+
+import { useAnalytics } from '~~/stores/analytics';
+const analytics = useAnalytics()
+
 //const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
 
@@ -36,7 +40,7 @@ useHead({
 })
 
 onMounted(() => {
-    //console.log('would reset')
+    analytics.activateWatcher()
 })
 </script>
 

@@ -1,9 +1,9 @@
 <script setup>
 import { useProfileStore } from '~/stores/profiles'
 
-const profile = useProfileStore()
+const profiles = useProfileStore()
 
-const linkText = computed(() => profile.hasTraits ? 'Account' : 'Login')
+const linkText = computed(() => profiles.hasTraits ? 'Account' : 'Login')
 
 const topLinks = [
     {

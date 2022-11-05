@@ -2,6 +2,7 @@
   
 import {defineStore} from 'pinia'
 import {useProfileStore} from '~/stores/profiles'
+import { useArticleCatalog } from '~/stores/articles'
 
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({}),
@@ -14,24 +15,18 @@ export const useAnalytics = defineStore('analyticsStore', {
   
     actions: {
       page(pageTitle) {
-        console.log('Page call for ' + pageTitle)
         this.analytics.page(pageTitle)
       },
       track(eventName, traitsObject = null) {
-        console.log('Track call for ' + eventName)
         this.analytics.track(eventName, traitsObject)
       },
       identify(user_id = null, traitsObject = {}) {
-        console.log('Identify call for ' + user_id === null ? 'Anonymous' : user_id)
-
         const profile = useProfileStore()
-        if (user_id) {
+        if (user_id !== null) {
           profile.userID = user_id
-          profile.traits = traitsObject
-
+          //profile.traits = traitsObject
+          
           this.analytics.identify(user_id, traitsObject)
-
-          this.activateAnalyticsWatcher()
 
           setTimeout(() => {
             profile.startSyncing(10)
@@ -41,11 +36,17 @@ export const useAnalytics = defineStore('analyticsStore', {
           this.analytics.identify(traitsObject) // automatically prepends the anonymous ID
         }
       },
-      activateAnalyticsWatcher() {
+      activateWatcher() {
         // analytics.js emitter
         // works for alias, group, identify, track, and page
         // callback to augment this data
-        this.analytics.on('track', (eventName, traits = {}) => console.log('Watcher caught Track Call for ' + eventName))
+
+        this.analytics.on('track', (event, properties) => console.log('Track Call for ' + event))
+        this.analytics.on('page', (event, properties) => console.log('Page Call for ' + properties))
+        this.analytics.on('identify', (event, properties) => console.log('Identify Call for ' + event))
+
+        const articles = useArticleCatalog()
+        watch(articles.categoryScores, () => console.log('category scores changed, would identify'))
       },
       reset() {
         this.analytics.reset()
