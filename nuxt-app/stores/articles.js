@@ -80,7 +80,6 @@ export const useArticleCatalog = defineStore('articleCatalog', {
       ],
       favorites: new Set(), // ID Strings
       articlesRead: new Set(), // ID Strings
-      //categoryScores: new Map(), // 'Category Name' => 0 (Number)
     }),
   
     getters: {
@@ -128,7 +127,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
   
     actions: {
         loadFavesAndScores(withTraits) {
-            // console.log('Would update client-side score data from Profile API')
+            console.log('To-do: set up article store to import scores from Profile')
         },
         markAsRead(withArticleID) {
             this.articlesRead.add(withArticleID)

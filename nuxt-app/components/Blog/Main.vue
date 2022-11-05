@@ -3,11 +3,10 @@ import { useArticleCatalog } from '~/stores/articles.js'
 const articles = useArticleCatalog()
 
 const recommendedCategoryLocal = ref(null)
-const categoryArrayLocal = ref([])
+const categoryArrayLocal = ref(articles.categories)
 
 
 onMounted(() => {
-    console.log(articles.categoryScores)
     // grab these so the page doesn't rerender with every click, only on Mount
     recommendedCategoryLocal.value = articles.recommendedCategory
     categoryArrayLocal.value = articles.categoriesWithoutRecommended

@@ -3,6 +3,7 @@
 import {defineStore} from 'pinia'
 import {useProfileStore} from '~/stores/profiles'
 import { useArticleCatalog } from '~/stores/articles'
+import { storeToRefs } from 'pinia'
 
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({}),
@@ -46,7 +47,8 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.analytics.on('identify', (event, properties) => console.log('Identify Call for ' + event))
 
         const articles = useArticleCatalog()
-        watch(articles.categoryScores, () => console.log('category scores changed, would identify'))
+        const { categoryScores } = storeToRefs(articles)
+        watch(categoryScores, articles.syncScores)
       },
       reset() {
         this.analytics.reset()
