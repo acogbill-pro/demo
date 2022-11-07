@@ -18,18 +18,8 @@ function refreshWithRecommendations() {
     categoryArrayLocal.value = Array.from(articles.categoriesWithoutRecommended)
 }
 
-const hasRecommendation = computed(() => {
-    const isArticle = articles.recommendedArticle instanceof Object
-    if (isArticle) {
-        //console.log('has reco')
-        analytics.track('Article Recommended', articles.recommendedArticle)
-    }
-    return isArticle
-})
+const hasRecommendation = computed(() => articles.recommendedArticle instanceof Object)
 
-function titleCase(string) {
-    return string !== null ? string[0].toUpperCase() + string.slice(1).toLowerCase() : ''
-}
 </script>
 
 <template>
@@ -38,10 +28,7 @@ function titleCase(string) {
             <v-row>
                 <v-col cols="7">
                     <v-expand-transition>
-                        <div v-if="hasRecommendation">
-                            <h1>Recommended in {{ titleCase(articles.recommendedCategory) }}</h1>
-                            <BlogArticleCard :article="articles.recommendedArticle" :show-text="false" />
-                        </div>
+                        <BlogRecommendedArticle v-if="hasRecommendation" :article="articles.recommendedArticle" />
                     </v-expand-transition>
                     <!--<BlogArticleList v-if="hasRecommendation" :category="recommendedCategoryLocal" />-->
                     <BlogArticleList v-for="category in articles.categories" :key="category" :category="category" />

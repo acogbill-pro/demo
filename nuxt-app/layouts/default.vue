@@ -1,15 +1,3 @@
-<template>
-    <div class="default-layout">
-        <v-app>
-            <BlogNavBar />
-            <v-main>
-                <slot />
-            </v-main>
-            <BlogFooter />
-        </v-app>
-    </div>
-</template>
-
 <script setup>
 //import { useRoute } from 'vue-router'
 
@@ -54,6 +42,18 @@ onMounted(() => {
     )
 })
 </script>
+
+<template>
+    <div class="default-layout">
+        <v-app>
+            <BlogNavBar />
+            <v-main>
+                <slot />
+            </v-main>
+            <BlogFooter />
+        </v-app>
+    </div>
+</template>
 
 <style lang="scss" scoped>
 

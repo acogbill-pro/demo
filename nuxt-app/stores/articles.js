@@ -5,6 +5,7 @@ import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 
 export const useArticleCatalog = defineStore('articleCatalog', {
+    
     state: () => ({
       all: [
         {

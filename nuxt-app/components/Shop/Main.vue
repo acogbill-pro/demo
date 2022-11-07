@@ -10,17 +10,7 @@ onMounted(() => {
 
 })
 
-const hasRecommendation = computed(() => {
-    const isProduct = cart.recommendedProduct instanceof Object
-    if (isProduct) {
-        analytics.track('Product Recommended', cart.recommendedProduct)
-    }
-    return isProduct
-})
-
-function titleCase(string) {
-    return string !== null ? string[0].toUpperCase() + string.slice(1).toLowerCase() : ''
-}
+const hasRecommendation = computed(() => cart.recommendedProduct instanceof Object)
 </script>
 
 <template>
@@ -29,10 +19,7 @@ function titleCase(string) {
             <v-row>
                 <v-col cols="7">
                     <v-expand-transition>
-                        <div v-if="hasRecommendation">
-                            <h1>Recommended in {{ titleCase(cart.recommendedCategory) }}</h1>
-                            <ShopProductCard :product="cart.recommendedProduct" :show-detail="false" />
-                        </div>
+                        <ShopRecommendedProduct v-if="hasRecommendation" :product="cart.recommendedProduct" />
                     </v-expand-transition>
                     <ShopProductList v-for="category in products.categories" :key="category" :category="category" />
                 </v-col>

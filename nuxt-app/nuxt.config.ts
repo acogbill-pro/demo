@@ -23,6 +23,7 @@ export default defineNuxtConfig({
         profilesSpaceID: process.env.PROFILES_SPACE_ID,
         profilesAccessToken: process.env.PROFILES_ACCESS_TOKEN,
         justCORSurl: process.env.JUST_CORS,
+        categoryNames: process.env.CATEGORY_NAMES,
       }
     },
     head: {

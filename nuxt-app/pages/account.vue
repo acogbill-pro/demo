@@ -15,7 +15,7 @@ useHead({
 onMounted(() => {
     analytics.page('Login Page')
 
-    profiles.persistUser()
+    //profiles.persistUser()
 })
 
 const collapse = ref(true)
