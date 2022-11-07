@@ -8,6 +8,7 @@ const form = ref(null)
 const valid = ref(true)
 const fname = ref('')
 const lname = ref('')
+const name = computed(() => fname.value + ' ' + lname.value)
 const nameRules = [
     v => !!v || 'Name is required',
     v => (v && v.length <= 10) || 'Name must be less than 10 characters',
@@ -38,6 +39,7 @@ const traitsObject = computed(() => {
     return {
         fname: fname.value,
         lname: lname.value,
+        name: name.value,
         email: email.value,
         phone: phone.value
     }
