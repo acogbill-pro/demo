@@ -14,6 +14,10 @@ const props = defineProps({
             category: 'Loading',
             priceUSD: 1,
         },
+    },
+    showDetail: {
+        type: Boolean,
+        default: true,
     }
 })
 

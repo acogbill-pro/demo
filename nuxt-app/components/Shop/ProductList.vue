@@ -1,6 +1,8 @@
 <script setup>
 import { useProductCatalog } from '~/stores/products.js'
+import { useCartStore } from '~/stores/cart';
 const products = useProductCatalog()
+const cart = useCartStore()
 
 const props = defineProps({
     category: {
@@ -9,7 +11,15 @@ const props = defineProps({
     }
 })
 
-const productsToShow = computed(() => products.all.filter(product => product.category === props.category))
+function titleCase(string) {
+    return string !== null ? string[0].toUpperCase() + string.slice(1).toLowerCase() : ''
+}
+
+const categoryToPrint = computed(() => {
+    return titleCase(props.category)
+})
+
+const productsToShow = computed(() => products.all.filter(product => product.category === props.category && product !== cart.recommendedProduct))
 
 const reachedTheEnd = ref(false)
 
@@ -28,7 +38,7 @@ function onIntersect(isIntersecting, entries, observer) {
 
 <template>
     <div>
-        <h1 color="primary" class="my-10">{{ props.category }}</h1>
+        <h1 color="primary" class="my-10">{{ categoryToPrint }}</h1>
         <ShopProductCard v-for="product in productsToShow" :key="product.SKU" :product="product" />
         <v-spacer v-intersect="{
             handler: onIntersect,

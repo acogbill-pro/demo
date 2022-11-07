@@ -34,7 +34,7 @@ export const useCartStore = defineStore('cartStore', {
 
             const mapToReturn = [...this.contents.entries()].reduce((result, value) => {
                 const product = products.all.find(product => product.SKU === value[0])
-                const category = product.category.toLowerCase()
+                const category = product.category
                 result.set(category, result.has(category) ? result.get(category) + 1 : 1)
                 return result;
               }, new Map())
@@ -43,6 +43,48 @@ export const useCartStore = defineStore('cartStore', {
         asObject() { 
             return Object.assign(this.categoryCountsAsObject, {quantity: this.totalQuantity, value: this.totalValue})
         },
+        categoryScores: (state) => {
+            const products = useProductCatalog()
+            const profile = useProfileStore()
+
+            // process all traits into scores
+            // could make a call to anotoher API to pull / build these scores
+    
+            const contentsAsArray = Array.from(state?.contents.entries()) ?? [] [[key, value]]
+    
+            const categoryScoreMap = contentsAsArray.reduce(
+                function (acc, obj) { 
+                    const product = products.all.find(product => product.SKU === obj[0])
+                    const category = product.category
+                    return acc.set(category, acc.has(category) ? acc.get(category) + 1 : 1) // TODO: factor in quantity as multiplier?
+                }, 
+            profile.categoryScores)
+    
+            return categoryScoreMap
+            },
+            scoresAsObject: (state) => {
+                return Object.fromEntries(state.categoryScores)
+            },
+          recommendedCategory: (state) => {
+            const scoreArray = Array.from(state.categoryScores.entries()) // [[key, value]]
+            const topCategory = scoreArray.reduce((a, e) => e[1] > a[1] ? e : a, [null, null])[0]
+            return topCategory
+          },
+          categoriesWithoutRecommended: (state) => {
+            const products = useProductCatalog()
+            if (state.recommendedCategory !== null) {
+                const setToReturn = products.categories
+                setToReturn.delete(state.recommendedCategory)
+                return setToReturn
+            } else {
+                return products.categories
+            }
+            
+          },
+          recommendedProduct: (state) => {
+            const products = useProductCatalog()
+            return products.all.filter(product => product.category === state.recommendedCategory)[0] // TODO: Filter out favorites, pick the best, etc.
+          }
     },
   
     actions: {

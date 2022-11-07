@@ -7,6 +7,10 @@ const props = defineProps({
     article: {
         type: Object,
         default: { ID: '0001', title: 'Article Loading', fullText: 'Article Loading' }
+    },
+    showText: {
+        type: Boolean,
+        default: true,
     }
 })
 
@@ -25,7 +29,7 @@ function favorite() {
 <template>
     <v-card class="mb-10">
         <v-card-title>{{ props.article.title }}</v-card-title>
-        <v-card-text>
+        <v-card-text v-if="props.showText">
             {{ props.article.fullText }}
         </v-card-text>
         <v-card-actions>

@@ -12,7 +12,6 @@ const products = useProductCatalog()
 const dialog = ref(false)
 
 function viewCart() {
-    console.log(cart.asObject)
     analytics.page('Cart Viewed')
 }
 
@@ -45,6 +44,8 @@ function productFromSKU(withSKU) {
                             value
                     }}
                     </li>
+                    <li>Quantity: {{ cart.totalQuantity }}</li>
+                    <li>Total: ${{ cart.totalValue }}</li>
                 </ul>
             </v-card-text>
             <v-card-text v-else>

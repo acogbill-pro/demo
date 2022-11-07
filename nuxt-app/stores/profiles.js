@@ -5,6 +5,7 @@ import { Buffer } from 'buffer'
 import { useAnalytics } from '~/stores/analytics'
 import { useArticleCatalog } from '~/stores/articles'
 import { isProxy, toRaw } from 'vue'
+import { useCartStore } from './cart'
 
 export const useProfileStore = defineStore('profilesStore', {
     state: () => ({
@@ -13,6 +14,7 @@ export const useProfileStore = defineStore('profilesStore', {
       isLoading: false,
       traits: {},
       traitBlacklist: ['incrementers', 'phone', 'email'],
+      categoryScores: new Map(), // 'Category' => Int(Score)
     }),
   
     getters: {
@@ -45,6 +47,7 @@ export const useProfileStore = defineStore('profilesStore', {
       loadProfileForUser(userID, attemptsRemaining = 0) {
         const runtimeConfig = useRuntimeConfig()
         const articleStore = useArticleCatalog()
+        const cart = useCartStore()
 
         const options = {
         method: "GET",
@@ -90,7 +93,7 @@ export const useProfileStore = defineStore('profilesStore', {
           this.userID = userID
 
           this.traits = fetchedProfile.traits
-          articleStore.loadFavesAndScores(fetchedProfile.traits)
+          this.loadFavesAndScores(fetchedProfile.traits)
 
           if (this.isSyncing && attemptsRemaining > 0) {
             setTimeout(() => {
@@ -119,6 +122,10 @@ export const useProfileStore = defineStore('profilesStore', {
        // const analytics = useAnalytics()
         //analytics.identify(this.userID, this.traits)
       },
+      loadFavesAndScores(withTraits) {
+        console.log('To-do: set up article store to import scores from Profile')
+        this.categoryScores.set('sleep', 3)
+    },
       persistUser() {
         const analytics = useAnalytics()
 
@@ -133,10 +140,10 @@ export const useProfileStore = defineStore('profilesStore', {
 
         const analytics = useAnalytics()
 
-        if (this.userID !== null) {
+        /*if (this.userID !== null) {
           console.log('calling identify from unload')
           analytics.identify(this.userID, {favorited_pregnancy_articles: 0, favorited_sleep_articles: 0})
-        }
+        }*/
 
         this.userID = null
         this.traits = {}

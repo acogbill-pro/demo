@@ -1,23 +1,37 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import { useProfileStore } from '~/stores/profiles'
 const profile = useProfileStore()
 
-const linkText = computed(() => profile.hasTraits ? 'Account' : 'Login')
+const route = useRoute()
+console.log(route.path)
 
-const topLinks = [
-    {
-        label: 'Blog',
-        url: '/',
-    },
-    /*{ YES YOU HAVE TRIED THIS RECENTLY
-        label: 'ShopIN',
-        url: '/shop',
-    },*/
-    {
-        label: linkText.value,
-        url: '/account',
-    },
-]
+const internalLink = computed(() => {
+    if (route.path !== '/') {
+        return {
+            label: 'Blog',
+            url: '/',
+        }
+    } else {
+        return {
+            label: 'Login',//profile.hasTraits ? 'Account' : 'Login',
+            url: '/account',
+        }
+    }
+})
+
+const topLinks = computed(() => {
+    return [
+        /*{ YES YOU HAVE TRIED THIS RECENTLY
+            label: 'ShopIN',
+            url: '/shop',
+        },*/
+        {
+            label: 'Login',//profile.hasTraits ? 'Account' : 'Login',
+            url: '/account',
+        },
+    ]
+})
 
 /*undoRedoStore.startSaving()
 const undoable = ref(false)
@@ -51,6 +65,9 @@ function redo() {
                 <v-icon>mdi-redo-variant</v-icon>
             </v-btn>
             <v-spacer />-->
+            <v-btn color="secondary" text rounded to="/" nuxt>
+                Blog
+            </v-btn>
             <v-btn color="secondary" text rounded href="/shop" target="_blank">
                 Shop
             </v-btn>
