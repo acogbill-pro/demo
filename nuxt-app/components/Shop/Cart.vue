@@ -7,11 +7,12 @@ const analytics = useAnalytics()
 const cart = useCartStore()
 const products = useProductCatalog()
 
-const cartQuantity = computed((() => cart.totalQuantity))
+//const cartQuantity = computed((() => cart.totalQuantity))
 
 const dialog = ref(false)
 
 function viewCart() {
+    console.log(cart.asObject)
     analytics.page('Cart Viewed')
 }
 
@@ -24,7 +25,7 @@ function productFromSKU(withSKU) {
     <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
         <template v-slot:activator="{ props }">
             <v-btn @click="viewCart" v-bind="props" rounded>
-                <v-icon icon="mdi-cart" /> {{ cartQuantity }}
+                <v-icon icon="mdi-cart" /> {{ cart.totalQuantity }} - ${{ cart.totalValue }}
             </v-btn>
         </template>
         <v-card>

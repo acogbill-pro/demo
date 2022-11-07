@@ -9,7 +9,7 @@ definePageMeta({
 })
 
 useHead({
-    title: 'Home'
+    title: 'Blog'
 })
 
 onMounted(() => {

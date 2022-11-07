@@ -58,9 +58,7 @@ export const useProfileStore = defineStore('profilesStore', {
         const justCors = runtimeConfig.public.justCORSurl
 
         const requestURL = justCors + 'https://profiles.segment.com/v1/spaces/' + runtimeConfig.public.profilesSpaceID + '/collections/users/profiles/user_id:' + userID + '/traits'
-        //console.log(requestURL)
 
-              
         if (this.isSyncing) {
           this.isLoading = true  
         } else {
@@ -80,7 +78,6 @@ export const useProfileStore = defineStore('profilesStore', {
             return Promise.reject('some other error: ' + response.status)
           }
         })
-        //.then((profile) => (this.traits = profile.traits !== null ? profile.traits : {}))
         .then((fetchedProfile) => {
 
           /* Logic to only update traits if they changed */
@@ -88,15 +85,7 @@ export const useProfileStore = defineStore('profilesStore', {
             this.userID = userID
             this.traits = fetchedProfile.traits
             articleStore.loadFavesAndScores(fetchedProfile.traits)
-          } else if (attemptsRemaining > 0) {
-            console.log('No new traits for profile, will retry')
-            setTimeout(() => {
-              this.loadProfileForUser(userID, attemptsRemaining - 1)
-            }, 2000)
-          } else {
-            console.log('No more retries.')
-            this.isSyncing = false
-          }*/
+          } */
 
           this.userID = userID
 
@@ -106,15 +95,11 @@ export const useProfileStore = defineStore('profilesStore', {
           if (this.isSyncing && attemptsRemaining > 0) {
             setTimeout(() => {
               this.loadProfileForUser(userID, attemptsRemaining - 1)
-            }, 5000)
+            }, 2000)
           } else {
             this.isSyncing = false
           }
         })
-        /*.then(() => {
-          this.isLoading = false
-          //this.loadProfileForUser(userID, attemptsRemaining - 1)
-        })*/
         .catch((error) => console.log(error));
       },
       startSyncing(retryCount) {
@@ -140,7 +125,7 @@ export const useProfileStore = defineStore('profilesStore', {
         if (analytics.userID !== null && this.userID === null) {
           this.userID = analytics.userID
 
-          this.startSyncing(1)
+          analytics.identify(analytics.userID)
         }
       },
       unload() {

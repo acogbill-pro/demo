@@ -1,5 +1,6 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics'
+import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
 /*import { useRoute } from 'vue-router'
 const route = useRoute()*/
@@ -26,8 +27,21 @@ useHead({
     ]
 })
 
+function leaving(e) {
+    e.returnValue = ""
+
+    const cart = useCartStore()
+
+    analytics.track('Shop Closed', cart.asObject)
+}
+
 onMounted(() => {
     analytics.activateWatcher()
+
+    window.addEventListener(
+        "beforeunload",
+        leaving
+    )
 })
 </script>
 

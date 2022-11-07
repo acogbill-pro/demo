@@ -19,6 +19,30 @@ export const useCartStore = defineStore('cartStore', {
               }, 0)
             return count
         },
+        totalValue() {
+            const products = useProductCatalog()
+
+            const count = [...this.contents.entries()].reduce((result, value) => {
+                const product = products.all.find(product => product.SKU === value[0])
+                result += value[1] * product.priceUSD
+                return result;
+              }, 0)
+            return count
+        },
+        categoryCountsAsObject() {
+            const products = useProductCatalog()
+
+            const mapToReturn = [...this.contents.entries()].reduce((result, value) => {
+                const product = products.all.find(product => product.SKU === value[0])
+                const category = product.category.toLowerCase()
+                result.set(category, result.has(category) ? result.get(category) + 1 : 1)
+                return result;
+              }, new Map())
+            return Object.fromEntries(mapToReturn)
+        },
+        asObject() { 
+            return Object.assign(this.categoryCountsAsObject, {quantity: this.totalQuantity, value: this.totalValue})
+        },
     },
   
     actions: {

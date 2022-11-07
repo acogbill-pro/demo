@@ -128,6 +128,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
     actions: {
         loadFavesAndScores(withTraits) {
             console.log('To-do: set up article store to import scores from Profile')
+            console.log('Also todo: render another event when a recommended article is displayed')
         },
         markAsRead(withArticleID) {
             this.articlesRead.add(withArticleID)

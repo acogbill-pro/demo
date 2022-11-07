@@ -1,6 +1,8 @@
 <script setup>
 import { useArticleCatalog } from '~/stores/articles.js'
+import { useAnalytics } from '~/stores/analytics';
 const articles = useArticleCatalog()
+const analytics = useAnalytics()
 
 const recommendedCategoryLocal = ref(null)
 const categoryArrayLocal = ref(articles.categories)
@@ -12,6 +14,14 @@ onMounted(() => {
     categoryArrayLocal.value = articles.categoriesWithoutRecommended
 })
 
+const hasRecommendation = computed(() => {
+    if (recommendedCategoryLocal.value !== null) {
+        //console.log('has reco')
+        analytics.track('Article Category Recommended', { category: recommendedCategoryLocal.value })
+    }
+    return recommendedCategoryLocal !== null
+
+})
 </script>
 
 <template>
@@ -19,7 +29,7 @@ onMounted(() => {
         <v-container>
             <v-row>
                 <v-col cols="7">
-                    <BlogArticleList v-if="recommendedCategoryLocal !== null" :category="recommendedCategoryLocal" />
+                    <BlogArticleList v-if="hasRecommendation" :category="recommendedCategoryLocal" />
                     <BlogArticleList v-for="category in categoryArrayLocal" :key="category" :category="category" />
                 </v-col>
                 <v-col cols="1"></v-col>

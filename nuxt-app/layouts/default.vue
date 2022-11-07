@@ -39,8 +39,19 @@ useHead({
     ]
 })
 
+function leaving(e) {
+    e.returnValue = ""
+
+    analytics.track('Blog Closed')
+}
+
 onMounted(() => {
     analytics.activateWatcher()
+
+    window.addEventListener(
+        "beforeunload",
+        leaving
+    )
 })
 </script>
 

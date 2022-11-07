@@ -30,7 +30,7 @@ export const useAnalytics = defineStore('analyticsStore', {
           this.analytics.identify(user_id, traitsObject)
 
           setTimeout(() => {
-            profile.startSyncing(10)
+            profile.startSyncing(3)
           }, 2000)
           
         } else {
