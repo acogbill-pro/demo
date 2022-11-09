@@ -14,7 +14,6 @@ useHead({
 
 onMounted(() => {
     analytics.page('Product Listing Page')
-    profiles.persistUser()
 })
 </script>
 

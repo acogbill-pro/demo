@@ -17,8 +17,9 @@ const isSyncing = computed({
     set: (value) => {
         if (value === true) {
             if (profiles.userID === null) {
-                analytics.reset()
-                analytics.identify('Andy_Cogbill_id')
+                profiles.persistUser()
+                //analytics.reset()
+                //analytics.identify('Andy_Cogbill_id')
             } else {
                 profiles.startSyncing(10)
             }
