@@ -86,10 +86,5 @@ export const useProductCatalog = defineStore('productCatalog', {
     },
   
     actions: {
-      /*increment(amount = 1) {
-        const analytics = useAnalytics()
-        this.n += amount
-        analytics.track("Incremented")
-      },*/
     }
   })
