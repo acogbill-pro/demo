@@ -148,6 +148,7 @@ export const useProfileStore = defineStore('profilesStore', {
 
         this.userID = null
         this.traits = {}
+        this.categoryScores = new Map()
 
         analytics.reset()
       }
