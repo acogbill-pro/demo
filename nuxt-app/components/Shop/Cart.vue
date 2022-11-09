@@ -15,6 +15,11 @@ function viewCart() {
     analytics.page('Cart Viewed')
 }
 
+function closeCart() {
+    dialog.value = false
+    analytics.track('Cart Closed')
+}
+
 function productFromSKU(withSKU) {
     return products.all.find(product => product.SKU === withSKU)
 }
@@ -33,7 +38,7 @@ function productFromSKU(withSKU) {
                 <v-toolbar-title>Shopping Cart</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
-                    <v-btn icon dark @click="dialog = false">
+                    <v-btn icon dark @click="closeCart()">
                         <v-icon>mdi-close</v-icon>
                     </v-btn>
                 </v-toolbar-items>
