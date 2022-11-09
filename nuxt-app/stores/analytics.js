@@ -6,7 +6,9 @@ import { useArticleCatalog } from '~/stores/articles'
 import { storeToRefs } from 'pinia'
 
 export const useAnalytics = defineStore('analyticsStore', {
-    state: () => ({}),
+    state: () => ({
+      allEvents: [],
+    }),
   
     getters: {
       analytics: (state) => window.analytics? window.analytics : null, // TODO: add some validation
@@ -42,9 +44,9 @@ export const useAnalytics = defineStore('analyticsStore', {
         // works for alias, group, identify, track, and page
         // callback to augment this data
 
-        this.analytics.on('track', (event, properties) => console.log('Track Call for ' + event))
-        this.analytics.on('page', (event, properties) => console.log('Page Call for ' + properties))
-        this.analytics.on('identify', (event, properties) => console.log('Identify Call for ' + event))
+        this.analytics.on('track', (event, properties) => this.allEvents.unshift(event + ' (Track)'))
+        this.analytics.on('page', (event, properties) => this.allEvents.unshift(properties + ' (Page)'))
+        this.analytics.on('identify', (event, properties) => this.allEvents.unshift(event + ' (Identify)'))
 
         const articles = useArticleCatalog()
         const { categoryScores } = storeToRefs(articles)

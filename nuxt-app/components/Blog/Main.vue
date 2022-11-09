@@ -35,7 +35,8 @@ const hasRecommendation = computed(() => articles.recommendedArticle instanceof 
                 </v-col>
                 <v-col cols="1"></v-col>
                 <v-col cols="4">
-                    <BlogProfile />
+                    <SharedProfile />
+                    <SharedEventList />
                     <!--Pregnancy Score: {{ articles.categoryScores.get('Pregnancy') }}-->
                 </v-col>
             </v-row>
