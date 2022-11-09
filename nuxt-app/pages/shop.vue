@@ -9,7 +9,7 @@ definePageMeta({
 })
 
 useHead({
-    title: 'Products'
+    title: 'Shop'
 })
 
 onMounted(() => {

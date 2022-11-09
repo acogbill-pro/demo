@@ -29,7 +29,7 @@ function onIntersect(isIntersecting, entries, observer) {
     // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
     if (isIntersecting && !reachedTheEnd.value && entries[0].intersectionRatio >= 0.5) {
         reachedTheEnd.value = true
-        console.log('Viewed all products in ' + props.category)
+        analytics.track('Viewed All Products in Category', { category: props.category })
     }
 }
 
