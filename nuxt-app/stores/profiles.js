@@ -124,6 +124,7 @@ export const useProfileStore = defineStore('profilesStore', {
       },
       loadFavesAndScores(withTraits) {
         console.log('To-do: set up article store to import scores from Profile')
+        // imagine this as a function that takes the traits and calculates scores
         this.categoryScores.set('sleep', 3)
     },
       persistUser() {

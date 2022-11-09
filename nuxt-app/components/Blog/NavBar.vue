@@ -4,7 +4,6 @@ import { useProfileStore } from '~/stores/profiles'
 const profile = useProfileStore()
 
 const route = useRoute()
-console.log(route.path)
 
 const internalLink = computed(() => {
     if (route.path !== '/') {
