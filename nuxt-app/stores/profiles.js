@@ -14,7 +14,8 @@ export const useProfileStore = defineStore('profilesStore', {
       isSyncing: false,
       isLoading: false,
       traits: {},
-      traitBlacklist: ['incrementers', 'phone', 'email'],
+      traitBlacklist: ['incrementers', 'phone', 'email', 'edge'],
+      unwatchers: [],
     }),
   
     getters: {
@@ -109,18 +110,9 @@ export const useProfileStore = defineStore('profilesStore', {
         .catch((error) => console.log(error));
       },
       startSyncing(retryCount) {
-        const articles = useArticleCatalog()
-        const { favorites, articlesRead } = storeToRefs(articles)
-        watch(favorites.value, this.syncStores)
-        watch(articlesRead.value, this.syncStores)
-
-        const cart = useCartStore()
-        const {contents} = storeToRefs(cart)
-        watch(contents.value, this.syncStores)
-
         if (this.userID !== null) {
           this.isSyncing = true
-          this.syncStores()
+          
           this.loadProfileForUser(this.userID, retryCount)
         } else {
           console.log('no User ID to sync in startSyncing()')
@@ -130,8 +122,19 @@ export const useProfileStore = defineStore('profilesStore', {
         this.isSyncing = false
         this.isLoading = false
       },
-      syncStores() {
-        console.log('would sync stores')
+      startSyncingArticleStore() {
+        const articles = useArticleCatalog()
+        const { favorites, articlesRead } = storeToRefs(articles)
+        this.unwatchers.push(watch(favorites.value, articles.edgeToProfile))
+        this.unwatchers.push(watch(articlesRead.value, articles.edgeToProfile))
+      },
+      startSyncingCartStore() {
+        const cart = useCartStore()
+        const {contents} = storeToRefs(cart)
+        this.unwatchers.push(watch(contents.value, cart.edgeToProfile))
+      },
+      stopWatchingStores() {
+        this.unwatchers.forEach(unwatcher => unwatcher());
       },
       persistUser() {
         const analytics = useAnalytics()
@@ -144,9 +147,7 @@ export const useProfileStore = defineStore('profilesStore', {
       },
       unload() {
         this.isSyncing = false
-
-        const analytics = useAnalytics()
-        const recommendations = useRecommendations()
+        this.stopWatchingStores()
 
         /*if (this.userID !== null) {
           console.log('calling identify from unload')
@@ -155,8 +156,11 @@ export const useProfileStore = defineStore('profilesStore', {
 
         this.userID = null
         this.traits = {}
+
+        const recommendations = useRecommendations()
         recommendations.categoryScoreMap = new Map()
 
+        const analytics = useAnalytics()
         analytics.reset()
       },
       

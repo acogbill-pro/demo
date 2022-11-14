@@ -1,7 +1,9 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics'
+import { useProfileStore } from '~/stores/profiles';
 import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
+const profiles = useProfileStore()
 /*import { useRoute } from 'vue-router'
 const route = useRoute()*/
 const runtimeConfig = useRuntimeConfig()
@@ -37,6 +39,8 @@ function leaving(e) {
 
 onMounted(() => {
     analytics.activateWatcher()
+
+    profiles.startSyncingCartStore()
 
     window.addEventListener(
         "beforeunload",

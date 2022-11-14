@@ -86,9 +86,6 @@ export const useCartStore = defineStore('cartStore', {
     },
     
     actions: {
-        profileToEdge(withTraits) {
-            console.log('cart.loadToEdge')
-        },
         add(withSKU, withQuantity) {
             const prevQuantity = this.contents.has(withSKU) ? this.contents.get(withSKU) : 0
             this.contents.set(withSKU, prevQuantity + withQuantity)
@@ -101,6 +98,19 @@ export const useCartStore = defineStore('cartStore', {
         },
         remove(withSKU) {
             this.contents.delete(withSKU)
+        },
+        profileToEdge(withTraits) {
+            console.log('cart.profileToEdge')
+            //console.log(withTraits.edge)
+            // imagine this as a function that takes the traits and calculates scores
+            
+        },
+        edgeToProfile() {  
+            const analytics = useAnalytics()
+            const profiles = useProfileStore()
+            console.log('cart.edgeToProfile')
+
+            //analytics.identify(profiles.userID, this.scoresAsObject)
         },
     }
   })

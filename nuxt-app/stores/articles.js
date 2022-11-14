@@ -134,15 +134,15 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             analytics.track('Article Read', article)
         },
         profileToEdge(withTraits) {
-            console.log('articles.loadToEdge')
+            console.log('articles.profileToEdge')
             //console.log(withTraits.edge)
             // imagine this as a function that takes the traits and calculates scores
             
         },
-        syncWithStore() {  
+        edgeToProfile() {  
             const analytics = useAnalytics()
             const profiles = useProfileStore()
-            console.log('would send to store from articles')
+            console.log('articles.edgeToProfile')
 
             //analytics.identify(profiles.userID, this.scoresAsObject)
         },

@@ -70,7 +70,7 @@ function resetProfile() {
                         <v-icon icon="mdi-cached" color="gray" />
                     </template>
                 </v-switch>
-                <v-btn @click="loadProfile()" class="mb-5">
+                <v-btn @click="resetProfile()" class="mb-5">
                     <v-icon icon="mdi-delete" color="gray" />
                 </v-btn>
             </v-card-actions>
