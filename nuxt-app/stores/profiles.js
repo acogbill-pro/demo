@@ -1,6 +1,6 @@
 // Wrapper store for User's Segment Profile
   
-import {defineStore} from 'pinia'
+import {defineStore, storeToRefs} from 'pinia'
 import { Buffer } from 'buffer'
 import { useAnalytics } from '~/stores/analytics'
 import { useArticleCatalog } from '~/stores/articles'
@@ -94,9 +94,9 @@ export const useProfileStore = defineStore('profilesStore', {
           this.userID = userID
 
           this.traits = fetchedProfile.traits
-          recommendations.loadToEdge(fetchedProfile.traits)
-          articleStore.loadToEdge(fetchedProfile.traits)
-          cartStore.loadToEdge(fetchedProfile.traits)
+          recommendations.profileToEdge(fetchedProfile.traits)
+          articleStore.profileToEdge(fetchedProfile.traits)
+          cartStore.profileToEdge(fetchedProfile.traits)
 
           if (this.isSyncing && attemptsRemaining > 0) {
             setTimeout(() => {
@@ -109,8 +109,18 @@ export const useProfileStore = defineStore('profilesStore', {
         .catch((error) => console.log(error));
       },
       startSyncing(retryCount) {
+        const articles = useArticleCatalog()
+        const { favorites, articlesRead } = storeToRefs(articles)
+        watch(favorites.value, this.syncStores)
+        watch(articlesRead.value, this.syncStores)
+
+        const cart = useCartStore()
+        const {contents} = storeToRefs(cart)
+        watch(contents.value, this.syncStores)
+
         if (this.userID !== null) {
           this.isSyncing = true
+          this.syncStores()
           this.loadProfileForUser(this.userID, retryCount)
         } else {
           console.log('no User ID to sync in startSyncing()')
@@ -120,10 +130,8 @@ export const useProfileStore = defineStore('profilesStore', {
         this.isSyncing = false
         this.isLoading = false
       },
-      syncWithStore() {
-        //console.log('would send Identify call with latest traits')
-       // const analytics = useAnalytics()
-        //analytics.identify(this.userID, this.traits)
+      syncStores() {
+        console.log('would sync stores')
       },
       persistUser() {
         const analytics = useAnalytics()
@@ -150,6 +158,7 @@ export const useProfileStore = defineStore('profilesStore', {
         recommendations.categoryScoreMap = new Map()
 
         analytics.reset()
-      }
+      },
+      
     }
   })

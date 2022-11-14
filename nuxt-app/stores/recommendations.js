@@ -51,7 +51,7 @@ export const useRecommendations = defineStore('recommendations', {
     },
   
     actions: {
-        loadToEdge() {
+        profileToEdge() {
             this.categoryScoreMap.set('sleep', 3)
         }
     }

@@ -1,19 +1,25 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
+import { useArticleCatalog } from '~/stores/articles.js'
+import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
+const articles = useArticleCatalog()
+const cart = useCartStore()
 
 function loadProfile() {
-    analytics.identify('Andy_Cogbill_id', { edge: "{trait1: 'value', trait2: 'another value'}" })
+    /*analytics.identify('Andy_Cogbill_id', { edge: null })
     const exampleMap = new Map()
-    exampleMap.set('trait1', 'value')
-    exampleMap.set('trait2', 'another value')
+    exampleMap.set('articles', 2)
+    exampleMap.set('sleep', 3)
     const exampleArray = ['trait1', 'trait2']
     console.log(exampleMap)
     console.log(JSON.stringify(Array.from(exampleMap.entries())))
     const reviveMap = new Map(Array.from(exampleMap.entries()))
-    console.log(reviveMap)
+    console.log(reviveMap)*/
+    console.log(articles.forEdge)
+    console.log(cart.forEdge)
 }
 
 const profileLoaded = computed(() => {
@@ -64,7 +70,7 @@ function resetProfile() {
                         <v-icon icon="mdi-cached" color="gray" />
                     </template>
                 </v-switch>
-                <v-btn @click="resetProfile()" class="mb-5">
+                <v-btn @click="loadProfile()" class="mb-5">
                     <v-icon icon="mdi-delete" color="gray" />
                 </v-btn>
             </v-card-actions>

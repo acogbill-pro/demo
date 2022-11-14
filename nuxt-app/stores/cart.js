@@ -44,9 +44,9 @@ export const useCartStore = defineStore('cartStore', {
         asObject() { 
             return Object.assign(this.categoryCountsAsObject, {quantity: this.totalQuantity, value: this.totalValue})
         },
-      forUser: (state) => {
-        return {articleStore: null}
-      },
+        forEdge: (state) => {
+            return {cartStore_contents: Array.from(state.contents.entries())}
+          },
           categoriesWithoutRecommended: (state) => {
             const products = useProductCatalog()
             if (state.recommendedCategory !== null) {
@@ -84,9 +84,9 @@ export const useCartStore = defineStore('cartStore', {
             }
         }, 
     },
-  
+    
     actions: {
-        loadToEdge(withTraits) {
+        profileToEdge(withTraits) {
             console.log('cart.loadToEdge')
         },
         add(withSKU, withQuantity) {

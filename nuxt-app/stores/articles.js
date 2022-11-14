@@ -5,8 +5,8 @@ import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 import { useRecommendations } from '~/stores/recommendations'
 
+
 export const useArticleCatalog = defineStore('articleCatalog', {
-    
     state: () => ({
       all: [
         {
@@ -119,7 +119,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
     }, 
       hasRecommendation: (state) => state.recommendedArticle instanceof Object,
       forEdge: (state) => {
-        return {articleStore: null}
+        return {articleStore_favorites: Array.from(state.favorites), articleStore_read: Array.from(state.articlesRead)}
       },
     },
   
@@ -133,17 +133,18 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             analytics.page('Article Page')
             analytics.track('Article Read', article)
         },
-        loadToEdge(withTraits) {
+        profileToEdge(withTraits) {
             console.log('articles.loadToEdge')
             //console.log(withTraits.edge)
             // imagine this as a function that takes the traits and calculates scores
             
         },
-        syncScores() {  
+        syncWithStore() {  
             const analytics = useAnalytics()
             const profiles = useProfileStore()
+            console.log('would send to store from articles')
 
-            analytics.identify(profiles.userID, this.scoresAsObject)
+            //analytics.identify(profiles.userID, this.scoresAsObject)
         },
         addFavorite(withArticleID) {
             this.favorites.add(withArticleID)
