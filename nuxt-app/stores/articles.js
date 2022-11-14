@@ -3,6 +3,7 @@
 import {defineStore} from 'pinia'
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
+import { useRecommendations } from '~/stores/recommendations'
 
 export const useArticleCatalog = defineStore('articleCatalog', {
     
@@ -84,32 +85,6 @@ export const useArticleCatalog = defineStore('articleCatalog', {
     }),
   
     getters: {
-      categoryScores: (state) => {
-        const profile = useProfileStore()
-
-        // process all traits into scores
-        // could make a call to anotoher API to pull / build these scores
-
-        const favesAsArray = Array.from(state?.favorites) ?? []
-
-        const favesScoreMap = favesAsArray.reduce(
-            function (acc, obj) { 
-                const article = state.all.find(article => article.ID === obj)
-                const category = article.category
-                return acc.set(category, acc.has(category) ? acc.get(category) + 1 : 1)
-            }, 
-        profile.categoryScores)
-
-        return favesScoreMap
-        },
-        scoresAsObject: (state) => {
-            return Object.fromEntries(state.categoryScores)
-        },
-      recommendedCategory: (state) => {
-        const scoreArray = Array.from(state.categoryScores.entries()) // [[key, value]]
-        const topCategory = scoreArray.reduce((a, e) => e[1] > a[1] ? e : a, [null, null])[0]
-        return topCategory
-      },
       categories: (state) => {
         return state.all.reduce(function (acc, obj) { return acc.add(obj.category); }, new Set())
       },
@@ -124,8 +99,28 @@ export const useArticleCatalog = defineStore('articleCatalog', {
         
       },
       recommendedArticle: (state) => {
-        return state.all.filter(article => article.category === state.recommendedCategory)[0] // TODO: Filter out favorites, pick the best, etc.
-      }
+        const recommendations = useRecommendations()
+
+        const union = new Set([...state.favorites, ...state.articlesRead])
+        const array = Array.from(union)
+
+        // find Difference between the two Arrays
+        const leftInCategory = state.all.filter(({ ID: id1, category }) => {
+            return !array.some((id2) => {
+                return id2 === id1
+            }) && category === recommendations.recommendedCategory
+        })
+
+        if (leftInCategory.length > 0) {
+            return leftInCategory[0]
+        } else {
+            return state.all.filter(article => article.category === recommendations.recommendedCategory)[0] // TODO: Filter out favorites, pick the best, etc.
+        }
+    }, 
+      hasRecommendation: (state) => state.recommendedArticle instanceof Object,
+      forEdge: (state) => {
+        return {articleStore: null}
+      },
     },
   
     actions: {
@@ -137,6 +132,12 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             const analytics = useAnalytics()
             analytics.page('Article Page')
             analytics.track('Article Read', article)
+        },
+        loadToEdge(withTraits) {
+            console.log('articles.loadToEdge')
+            //console.log(withTraits.edge)
+            // imagine this as a function that takes the traits and calculates scores
+            
         },
         syncScores() {  
             const analytics = useAnalytics()

@@ -6,6 +6,7 @@ import { useAnalytics } from '~/stores/analytics'
 import { useArticleCatalog } from '~/stores/articles'
 import { isProxy, toRaw } from 'vue'
 import { useCartStore } from './cart'
+import { useRecommendations } from '~/stores/recommendations'
 
 export const useProfileStore = defineStore('profilesStore', {
     state: () => ({
@@ -14,7 +15,6 @@ export const useProfileStore = defineStore('profilesStore', {
       isLoading: false,
       traits: {},
       traitBlacklist: ['incrementers', 'phone', 'email'],
-      categoryScores: new Map(), // 'Category' => Int(Score)
     }),
   
     getters: {
@@ -46,8 +46,9 @@ export const useProfileStore = defineStore('profilesStore', {
     actions: {
       loadProfileForUser(userID, attemptsRemaining = 0) {
         const runtimeConfig = useRuntimeConfig()
+        const recommendations = useRecommendations()
+        const cartStore = useCartStore()
         const articleStore = useArticleCatalog()
-        const cart = useCartStore()
 
         const options = {
         method: "GET",
@@ -93,7 +94,9 @@ export const useProfileStore = defineStore('profilesStore', {
           this.userID = userID
 
           this.traits = fetchedProfile.traits
-          this.loadFavesAndScores(fetchedProfile.traits)
+          recommendations.loadToEdge(fetchedProfile.traits)
+          articleStore.loadToEdge(fetchedProfile.traits)
+          cartStore.loadToEdge(fetchedProfile.traits)
 
           if (this.isSyncing && attemptsRemaining > 0) {
             setTimeout(() => {
@@ -122,24 +125,20 @@ export const useProfileStore = defineStore('profilesStore', {
        // const analytics = useAnalytics()
         //analytics.identify(this.userID, this.traits)
       },
-      loadFavesAndScores(withTraits) {
-        console.log('To-do: set up article store to import scores from Profile')
-        // imagine this as a function that takes the traits and calculates scores
-        this.categoryScores.set('sleep', 3)
-    },
       persistUser() {
         const analytics = useAnalytics()
 
         if (analytics.userID !== null && this.userID === null) {
           this.userID = analytics.userID
 
-          analytics.identify(analytics.userID)
+          analytics.identify(analytics.userID) // starts syncing after the Identify call
         }
       },
       unload() {
         this.isSyncing = false
 
         const analytics = useAnalytics()
+        const recommendations = useRecommendations()
 
         /*if (this.userID !== null) {
           console.log('calling identify from unload')
@@ -148,7 +147,7 @@ export const useProfileStore = defineStore('profilesStore', {
 
         this.userID = null
         this.traits = {}
-        this.categoryScores = new Map()
+        recommendations.categoryScoreMap = new Map()
 
         analytics.reset()
       }

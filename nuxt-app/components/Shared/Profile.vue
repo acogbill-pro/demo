@@ -5,7 +5,15 @@ const analytics = useAnalytics()
 const profiles = useProfileStore()
 
 function loadProfile() {
-    profiles.loadProfileForUser('Andy_Cogbill_id')
+    analytics.identify('Andy_Cogbill_id', { edge: "{trait1: 'value', trait2: 'another value'}" })
+    const exampleMap = new Map()
+    exampleMap.set('trait1', 'value')
+    exampleMap.set('trait2', 'another value')
+    const exampleArray = ['trait1', 'trait2']
+    console.log(exampleMap)
+    console.log(JSON.stringify(Array.from(exampleMap.entries())))
+    const reviveMap = new Map(Array.from(exampleMap.entries()))
+    console.log(reviveMap)
 }
 
 const profileLoaded = computed(() => {
@@ -18,8 +26,6 @@ const isSyncing = computed({
         if (value === true) {
             if (profiles.userID === null) {
                 profiles.persistUser()
-                //analytics.reset()
-                //analytics.identify('Andy_Cogbill_id')
             } else {
                 profiles.startSyncing(10)
             }

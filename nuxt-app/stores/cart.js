@@ -4,6 +4,7 @@ import {defineStore} from 'pinia'
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 import { useProductCatalog } from '~/stores/products.js'
+import { useRecommendations } from './recommendations'
 
 export const useCartStore = defineStore('cartStore', {
     state: () => ({
@@ -43,33 +44,9 @@ export const useCartStore = defineStore('cartStore', {
         asObject() { 
             return Object.assign(this.categoryCountsAsObject, {quantity: this.totalQuantity, value: this.totalValue})
         },
-        categoryScores: (state) => {
-            const products = useProductCatalog()
-            const profile = useProfileStore()
-
-            // process all traits into scores
-            // could make a call to anotoher API to pull / build these scores
-    
-            const contentsAsArray = Array.from(state?.contents.entries()) ?? [] [[key, value]]
-    
-            const categoryScoreMap = contentsAsArray.reduce(
-                function (acc, obj) { 
-                    const product = products.all.find(product => product.SKU === obj[0])
-                    const category = product.category
-                    return acc.set(category, acc.has(category) ? acc.get(category) + 1 : 1) // TODO: factor in quantity as multiplier?
-                }, 
-            profile.categoryScores)
-    
-            return categoryScoreMap
-            },
-            scoresAsObject: (state) => {
-                return Object.fromEntries(state.categoryScores)
-            },
-          recommendedCategory: (state) => {
-            const scoreArray = Array.from(state.categoryScores.entries()) // [[key, value]]
-            const topCategory = scoreArray.reduce((a, e) => e[1] > a[1] ? e : a, [null, null])[0]
-            return topCategory
-          },
+      forUser: (state) => {
+        return {articleStore: null}
+      },
           categoriesWithoutRecommended: (state) => {
             const products = useProductCatalog()
             if (state.recommendedCategory !== null) {
@@ -81,22 +58,36 @@ export const useCartStore = defineStore('cartStore', {
             }
             
           },
-          recommendedProduct: (state) => {
+          recommendedProductOLD: (state) => {
             const products = useProductCatalog()
-            return products.all.filter(product => product.category === state.recommendedCategory)[0] // TODO: Filter out favorites, pick the best, etc.
-          }
+            const recommendations = useRecommendations()
+            return products.all.filter(product => product.category === recommendations.recommendedCategory)[0] // TODO: Filter out favorites, pick the best, etc.
+          },
+
+        recommendedProduct: (state) => {
+            const recommendations = useRecommendations()
+            const products = useProductCatalog()
+
+            const array = Array.from(state.contents.keys())
+
+            // find Difference between the two Arrays
+            const leftInCategory = products.all.filter(({ SKU: SKU1, category }) => {
+                return !array.some((SKU2) => {
+                    return SKU2 === SKU1
+                }) && category === recommendations.recommendedCategory
+            })
+
+            if (leftInCategory.length > 0) {
+                return leftInCategory[0]
+            } else {
+                return products.all.filter(article => article.category === recommendations.recommendedCategory)[0] // TODO: Filter out favorites, pick the best, etc.
+            }
+        }, 
     },
   
     actions: {
-        loadCart(withTraits) {
-            console.log('Would update client-side cart data')
-        },
-        updateScores() {
-            // could do a round-trip to an API to calculate scores first
-            console.log('Would update score data from client side')
-            
-            const profiles = useProfileStore()
-            profiles.syncWithStore()
+        loadToEdge(withTraits) {
+            console.log('cart.loadToEdge')
         },
         add(withSKU, withQuantity) {
             const prevQuantity = this.contents.has(withSKU) ? this.contents.get(withSKU) : 0

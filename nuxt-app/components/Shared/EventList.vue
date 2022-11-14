@@ -12,7 +12,7 @@ function toggleList() {
 <template>
     <v-card>
         <v-card-actions @click="toggleList()">
-            Events
+            Segment Events
             <v-icon :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'" />
         </v-card-actions>
         <v-expand-transition>

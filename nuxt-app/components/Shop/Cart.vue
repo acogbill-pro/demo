@@ -13,11 +13,12 @@ const dialog = ref(false)
 
 function viewCart() {
     analytics.page('Cart Viewed')
+    analytics.track('Cart Opened', cart.asObject)
 }
 
 function closeCart() {
     dialog.value = false
-    analytics.track('Cart Closed')
+    analytics.track('Cart Closed', cart.asObject)
 }
 
 function productFromSKU(withSKU) {

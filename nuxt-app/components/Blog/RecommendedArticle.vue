@@ -1,12 +1,12 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics';
+import { useArticleCatalog } from '~/stores/articles'
+import { useRecommendations } from '~/stores/recommendations';
 const analytics = useAnalytics()
+const articles = useArticleCatalog()
+//const recommendations = useRecommendations()
 
 const props = defineProps({
-    article: {
-        type: Object,
-        default: { ID: '0001', title: 'Article Loading', fullText: 'Article Loading' }
-    },
 })
 
 onMounted(() => {
@@ -20,8 +20,8 @@ function titleCase(string) {
 
 <template>
     <div>
-        <h1>Recommended in {{ titleCase(article.category) }}</h1>
-        <BlogArticleCard :article="props.article" :show-text="false" />
+        <h1>Recommended in {{ titleCase(articles.recommendedArticle.category) }}</h1>
+        <BlogArticleCard :article="articles.recommendedArticle" :show-text="false" />
     </div>
 </template>
 

@@ -1,8 +1,10 @@
 <script setup>
 import { useArticleCatalog } from '~/stores/articles.js'
 import { useAnalytics } from '~/stores/analytics'
+import { useRecommendations } from '~/stores/recommendations';
 const articles = useArticleCatalog()
 const analytics = useAnalytics()
+const recommendations = useRecommendations()
 
 const props = defineProps({
     category: {
@@ -19,7 +21,7 @@ const categoryToPrint = computed(() => {
     return titleCase(props.category)
 })
 
-const articlesToShow = computed(() => articles.all.filter(article => article.category === props.category && article !== articles.recommendedArticle))
+const articlesToShow = computed(() => articles.all.filter(article => article.category === props.category && article !== recommendations.recommendedArticle))
 
 const reachedTheEnd = ref(false)
 
