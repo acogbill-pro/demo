@@ -22,7 +22,8 @@ export const useAnalytics = defineStore('analyticsStore', {
       track(eventName, traitsObject = null) {
         this.analytics.track(eventName, traitsObject)
       },
-      identify(user_id = null, traitsObject = {}) {
+      identify(user_id = null, traitsObject = {}, syncAfter = false) {
+        //console.log('identify call')
         const profile = useProfileStore()
         if (user_id !== null) {
           profile.userID = user_id
@@ -30,9 +31,11 @@ export const useAnalytics = defineStore('analyticsStore', {
           
           this.analytics.identify(user_id, traitsObject)
 
-          setTimeout(() => {
-            profile.startSyncing(3)
-          }, 2000)
+          if (syncAfter) {
+            setTimeout(() => {
+              profile.startSyncing(3)
+            }, 2000)
+        }
           
         } else {
           this.analytics.identify(traitsObject) // automatically prepends the anonymous ID

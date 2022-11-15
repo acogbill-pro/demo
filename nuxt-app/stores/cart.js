@@ -45,7 +45,7 @@ export const useCartStore = defineStore('cartStore', {
             return Object.assign(this.categoryCountsAsObject, {quantity: this.totalQuantity, value: this.totalValue})
         },
         forEdge: (state) => {
-            return {cartStore_contents: Array.from(state.contents.entries())}
+            return {cart_contents: Array.from(state.contents.entries())}
           },
           categoriesWithoutRecommended: (state) => {
             const products = useProductCatalog()
@@ -99,18 +99,28 @@ export const useCartStore = defineStore('cartStore', {
         remove(withSKU) {
             this.contents.delete(withSKU)
         },
-        profileToEdge(withTraits) {
-            console.log('cart.profileToEdge')
-            //console.log(withTraits.edge)
-            // imagine this as a function that takes the traits and calculates scores
-            
+        profileToEdge({cartStore}) {
+            //console.log('cart.profileToEdge')
+            const toObject = JSON.parse(cartStore?? '{}')
+            const contents = new Map(toObject.cart_contents)
+
+            const stateIsMaster = this.contents.size > 0
+            // TODO: This isn't great, since being empty could still be meaningful... just not likely
+
+            if (!stateIsMaster) {
+                this.contents = new Map([...this.contents, ...contents]) 
+            } else {
+                //console.log('Not overwriting state')
+            }          
         },
         edgeToProfile() {  
             const analytics = useAnalytics()
             const profiles = useProfileStore()
-            console.log('cart.edgeToProfile')
 
-            //analytics.identify(profiles.userID, this.scoresAsObject)
+            const asString = JSON.stringify(this.forEdge)
+
+            console.log('cart.edgeToProfile')
+            analytics.identify(profiles.userID, {cartStore: asString})
         },
     }
   })

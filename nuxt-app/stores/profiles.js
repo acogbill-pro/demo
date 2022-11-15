@@ -66,6 +66,7 @@ export const useProfileStore = defineStore('profilesStore', {
 
         if (this.isSyncing) {
           this.isLoading = true  
+          this.stopSyncingStores()
         } else {
           return
         }
@@ -99,6 +100,9 @@ export const useProfileStore = defineStore('profilesStore', {
           articleStore.profileToEdge(fetchedProfile.traits)
           cartStore.profileToEdge(fetchedProfile.traits)
 
+          this.startSyncingArticleStore()
+            this.startSyncingCartStore()
+
           if (this.isSyncing && attemptsRemaining > 0) {
             setTimeout(() => {
               this.loadProfileForUser(userID, attemptsRemaining - 1)
@@ -125,15 +129,17 @@ export const useProfileStore = defineStore('profilesStore', {
       startSyncingArticleStore() {
         const articles = useArticleCatalog()
         const { favorites, articlesRead } = storeToRefs(articles)
+        //articles.edgeToProfile()
         this.unwatchers.push(watch(favorites.value, articles.edgeToProfile))
         this.unwatchers.push(watch(articlesRead.value, articles.edgeToProfile))
       },
       startSyncingCartStore() {
         const cart = useCartStore()
         const {contents} = storeToRefs(cart)
+        //cart.edgeToProfile()
         this.unwatchers.push(watch(contents.value, cart.edgeToProfile))
       },
-      stopWatchingStores() {
+      stopSyncingStores() {
         this.unwatchers.forEach(unwatcher => unwatcher());
       },
       persistUser() {
@@ -142,17 +148,11 @@ export const useProfileStore = defineStore('profilesStore', {
         if (analytics.userID !== null && this.userID === null) {
           this.userID = analytics.userID
 
-          analytics.identify(analytics.userID) // starts syncing after the Identify call
+          analytics.identify(analytics.userID, {}, true) // starts syncing after the Identify call
         }
       },
       unload() {
         this.isSyncing = false
-        this.stopWatchingStores()
-
-        /*if (this.userID !== null) {
-          console.log('calling identify from unload')
-          analytics.identify(this.userID, {favorited_pregnancy_articles: 0, favorited_sleep_articles: 0})
-        }*/
 
         this.userID = null
         this.traits = {}

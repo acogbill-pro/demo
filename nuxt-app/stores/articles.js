@@ -119,7 +119,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
     }, 
       hasRecommendation: (state) => state.recommendedArticle instanceof Object,
       forEdge: (state) => {
-        return {articleStore_favorites: Array.from(state.favorites), articleStore_read: Array.from(state.articlesRead)}
+        return {articles_favorites: Array.from(state.favorites), articles_read: Array.from(state.articlesRead)}
       },
     },
   
@@ -133,18 +133,31 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             analytics.page('Article Page')
             analytics.track('Article Read', article)
         },
-        profileToEdge(withTraits) {
-            console.log('articles.profileToEdge')
-            //console.log(withTraits.edge)
-            // imagine this as a function that takes the traits and calculates scores
-            
+        profileToEdge({articleStore = null}) {
+            //console.log('articles.profileToEdge')
+            const toObject = JSON.parse(articleStore?? '{}')
+
+            const favorites = new Set(toObject.articles_favorites)
+            const read = new Set(toObject.articles_read)
+
+            const stateIsMaster = this.favorites.size > 0 || this.articlesRead.size > 0
+            // TODO: This isn't great, since these being empty could still be meaningful... just not likely
+
+            if (!stateIsMaster) {
+                this.favorites = new Set([...this.favorites, ...favorites])
+                this.articlesRead = new Set([...this.articlesRead, ...read])
+            } else {
+                //console.log('Not overwriting state')
+            }
         },
         edgeToProfile() {  
             const analytics = useAnalytics()
             const profiles = useProfileStore()
-            console.log('articles.edgeToProfile')
 
-            //analytics.identify(profiles.userID, this.scoresAsObject)
+            const asString = JSON.stringify(this.forEdge)
+
+            console.log('articles.edgeToProfile')
+            analytics.identify(profiles.userID, {articleStore: asString})
         },
         addFavorite(withArticleID) {
             this.favorites.add(withArticleID)
