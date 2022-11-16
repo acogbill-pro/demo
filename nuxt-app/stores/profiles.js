@@ -10,22 +10,32 @@ import { useRecommendations } from '~/stores/recommendations'
 
 export const useProfileStore = defineStore('profilesStore', {
     state: () => ({
-      userID: null,
       isSyncing: false,
       isLoading: false,
       traits: {},
       traitBlacklist: ['incrementers', 'phone', 'email', 'edge'],
       unwatchers: [],
     }),
-  
     getters: {
+      bestID: (state) => {
+        const analytics = useAnalytics()
+        console.log('bestID')
+        console.log(analytics.userID)
+        console.log(analytics.anonymousID)
+        return analytics.userID !== null ? analytics.userID : analytics.anonymousID !== null ? analytics.anonymousID : null
+      },
+      bestIDIsAnonymous: (state) => {
+        const analytics = useAnalytics()
+        const value = analytics.userID === null && analytics.anonymousID !== null
+        //this.bestID.split('_').pop() !== 'id'
+        return value
+      },
       hasTraits: (state) => {
         if (state?.traits instanceof Object) {
           return Object.keys(state.traits).length > 0
         } else {
           return false
         }
-        
       },
       cleanTraits: (state) => {
 
@@ -45,9 +55,8 @@ export const useProfileStore = defineStore('profilesStore', {
     },
   
     actions: {
-      loadProfileForUser(userID, attemptsRemaining = 0) {
+      loadProfileForUser(attemptsRemaining = 0) {
         const runtimeConfig = useRuntimeConfig()
-        const recommendations = useRecommendations()
         const cartStore = useCartStore()
         const articleStore = useArticleCatalog()
 
@@ -62,12 +71,13 @@ export const useProfileStore = defineStore('profilesStore', {
 
         const justCors = runtimeConfig.public.justCORSurl
 
-        const requestURL = justCors + 'https://profiles.segment.com/v1/spaces/' + runtimeConfig.public.profilesSpaceID + '/collections/users/profiles/user_id:' + userID + '/traits'
+        const requestURL = justCors + 'https://profiles.segment.com/v1/spaces/' + runtimeConfig.public.profilesSpaceID + '/collections/users/profiles/' + (this.bestIDIsAnonymous ? 'anonymous_id:' : 'user_id:') + this.bestID + '/traits'
 
-        if (this.isSyncing) {
+        if (this.isSyncing && this.bestID !== null) {
           this.isLoading = true  
           this.stopSyncingStores()
         } else {
+          console.log('bailing on loadProfile: ' + this.isSyncing)
           return
         }
 
@@ -79,8 +89,10 @@ export const useProfileStore = defineStore('profilesStore', {
             return response.json()
           } else if(response.status === 404) {
             console.log('404 error')
+            this.stopSyncing()
             return Promise.reject('error 404')
           } else {
+            this.stopSyncing()
             return Promise.reject('some other error: ' + response.status)
           }
         })
@@ -92,34 +104,34 @@ export const useProfileStore = defineStore('profilesStore', {
             this.traits = fetchedProfile.traits
             articleStore.loadFavesAndScores(fetchedProfile.traits)
           } */
-
-          this.userID = userID
-
-          this.traits = fetchedProfile.traits
-          recommendations.profileToEdge(fetchedProfile.traits)
+          
           articleStore.profileToEdge(fetchedProfile.traits)
           cartStore.profileToEdge(fetchedProfile.traits)
+          this.traits = fetchedProfile.traits
 
           this.startSyncingArticleStore()
-            this.startSyncingCartStore()
+          this.startSyncingCartStore()
 
           if (this.isSyncing && attemptsRemaining > 0) {
             setTimeout(() => {
-              this.loadProfileForUser(userID, attemptsRemaining - 1)
+              this.loadProfileForUser(attemptsRemaining - 1)
             }, 2000)
           } else {
             this.isSyncing = false
           }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          this.stopSyncing()
+          console.log(error)
+        });
       },
       startSyncing(retryCount) {
-        if (this.userID !== null) {
+        if (this.bestID !== null && !this.isSyncing) {
           this.isSyncing = true
           
-          this.loadProfileForUser(this.userID, retryCount)
+          this.loadProfileForUser(retryCount)
         } else {
-          console.log('no User ID to sync in startSyncing()')
+          //console.log('no User ID to sync in startSyncing()')
         }
       },
       stopSyncing() {
@@ -142,23 +154,10 @@ export const useProfileStore = defineStore('profilesStore', {
       stopSyncingStores() {
         this.unwatchers.forEach(unwatcher => unwatcher());
       },
-      persistUser() {
-        const analytics = useAnalytics()
-
-        if (analytics.userID !== null && this.userID === null) {
-          this.userID = analytics.userID
-
-          analytics.identify(analytics.userID, {}, true) // starts syncing after the Identify call
-        }
-      },
       unload() {
         this.isSyncing = false
 
-        this.userID = null
         this.traits = {}
-
-        const recommendations = useRecommendations()
-        recommendations.categoryScoreMap = new Map()
 
         const analytics = useAnalytics()
         analytics.reset()

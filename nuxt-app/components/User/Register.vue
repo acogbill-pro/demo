@@ -81,7 +81,7 @@ function prePopRandom() {
 
 function submit() {
     if (form.value.validate()) {
-        analytics.identify(user_id.value, traitsObject.value)
+        analytics.identify(user_id.value, traitsObject.value, true)
         analytics.track("User Registered")
     } else {
         // go to error page
@@ -130,7 +130,7 @@ function resetValidation() {
                     Reset
                 </v-btn>
                 <v-btn variant="plain" @click="prePopRandom()">
-                    Populate
+                    Random
                 </v-btn>
 
                 <!--<v-btn color="warning" @click="resetValidation">

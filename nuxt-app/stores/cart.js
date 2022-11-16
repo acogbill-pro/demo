@@ -9,6 +9,7 @@ import { useRecommendations } from './recommendations'
 export const useCartStore = defineStore('cartStore', {
     state: () => ({
       contents: new Map(), // SKU => quantity
+      lastSyncTime: new Date(0),
     }),
   
     getters: {
@@ -45,7 +46,9 @@ export const useCartStore = defineStore('cartStore', {
             return Object.assign(this.categoryCountsAsObject, {quantity: this.totalQuantity, value: this.totalValue})
         },
         forEdge: (state) => {
-            return {cart_contents: Array.from(state.contents.entries())}
+            const syncTime = new Date()
+            state.lastSyncTime = syncTime
+            return {cart_contents: Array.from(state.contents.entries()), lastSyncTime: syncTime}
           },
           categoriesWithoutRecommended: (state) => {
             const products = useProductCatalog()
@@ -99,16 +102,19 @@ export const useCartStore = defineStore('cartStore', {
         remove(withSKU) {
             this.contents.delete(withSKU)
         },
-        profileToEdge({cartStore}) {
-            //console.log('cart.profileToEdge')
-            const toObject = JSON.parse(cartStore?? '{}')
+        profileToEdge({cartStore = '{}'}) {
+            console.log('cart.profileToEdge')
+            const toObject = JSON.parse(cartStore)
             const contents = new Map(toObject.cart_contents)
+            const lastSyncTime = new Date(toObject.lastSyncTime)
 
-            const stateIsMaster = this.contents.size > 0
-            // TODO: This isn't great, since being empty could still be meaningful... just not likely
+            const stateIsMaster = this.contents.size > 0 // should NOT merge
 
-            if (!stateIsMaster) {
+            const needsSync = this.lastSyncTime < lastSyncTime
+
+            if (needsSync) { // needs to merge Profile return
                 this.contents = new Map([...this.contents, ...contents]) 
+                this.edgeToProfile()
             } else {
                 //console.log('Not overwriting state')
             }          
@@ -120,7 +126,7 @@ export const useCartStore = defineStore('cartStore', {
             const asString = JSON.stringify(this.forEdge)
 
             console.log('cart.edgeToProfile')
-            analytics.identify(profiles.userID, {cartStore: asString})
+            analytics.identify(profiles.bestIDIsAnonymous ? null : profiles.bestID, {cartStore: asString}, true)
         },
     }
   })

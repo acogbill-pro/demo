@@ -6,9 +6,7 @@ import { useCartStore } from '~/stores/cart'
 import { useProductCatalog } from '~/stores/products'
 
 export const useRecommendations = defineStore('recommendations', {
-    state: () => ({
-      categoryScoreMap: new Map(), // 'Category' => Int(Score)
-    }),
+    state: () => ({}),
   
     getters: {
       categoryScores: (state) => {
@@ -24,7 +22,7 @@ export const useRecommendations = defineStore('recommendations', {
                 const category = article.category
                 return acc.set(category, acc.has(category) ? acc.get(category) + 1 : 1)
             }, 
-        state.categoryScoreMap)
+        new Map())
 
         // SCORES FROM CART
 
@@ -52,7 +50,7 @@ export const useRecommendations = defineStore('recommendations', {
   
     actions: {
         profileToEdge() {
-            this.categoryScoreMap.set('sleep', 3)
+            //console.log('This all populates via other stores now')
         }
     }
   })

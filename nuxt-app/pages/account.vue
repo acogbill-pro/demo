@@ -25,10 +25,10 @@ function toggleCollapse() {
 }
 
 const isLoggedIn = computed(() => {
-    return profiles.hasTraits
+    return !profiles.bestIDIsAnonymous
 })
 
-const loginTitle = computed(() => `Logged in as ${profiles.traits.fname} ${profiles.traits.lname}`)
+const loginTitle = computed(() => `Logged in as ${profiles.traits.name}`)
 
 function logout() {
     profiles.unload()

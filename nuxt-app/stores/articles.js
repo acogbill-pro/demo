@@ -82,6 +82,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
       ],
       favorites: new Set(), // ID Strings
       articlesRead: new Set(), // ID Strings
+      lastSyncTime: new Date(0),
     }),
   
     getters: {
@@ -119,7 +120,9 @@ export const useArticleCatalog = defineStore('articleCatalog', {
     }, 
       hasRecommendation: (state) => state.recommendedArticle instanceof Object,
       forEdge: (state) => {
-        return {articles_favorites: Array.from(state.favorites), articles_read: Array.from(state.articlesRead)}
+        const syncTime = new Date()
+        state.lastSyncTime = syncTime
+        return {articles_favorites: Array.from(state.favorites), articles_read: Array.from(state.articlesRead), lastSyncTime: syncTime}
       },
     },
   
@@ -133,19 +136,22 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             analytics.page('Article Page')
             analytics.track('Article Read', article)
         },
-        profileToEdge({articleStore = null}) {
-            //console.log('articles.profileToEdge')
-            const toObject = JSON.parse(articleStore?? '{}')
+        profileToEdge({articleStore = '{}'}) {
+            console.log('articles.profileToEdge')
+            const toObject = JSON.parse(articleStore)
 
             const favorites = new Set(toObject.articles_favorites)
             const read = new Set(toObject.articles_read)
+            const lastSyncTime = new Date(toObject.lastSyncTime)
 
             const stateIsMaster = this.favorites.size > 0 || this.articlesRead.size > 0
-            // TODO: This isn't great, since these being empty could still be meaningful... just not likely
+            // should NOT merge
+            const needsSync = this.lastSyncTime < lastSyncTime
 
-            if (!stateIsMaster) {
+            if (needsSync) {
                 this.favorites = new Set([...this.favorites, ...favorites])
                 this.articlesRead = new Set([...this.articlesRead, ...read])
+                this.edgeToProfile()
             } else {
                 //console.log('Not overwriting state')
             }
@@ -157,7 +163,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             const asString = JSON.stringify(this.forEdge)
 
             console.log('articles.edgeToProfile')
-            analytics.identify(profiles.userID, {articleStore: asString})
+            analytics.identify(profiles.bestIDIsAnonymous ? null : profiles.bestID, {articleStore: asString}, true)
         },
         addFavorite(withArticleID) {
             this.favorites.add(withArticleID)

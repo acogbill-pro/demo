@@ -52,7 +52,7 @@ function prePop() {
 
 function submit() {
     if (form.value.validate()) {
-        analytics.identify(user_id.value)
+        analytics.identify(user_id.value, {}, true)
         analytics.track("User Logged In")
     } else {
         // go to error page
