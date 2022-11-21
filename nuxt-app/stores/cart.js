@@ -31,6 +31,10 @@ export const useCartStore = defineStore('cartStore', {
               }, 0)
             return count
         },
+        skus() {
+            console.log(Array.from(this.contents.keys()))
+            return Array.from(this.contents.keys())
+        },
         categoryCountsAsObject() {
             const products = useProductCatalog()
 
@@ -42,8 +46,11 @@ export const useCartStore = defineStore('cartStore', {
               }, new Map())
             return Object.fromEntries(mapToReturn)
         },
-        asObject() { 
-            return Object.assign(this.categoryCountsAsObject, {quantity: this.totalQuantity, value: this.totalValue})
+        asSummaryObject() { 
+            return Object.assign(this.categoryCountsAsObject, {skus: this.skus, quantity: this.totalQuantity, value: this.totalValue})
+        },
+        asObject() {
+
         },
         forEdge: (state) => {
             const syncTime = new Date()
@@ -97,10 +104,16 @@ export const useCartStore = defineStore('cartStore', {
             const product = productCatalog.all.find(product => product.SKU === withSKU)
 
             const analytics = useAnalytics()
-            analytics.track('Product Added to Cart', product)
+            analytics.track('Product Added', product)
         },
         remove(withSKU) {
             this.contents.delete(withSKU)
+
+            const productCatalog = useProductCatalog()
+            const product = productCatalog.all.find(product => product.SKU === withSKU)
+
+            const analytics = useAnalytics()
+            analytics.track('Product Removed', product)
         },
         profileToEdge({cartStore = '{}'}) {
             console.log('cart.profileToEdge')
@@ -127,6 +140,18 @@ export const useCartStore = defineStore('cartStore', {
 
             console.log('cart.edgeToProfile')
             analytics.identify(profiles.bestIDIsAnonymous ? null : profiles.bestID, {cartStore: asString}, true)
+        },
+        reset() {
+            this.contents = new Map()
+            this.lastSyncTime = new Date(0)
+            this.edgeToProfile()
+        }, 
+        submitOrder() {
+            const analytics = useAnalytics()
+
+            analytics.track('Order Completed', this.asSummaryObject)
+
+            this.reset()
         },
     }
   })

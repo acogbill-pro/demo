@@ -19,10 +19,7 @@ export const useProfileStore = defineStore('profilesStore', {
     getters: {
       bestID: (state) => {
         const analytics = useAnalytics()
-        console.log('bestID')
-        console.log(analytics.userID)
-        console.log(analytics.anonymousID)
-        return analytics.userID !== null ? analytics.userID : analytics.anonymousID !== null ? analytics.anonymousID : null
+        return analytics.userID !== null ? analytics.userID : analytics.anonymousID
       },
       bestIDIsAnonymous: (state) => {
         const analytics = useAnalytics()
@@ -89,10 +86,11 @@ export const useProfileStore = defineStore('profilesStore', {
             return response.json()
           } else if(response.status === 404) {
             console.log('404 error')
-            this.stopSyncing()
+            //this.stopSyncing()
             return Promise.reject('error 404')
           } else {
-            this.stopSyncing()
+            //this.stopSyncing()
+            console.log('error in profile API response')
             return Promise.reject('some other error: ' + response.status)
           }
         })
@@ -126,6 +124,9 @@ export const useProfileStore = defineStore('profilesStore', {
         });
       },
       startSyncing(retryCount) {
+        const analytics = useAnalytics()
+        analytics.refreshID()
+
         if (this.bestID !== null && !this.isSyncing) {
           this.isSyncing = true
           
@@ -158,6 +159,12 @@ export const useProfileStore = defineStore('profilesStore', {
         this.isSyncing = false
 
         this.traits = {}
+
+        /*const articles = useArticleCatalog()
+        articles.reset()
+
+        const cart = useCartStore()
+        cart.reset()*/
 
         const analytics = useAnalytics()
         analytics.reset()

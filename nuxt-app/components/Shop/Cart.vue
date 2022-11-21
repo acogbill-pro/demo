@@ -1,11 +1,9 @@
 <script setup>
 import { useCartStore } from '~/stores/cart';
 import { useAnalytics } from '~/stores/analytics';
-import { useProductCatalog } from '~/stores/products';
 
 const analytics = useAnalytics()
 const cart = useCartStore()
-const products = useProductCatalog()
 
 //const cartQuantity = computed((() => cart.totalQuantity))
 
@@ -13,16 +11,12 @@ const dialog = ref(false)
 
 function viewCart() {
     analytics.page('Cart Viewed')
-    analytics.track('Cart Opened', cart.asObject)
+    analytics.track('Cart Opened', cart.asSummaryObject)
 }
 
 function closeCart() {
     dialog.value = false
-    analytics.track('Cart Closed', cart.asObject)
-}
-
-function productFromSKU(withSKU) {
-    return products.all.find(product => product.SKU === withSKU)
+    analytics.track('Cart Closed', cart.asSummaryObject)
 }
 </script>
 
@@ -39,20 +33,15 @@ function productFromSKU(withSKU) {
                 <v-toolbar-title>Shopping Cart</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
+                    <v-btn to="/checkout" nuxt @click="closeCart()">Checkout</v-btn>
                     <v-btn icon dark @click="closeCart()">
                         <v-icon>mdi-close</v-icon>
                     </v-btn>
                 </v-toolbar-items>
             </v-toolbar>
             <v-card-text v-if="cart.totalQuantity > 0">
-                <ul>
-                    <li v-for="[key, value] in cart.contents.entries()" :key="key">{{ productFromSKU(key).name + ': ' +
-                            value
-                    }}
-                    </li>
-                    <li>Quantity: {{ cart.totalQuantity }}</li>
-                    <li>Total: ${{ cart.totalValue }}</li>
-                </ul>
+                <ShopCartContents />
+                <v-btn to="/checkout" nuxt @click="closeCart()">Checkout</v-btn>
             </v-card-text>
             <v-card-text v-else>
                 Cart is Empty

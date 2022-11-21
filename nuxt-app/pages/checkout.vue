@@ -1,27 +1,26 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileStore } from '~~/stores/profiles';
+import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
-const profiles = useProfileStore()
+const cart = useCartStore()
 
 definePageMeta({
     layout: "shop",
 })
 
 useHead({
-    title: 'Shop'
+    title: 'Shop - Checkout'
 })
 
 onMounted(() => {
-    analytics.page('Product Listing Page')
-
-    profiles.startSyncing(3)
+    analytics.page('Checkout Start')
+    analytics.track('Checkout Started', cart.asSummaryObject)
 })
 </script>
 
 <template>
     <div>
-        <ShopMain />
+        <ShopCheckout />
     </div>
 </template>
 

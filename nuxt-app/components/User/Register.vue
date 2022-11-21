@@ -83,6 +83,7 @@ function submit() {
     if (form.value.validate()) {
         analytics.identify(user_id.value, traitsObject.value, true)
         analytics.track("User Registered")
+        analytics.track("Signed In")
     } else {
         // go to error page
     }

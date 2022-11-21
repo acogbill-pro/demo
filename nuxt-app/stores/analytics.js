@@ -7,12 +7,13 @@ import { useArticleCatalog } from '~/stores/articles'
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
       allEvents: [],
+      userID: null,
     }),
   
     getters: {
       analytics: (state) => window.analytics? window.analytics : null, // TODO: add some validation
-      userID: (state) => window.analytics?._user.id() ?? null,
-      anonymousID: (state) => window.analytics?._user.anonymousId() ?? null,
+      //userID: (state) => window.analytics.user().id(),
+      anonymousID: (state) => window.analytics.user().anonymousId(),
     },
   
     actions: {
@@ -22,12 +23,19 @@ export const useAnalytics = defineStore('analyticsStore', {
       track(eventName, traitsObject = null) {
         this.analytics.track(eventName, traitsObject)
       },
+      refreshID() {
+        if (this.userID === null) this.userID = window.analytics?.user().id() ?? null
+      },
       identify(user_id = null, traitsObject = {}, syncAfter = false) {
         console.log('identify call with user_id ' + user_id)
+        //console.log(this.userID)
+        //console.log(this.anonymousID)
+        //console.log(this.analytics.user())
         const profile = useProfileStore()
 
         if (user_id !== null) {  // can be anonymous
-          this.analytics.identify(user_id, traitsObject)
+          this.userID = user_id
+          this.analytics.identify(user_id, traitsObject)     
 
           if (syncAfter) {
             setTimeout(() => {
@@ -40,7 +48,7 @@ export const useAnalytics = defineStore('analyticsStore', {
 
           if (syncAfter) {
             setTimeout(() => {
-              profile.startSyncing(3)
+              profile.startSyncing(10)
             }, 2000)
           }
         }
@@ -56,6 +64,7 @@ export const useAnalytics = defineStore('analyticsStore', {
       },
       reset() {
         this.analytics.reset()
+        this.refreshID()
       }
     }
   })

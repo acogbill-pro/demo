@@ -176,5 +176,11 @@ export const useArticleCatalog = defineStore('articleCatalog', {
         removeFavorite(withArticleID) {
             this.favorites.delete(withArticleID)
         },
+        reset() {
+            this.favorites = new Set()
+            this.articlesRead = new Set()
+            this.lastSyncTime = new Date(0)
+            this.edgeToProfile()
+        },
     }
   })

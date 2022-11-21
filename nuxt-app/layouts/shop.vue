@@ -34,7 +34,7 @@ function leaving(e) {
 
     const cart = useCartStore()
 
-    analytics.track('Shop Closed', cart.asObject)
+    analytics.track('Shop Closed', cart.asSummaryObject)
 }
 
 onMounted(() => {

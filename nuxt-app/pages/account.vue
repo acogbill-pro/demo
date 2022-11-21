@@ -28,7 +28,9 @@ const isLoggedIn = computed(() => {
     return !profiles.bestIDIsAnonymous
 })
 
-const loginTitle = computed(() => `Logged in as ${profiles.traits.name}`)
+const loginTitle = computed(() => {
+    return profiles.hasTraits ? `Logged in as ${profiles.traits.name}` : `Logged in`
+})
 
 function logout() {
     profiles.unload()
@@ -48,7 +50,7 @@ function logout() {
         </v-row>
         <v-row v-else>
             <v-col>
-                <p>{{ loginTitle }}</p>
+                <p>Logged In</p>
             </v-col>
             <v-col>
 
