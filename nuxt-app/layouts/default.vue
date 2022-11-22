@@ -40,10 +40,10 @@ onMounted(() => {
 
     profiles.startSyncingArticleStore()
 
-    window.addEventListener(
+    /*window.addEventListener(
         "beforeunload",
         leaving
-    )
+    )*/
 })
 </script>
 

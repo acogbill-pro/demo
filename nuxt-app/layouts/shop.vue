@@ -42,10 +42,10 @@ onMounted(() => {
 
     profiles.startSyncingCartStore()
 
-    window.addEventListener(
+    /*window.addEventListener(
         "beforeunload",
         leaving
-    )
+    )*/
 })
 </script>
 
