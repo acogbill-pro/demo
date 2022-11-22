@@ -18,7 +18,14 @@ export const useAnalytics = defineStore('analyticsStore', {
   
     actions: {
       page(pageTitle) {
-        this.analytics.page(pageTitle)
+        try {
+          this.analytics.page(pageTitle)
+        } catch {
+          console.log('Page call failed; retrying')
+          setTimeout(() => {
+            this.page(pageTitle)
+          }, 1000)
+        }
       },
       track(eventName, traitsObject = null) {
         this.analytics.track(eventName, traitsObject)
