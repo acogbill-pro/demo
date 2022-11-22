@@ -18,6 +18,9 @@ function closeCart() {
     dialog.value = false
     analytics.track('Cart Closed', cart.asSummaryObject)
 }
+
+onMounted(() => {
+})
 </script>
 
 <template>

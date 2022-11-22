@@ -31,23 +31,35 @@ export const useCartStore = defineStore('cartStore', {
               }, 0)
             return count
         },
-        skus() {
-            console.log(Array.from(this.contents.keys()))
-            return Array.from(this.contents.keys())
+        products() {
+            const skuArray = Array.from(this.contents.keys())
+            console.log(skuArray)
+
+            const products = useProductCatalog().all
+            console.log(products)
+
+            const productList = products.filter(value => skuArray.includes(value.SKU))
+            console.log(productList)
+            return productList
         },
         categoryCountsAsObject() {
             const products = useProductCatalog()
 
-            const mapToReturn = [...this.contents.entries()].reduce((result, value) => {
+            const categorySeedMap = Array.from(products.categories).reduce((accumulator, value) => {
+                accumulator.set(value, 0)
+                return accumulator
+            }, new Map())
+
+            const mapToReturn = [...this.contents.entries()].reduce((accumulator, value) => {
                 const product = products.all.find(product => product.SKU === value[0])
                 const category = product.category
-                result.set(category, result.has(category) ? result.get(category) + 1 : 1)
-                return result;
-              }, new Map())
+                accumulator.set(category, accumulator.get(category) + 1)
+                return accumulator;
+              }, categorySeedMap)
             return Object.fromEntries(mapToReturn)
         },
         asSummaryObject() { 
-            return Object.assign(this.categoryCountsAsObject, {skus: this.skus, quantity: this.totalQuantity, value: this.totalValue})
+            return Object.assign(this.categoryCountsAsObject, {products: this.products, quantity: this.totalQuantity, value: this.totalValue})
         },
         asObject() {
 
