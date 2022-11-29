@@ -7,6 +7,7 @@ import { useArticleCatalog } from '~/stores/articles'
 import { isProxy, toRaw } from 'vue'
 import { useCartStore } from './cart'
 import { useRecommendations } from '~/stores/recommendations'
+import scripts from '~/middleware/scripts.js'
 
 export const useProfileStore = defineStore('profilesStore', {
     state: () => ({
@@ -48,6 +49,9 @@ export const useProfileStore = defineStore('profilesStore', {
         }
 
         return traitsToReturn
+      },
+      productSKUsOwned: (state) => {
+        return scripts.listToArray(state.traits.products_owned ?? '')
       },
     },
   

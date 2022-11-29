@@ -33,13 +33,10 @@ export const useCartStore = defineStore('cartStore', {
         },
         products() {
             const skuArray = Array.from(this.contents.keys())
-            console.log(skuArray)
 
             const products = useProductCatalog().all
-            console.log(products)
 
             const productList = products.filter(value => skuArray.includes(value.SKU))
-            console.log(productList)
             return productList
         },
         categoryCountsAsObject() {

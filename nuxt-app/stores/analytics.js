@@ -70,6 +70,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         //this.analytics.on('identify', (event, properties) => this.allEvents.unshift(event + ' (Identify)'))
       },
       reset() {
+        this.userID = null
         this.analytics.reset()
         this.refreshID()
       }
