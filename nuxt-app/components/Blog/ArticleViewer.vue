@@ -3,6 +3,7 @@ import { useArticleCatalog } from '~/stores/articles';
 const articles = useArticleCatalog()
 
 const dialog = ref(false)
+const hovered = ref(false)
 
 const props = defineProps({
     article: {
@@ -13,6 +14,13 @@ const props = defineProps({
 
 function readArticle() {
     articles.markAsRead(props.article.ID)
+}
+
+function hoverArticle() {
+    if (!hovered.value) {
+        hovered.value = true
+        articles.hover(props.article.ID)
+    }
 }
 
 const isFavorite = computed(() => articles.favorites.has(props.article.ID))
@@ -30,7 +38,7 @@ function favorite() {
 <template>
     <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
         <template v-slot:activator="{ props }">
-            <v-btn @click="readArticle" v-bind="props">
+            <v-btn @click="readArticle" @mouseover="hoverArticle" v-bind="props">
                 Read Article
             </v-btn>
         </template>

@@ -136,6 +136,14 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             analytics.page('Article Page')
             analytics.track('Article Read', article)
         },
+        hover(withArticleID) {
+            //this.articlesRead.add(withArticleID)
+
+            const article = this.all.find(article => article.ID === withArticleID)
+
+            const analytics = useAnalytics()
+            analytics.track('Article Hovered', article)
+        },
         profileToEdge({articleStore = '{}'}) {
             console.log('articles.profileToEdge')
             const toObject = JSON.parse(articleStore)
