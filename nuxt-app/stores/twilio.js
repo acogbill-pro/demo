@@ -16,6 +16,7 @@ export const useTwilio = defineStore('twilioStore', {
   
     actions: {
         async sendSMS(toNumberString, withMessage = 'Ahoy!') {
+          // enabled by Twilio Function https://www.twilio.com/console/functions/api/start/ZSbaccfcf229a0615df5a0ff35dca021ca
             const analytics = useAnalytics()
             const runtimeConfig = useRuntimeConfig()
 
