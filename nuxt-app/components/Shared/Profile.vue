@@ -38,7 +38,7 @@ const isSyncing = computed({
 })
 
 function sendSMS() {
-    twilio.sendSMS('+19177576756', 'It works')
+    twilio.sendSMS('9177576756', 'It works')
 }
 
 function resetProfile() {
@@ -64,7 +64,7 @@ function toggleList() {
                 </v-form>-->
             <v-card-actions @click="toggleList()">
                 <span>Profile: {{ IDforPrint }}</span>
-                <v-icon :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
+                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
                     :color="profiles.hasTraits ? 'black' : 'white'" />
                 <v-btn @click="sendSMS()" icon="mdi-message" />
             </v-card-actions>

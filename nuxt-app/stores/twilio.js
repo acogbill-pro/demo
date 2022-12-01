@@ -15,11 +15,11 @@ export const useTwilio = defineStore('twilioStore', {
     },
   
     actions: {
-        async sendSMS(toNumber, withMessage = 'Ahoy!') {
+        async sendSMS(toNumberString, withMessage = 'Ahoy!') {
             const analytics = useAnalytics()
             const runtimeConfig = useRuntimeConfig()
 
-            const requestURL = `${runtimeConfig.public.justCORSurl}${runtimeConfig.public.twilioSMS}?To=${encodeURIComponent(toNumber)}&Body=${encodeURIComponent(withMessage)}`
+            const requestURL = `${runtimeConfig.public.justCORSurl}${runtimeConfig.public.twilioSMS}?To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberString)}&Body=${encodeURIComponent(withMessage)}`
 
             const response = await fetch(requestURL)
 
@@ -29,7 +29,7 @@ export const useTwilio = defineStore('twilioStore', {
             const successfulPrefix = data.status.split(' successfully with SID:')
 
             if (successfulPrefix[0] === 'Your message was sent') {
-                analytics.track('SMS Sent')
+                analytics.track('SMS Sent', {message: withMessage})
             }
         }
     }
