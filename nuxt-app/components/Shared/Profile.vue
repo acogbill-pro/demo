@@ -3,10 +3,12 @@ import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 import { useArticleCatalog } from '~/stores/articles.js'
 import { useCartStore } from '~/stores/cart';
+import { useTwilio } from '~/stores/twilio';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
 const articles = useArticleCatalog()
 const cart = useCartStore()
+const twilio = useTwilio()
 
 function loadProfile() {
     /*analytics.identify('Andy_Cogbill_id', { edge: null })
@@ -35,6 +37,10 @@ const isSyncing = computed({
     }
 })
 
+function sendSMS() {
+    twilio.sendSMS('+19177576756', 'It works')
+}
+
 function resetProfile() {
     profiles.unload()
 }
@@ -60,6 +66,7 @@ function toggleList() {
                 <span>Profile: {{ IDforPrint }}</span>
                 <v-icon :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
                     :color="profiles.hasTraits ? 'black' : 'white'" />
+                <v-btn @click="sendSMS()" icon="mdi-message" />
             </v-card-actions>
             <v-expand-transition>
                 <v-card-text v-if="!collapse">

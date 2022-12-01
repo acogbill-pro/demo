@@ -24,6 +24,7 @@ export default defineNuxtConfig({
         profilesAccessToken: process.env.PROFILES_ACCESS_TOKEN,
         justCORSurl: process.env.JUST_CORS,
         categoryNames: process.env.CATEGORY_NAMES,
+        twilioSMS: process.env.TWILIO_SMS_URL,
       }
     },
     head: {
