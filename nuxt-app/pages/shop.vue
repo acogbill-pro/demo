@@ -15,7 +15,7 @@ useHead({
 onMounted(() => {
     analytics.page('Product Listing Page')
 
-    profiles.startSyncing(3)
+    //profiles.startSyncing(3)
 })
 </script>
 
