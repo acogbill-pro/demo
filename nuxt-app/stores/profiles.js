@@ -18,16 +18,6 @@ export const useProfileStore = defineStore('profilesStore', {
       unwatchers: [], // because watch returns a function to call when you want to unwatch
     }),
     getters: {
-      bestID: (state) => {
-        const analytics = useAnalytics()
-        return analytics.userID !== null ? analytics.userID : analytics.anonymousID
-      },
-      bestIDIsAnonymous: (state) => {
-        const analytics = useAnalytics()
-        const value = analytics.userID === null && analytics.anonymousID !== null
-        //this.bestID.split('_').pop() !== 'id'
-        return value
-      },
       hasTraits: (state) => {
         if (state?.traits instanceof Object) {
           return Object.keys(state.traits).length > 0
@@ -60,6 +50,7 @@ export const useProfileStore = defineStore('profilesStore', {
         const runtimeConfig = useRuntimeConfig()
         const cartStore = useCartStore()
         const articleStore = useArticleCatalog()
+        const analytics = useAnalytics()
 
         const options = {
         method: "GET",
@@ -72,9 +63,9 @@ export const useProfileStore = defineStore('profilesStore', {
 
         const justCors = runtimeConfig.public.justCORSurl
 
-        const requestURL = justCors + 'https://profiles.segment.com/v1/spaces/' + runtimeConfig.public.profilesSpaceID + '/collections/users/profiles/' + (this.bestIDIsAnonymous ? 'anonymous_id:' : 'user_id:') + this.bestID + '/traits'
+        const requestURL = justCors + 'https://profiles.segment.com/v1/spaces/' + runtimeConfig.public.profilesSpaceID + '/collections/users/profiles/' + (analytics.bestIDIsAnonymous ? 'anonymous_id:' : 'user_id:') + analytics.bestID + '/traits'
 
-        if (this.isSyncing && this.bestID !== null) {
+        if (this.isSyncing && analytics.bestID !== null) {
           this.isLoading = true  
           this.stopSyncingStores()
         } else {
@@ -131,7 +122,7 @@ export const useProfileStore = defineStore('profilesStore', {
         const analytics = useAnalytics()
         analytics.refreshID()
 
-        if (this.bestID !== null && !this.isSyncing) {
+        if (analytics.bestID !== null && !this.isSyncing) {
           this.isSyncing = true
           
           this.loadProfileForUser(retryCount)
@@ -158,6 +149,12 @@ export const useProfileStore = defineStore('profilesStore', {
       },
       stopSyncingStores() {
         this.unwatchers.forEach(unwatcher => unwatcher());
+      },
+      addTrait(withTraitName, withTraitValue) {
+        const traitObject = {[withTraitName]: withTraitValue}
+
+        const analytics = useAnalytics()
+        analytics.identify(traitObject)
       },
       unload() {
         this.isSyncing = false

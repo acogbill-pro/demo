@@ -149,7 +149,7 @@ export const useCartStore = defineStore('cartStore', {
             const asString = JSON.stringify(this.forEdge)
 
             console.log('cart.edgeToProfile')
-            analytics.identify(profiles.bestIDIsAnonymous ? null : profiles.bestID, {cartStore: asString}, true)
+            analytics.identify({cartStore: asString}, true)
         },
         reset() {
             this.contents = new Map()

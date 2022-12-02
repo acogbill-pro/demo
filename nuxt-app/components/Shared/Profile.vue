@@ -24,7 +24,7 @@ function loadProfile() {
     console.log(cart.forEdge)
 }
 
-const IDforPrint = computed(() => profiles.bestIDIsAnonymous ? 'Anonymous' : profiles.bestID)
+const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
 const isSyncing = computed({
     get: () => profiles.isSyncing,
@@ -83,6 +83,7 @@ function toggleList() {
                         }}
                         </li>
                     </ul>
+                    <SharedTraitAdder />
                 </v-card-text>
             </v-expand-transition>
             <v-card-actions>

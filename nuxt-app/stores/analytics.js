@@ -13,7 +13,17 @@ export const useAnalytics = defineStore('analyticsStore', {
     getters: {
       analytics: (state) => window.analytics? window.analytics : null, // TODO: add some validation
       //userID: (state) => window.analytics.user().id(),
-      anonymousID: (state) => window.analytics.user().anonymousId(),
+      anonymousID: (state) => window.analytics?.user().anonymousId() ?? null,
+      bestID: (state) => {
+        const analytics = useAnalytics()
+        return analytics.userID !== null ? analytics.userID : analytics.anonymousID
+      },
+      bestIDIsAnonymous: (state) => {
+        const analytics = useAnalytics()
+        const value = analytics.userID === null
+        //this.bestID.split('_').pop() !== 'id'
+        return value
+      },
     },
   
     actions: {
@@ -33,16 +43,14 @@ export const useAnalytics = defineStore('analyticsStore', {
       refreshID() {
         if (this.userID === null) this.userID = window.analytics?.user().id() ?? null
       },
-      identify(user_id = null, traitsObject = {}, syncAfter = false) {
-        console.log('identify call with user_id ' + user_id)
+      identify(traitsObject = {}, syncAfter = false) {
         //console.log(this.userID)
         //console.log(this.anonymousID)
         //console.log(this.analytics.user())
         const profile = useProfileStore()
 
-        if (user_id !== null) {  // can be anonymous
-          this.userID = user_id
-          this.analytics.identify(user_id, traitsObject)     
+        if (this.useriD !== null) {  // can be anonymous
+          this.analytics.identify(this.userID, traitsObject)     
 
           if (syncAfter) {
             setTimeout(() => {

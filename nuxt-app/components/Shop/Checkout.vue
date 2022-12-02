@@ -4,7 +4,6 @@ import { useProfileStore } from '~/stores/profiles';
 import { useProductCatalog } from '~/stores/products'
 import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
-const profiles = useProfileStore()
 const products = useProductCatalog()
 const cart = useCartStore()
 
@@ -30,7 +29,7 @@ onMounted(() => {
 
 <template>
     <v-container>
-        <v-row v-if="!profiles.bestIDIsAnonymous">
+        <v-row v-if="!analytics.bestIDIsAnonymous">
             <v-col>
                 <ShopCartContents />
                 <v-btn @click="submitOrder()">Complete Purchase</v-btn>

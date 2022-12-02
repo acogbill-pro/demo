@@ -25,7 +25,7 @@ function toggleCollapse() {
 }
 
 const isLoggedIn = computed(() => {
-    return !profiles.bestIDIsAnonymous
+    return !analytics.bestIDIsAnonymous
 })
 
 const loginTitle = computed(() => {

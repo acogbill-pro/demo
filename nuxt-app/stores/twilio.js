@@ -31,8 +31,6 @@ export const useTwilio = defineStore('twilioStore', {
             const data = await response.json();
             this.status = data.status;
 
-            //const successfulPrefix = data.status.split(' successfully with SID:')
-
             if (this.statusOK) {
                 analytics.track('SMS Sent', {message: withMessage})
             }
