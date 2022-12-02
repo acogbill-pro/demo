@@ -15,7 +15,7 @@ export const useProfileStore = defineStore('profilesStore', {
       isLoading: false,
       traits: {},
       traitBlacklist: ['incrementers', 'phone', 'email', 'edge'],
-      unwatchers: [],
+      unwatchers: [], // because watch returns a function to call when you want to unwatch
     }),
     getters: {
       bestID: (state) => {
