@@ -38,8 +38,14 @@ const isSyncing = computed({
 })
 
 function sendSMS() {
-    twilio.sendSMS('9177576756', 'It works')
+    twilio.sendSMS('9177576756', 'Placeholder.')
 }
+
+const statusColor = computed(() => {
+    if (twilio.statusOK) return 'green'
+    if (twilio.status === '') return 'gray'
+    return 'red'
+})
 
 function resetProfile() {
     profiles.unload()
@@ -66,7 +72,7 @@ function toggleList() {
                 <span>Profile: {{ IDforPrint }}</span>
                 <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
                     :color="profiles.hasTraits ? 'black' : 'white'" />
-                <v-btn @click="sendSMS()" icon="mdi-message" />
+
             </v-card-actions>
             <v-expand-transition>
                 <v-card-text v-if="!collapse">
@@ -85,8 +91,8 @@ function toggleList() {
                         <v-icon icon="mdi-cached" color="gray" />
                     </template>
                 </v-switch>
-                <v-btn @click="resetProfile()" class="mb-5">
-                    <v-icon icon="mdi-delete" color="gray" />
+                <v-btn @click="sendSMS()" icon="mdi-message" :color="statusColor" />
+                <v-btn @click="resetProfile()" icon="mdi-delete" color="gray">
                 </v-btn>
             </v-card-actions>
         </v-card>
