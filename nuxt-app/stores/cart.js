@@ -5,6 +5,7 @@ import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 import { useProductCatalog } from '~/stores/products.js'
 import { useRecommendations } from './recommendations'
+import { useTwilio } from './twilio'
 
 export const useCartStore = defineStore('cartStore', {
     state: () => ({
@@ -157,8 +158,10 @@ export const useCartStore = defineStore('cartStore', {
         }, 
         submitOrder() {
             const analytics = useAnalytics()
+            const twilio = useTwilio()
 
             analytics.track('Order Completed', this.asSummaryObject)
+            twilio.sendSMS('9177576756', `Thank you for your order, totaling $${this.totalValue}. We'll let you know when it's on its way.`)
 
             this.reset()
         },
