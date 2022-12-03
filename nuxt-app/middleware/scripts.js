@@ -21,17 +21,22 @@ export default {
           return false;
     },
     transformStringToType(withString) {
-        if (withString === 'true') return true
-        if (withString === 'false') return false
-        if (withString === 'null') return null
+        switch(withString) {
+            case 'true':
+              return true;
+            case 'false':
+              return false;
+            case 'null':
+              return null;
+            default:
+                // the `+` turns it into a Number... probably
+                if (this.isStringANumber(withString)) return +withString
 
-        // the `+` turns it into a Number... probably
-        if (this.isStringANumber(withString)) return +withString
-
-        const asDate = new Date(withString)
-
-        if (this.isDateValid(asDate)) return asDate.toISOString()
-
-        return withString
+                const asDate = new Date(withString)
+        
+                if (this.isDateValid(asDate)) return asDate.toISOString()
+        
+                return withString
+          }
     },
 }
