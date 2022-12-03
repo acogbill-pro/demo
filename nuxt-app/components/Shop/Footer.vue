@@ -1,12 +1,12 @@
+<script setup>
+
+</script>
+
 <template>
     <div>
         Shop Footer
     </div>
 </template>
-
-<script setup>
-
-</script>
 
 <style lang="scss" scoped>
 
