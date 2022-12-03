@@ -23,6 +23,7 @@ export default {
     transformStringToType(withString) {
         if (withString === 'true') return true
         if (withString === 'false') return false
+        if (withString === 'null') return null
 
         // the `+` turns it into a Number... probably
         if (this.isStringANumber(withString)) return +withString

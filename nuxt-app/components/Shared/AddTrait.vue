@@ -4,6 +4,7 @@ import { useProfileStore } from '~~/stores/profiles';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
 
+const form = ref(null)
 const traitName = ref('')
 const traitValue = ref('')
 const valid = ref(true)
@@ -18,13 +19,15 @@ function submitForm() {
         profiles.addTrait(traitName.value, traitValue.value)
         traitName.value = ''
         traitValue.value = ''
+        form.value.resetValidation()
+        valid.value = true
     }
 }
 </script>
 
 <template>
     <v-container>
-        <v-form ref="form" v-model="valid">
+        <v-form ref="form" v-model="valid" lazy-validation>
             <v-row>
                 <v-col cols="12">
                     <h5>Add a Trait</h5>
