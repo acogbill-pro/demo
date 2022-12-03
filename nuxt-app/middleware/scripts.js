@@ -8,8 +8,30 @@ export default {
     isStringANumber(withString) {
         return !isNaN(withString)
     },
-    numberIfNumber(withString) {
+    isDateValid(withDate) {
+        if (
+            typeof withDate === 'object' &&
+            withDate !== null &&
+            typeof withDate.getTime === 'function' &&
+            !isNaN(withDate)
+          ) {
+            return true;
+          }
+        
+          return false;
+    },
+    transformStringToType(withString) {
+        if (withString === 'true') return true
+        if (withString === 'false') return false
+
         // the `+` turns it into a Number... probably
-        return this.isStringANumber(withString) ? +withString : withString
+        if (this.isStringANumber(withString)) return +withString
+
+        const asDate = new Date(withString)
+        console.log(asDate)
+        console.log(asDate.toISOString())
+        if (this.isDateValid(asDate)) return asDate.toISOString()
+
+        return withString
     },
 }

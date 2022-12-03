@@ -151,24 +151,11 @@ export const useProfileStore = defineStore('profilesStore', {
         this.unwatchers.forEach(unwatcher => unwatcher());
       },
       addTrait(withTraitName, withTraitValue) {
-        var valueToUse = ''
-
-        switch(withTraitValue) {
-          case 'true':
-            valueToUse = true
-            break;
-          case 'false':
-            valueToUse = false
-            break;
-          case '':
-            return;
-          default:
-            valueToUse = scripts.numberIfNumber(withTraitValue)
-        }
-
-        if (withTraitName === '') {
+        if (withTraitName === '' || withTraitValue === '') {
           return
         }
+
+        var valueToUse = scripts.transformStringToType(withTraitValue)
 
         const traitObject = {[withTraitName]: valueToUse}
 
