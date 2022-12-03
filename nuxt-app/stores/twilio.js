@@ -15,7 +15,7 @@ export const useTwilio = defineStore('twilioStore', {
     },
   
     actions: {
-        async sendSMS(fromNumberString = '', toNumberString, withMessage = 'Ahoy!') {
+        async sendSMS(eventName = 'General SMS', fromNumberString = '', toNumberString, withMessage = 'Ahoy!') {
           // enabled by Twilio Function https://www.twilio.com/console/functions/api/start/ZSbaccfcf229a0615df5a0ff35dca021ca
           // Largely built following these instructions: https://www.twilio.com/blog/send-sms-vue
           // Needed another article to confirm that URL params are pulled through an `event` object
@@ -32,7 +32,7 @@ export const useTwilio = defineStore('twilioStore', {
             this.status = data.status;
 
             if (this.statusOK) {
-                analytics.track('SMS Sent', {message: withMessage})
+                analytics.track('SMS Sent', {eventName, message: withMessage})
             }
         }
     }

@@ -10,7 +10,7 @@ function toggleFields() {
 }
 
 function sendSMS() {
-    twilio.sendSMS('', '9177576756', 'Yet another')
+    twilio.sendSMS('Button Press', '', '9177576756', 'Yet another')
 }
 
 const statusColor = computed(() => {

@@ -17,7 +17,7 @@ const message = ref('')
 
 function submitForm() {
     if (toNumber.value !== '' && message.value !== '' && form.value.validate()) {
-        twilio.sendSMS(fromNumber.value, toNumber.value, message.value)
+        twilio.sendSMS('Form Submission', fromNumber.value, toNumber.value, message.value)
 
         form.resetValidation()
 
