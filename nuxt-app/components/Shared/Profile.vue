@@ -35,12 +35,6 @@ const isSyncing = computed({
     }
 })
 
-const statusColor = computed(() => {
-    if (twilio.statusOK) return 'green'
-    if (twilio.status === '') return 'gray'
-    return 'red'
-})
-
 function resetProfile() {
     profiles.unload()
 }
@@ -64,6 +58,7 @@ function toggleList() {
                 </v-form>-->
             <v-card-actions @click="toggleList()">
                 <span>Profile: {{ IDforPrint }}</span>
+                <v-spacer />
                 <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
                     :color="profiles.hasTraits ? 'black' : 'white'" />
 
