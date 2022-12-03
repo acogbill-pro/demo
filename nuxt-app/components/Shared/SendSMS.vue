@@ -35,16 +35,16 @@ function submitForm() {
 
                 <v-col cols="10">
                     <v-text-field v-model="toNumber" required density="compact" variant="solo" single-line hide-details
-                        :rules="phoneRules" />
+                        :rules="phoneRules" label="To Number" />
                 </v-col>
             </v-row>
             <v-row>
                 <v-col>
-                    <v-text-field v-model="message" required density="compact" variant="solo" single-line
-                        hide-details />
+                    <v-text-field v-model="message" required density="compact" variant="solo" single-line hide-details
+                        label="Message" />
                 </v-col>
                 <v-col cols="2">
-                    <v-btn icon="mdi-check" @click="submitForm" variant="flat" block :disabled="!valid" />
+                    <v-btn icon="mdi-check" @click="submitForm" variant="plain" block :disabled="!valid" />
                 </v-col>
             </v-row>
         </v-form>

@@ -8,6 +8,11 @@ const traitName = ref('')
 const traitValue = ref('')
 const valid = ref(true)
 
+const validationRules = [
+    v => !!v || 'Name is required',
+    v => (v && v !== '') || 'Name must be less than 10 characters',
+]
+
 function submitForm() {
     if (traitName.value !== '' && traitValue.value !== '') {
         profiles.addTrait(traitName.value, traitValue.value)
@@ -28,15 +33,15 @@ function submitForm() {
             <v-row>
 
                 <v-col cols="5">
-                    <v-text-field v-model="traitName" required density="compact" variant="solo" single-line
-                        hide-details />
+                    <v-text-field v-model="traitName" :rules="validationRules" required density="compact" variant="solo"
+                        single-line hide-details label="Trait Name" />
                 </v-col>
                 <v-col cols="5">
                     <v-text-field v-model="traitValue" required density="compact" variant="solo" single-line
-                        hide-details />
+                        hide-details label="Value" />
                 </v-col>
                 <v-col cols="2">
-                    <v-btn icon="mdi-check" @click="submitForm" variant="flat" block />
+                    <v-btn icon="mdi-check" @click="submitForm" variant="plain" block :disabled="!valid" />
                 </v-col>
 
             </v-row>
