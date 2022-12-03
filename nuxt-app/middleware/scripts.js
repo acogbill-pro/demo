@@ -29,8 +29,7 @@ export default {
         if (this.isStringANumber(withString)) return +withString
 
         const asDate = new Date(withString)
-        console.log(asDate)
-        console.log(asDate.toISOString())
+
         if (this.isDateValid(asDate)) return asDate.toISOString()
 
         return withString
