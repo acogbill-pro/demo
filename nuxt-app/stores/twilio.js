@@ -15,7 +15,7 @@ export const useTwilio = defineStore('twilioStore', {
     },
   
     actions: {
-        async sendSMS(toNumberString, withMessage = 'Ahoy!') {
+        async sendSMS(fromNumberString, toNumberString, withMessage = 'Ahoy!') {
           // enabled by Twilio Function https://www.twilio.com/console/functions/api/start/ZSbaccfcf229a0615df5a0ff35dca021ca
           // Largely built following these instructions: https://www.twilio.com/blog/send-sms-vue
           // Needed another article to confirm that URL params are pulled through an `event` object
@@ -24,7 +24,7 @@ export const useTwilio = defineStore('twilioStore', {
             const runtimeConfig = useRuntimeConfig()
 
             const requestURL = 
-            `${runtimeConfig.public.justCORSurl}${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent(runtimeConfig.public.fromTwilioNumber)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberString)}&Body=${encodeURIComponent(withMessage)}`
+            `${runtimeConfig.public.justCORSurl}${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberString)}&Body=${encodeURIComponent(withMessage)}`
 
             const response = await fetch(requestURL)
 
