@@ -25,6 +25,7 @@ export default defineNuxtConfig({
         justCORSurl: process.env.JUST_CORS,
         categoryNames: process.env.CATEGORY_NAMES,
         twilioSMS: process.env.TWILIO_SMS_URL,
+        fromTwilioNumber: process.env.TWILIO_PHONE_NUMBER,
       }
     },
     head: {
