@@ -1,6 +1,7 @@
 <script setup>
 import { useTwilio } from '~/stores/twilio';
 const twilio = useTwilio()
+const runtimeConfig = useRuntimeConfig()
 
 const collapse = ref(true)
 
@@ -9,7 +10,7 @@ function toggleFields() {
 }
 
 function sendSMS() {
-    twilio.sendSMS('9177576756', 'Yet another')
+    twilio.sendSMS('', '9177576756', 'Yet another')
 }
 
 const statusColor = computed(() => {
