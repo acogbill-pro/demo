@@ -151,10 +151,29 @@ export const useProfileStore = defineStore('profilesStore', {
         this.unwatchers.forEach(unwatcher => unwatcher());
       },
       addTrait(withTraitName, withTraitValue) {
-        const traitObject = {[withTraitName]: withTraitValue}
+        var valueToUse = ''
+
+        switch(withTraitValue) {
+          case 'true':
+            valueToUse = true
+            break;
+          case 'false':
+            valueToUse = false
+            break;
+          case '':
+            return;
+          default:
+            valueToUse = scripts.numberIfNumber(withTraitValue)
+        }
+
+        if (withTraitName === '') {
+          return
+        }
+
+        const traitObject = {[withTraitName]: valueToUse}
 
         const analytics = useAnalytics()
-        analytics.identify(traitObject)
+        analytics.identify(traitObject, true)
       },
       unload() {
         this.isSyncing = false
