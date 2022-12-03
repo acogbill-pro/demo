@@ -67,11 +67,14 @@ export const useProfileStore = defineStore('profilesStore', {
 
         if (this.isSyncing && analytics.bestID !== null) {
           this.isLoading = true  
-          this.stopSyncingStores()
         } else {
-          console.log('bailing on loadProfile: ' + this.isSyncing)
+          console.log('bailing on loadProfile since either notn syncing or no ID')
+          this.isSyncing = false
+          this.isLoading = false
           return
         }
+
+        this.stopSyncingStores()
 
         fetch(requestURL, options)
         .then((response) => {
