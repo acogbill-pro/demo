@@ -35,9 +35,7 @@ function refreshWithRecommendations() {
                 </v-col>
                 <v-col cols="1"></v-col>
                 <v-col cols="4">
-                    <SharedProfile />
-                    <SharedEventList />
-                    <SharedMessaging />
+                    <SharedSidebar />
                 </v-col>
             </v-row>
         </v-container>
