@@ -19,7 +19,7 @@ function submitForm() {
     if (toNumber.value !== '' && message.value !== '' && form.value.validate()) {
         twilio.sendSMS(fromNumber.value, toNumber.value, message.value)
 
-        form.value.resetValidation()
+        form.resetValidation()
 
         toNumber.value = ''
         message.value = ''

@@ -20,7 +20,6 @@ function submitForm() {
         traitName.value = ''
         traitValue.value = ''
         form.value.resetValidation()
-        valid.value = true
     }
 }
 </script>
