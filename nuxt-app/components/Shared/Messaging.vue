@@ -9,7 +9,7 @@ function toggleFields() {
 }
 
 function sendSMS() {
-    twilio.sendSMS('9177576756', 'From new component!')
+    twilio.sendSMS('9177576756', 'Yet another')
 }
 
 const statusColor = computed(() => {
