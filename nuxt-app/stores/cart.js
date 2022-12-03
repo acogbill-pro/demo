@@ -161,7 +161,7 @@ export const useCartStore = defineStore('cartStore', {
             const twilio = useTwilio()
 
             analytics.track('Order Completed', this.asSummaryObject)
-            twilio.sendSMS('9177576756', `Thank you for your order, totaling $${this.totalValue}. We'll let you know when it's on its way.`)
+            twilio.sendSMS('', '9177576756', `Thank you for your order, totaling $${this.totalValue}. We'll let you know when it's on its way.`)
 
             this.reset()
         },
