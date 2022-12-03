@@ -37,7 +37,7 @@ function refreshWithRecommendations() {
                 <v-col cols="4">
                     <SharedProfile />
                     <SharedEventList />
-                    <!--Pregnancy Score: {{ articles.categoryScores.get('Pregnancy') }}-->
+                    <SharedMessaging />
                 </v-col>
             </v-row>
         </v-container>
