@@ -149,7 +149,7 @@ export const useCartStore = defineStore('cartStore', {
             const asString = JSON.stringify(this.forEdge)
 
             console.log('cart.edgeToProfile')
-            analytics.identify({cartStore: asString}, true)
+            analytics.identify({cartStore: asString}, profiles.isSyncing)
         },
         reset() {
             this.contents = new Map()

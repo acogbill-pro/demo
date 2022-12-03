@@ -14,7 +14,7 @@ export const useProfileStore = defineStore('profilesStore', {
       isSyncing: false,
       isLoading: false,
       traits: {},
-      traitBlacklist: ['incrementers', 'phone', 'email', 'edge'],
+      traitBlacklist: ['incrementers', 'phone', 'email', 'edge', 'articleStore', 'cartStore'],
       unwatchers: [], // because watch returns a function to call when you want to unwatch
     }),
     getters: {
@@ -65,16 +65,14 @@ export const useProfileStore = defineStore('profilesStore', {
 
         const requestURL = justCors + 'https://profiles.segment.com/v1/spaces/' + runtimeConfig.public.profilesSpaceID + '/collections/users/profiles/' + (analytics.bestIDIsAnonymous ? 'anonymous_id:' : 'user_id:') + analytics.bestID + '/traits'
 
-        if (this.isSyncing && analytics.bestID !== null) {
-          this.isLoading = true  
-        } else {
-          console.log('bailing on loadProfile since either notn syncing or no ID')
-          this.isSyncing = false
-          this.isLoading = false
+        if (!this.isSyncing || analytics.bestID === null) {
+          console.log('bailing on loadProfile since either not syncing or no ID')
+          this.stopSyncing()
           return
         }
 
-        this.stopSyncingStores()
+        this.isLoading = true  
+        this.stopSyncingStores() // don't want a loop of trait updates calling this again
 
         fetch(requestURL, options)
         .then((response) => {
