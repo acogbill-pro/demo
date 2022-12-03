@@ -3,12 +3,10 @@ import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 import { useArticleCatalog } from '~/stores/articles.js'
 import { useCartStore } from '~/stores/cart';
-import { useTwilio } from '~/stores/twilio';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
 const articles = useArticleCatalog()
 const cart = useCartStore()
-const twilio = useTwilio()
 
 function loadProfile() {
     /*analytics.identify('Andy_Cogbill_id', { edge: null })
@@ -36,10 +34,6 @@ const isSyncing = computed({
         }
     }
 })
-
-function sendSMS() {
-    twilio.sendSMS('9177576756', 'Placeholder.')
-}
 
 const statusColor = computed(() => {
     if (twilio.statusOK) return 'green'
@@ -92,7 +86,6 @@ function toggleList() {
                         <v-icon icon="mdi-cached" color="gray" />
                     </template>
                 </v-switch>
-                <v-btn @click="sendSMS()" icon="mdi-message" :color="statusColor" />
                 <v-btn @click="resetProfile()" icon="mdi-delete" color="gray">
                 </v-btn>
             </v-card-actions>

@@ -10,10 +10,11 @@ function toggleList() {
 </script>
 
 <template>
-    <v-card>
+    <v-card class="mb-5">
         <v-card-actions @click="toggleList()">
             Segment Events
-            <v-icon :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'" />
+            <v-spacer />
+            <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'" />
         </v-card-actions>
         <v-expand-transition>
             <v-card-text v-if="!collapse">

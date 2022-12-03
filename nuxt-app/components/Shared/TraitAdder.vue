@@ -11,6 +11,8 @@ const valid = ref(true)
 function submitForm() {
     if (traitName.value !== '' && traitValue.value !== '') {
         profiles.addTrait(traitName.value, traitValue.value)
+        traitName.value = ''
+        traitValue.value = ''
     }
 }
 </script>
@@ -19,15 +21,22 @@ function submitForm() {
     <v-container>
         <v-form ref="form" v-model="valid">
             <v-row>
+                <v-col cols="12">
+                    <h5>Add a Trait</h5>
+                </v-col>
+            </v-row>
+            <v-row>
 
                 <v-col cols="5">
-                    <v-text-field v-model="traitName" required />
+                    <v-text-field v-model="traitName" required density="compact" variant="solo" single-line
+                        hide-details />
                 </v-col>
                 <v-col cols="5">
-                    <v-text-field v-model="traitValue" required />
+                    <v-text-field v-model="traitValue" required density="compact" variant="solo" single-line
+                        hide-details />
                 </v-col>
                 <v-col cols="2">
-                    <v-btn icon="mdi-check" @click="submitForm" />
+                    <v-btn icon="mdi-check" @click="submitForm" variant="flat" block />
                 </v-col>
 
             </v-row>
