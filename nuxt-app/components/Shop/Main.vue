@@ -27,6 +27,7 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                 <v-col cols="4">
                     <SharedProfile />
                     <SharedEventList />
+                    <SharedMessaging />
                 </v-col>
             </v-row>
         </v-container>
