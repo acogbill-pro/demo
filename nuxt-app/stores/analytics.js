@@ -44,26 +44,24 @@ export const useAnalytics = defineStore('analyticsStore', {
         if (this.userID === null) this.userID = window.analytics?.user().id() ?? null
       },
       identify(traitsObject = {}, syncAfter = false) {
-        //console.log(this.userID)
-        //console.log(this.anonymousID)
-        //console.log(this.analytics.user())
-        const profile = useProfileStore()
+        const profiles = useProfileStore()
 
-        if (this.useriD !== null) {  // can be anonymous
+        if (this.userID !== null) {  // can be anonymous
           this.analytics.identify(this.userID, traitsObject)     
 
           if (syncAfter) {
             setTimeout(() => {
-              profile.startSyncing(3)
+              profiles.startSyncing(3)
             }, 2000)
           }
           
         } else {
+          console.log('adding traits to anon')
           this.analytics.identify(traitsObject) // automatically prepends the anonymous ID
 
           if (syncAfter) {
             setTimeout(() => {
-              profile.startSyncing(10)
+              profiles.startSyncing(10)
             }, 2000)
           }
         }
@@ -73,9 +71,16 @@ export const useAnalytics = defineStore('analyticsStore', {
         // works for alias, group, identify, track, and page
         // callback to augment this data
 
-        this.analytics.on('track', (event, properties) => this.allEvents.unshift(event + ' (Track)'))
-        this.analytics.on('page', (event, properties) => this.allEvents.unshift(properties + ' (Page)'))
-        //this.analytics.on('identify', (event, properties) => this.allEvents.unshift(event + ' (Identify)'))
+        try {
+          this.analytics.on('track', (event, properties) => this.allEvents.unshift(event + ' (Track)'))
+          this.analytics.on('page', (event, properties) => this.allEvents.unshift(properties + ' (Page)'))
+          //this.analytics.on('identify', (event, properties) => this.allEvents.unshift(event + ' (Identify)'))
+        } catch {
+          console.log('Activate Watcher failed; retrying')
+          setTimeout(() => {
+            this.activateWatcher()
+          }, 1000)
+        }
       },
       reset() {
         this.userID = null
