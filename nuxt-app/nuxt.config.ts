@@ -9,7 +9,7 @@ export default defineNuxtConfig({
         'process.env.DEBUG': false,
       },
     },
-    buildModules: ['@pinia/nuxt'],
+    modules: ['@pinia/nuxt'],
     alias: {
         pinia: '/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs',
     },
@@ -28,7 +28,7 @@ export default defineNuxtConfig({
         fromTwilioNumbers: JSON.parse(process.env.TWILIO_PHONE_NUMBERS),
       }
     },
-    head: {
+    /*head: {
       "meta": [
         {
           "name": "viewport",
@@ -42,5 +42,5 @@ export default defineNuxtConfig({
       "style": [],
       "script": [],
       "noscript": []
-    },
+    },*/
 })
