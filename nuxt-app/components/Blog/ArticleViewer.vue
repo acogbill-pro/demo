@@ -1,6 +1,8 @@
 <script setup>
 import { useArticleCatalog } from '~/stores/articles';
+import { useAnalytics } from '~~/stores/analytics';
 const articles = useArticleCatalog()
+const analytics = useAnalytics()
 
 const dialog = ref(false)
 const hovered = ref(false)
@@ -14,6 +16,7 @@ const props = defineProps({
 
 function readArticle() {
     articles.markAsRead(props.article.ID)
+
 }
 
 function hoverArticle() {
@@ -33,6 +36,10 @@ function favorite() {
         articles.addFavorite(props.article.ID)
     }
 }
+
+onMounted(() => {
+    analytics.page('Article Read')
+})
 </script>
 
 <template>

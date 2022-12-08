@@ -22,10 +22,10 @@ useHead({
         class: 'from-useHead-default-layout'
     },
     script: [
-        {
+        /*{
             src: `https://cdn.segment.com/analytics.js/v1/${runtimeConfig.public.blogWriteKey}/analytics.min.js`,//'static/js/analytics-blog.js',
             type: 'text/javascript',
-        }
+        }*/
     ]
 })
 
@@ -36,6 +36,11 @@ function leaving(e) {
 }
 
 onMounted(() => {
+    const nuxtApp = useNuxtApp()
+    const runtimeConfig = useRuntimeConfig()
+
+    nuxtApp.$blogAnalytics.load(runtimeConfig.blogWriteKey)
+
     analytics.activateWatcher()
 
     profiles.startSyncingArticleStore()

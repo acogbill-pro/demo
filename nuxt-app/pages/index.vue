@@ -13,8 +13,8 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Main page')
-
+    analytics.page('Main Page')
+    analytics.track('Page Loaded')
     //profiles.startSyncing(3)
 })
 </script>

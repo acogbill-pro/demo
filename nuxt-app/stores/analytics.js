@@ -11,16 +11,20 @@ export const useAnalytics = defineStore('analyticsStore', {
     }),
   
     getters: {
-      analytics: (state) => window.analytics? window.analytics : null, // TODO: add some validation
+      blogAnalytics: (state) => {
+        //nuxtApp.$blogAnalytics.load(runtimeConfig.blogWriteKey)
+        const nuxtApp = useNuxtApp()
+        console.log(nuxtApp.$blogAnalytics)
+        return nuxtApp.$blogAnalytics
+       }, // TODO: add some validation
       //userID: (state) => window.analytics.user().id(),
-      anonymousID: (state) => window.analytics?.user().anonymousId() ?? null,
+      anonymousID: (state) => state.analytics._user().anonymousId() ?? null,
       bestID: (state) => {
-        const analytics = useAnalytics()
-        return analytics.userID !== null ? analytics.userID : analytics.anonymousID
+        return state.userID !== null ? state.userID : state.anonymousID
       },
       bestIDIsAnonymous: (state) => {
-        const analytics = useAnalytics()
-        const value = analytics.userID === null
+        //const analytics = useAnalytics()
+        const value = state.userID === null
         //this.bestID.split('_').pop() !== 'id'
         return value
       },
@@ -29,16 +33,19 @@ export const useAnalytics = defineStore('analyticsStore', {
     actions: {
       page(pageTitle) {
         try {
-          this.analytics.page(pageTitle)
+          console.log('Page call!')
+         //console.log(useNuxtApp())
+          this.blogAnalytics.page(pageTitle)
         } catch {
           console.log('Page call failed; retrying')
-          setTimeout(() => {
+          /*setTimeout(() => {
             this.page(pageTitle)
-          }, 1000)
+          }, 1000)*/
         }
       },
       track(eventName, traitsObject = null) {
-        this.analytics.track(eventName, traitsObject)
+        console.log('Track call!')
+        this.blogAnalytics.track(eventName, traitsObject)
       },
       refreshID() {
         if (this.userID === null) this.userID = window.analytics?.user().id() ?? null
@@ -47,7 +54,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         const profiles = useProfileStore()
 
         if (this.userID !== null) {  // can be anonymous
-          this.analytics.identify(this.userID, traitsObject)     
+          this.blogAnalytics.identify(this.userID, traitsObject)     
 
           if (syncAfter) {
             setTimeout(() => {
@@ -57,7 +64,7 @@ export const useAnalytics = defineStore('analyticsStore', {
           
         } else {
           console.log('adding traits to anon')
-          this.analytics.identify(traitsObject) // automatically prepends the anonymous ID
+          this.blogAnalytics.identify(traitsObject) // automatically prepends the anonymous ID
 
           if (syncAfter) {
             setTimeout(() => {
@@ -72,19 +79,19 @@ export const useAnalytics = defineStore('analyticsStore', {
         // callback to augment this data
 
         try {
-          this.analytics.on('track', (event, properties) => this.allEvents.unshift(event + ' (Track)'))
-          this.analytics.on('page', (event, properties) => this.allEvents.unshift(properties + ' (Page)'))
+          this.blogAnalytics.on('track', (event, properties) => this.allEvents.unshift(event + ' (Track)'))
+          this.blogAnalytics.on('page', (event, properties) => this.allEvents.unshift(properties + ' (Page)'))
           //this.analytics.on('identify', (event, properties) => this.allEvents.unshift(event + ' (Identify)'))
         } catch {
           console.log('Activate Watcher failed; retrying')
-          setTimeout(() => {
+          /*setTimeout(() => {
             this.activateWatcher()
-          }, 1000)
+          }, 1000)*/
         }
       },
       reset() {
         this.userID = null
-        this.analytics.reset()
+        this.blogAnalytics.reset()
         this.refreshID()
       }
     }
