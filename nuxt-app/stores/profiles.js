@@ -65,7 +65,7 @@ export const useProfileStore = defineStore('profilesStore', {
 
         const requestURL = justCors + 'https://profiles.segment.com/v1/spaces/' + runtimeConfig.public.profilesSpaceID + '/collections/users/profiles/' + (analytics.bestIDIsAnonymous ? 'anonymous_id:' : 'user_id:') + analytics.bestID + '/traits'
 
-        if (!this.isSyncing || analytics.bestID === null) {
+        if (!this.isSyncing || analytics.bestID === null || analytics.bestID === '') {
           console.log('bailing on loadProfile since either not syncing or no ID')
           this.stopSyncing()
           return
@@ -121,7 +121,7 @@ export const useProfileStore = defineStore('profilesStore', {
       },
       startSyncing(retryCount) {
         const analytics = useAnalytics()
-        analytics.refreshID()
+        analytics.refreshIDs()
 
         if (analytics.bestID !== null && !this.isSyncing) {
           this.isSyncing = true

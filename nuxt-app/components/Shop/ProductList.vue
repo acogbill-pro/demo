@@ -1,8 +1,10 @@
 <script setup>
 import { useProductCatalog } from '~/stores/products.js'
 import { useCartStore } from '~/stores/cart';
+import { useAnalytics } from '~~/stores/analytics';
 const products = useProductCatalog()
 const cart = useCartStore()
+const analytics = useAnalytics()
 
 const props = defineProps({
     category: {

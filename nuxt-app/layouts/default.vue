@@ -1,13 +1,9 @@
 <script setup>
 //import { useRoute } from 'vue-router'
-
 import { useAnalytics } from '~/stores/analytics';
 import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
-
-//const route = useRoute()
-const runtimeConfig = useRuntimeConfig()
 
 useHead({
     //title: 'Segment App Home',
@@ -36,9 +32,9 @@ function leaving(e) {
 }
 
 onMounted(() => {
-    analytics.activateWatcher()
+    analytics.setup('blog')
 
-    //profiles.startSyncingArticleStore()
+    profiles.startSyncingArticleStore()
 
     /*window.addEventListener(
         "beforeunload",

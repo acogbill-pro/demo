@@ -4,10 +4,6 @@ import { useProfileStore } from '~/stores/profiles';
 import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
-/*import { useRoute } from 'vue-router'
-const route = useRoute()*/
-const runtimeConfig = useRuntimeConfig()
-
 
 useHead({
     //title: 'Segment App Home',
@@ -21,12 +17,12 @@ useHead({
     bodyAttrs: {
         class: 'from-useHead-default-layout'
     },
-    script: [
+    /*script: [
         {
             src: 'js/shopAnalytics.js',
             type: 'text/javascript',
         }
-    ]
+    ]*/
 })
 
 function leaving(e) {
@@ -38,7 +34,7 @@ function leaving(e) {
 }
 
 onMounted(() => {
-    analytics.activateWatcher()
+    analytics.setup('shop')
 
     profiles.startSyncingCartStore()
 

@@ -7,36 +7,76 @@ export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
       allEvents: [],
       userID: null,
+      anonymousID: '',
+      activeSource: null, // make sure to run setup!
     }),
   
     getters: {
       analytics: (state) => {
-        return useNuxtApp().$blogAnalytics
+        return state.activeSource
       },
       //userID: (state) => window.analytics.user().id(),
-      anonymousID: (state) => window.analytics?.user().anonymousId() ?? null,
+      /*anonymousID: (state) => {
+        var returnID = 'loading'
+        const promise = state.activeSource.user()
+        const promise2 = promise.then((result) => returnID = result)//, failureCallback)
+        return returnID
+        //state.activeSource.instance._user().anonymousId() ?? null
+      },*/
       bestID: (state) => {
-        const analytics = useAnalytics()
-        return analytics.userID !== null ? analytics.userID : analytics.anonymousID
+        return state.userID !== null ? state.userID : state.anonymousID
       },
       bestIDIsAnonymous: (state) => {
         return state.userID === null
       },
     },
-  
     actions: {
+      setup(withPropertyName) {
+        switch(withPropertyName) {
+          case 'blog':
+            console.log('Analytics using Blog source')
+            this.activeSource = useNuxtApp().$blogAnalytics
+            break;
+          case 'shop':
+            console.log('Analytics using Shop source')
+            this.activeSource = useNuxtApp().$shopAnalytics
+            break;
+          default:
+            this.activeSource = useNuxtApp().$blogAnalytics
+        }
+
+        this.refreshIDs()
+        
+        this.activateWatcher()
+      },
+      refreshIDs() {
+        const promise = this.activeSource.user()
+        const promise2 = promise.then((result) => {
+          this.anonymousID = result.anonymousId()
+          this.userID = result.id()
+        })
+
+        this.identify()
+      },
       page(pageTitle) {
         try {
           this.analytics.page(pageTitle)
         } catch {
-          console.log('Segment Page call failed')
+          console.log('Segment Page call failed; retrying')
+          setTimeout(() => {
+            this.page(pageTitle)
+          }, 2000)
         }
       },
       track(eventName, traitsObject = null) {
-        this.analytics.track(eventName, traitsObject)
-      },
-      refreshID() {
-        if (this.userID === null) this.userID = window.analytics?.user().id() ?? null
+        try {
+          this.analytics.track(eventName, traitsObject) 
+        } catch {
+          console.log('Segment Track call failed; retrying')
+          setTimeout(() => {
+            this.track(eventName, traitsObject)
+          }, 2000)
+        }
       },
       identify(traitsObject = {}, syncAfter = false) {
         const profiles = useProfileStore()
@@ -77,7 +117,7 @@ export const useAnalytics = defineStore('analyticsStore', {
       reset() {
         this.userID = null
         this.analytics.reset()
-        this.refreshID()
+        this.refreshIDs()
       }
     }
   })
