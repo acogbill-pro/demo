@@ -38,6 +38,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         }
       },
       track(eventName, traitsObject = null) {
+        console.log('store track')
         this.analytics.track(eventName, traitsObject)
       },
       refreshID() {

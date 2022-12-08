@@ -3,7 +3,7 @@
 
 import { useAnalytics } from '~/stores/analytics';
 import { useProfileStore } from '~/stores/profiles';
-const analytics = useAnalytics()
+const analyticsStore = useAnalytics()
 const profiles = useProfileStore()
 
 //const route = useRoute()
@@ -32,11 +32,15 @@ useHead({
 function leaving(e) {
     e.returnValue = ""
 
-    analytics.track('Blog Closed')
+    analyticsStore.track('Blog Closed')
 }
 
 onMounted(() => {
-    analytics.activateWatcher()
+    console.log(window.analytics)
+    console.log(analytics)
+    window.analytics.load("DtDvPaJzJ7sw0EJD6RkYKO9BkPIhFh97")
+
+    //analytics.activateWatcher()
 
     profiles.startSyncingArticleStore()
 

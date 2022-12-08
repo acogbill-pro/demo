@@ -1,7 +1,7 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles';
-const analytics = useAnalytics()
+const analyticsStore = useAnalytics()
 const profiles = useProfileStore()
 
 definePageMeta({
@@ -13,7 +13,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Main page')
+    window.analytics.page('Main page')
 
     //profiles.startSyncing(3)
 })
