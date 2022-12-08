@@ -24,10 +24,13 @@ export default {
         switch(withString) {
             case 'true':
               return true;
+              // no break because returns
             case 'false':
               return false;
+              // no break because returns
             case 'null':
               return null;
+              // no break because returns
             default:
                 // the `+` turns it into a Number... probably
                 if (this.isStringANumber(withString)) return +withString
