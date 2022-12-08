@@ -2,7 +2,6 @@
 import { useArticleCatalog } from '~/stores/articles';
 import { useAnalytics } from '~~/stores/analytics';
 const articles = useArticleCatalog()
-const analyticsStore = useAnalytics()
 
 const dialog = ref(false)
 const hovered = ref(false)
@@ -16,7 +15,6 @@ const props = defineProps({
 
 function readArticle() {
     articles.markAsRead(props.article.ID)
-    window.analytics.track('Article Read', props.article)
 }
 
 function hoverArticle() {

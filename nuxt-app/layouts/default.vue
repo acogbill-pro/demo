@@ -3,7 +3,7 @@
 
 import { useAnalytics } from '~/stores/analytics';
 import { useProfileStore } from '~/stores/profiles';
-const analyticsStore = useAnalytics()
+const analytics = useAnalytics()
 const profiles = useProfileStore()
 
 //const route = useRoute()
@@ -21,28 +21,24 @@ useHead({
     bodyAttrs: {
         class: 'from-useHead-default-layout'
     },
-    script: [
+    /*script: [
         {
             src: 'js/blogAnalytics.js',
             type: 'text/javascript',
         }
-    ]
+    ]*/
 })
 
 function leaving(e) {
     e.returnValue = ""
 
-    analyticsStore.track('Blog Closed')
+    analytics.track('Blog Closed')
 }
 
 onMounted(() => {
-    console.log(window.analytics)
-    console.log(analytics)
-    window.analytics.load("DtDvPaJzJ7sw0EJD6RkYKO9BkPIhFh97")
+    analytics.activateWatcher()
 
-    //analytics.activateWatcher()
-
-    profiles.startSyncingArticleStore()
+    //profiles.startSyncingArticleStore()
 
     /*window.addEventListener(
         "beforeunload",

@@ -24,7 +24,7 @@ export const useTwilio = defineStore('twilioStore', {
             const runtimeConfig = useRuntimeConfig()
 
             const requestURL = 
-            `${runtimeConfig.public.justCORSurl}${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? runtimeConfig.fromTwilioNumbers[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberString)}&Body=${encodeURIComponent(withMessage)}`
+            `${runtimeConfig.public.justCORSurl}${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberString)}&Body=${encodeURIComponent(withMessage)}`
 
             const response = await fetch(requestURL)
 

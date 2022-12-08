@@ -22,7 +22,7 @@ export default defineNuxtConfig({
         justCORSurl: process.env.JUST_CORS,
         categoryNames: process.env.CATEGORY_NAMES,
         twilioSMS: process.env.TWILIO_SMS_URL,
-        fromTwilioNumbers: JSON.parse(process.env.TWILIO_PHONE_NUMBERS),
+        fromTwilioNumbers: process.env.TWILIO_PHONE_NUMBERS,
       }
     },
     /*head: {

@@ -27,7 +27,7 @@ function submitForm() {
 }
 
 onMounted(() => {
-    fromNumber.value = runtimeConfig.fromTwilioNumbers[0]
+    fromNumber.value = JSON.parse(runtimeConfig.fromTwilioNumbers)[0]
 })
 </script>
 
@@ -41,7 +41,7 @@ onMounted(() => {
             </v-row>
             <v-row>
                 <v-col cols="12">
-                    <v-select v-model="fromNumber" :items="runtimeConfig.fromTwilioNumbers" label="From"
+                    <v-select v-model="fromNumber" :items="JSON.parse(runtimeConfig.fromTwilioNumbers)" label="From"
                         density="compact" />
                 </v-col>
             </v-row>

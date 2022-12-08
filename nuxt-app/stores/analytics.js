@@ -2,7 +2,6 @@
   
 import {defineStore} from 'pinia'
 import {useProfileStore} from '~/stores/profiles'
-import { useArticleCatalog } from '~/stores/articles'
 
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
@@ -11,7 +10,9 @@ export const useAnalytics = defineStore('analyticsStore', {
     }),
   
     getters: {
-      analytics: (state) => window.analytics? window.analytics : null, // TODO: add some validation
+      analytics: (state) => {
+        return useNuxtApp().$blogAnalytics
+      },
       //userID: (state) => window.analytics.user().id(),
       anonymousID: (state) => window.analytics?.user().anonymousId() ?? null,
       bestID: (state) => {
@@ -19,10 +20,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         return analytics.userID !== null ? analytics.userID : analytics.anonymousID
       },
       bestIDIsAnonymous: (state) => {
-        const analytics = useAnalytics()
-        const value = analytics.userID === null
-        //this.bestID.split('_').pop() !== 'id'
-        return value
+        return state.userID === null
       },
     },
   
@@ -31,14 +29,10 @@ export const useAnalytics = defineStore('analyticsStore', {
         try {
           this.analytics.page(pageTitle)
         } catch {
-          console.log('Page call failed; retrying')
-          /*setTimeout(() => {
-            this.page(pageTitle)
-          }, 1000)*/
+          console.log('Segment Page call failed')
         }
       },
       track(eventName, traitsObject = null) {
-        console.log('store track')
         this.analytics.track(eventName, traitsObject)
       },
       refreshID() {
@@ -77,10 +71,7 @@ export const useAnalytics = defineStore('analyticsStore', {
           this.analytics.on('page', (event, properties) => this.allEvents.unshift(properties + ' (Page)'))
           //this.analytics.on('identify', (event, properties) => this.allEvents.unshift(event + ' (Identify)'))
         } catch {
-          console.log('Activate Watcher failed; retrying')
-          /*setTimeout(() => {
-            this.activateWatcher()
-          }, 1000)*/
+          console.log('Activate Watcher failed')
         }
       },
       reset() {

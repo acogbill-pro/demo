@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.4.6",
+    "@segment/analytics-next": "^1.47.1",
     "buffer": "^6.0.3",
     "mdi": "^2.2.43",
     "nuxt": "^3.0.0",
