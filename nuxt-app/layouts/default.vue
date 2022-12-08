@@ -23,7 +23,7 @@ useHead({
     },
     script: [
         {
-            src: `https://cdn.segment.com/analytics.js/v1/${runtimeConfig.public.blogWriteKey}/analytics.min.js`,//'static/js/analytics-blog.js',
+            src: 'js/blogAnalytics.js',
             type: 'text/javascript',
         }
     ]

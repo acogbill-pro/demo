@@ -1,7 +1,7 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import firstNames from '~/static/json/firstNames.json'
-import lastNames from '~/static/json/lastNames.json'
+import firstNames from '~/assets/json/firstNames.json'
+import lastNames from '~/assets/json/lastNames.json'
 const analytics = useAnalytics()
 
 const form = ref(null)
@@ -106,15 +106,13 @@ function resetValidation() {
         <v-card-title>Register</v-card-title>
         <v-form ref="form" v-model="valid" lazy-validation>
             <v-card-text>
-                <v-text-field v-model="fname" :counter="10" :rules="nameRules" label="First Name" required>
-                </v-text-field>
+                <v-text-field v-model="fname" :counter="10" :rules="nameRules" label="First Name" required />
 
-                <v-text-field v-model="lname" :counter="10" :rules="nameRules" label="Last Name" required>
-                </v-text-field>
+                <v-text-field v-model="lname" :counter="10" :rules="nameRules" label="Last Name" required />
 
-                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                <v-text-field v-model="email" :rules="emailRules" label="E-mail" required />
 
-                <v-text-field v-model="phone" :rules="phoneRules" label="Phone" required></v-text-field>
+                <v-text-field v-model="phone" :rules="phoneRules" label="Phone" required />
 
                 <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
         </v-select>-->

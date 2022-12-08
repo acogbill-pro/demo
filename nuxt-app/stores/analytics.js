@@ -32,9 +32,9 @@ export const useAnalytics = defineStore('analyticsStore', {
           this.analytics.page(pageTitle)
         } catch {
           console.log('Page call failed; retrying')
-          setTimeout(() => {
+          /*setTimeout(() => {
             this.page(pageTitle)
-          }, 1000)
+          }, 1000)*/
         }
       },
       track(eventName, traitsObject = null) {
@@ -77,9 +77,9 @@ export const useAnalytics = defineStore('analyticsStore', {
           //this.analytics.on('identify', (event, properties) => this.allEvents.unshift(event + ' (Identify)'))
         } catch {
           console.log('Activate Watcher failed; retrying')
-          setTimeout(() => {
+          /*setTimeout(() => {
             this.activateWatcher()
-          }, 1000)
+          }, 1000)*/
         }
       },
       reset() {
