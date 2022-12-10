@@ -57,20 +57,9 @@ export const useAnalytics = defineStore('analyticsStore', {
           const isShop = routeAsArray.length > 1 ? routeAsArray[1] === 'shop' : false
 
           this.activeSource = isShop ? useNuxtApp().$shopAnalytics : useNuxtApp().$blogAnalytics
+
+          this.setup(isShop ? 'shop' : 'blog')
         }
-        
-        /*switch(isShop) {
-          case 'blog':
-            console.log('Analytics using Blog source')
-            this.activeSource = useNuxtApp().$blogAnalytics
-            break;
-          case 'shop':
-            console.log('Analytics using Shop source')
-            this.activeSource = useNuxtApp().$shopAnalytics
-            break;
-          default:
-            this.activeSource = useNuxtApp().$blogAnalytics
-        }*/
 
         try {
           this.analytics.page(pageTitle)
