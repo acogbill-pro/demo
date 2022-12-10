@@ -18,8 +18,8 @@ function loadProfile() {
     console.log(JSON.stringify(Array.from(exampleMap.entries())))
     const reviveMap = new Map(Array.from(exampleMap.entries()))
     console.log(reviveMap)*/
-    console.log(articles.forEdge)
-    console.log(cart.forEdge)
+    //console.log(articles.forEdge)
+    //console.log(cart.forEdge)
 }
 
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)

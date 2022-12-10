@@ -15,14 +15,6 @@ export const useAnalytics = defineStore('analyticsStore', {
       analytics: (state) => {
         return state.activeSource
       },
-      //userID: (state) => window.analytics.user().id(),
-      /*anonymousID: (state) => {
-        var returnID = 'loading'
-        const promise = state.activeSource.user()
-        const promise2 = promise.then((result) => returnID = result)//, failureCallback)
-        return returnID
-        //state.activeSource.instance._user().anonymousId() ?? null
-      },*/
       bestID: (state) => {
         return state.userID !== null ? state.userID : state.anonymousID
       },
@@ -58,7 +50,28 @@ export const useAnalytics = defineStore('analyticsStore', {
 
         this.identify()
       },
-      page(pageTitle) {
+      page(pageTitle, routePath = '') {
+        if (routePath !== '') {
+          const routeAsArray = routePath.split('/')
+
+          const isShop = routeAsArray.length > 1 ? routeAsArray[1] === 'shop' : false
+
+          this.activeSource = isShop ? useNuxtApp().$shopAnalytics : useNuxtApp().$blogAnalytics
+        }
+        
+        /*switch(isShop) {
+          case 'blog':
+            console.log('Analytics using Blog source')
+            this.activeSource = useNuxtApp().$blogAnalytics
+            break;
+          case 'shop':
+            console.log('Analytics using Shop source')
+            this.activeSource = useNuxtApp().$shopAnalytics
+            break;
+          default:
+            this.activeSource = useNuxtApp().$blogAnalytics
+        }*/
+
         try {
           this.analytics.page(pageTitle)
         } catch {

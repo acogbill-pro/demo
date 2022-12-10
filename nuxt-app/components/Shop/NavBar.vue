@@ -48,7 +48,7 @@ function redo() {
                 <v-icon>mdi-redo-variant</v-icon>
             </v-btn>
             <v-spacer />-->
-            <v-btn text rounded href="/" target="_blank">
+            <v-btn text rounded to="/" nuxt>
                 Blog
             </v-btn>
             <v-btn v-for="link in topLinks" :key="`${link.label}-nav-link`" text rounded :to="link.url" nuxt>

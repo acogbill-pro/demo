@@ -4,6 +4,8 @@ import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
 
+const route = useRoute()
+
 definePageMeta({
     layout: "default",
 })
@@ -13,7 +15,9 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Main page')
+    analytics.page('Main page', route.path)
+
+    console.log(route)
 
     //profiles.startSyncing(3)
 })

@@ -34,8 +34,6 @@ function leaving(e) {
 }
 
 onMounted(() => {
-    analytics.setup('shop')
-
     profiles.startSyncingCartStore()
 
     /*window.addEventListener(

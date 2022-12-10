@@ -32,8 +32,6 @@ function leaving(e) {
 }
 
 onMounted(() => {
-    analytics.setup('blog')
-
     profiles.startSyncingArticleStore()
 
     /*window.addEventListener(

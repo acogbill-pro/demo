@@ -13,7 +13,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Order Confirmation')
+    analytics.page('Order Confirmation', route.path)
 })
 </script>
 
