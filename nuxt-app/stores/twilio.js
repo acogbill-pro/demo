@@ -23,6 +23,8 @@ export const useTwilio = defineStore('twilioStore', {
             const analytics = useAnalytics()
             const runtimeConfig = useRuntimeConfig()
 
+            this.status = ''
+
             const requestURL = 
             `${runtimeConfig.public.justCORSurl}${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberString)}&Body=${encodeURIComponent(withMessage)}`
 
