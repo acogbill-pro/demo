@@ -51,7 +51,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.identify()
       },
       page(pageTitle, routePath = '') {
-        if (routePath !== '') {
+        if (routePath !== '' && this.activeSource === null) {
           const routeAsArray = routePath.split('/')
 
           const isShop = routeAsArray.length > 1 ? routeAsArray[1] === 'shop' : false
@@ -93,7 +93,7 @@ export const useAnalytics = defineStore('analyticsStore', {
           }
           
         } else {
-          console.log('adding traits to anon')
+          //console.log('adding traits to anon')
           this.analytics.identify(traitsObject) // automatically prepends the anonymous ID
 
           if (syncAfter) {
