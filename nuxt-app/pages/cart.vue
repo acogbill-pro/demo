@@ -14,15 +14,26 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Checkout Start', route.path)
-    analytics.track('Checkout Started', cart.asSummaryObject)
+    analytics.page('Cart Page')
+    analytics.track('Viewed Cart', cart.asSummaryObject)
 })
 </script>
 
 <template>
-    <div>
-        Cart
-    </div>
+    <v-card>
+        <v-card-title>Shopping Cart</v-card-title>
+
+        <v-card-text v-if="cart.totalQuantity > 0">
+            <ShopCartContents />
+        </v-card-text>
+        <v-card-text v-else>
+            Cart is Empty
+        </v-card-text>
+        <v-card-actions>
+            <v-btn to="/shop" nuxt>Continue Shopping</v-btn>
+            <v-btn to="/checkout" nuxt>Checkout</v-btn>
+        </v-card-actions>
+    </v-card>
 </template>
 
 <style lang="scss" scoped>
