@@ -15,7 +15,7 @@ function submitOrder() {
     cart.submitOrder()
 
     navigateTo({
-        path: '/confirmOrder',
+        path: '/shop/confirmOrder',
         query: {
             quantity,
             value
