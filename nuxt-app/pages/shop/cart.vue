@@ -14,7 +14,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Cart Page')
+    analytics.page('Cart Page', route.path)
     analytics.track('Viewed Cart', cart.asSummaryObject)
 })
 </script>
@@ -31,7 +31,7 @@ onMounted(() => {
         </v-card-text>
         <v-card-actions>
             <v-btn to="/shop" nuxt>Continue Shopping</v-btn>
-            <v-btn to="/checkout" nuxt>Checkout</v-btn>
+            <v-btn to="/shop/checkout" nuxt>Checkout</v-btn>
         </v-card-actions>
     </v-card>
 </template>
