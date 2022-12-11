@@ -14,7 +14,8 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
 </script>
 
 <template>
-    <v-no-ssr>
+    <div>Placeholder
+        <!--<v-no-ssr>
         <v-container>
             <v-row>
                 <v-col cols="7">
@@ -29,7 +30,8 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                 </v-col>
             </v-row>
         </v-container>
-    </v-no-ssr>
+    </v-no-ssr>-->
+    </div>
 </template>
 
 <style lang="scss" scoped>

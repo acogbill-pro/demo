@@ -24,7 +24,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
+    <div>Placeholder
+        <!--<v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
         <template v-slot:activator="{ props }">
             <v-btn @click="viewCart" v-bind="props" rounded>
                 <v-icon icon="mdi-cart" /> {{ cart.totalQuantity }} - ${{ cart.totalValue }}
@@ -51,7 +52,8 @@ onMounted(() => {
             </v-card-text>
         </v-card>
 
-    </v-dialog>
+    </v-dialog>-->
+    </div>
 </template>
 
 <style lang="scss" scoped>
