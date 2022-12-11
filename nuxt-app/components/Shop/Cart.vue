@@ -24,34 +24,32 @@ onMounted(() => {
 </script>
 
 <template>
-    <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
-        <template v-slot:activator="{ props }">
-            <v-btn @click="viewCart" v-bind="props" rounded>
-                <v-icon icon="mdi-cart" /> {{ cart.totalQuantity }} - ${{ cart.totalValue }}
-            </v-btn>
-        </template>
-        <v-card>
-            <v-toolbar color="#f22f46">
-
-                <v-toolbar-title>Shopping Cart</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-toolbar-items>
+    <div>
+        <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
+            <template v-slot:activator="{ props }">
+                <v-btn @click="viewCart" v-bind="props" rounded>
+                    <v-icon icon="mdi-cart" /> {{ cart.totalQuantity }} - ${{ cart.totalValue }}
+                </v-btn>
+            </template>
+            <v-card>
+                <v-card-title>Shopping Cart</v-card-title>
+                <v-card-actions>
                     <v-btn to="/checkout" nuxt @click="closeCart()">Checkout</v-btn>
                     <v-btn icon dark @click="closeCart()">
                         <v-icon>mdi-close</v-icon>
                     </v-btn>
-                </v-toolbar-items>
-            </v-toolbar>
-            <v-card-text v-if="cart.totalQuantity > 0">
-                <ShopCartContents />
-                <v-btn to="/checkout" nuxt @click="closeCart()">Checkout</v-btn>
-            </v-card-text>
-            <v-card-text v-else>
-                Cart is Empty
-            </v-card-text>
-        </v-card>
+                </v-card-actions>
+                <v-card-text v-if="cart.totalQuantity > 0">
+                    <ShopCartContents />
+                    <v-btn to="/checkout" nuxt @click="closeCart()">Checkout</v-btn>
+                </v-card-text>
+                <v-card-text v-else>
+                    Cart is Empty
+                </v-card-text>
+            </v-card>
 
-    </v-dialog>
+        </v-dialog>
+    </div>
 </template>
 
 <style lang="scss" scoped>
