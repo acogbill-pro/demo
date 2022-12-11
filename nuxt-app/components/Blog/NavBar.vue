@@ -21,10 +21,6 @@ const internalLink = computed(() => {
 
 const topLinks = computed(() => {
     return [
-        /*{ YES YOU HAVE TRIED THIS RECENTLY
-            label: 'ShopIN',
-            url: '/shop',
-        },*/
         {
             label: 'Login',//profile.hasTraits ? 'Account' : 'Login',
             url: '/account',
@@ -67,7 +63,7 @@ function redo() {
             <v-btn color="secondary" text rounded to="/" nuxt>
                 Blog
             </v-btn>
-            <v-btn color="secondary" text rounded to="/shop" nuxt><!-- target="_blank">-->
+            <v-btn color="secondary" text rounded href="/shop" target="_blank">
                 Shop
             </v-btn>
             <v-btn v-for="link in topLinks" :key="`${link.label}-nav-link`" color="secondary" text rounded
