@@ -14,7 +14,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Login Page', route.path)
+    analytics.page('Login Page')
 
     //profiles.persistUser()
 })
