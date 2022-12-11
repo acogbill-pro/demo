@@ -26,14 +26,14 @@ export const useTwilio = defineStore('twilioStore', {
             const requestURL = 
             `${runtimeConfig.public.justCORSurl}${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberString)}&Body=${encodeURIComponent(withMessage)}`
 
-            const response = await fetch(requestURL)
-
-            const data = await response.json();
-            this.status = data.status;
-
-            if (this.statusOK) {
-                analytics.track('SMS Sent', {eventName, message: withMessage})
-            }
+            const response = fetch(requestURL)
+            const status = response.then((data) => {
+              const convertToJSON = data.json()
+              const status = convertToJSON.then((json) => {
+                this.status = json.status
+                if (this.statusOK) analytics.track('SMS Sent', {eventName, message: withMessage})
+              }
+            )})
         }
     }
   })
