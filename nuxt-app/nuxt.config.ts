@@ -20,6 +20,7 @@ export default defineNuxtConfig({
         profilesSpaceID: process.env.PROFILES_SPACE_ID,
         profilesAccessToken: process.env.PROFILES_ACCESS_TOKEN,
         justCORSurl: process.env.JUST_CORS,
+        CORSdomain: process.env.NODE_ENV === 'production' ? 'andycogbill.com' : 'localhost:3000',
         categoryNames: process.env.CATEGORY_NAMES,
         twilioSMS: process.env.TWILIO_SMS_URL,
         fromTwilioNumbers: process.env.TWILIO_PHONE_NUMBERS,

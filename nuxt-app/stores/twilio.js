@@ -25,10 +25,17 @@ export const useTwilio = defineStore('twilioStore', {
 
             this.status = ''
 
-            const requestURL = 
-            `${runtimeConfig.public.justCORSurl}${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberString)}&Body=${encodeURIComponent(withMessage)}`
+            const headers = {
+              "Access-Control-Allow-Origin": `${runtimeConfig.public.CORSdomain}`,
+              "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type",
+              "Content-Type": "application/json"
+            }
 
-            const response = fetch(requestURL)
+            const requestURL = 
+            `${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberString)}&Body=${encodeURIComponent(withMessage)}`
+
+            const response = fetch(requestURL, {headers})
             const status = response.then((data) => {
               const convertToJSON = data.json()
               const status = convertToJSON.then((json) => {
