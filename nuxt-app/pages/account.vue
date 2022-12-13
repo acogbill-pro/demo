@@ -3,7 +3,6 @@ import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 const analytics = useAnalytics()
 const profiles = useProfileStore()
-const route = useRoute()
 
 definePageMeta({
     layout: "default",

@@ -133,7 +133,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             const article = this.all.find(article => article.ID === withArticleID)
 
             const analytics = useAnalytics()
-            analytics.page('Article Page', '/')
+            analytics.page('Article Page')
             analytics.track('Article Read', article)
         },
         hover(withArticleID) {

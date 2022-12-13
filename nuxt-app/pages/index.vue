@@ -8,6 +8,7 @@ const route = useRoute()
 
 definePageMeta({
     layout: "default",
+    middleware: ["page-analytics"],
 })
 
 useHead({
@@ -15,7 +16,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Main page', route.path)
+    analytics.page('Main page')
 
     //profiles.startSyncing(3)
 })

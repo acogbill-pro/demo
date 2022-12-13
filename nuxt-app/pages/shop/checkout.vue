@@ -14,7 +14,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Checkout Start', route.path)
+    analytics.page('Checkout Start')
     analytics.track('Checkout Started', cart.asSummaryObject)
 })
 </script>

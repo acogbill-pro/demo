@@ -15,7 +15,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Product Listing Page', route.path)
+    analytics.page('Product Listing Page')
 
     //profiles.startSyncing(3)
 })
