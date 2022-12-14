@@ -47,13 +47,13 @@ export const useAnalytics = defineStore('analyticsStore', {
           }, 2000)
         }
       },
-      track(eventName, traitsObject = null) {
+      track(eventName, propertyObject = null) {
         try {
-          this.analytics.track(eventName, traitsObject) 
+          this.analytics.track(eventName, propertyObject) 
         } catch {
           console.log('Segment Track call failed; retrying')
           setTimeout(() => {
-            this.track(eventName, traitsObject)
+            this.track(eventName, propertyObject)
           }, 2000)
         }
       },

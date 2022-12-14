@@ -33,9 +33,8 @@ function refreshWithRecommendations() {
                     <!--<BlogArticleList v-if="hasRecommendation" :category="recommendedCategoryLocal" />-->
                     <BlogArticleList v-for="category in articles.categories" :key="category" :category="category" />
                 </v-col>
-                <v-col cols="1"></v-col>
-                <v-col cols="4">
-                    <SharedSidebar />
+                <v-col cols="5">
+                    <SharedSidebar class="mx-5" />
                 </v-col>
             </v-row>
         </v-container>
