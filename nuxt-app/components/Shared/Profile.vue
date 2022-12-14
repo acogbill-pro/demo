@@ -72,7 +72,7 @@ function toggleList() {
                         }}
                         </li>
                     </ul>
-                    <SharedAddTrait />
+                    <SharedAddTrait class="my-5" />
                 </v-card-text>
             </v-expand-transition>
             <v-card-actions>
