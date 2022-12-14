@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     modules: ['@pinia/nuxt'],
     runtimeConfig: {
       // to use: const runtimeConfig = useRuntimeConfig(); runtimeConfig.varName
-      privateAPIKey: process.env.SERVER_ONLY_KEY,
       public: {
         // to use: runtimeConfig.public.varName
         blogWriteKey: process.env.BLOG_WRITE_KEY,
