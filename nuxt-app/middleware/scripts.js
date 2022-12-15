@@ -21,6 +21,7 @@ export default {
           return false;
     },
     transformStringToType(withString) {
+      if (typeof withString !== 'string') return withString
         switch(withString) {
             case 'true':
               return true;
@@ -38,6 +39,10 @@ export default {
                 const asDate = new Date(withString)
         
                 if (this.isDateValid(asDate)) return asDate.toISOString()
+
+                const asCalendarDate = new Date(...withString.split('/'))
+
+                if (this.isDateValid(asCalendarDate)) return asCalendarDate.toISOString()
         
                 return withString
           }
