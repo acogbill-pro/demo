@@ -1,19 +1,14 @@
 <script setup>
-import { useProfileStore } from '~/stores/profiles'
-
-const profiles = useProfileStore()
-
-//const linkText = computed(() => profiles.hasTraits ? 'Account' : 'Login')
 
 const topLinks = [
     {
         label: 'Shop',
         url: '/shop',
     },
-    /*{
-        label: linkText.value,
-        url: '/account',
-    },*/
+    {
+        label: 'Login',
+        url: '/shop/account',
+    },
 ]
 
 /*undoRedoStore.startSaving()

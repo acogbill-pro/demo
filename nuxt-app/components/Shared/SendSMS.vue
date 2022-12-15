@@ -47,19 +47,19 @@ onMounted(() => {
             </v-row>
             <v-row>
 
-                <v-col cols="12">
-                    <v-text-field v-model="toNumber" required density="compact" variant="solo" single-line hide-details
-                        :rules="phoneRules" label="To Number" />
-                </v-col>
-            </v-row>
-            <v-row>
-                <v-col>
-                    <v-text-field v-model="message" required density="compact" variant="solo" single-line hide-details
-                        label="Message" />
+                <v-col cols="10">
+                    <v-text-field v-model="toNumber" required variant="solo" single-line :rules="phoneRules"
+                        label="To Number" />
                 </v-col>
                 <v-col cols="2">
                     <v-btn icon="mdi-check" @click="submitForm" variant="plain" block :disabled="!valid" />
                 </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="12">
+                    <v-textarea v-model="message" required variant="solo" auto-grow label="Message" />
+                </v-col>
+
             </v-row>
         </v-form>
     </v-container>
