@@ -40,7 +40,12 @@ export const useTwilio = defineStore('twilioStore', {
               const convertToJSON = data.json()
               const status = convertToJSON.then((json) => {
                 this.status = json.status
-                if (this.statusOK) analytics.track('SMS Sent', {eventName, message: withMessage})
+                if (this.statusOK) {
+                  analytics.track('SMS Sent', {eventName, message: withMessage})
+                  setTimeout(() => {
+                    this.status = ''
+                  }, 20000)
+                }
               }
             )}).catch(
               console.log('Call to Twilio failed, likely due to CORS')
