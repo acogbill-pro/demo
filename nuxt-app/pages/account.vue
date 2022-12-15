@@ -57,6 +57,7 @@ function logout() {
             </v-col>
         </v-row>
         <v-row v-if="isLoggedIn">
+            <NuxtLink to="/"><v-btn class="mr-3">Continue to Blog</v-btn></NuxtLink>
             <v-btn @click="logout()">Logout</v-btn>
             <v-btn v-if="!collapse" @click="toggleCollapse()">Hide Login</v-btn>
             <v-btn v-else @click="toggleCollapse">Login Again</v-btn>
