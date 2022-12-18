@@ -3,11 +3,10 @@
 
 <template>
     <div>
-
         <SharedEventList />
+        <SharedAddWriteKey />
         <SharedProfile />
         <SharedMessaging />
-        <SharedAddWriteKey />
     </div>
 </template>
 
