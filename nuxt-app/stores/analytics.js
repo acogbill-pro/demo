@@ -1,5 +1,5 @@
 // Wrapper store for analytics.js
-  
+import { AnalyticsBrowser } from '@segment/analytics-next'
 import {defineStore} from 'pinia'
 import {useProfileStore} from '~/stores/profiles'
 
@@ -9,6 +9,7 @@ export const useAnalytics = defineStore('analyticsStore', {
       userID: null,
       anonymousID: '',
       activeSource: null, // make sure to run setup!
+      manualWriteKey: '',
     }),
   
     getters: {
@@ -27,6 +28,16 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.refreshIDs()
         
         this.activateWatcher()
+      },
+      loadWriteKey(writeKey) {
+        this.manualWriteKey = writeKey
+        this.activeSource = AnalyticsBrowser.load({writeKey})
+        this.setup()
+      },
+      unloadWriteKey() {
+        this.manualWriteKey = ''
+        this.activeSource = null
+        useRouter().go()
       },
       refreshIDs() {
         const promise = this.activeSource.user()

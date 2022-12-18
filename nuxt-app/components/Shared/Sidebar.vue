@@ -1,12 +1,13 @@
 <script setup>
-
 </script>
 
 <template>
     <div>
-        <SharedProfile />
+
         <SharedEventList />
+        <SharedProfile />
         <SharedMessaging />
+        <SharedAddWriteKey />
     </div>
 </template>
 
