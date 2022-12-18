@@ -14,7 +14,7 @@ export const useProfileStore = defineStore('profilesStore', {
       isSyncing: false,
       isLoading: false,
       traits: {},
-      traitBlacklist: ['incrementers', 'phone', 'email', 'edge', 'articleStore', 'cartStore'],
+      traitBlacklist: ['incrementers', 'phone', 'email', 'edge'],
       unwatchers: [], // because watch returns a function to call when you want to unwatch
     }),
     getters: {
