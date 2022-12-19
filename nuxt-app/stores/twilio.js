@@ -6,6 +6,7 @@ import {useAnalytics} from '~/stores/analytics'
 export const useTwilio = defineStore('twilioStore', {
     state: () => ({
         status: '',
+        manualToNumber: '',
     }),
   
     getters: {
@@ -25,6 +26,8 @@ export const useTwilio = defineStore('twilioStore', {
 
             this.status = ''
 
+            const toNumberToUse = toNumberString !== '' ? toNumberString : this.manualToNumber !== '' ? this.manualToNumber : '9177576756'
+
             const headers = {
               "Access-Control-Allow-Origin": `${runtimeConfig.public.CORSdomain}`,
               "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS",
@@ -33,7 +36,7 @@ export const useTwilio = defineStore('twilioStore', {
             }
 
             const requestURL = 
-            `${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberString)}&Body=${encodeURIComponent(withMessage)}`
+            `${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberToUse)}&Body=${encodeURIComponent(withMessage)}`
 
             const response = fetch(requestURL, {headers})
             const status = response.then((data) => {
@@ -50,6 +53,12 @@ export const useTwilio = defineStore('twilioStore', {
             )}).catch(
               console.log('Call to Twilio failed, likely due to CORS')
             )
-        }
+        },
+        loadToNumber(withNumber) {
+          this.manualToNumber = withNumber
+        },
+        unloadToNumber() {
+          this.manualToNumber = ''
+        },
     }
   })

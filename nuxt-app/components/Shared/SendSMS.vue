@@ -17,17 +17,19 @@ const message = ref('')
 
 function submitForm() {
     if (toNumber.value !== '' && message.value !== '' && form.value.validate()) {
+        twilio.loadToNumber(toNumber.value)
         twilio.sendSMS('Form Submission', fromNumber.value, toNumber.value, message.value)
 
         form.value.resetValidation()
 
-        toNumber.value = ''
+        //twilio.manualToNumber.value = ''
         message.value = ''
     }
 }
 
 onMounted(() => {
     fromNumber.value = JSON.parse(runtimeConfig.fromTwilioNumbers)[0]
+    toNumber.value = twilio.manualToNumber
 })
 </script>
 
@@ -47,19 +49,19 @@ onMounted(() => {
             </v-row>
             <v-row>
 
-                <v-col cols="10">
+                <v-col cols="12">
                     <v-text-field v-model="toNumber" required variant="solo" single-line :rules="phoneRules"
                         label="To Number" />
                 </v-col>
-                <v-col cols="2">
-                    <v-btn icon="mdi-check" @click="submitForm" variant="plain" block :disabled="!valid" />
-                </v-col>
+
             </v-row>
             <v-row>
-                <v-col cols="12">
+                <v-col cols="10">
                     <v-textarea v-model="message" required variant="solo" auto-grow label="Message" />
                 </v-col>
-
+                <v-col cols="2">
+                    <v-btn icon="mdi-send" @click="submitForm" variant="plain" block :disabled="!valid" />
+                </v-col>
             </v-row>
         </v-form>
     </v-container>

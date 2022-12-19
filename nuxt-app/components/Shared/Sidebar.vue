@@ -4,9 +4,9 @@
 <template>
     <div>
         <SharedEventList />
-        <SharedAddWriteKey />
         <SharedProfile />
         <SharedMessaging />
+        <SharedSetup />
     </div>
 </template>
 
