@@ -51,7 +51,7 @@ export const useTwilio = defineStore('twilioStore', {
                 }
               }
             )}).catch(
-              console.log('Call to Twilio failed, likely due to CORS')
+              //console.log('Call to Twilio failed, likely due to CORS')
             )
         },
         loadToNumber(withNumber) {

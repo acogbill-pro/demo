@@ -16,11 +16,7 @@ export default defineNuxtConfig({
         // to use: runtimeConfig.public.varName
         blogWriteKey: process.env.BLOG_WRITE_KEY,
         shopWriteKey: process.env.SHOP_WRITE_KEY,
-        profilesSpaceID: process.env.PROFILES_SPACE_ID,
-        profilesAccessToken: process.env.PROFILES_ACCESS_TOKEN,
-        justCORSurl: process.env.JUST_CORS,
         CORSdomain: process.env.NODE_ENV === 'production' ? 'andycogbill.com' : 'localhost:3000',
-        categoryNames: process.env.CATEGORY_NAMES,
         twilioSMS: process.env.TWILIO_SMS_URL,
         fromTwilioNumbers: process.env.TWILIO_PHONE_NUMBERS,
       }

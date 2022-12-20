@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# Node / Vue 3 / Nuxt 3 / Pinia / Vuetify 3
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+Node server, Vue front-end, Nuxt with Server-side rendered Single Page App, Pinia stores for managing app state, Vuetify 3 for UI
 
 ## Setup
 
@@ -38,5 +38,3 @@ Locally preview production build:
 ```bash
 npm run preview
 ```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.

@@ -42,6 +42,10 @@ export const useRecommendations = defineStore('recommendations', {
         return categoryScoreMap
       },
       recommendedCategory: (state) => {
+        // check if Profile API returns reco, use that;
+        
+
+        // if not, grab from app state
         const scoreArray = Array.from(state.categoryScores.entries()) // [[key, value]]
         const topCategory = scoreArray.reduce((a, e) => e[1] > a[1] ? e : a, [null, null])[0]
         return topCategory
