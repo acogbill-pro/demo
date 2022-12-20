@@ -1,24 +1,6 @@
 <script setup>
 import { useArticleCatalog } from '~/stores/articles.js'
-import { useAnalytics } from '~/stores/analytics';
-import { useRecommendations } from '~/stores/recommendations';
 const articles = useArticleCatalog()
-const analytics = useAnalytics()
-const recommendations = useRecommendations()
-
-//const recommendedCategoryLocal = ref(null)
-//const categoryArrayLocal = ref(Array.from(articles.categories))
-
-
-onMounted(() => {
-    // grab these so the page doesn't rerender with every click, only on Mount
-    refreshWithRecommendations()
-})
-
-function refreshWithRecommendations() {
-    //recommendedCategoryLocal.value = recommendations.recommendedCategory
-    //categoryArrayLocal.value = Array.from(recommendations.categoriesWithoutRecommended)
-}
 
 </script>
 
@@ -30,7 +12,6 @@ function refreshWithRecommendations() {
                     <v-expand-transition>
                         <BlogRecommendedArticle v-if="articles.hasRecommendation" />
                     </v-expand-transition>
-                    <!--<BlogArticleList v-if="hasRecommendation" :category="recommendedCategoryLocal" />-->
                     <BlogArticleList v-for="category in articles.categories" :key="category" :category="category" />
                 </v-col>
                 <v-col cols="5">

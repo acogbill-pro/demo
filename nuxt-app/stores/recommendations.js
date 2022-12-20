@@ -43,7 +43,7 @@ export const useRecommendations = defineStore('recommendations', {
       },
       recommendedCategory: (state) => {
         // check if Profile API returns reco, use that;
-        
+        // TODO: Implement trait-based weights
 
         // if not, grab from app state
         const scoreArray = Array.from(state.categoryScores.entries()) // [[key, value]]
@@ -52,9 +52,5 @@ export const useRecommendations = defineStore('recommendations', {
       },
     },
   
-    actions: {
-        profileToEdge() {
-            //console.log('This all populates via other stores now')
-        }
-    }
+    actions: {}
   })

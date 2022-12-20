@@ -145,6 +145,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             analytics.track('Article Hovered', article)
         },
         profileToEdge({articleStore = '{}'}) {
+            // handles syncing data FROM Profile API in TO app state
             console.log('articles.profileToEdge')
             const toObject = JSON.parse(articleStore)
 
@@ -165,6 +166,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             }
         },
         edgeToProfile() {  
+            // handles syncing data TO Profile FROM app state
             const analytics = useAnalytics()
             const profiles = useProfileStore()
 

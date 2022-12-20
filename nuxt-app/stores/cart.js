@@ -126,6 +126,7 @@ export const useCartStore = defineStore('cartStore', {
             analytics.track('Product Removed', product)
         },
         profileToEdge({cartStore = '{}'}) {
+            // handles syncing data FROM Profile API in TO app state
             console.log('cart.profileToEdge')
             const toObject = JSON.parse(cartStore)
             const contents = new Map(toObject.cart_contents)
@@ -143,6 +144,7 @@ export const useCartStore = defineStore('cartStore', {
             }          
         },
         edgeToProfile() {  
+            // handles syncing data TO Profile FROM app state
             const analytics = useAnalytics()
             const profiles = useProfileStore()
 

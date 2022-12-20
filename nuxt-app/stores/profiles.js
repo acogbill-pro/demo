@@ -4,9 +4,7 @@ import {defineStore, storeToRefs} from 'pinia'
 import { Buffer } from 'buffer'
 import { useAnalytics } from '~/stores/analytics'
 import { useArticleCatalog } from '~/stores/articles'
-import { isProxy, toRaw } from 'vue'
 import { useCartStore } from './cart'
-import { useRecommendations } from '~/stores/recommendations'
 import scripts from '~/middleware/scripts.js'
 
 export const useProfileStore = defineStore('profilesStore', {
@@ -88,10 +86,10 @@ export const useProfileStore = defineStore('profilesStore', {
             return response.json()
           } else if(response.status === 404) {
             console.log('404 error')
-            //this.stopSyncing()
+            this.stopSyncing()
             return Promise.reject('error 404')
           } else {
-            //this.stopSyncing()
+            this.stopSyncing()
             console.log('error in profile API response')
             return Promise.reject('some other error: ' + response.status)
           }
@@ -173,12 +171,6 @@ export const useProfileStore = defineStore('profilesStore', {
         this.isSyncing = false
 
         this.traits = {}
-
-        /*const articles = useArticleCatalog()
-        articles.reset()
-
-        const cart = useCartStore()
-        cart.reset()*/
 
         const analytics = useAnalytics()
         analytics.reset()

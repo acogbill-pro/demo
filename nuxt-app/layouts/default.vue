@@ -1,5 +1,4 @@
 <script setup>
-//import { useRoute } from 'vue-router'
 import { useAnalytics } from '~/stores/analytics';
 import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
@@ -17,12 +16,6 @@ useHead({
     bodyAttrs: {
         class: 'from-useHead-default-layout'
     },
-    /*script: [
-        {
-            src: 'js/blogAnalytics.js',
-            type: 'text/javascript',
-        }
-    ]*/
 })
 
 function leaving(e) {

@@ -17,12 +17,6 @@ useHead({
     bodyAttrs: {
         class: 'from-useHead-default-layout'
     },
-    /*script: [
-        {
-            src: 'js/shopAnalytics.js',
-            type: 'text/javascript',
-        }
-    ]*/
 })
 
 function leaving(e) {

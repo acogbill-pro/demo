@@ -4,8 +4,6 @@ import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
 
-const route = useRoute()
-
 definePageMeta({
     layout: "default",
     middleware: ["page-analytics"],
