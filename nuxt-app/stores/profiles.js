@@ -61,9 +61,14 @@ export const useProfileStore = defineStore('profilesStore', {
             },
         }
 
-        const justCors = runtimeConfig.public.justCORSurl
+        const backendOptions = {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }
 
-        const requestURL = justCors + 'https://profiles.segment.com/v1/spaces/' + runtimeConfig.public.profilesSpaceID + '/collections/users/profiles/' + (analytics.bestIDIsAnonymous ? 'anonymous_id:' : 'user_id:') + analytics.bestID + '/traits'
+        const requestURL = `https://segment-demo-backend.onrender.com/user?id=${analytics.bestID}&anon=${analytics.bestIDIsAnonymous}`
 
         if (!this.isSyncing || analytics.bestID === null || analytics.bestID === '') {
           console.log('bailing on loadProfile since either not syncing or no ID')
@@ -74,7 +79,8 @@ export const useProfileStore = defineStore('profilesStore', {
         this.isLoading = true  
         this.stopSyncingStores() // don't want a loop of trait updates calling this again
 
-        fetch(requestURL, options)
+        //fetch(requestURL, options)
+        fetch(requestURL, backendOptions)
         .then((response) => {
           this.isLoading = false  // stop all the downloading
 
