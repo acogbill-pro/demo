@@ -44,29 +44,43 @@ export const useProfileStore = defineStore('profilesStore', {
     },
   
     actions: {
-      loadProfileForUser(attemptsRemaining = 0) {
+      postObject(withObject) {
         const runtimeConfig = useRuntimeConfig()
+
+        const options = {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`
+          },
+          body: JSON.stringify(withObject)
+        }
+
+        const requestURL = `${runtimeConfig.profileURL}/object`
+
+        fetch(requestURL, options)
+        .then((response) => {
+          console.log('fetch successful, response: ', response)
+        })
+        .catch((error) => {
+          console.log('error in sendObject fetch', error)
+        })
+      },
+      loadProfileForUser(attemptsRemaining = 0) {
         const cartStore = useCartStore()
         const articleStore = useArticleCatalog()
         const analytics = useAnalytics()
+        const runtimeConfig = useRuntimeConfig()
 
         const options = {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-            // NOTE the `:` after the Token in the below
-            'Authorization': `Basic ${Buffer.from(`${runtimeConfig.public.profilesAccessToken}:`).toString('base64')}`,
-            },
-        }
-
-        const backendOptions = {
           method: "GET",
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
           }
         }
 
-        const requestURL = `https://segment-demo-backend.onrender.com/user?id=${analytics.bestID}&anon=${analytics.bestIDIsAnonymous}`
+        const requestURL = `${runtimeConfig.profileURL}/user?id=${analytics.bestID}&anon=${analytics.bestIDIsAnonymous}`
 
         if (!this.isSyncing || analytics.bestID === null || analytics.bestID === '') {
           console.log('bailing on loadProfile since either not syncing or no ID')
@@ -77,8 +91,7 @@ export const useProfileStore = defineStore('profilesStore', {
         this.isLoading = true  
         this.stopSyncingStores() // don't want a loop of trait updates calling this again
 
-        //fetch(requestURL, options)
-        fetch(requestURL, backendOptions)
+        fetch(requestURL, options)
         .then((response) => {
           this.isLoading = false  // stop all the downloading
 

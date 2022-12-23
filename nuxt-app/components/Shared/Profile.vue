@@ -8,18 +8,8 @@ const profiles = useProfileStore()
 const articles = useArticleCatalog()
 const cart = useCartStore()
 
-function loadProfile() {
-    /*analytics.identify('Andy_Cogbill_id', { edge: null })
-    const exampleMap = new Map()
-    exampleMap.set('articles', 2)
-    exampleMap.set('sleep', 3)
-    const exampleArray = ['trait1', 'trait2']
-    console.log(exampleMap)
-    console.log(JSON.stringify(Array.from(exampleMap.entries())))
-    const reviveMap = new Map(Array.from(exampleMap.entries()))
-    console.log(reviveMap)*/
-    //console.log(articles.forEdge)
-    //console.log(cart.forEdge)
+function postObject() {
+    profiles.postObject({ a: 1, b: 2 })
 }
 
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
@@ -59,6 +49,7 @@ function toggleList() {
             <v-card-actions @click="toggleList()">
                 <span>Profile: {{ IDforPrint }}</span>
                 <v-spacer />
+                <!--<v-btn @click="postObject()" icon="mdi-message" color="black" />-->
                 <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
                     :color="profiles.hasTraits ? 'black' : 'white'" />
 
