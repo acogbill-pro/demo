@@ -3,6 +3,7 @@ import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 const analytics = useAnalytics()
 const profiles = useProfileStore()
+const { auth } = useSupabaseClient()
 
 definePageMeta({
     layout: "default",
@@ -42,6 +43,15 @@ function logout() {
         <v-row v-if="!isLoggedIn || (isLoggedIn && !collapse)">
             <v-col>
                 <UserLogin />
+                <v-card>
+                    <v-card-title>
+                        Log in with...
+                    </v-card-title>
+                    <v-card-text>
+                        <v-btn icon="mdi:google" @click="auth.signInWithOAuth({ provider: 'google' })"
+                            block>Google</v-btn>
+                    </v-card-text>
+                </v-card>
             </v-col>
             <v-col>
                 <UserRegister />

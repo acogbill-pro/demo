@@ -25,6 +25,42 @@ const isSyncing = computed({
     }
 })
 
+function hitSourceFunction() {
+    console.log('source function')
+    const hookURL = 'https://platform.segmentapis.com/webhook?n=qbtwrw5hl3qgs3krfggnnbzfe5e2gsoq&s=A40PHhek&t=1673549858&w=cWBgjiLvqmfWSiUjyonfVR'
+
+    const runtimeConfig = useRuntimeConfig()
+    const requestURL = `${runtimeConfig.CORS_URL}${hookURL}`
+
+    const options = {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            //'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`
+        },
+        body: '{}'
+    }
+
+    const response = fetch(requestURL, options)
+    const status = response.then((data) => {
+        console.log(data)
+        /*const convertToJSON = data.json()
+        const status = convertToJSON.then((json) => {
+            this.status = json.status
+            if (this.statusOK) {
+                analytics.track('SMS Sent', { eventName, message: withMessage })
+                setTimeout(() => {
+                    this.status = ''
+                }, 20000)
+            }
+        }
+        )*/
+    }).catch(
+        console.log('Webhook call failed')
+    )
+
+}
+
 function resetProfile() {
     profiles.unload()
 }
@@ -72,8 +108,8 @@ function toggleList() {
                         <v-icon icon="mdi-cached" color="gray" />
                     </template>
                 </v-switch>
-                <v-btn @click="resetProfile()" icon="mdi-delete" color="gray">
-                </v-btn>
+                <v-btn @click="hitSourceFunction()" icon="mdi-webhook" color="gray" />
+                <v-btn @click="resetProfile()" icon="mdi-delete" color="gray" />
             </v-card-actions>
         </v-card>
     </div>

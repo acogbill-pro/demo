@@ -9,13 +9,14 @@ export default defineNuxtConfig({
         'process.env.DEBUG': false,
       },
     },
-    modules: ['@pinia/nuxt'],
+    modules: ['@pinia/nuxt','@nuxtjs/supabase'],
     runtimeConfig: {
       // to use: const runtimeConfig = useRuntimeConfig(); runtimeConfig.varName
       public: {
         // to use: runtimeConfig.public.varName
         blogWriteKey: process.env.BLOG_WRITE_KEY,
         shopWriteKey: process.env.SHOP_WRITE_KEY,
+        CORS_URL: process.env.CORS_URL,
         CORSdomain: process.env.NODE_ENV === 'production' ? 'andycogbill.com' : 'localhost:3000',
         profileURL: process.env.NODE_ENV === 'production' ? 'https://segment-demo-backend.onrender.com' : 'http://localhost:443',
         profileKey: process.env.BE_API_KEY,

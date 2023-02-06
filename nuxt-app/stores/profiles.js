@@ -31,6 +31,7 @@ export const useProfileStore = defineStore('profilesStore', {
         }
 
         var traitsToReturn = state.traits
+        console.log(traitsToReturn)
 
         for (let i = 0; i < state.traitBlacklist.length; i++) {
           traitsToReturn = removeProperty(traitsToReturn, state.traitBlacklist[i])

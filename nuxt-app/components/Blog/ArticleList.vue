@@ -21,7 +21,7 @@ const categoryToPrint = computed(() => {
     return titleCase(props.category)
 })
 
-const articlesToShow = computed(() => articles.all.filter(article => article.category === props.category && article !== recommendations.recommendedArticle))
+const articlesToShow = computed(() => articles.all?.filter(article => article.category === props.category && article !== recommendations.recommendedArticle)) ?? []
 
 const reachedTheEnd = ref(false)
 
@@ -35,13 +35,22 @@ function onIntersect(isIntersecting, entries, observer) {
     }
 }
 
+const client = useSupabaseClient()
+const { data: dbarticles } = await useAsyncData('dbarticles', async () => {
+    const { data } = await client.from('Articles').select('id, title, fullText, category')
+    //console.log(data)
+    articles.all = data
+    return data
+})
+onMounted(() => {
 
+})
 </script>
 
 <template>
     <div>
         <h1 color="primary" class="my-10">{{ categoryToPrint }}</h1>
-        <BlogArticleCard v-for="article in articlesToShow" :key="article.ID" :article="article" />
+        <BlogArticleCard v-for="article in articlesToShow" :key="article.id" :article="article" />
         <v-spacer v-intersect="{
             handler: onIntersect,
             options: {

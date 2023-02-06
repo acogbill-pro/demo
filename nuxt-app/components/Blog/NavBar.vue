@@ -1,6 +1,8 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { useProfileStore } from '~/stores/profiles'
+const user = useSupabaseUser()
+
 const profile = useProfileStore()
 
 const route = useRoute()
@@ -22,11 +24,19 @@ const internalLink = computed(() => {
 const topLinks = computed(() => {
     return [
         {
-            label: 'Login',//profile.hasTraits ? 'Account' : 'Login',
+            label: user.value !== null ? 'Account' : 'Login',
             url: '/account',
         },
     ]
 })
+
+const showAuth = computed(() => {
+    return false
+})
+
+function login() {
+    console.log('would log in')
+}
 
 /*undoRedoStore.startSaving()
 const undoable = ref(false)
@@ -38,6 +48,9 @@ function undo() {
 function redo() {
     console.log('would redo')
 }*/
+onMounted(() => {
+    console.log(user)
+})
 </script>
 
 <template>
@@ -69,6 +82,9 @@ function redo() {
             <v-btn v-for="link in topLinks" :key="`${link.label}-nav-link`" color="secondary" text rounded
                 :to="link.url" nuxt>
                 {{ link.label }}
+            </v-btn>
+            <v-btn @click="login" text rounded color="secondary" v-if="!user">
+                Auth
             </v-btn>
             <!--<v-btn color="secondary" text rounded @click="emit('toggleTheme', 'nav bar')">Toggle Theme</v-btn>-->
         </v-app-bar>
