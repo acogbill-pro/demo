@@ -5,6 +5,7 @@ import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 import { useRecommendations } from '~/stores/recommendations'
 
+
 export const useArticleCatalog = defineStore('articleCatalog', {
     state: () => ({
       all: [
@@ -85,14 +86,6 @@ export const useArticleCatalog = defineStore('articleCatalog', {
     }),
   
     getters: {
-        dbarticles: (state) => {
-            return state.all
-
-            // console.log('getting articles from db')
-            // const client = useSupabaseClient()
-            // const data = client.from('Articles').select('id, title, fullText, category')
-            // return data
-          },
       categories: (state) => {
         return state.all.reduce(function (acc, obj) { return acc.add(obj.category); }, new Set())
       },
