@@ -86,10 +86,12 @@ export const useArticleCatalog = defineStore('articleCatalog', {
   
     getters: {
         dbarticles: (state) => {
-            console.log('getting articles from db')
-            const client = useSupabaseClient()
-            const data = client.from('Articles').select('id, title, fullText, category')
-            return data
+            return state.all
+
+            // console.log('getting articles from db')
+            // const client = useSupabaseClient()
+            // const data = client.from('Articles').select('id, title, fullText, category')
+            // return data
           },
       categories: (state) => {
         return state.all.reduce(function (acc, obj) { return acc.add(obj.category); }, new Set())
