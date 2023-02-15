@@ -35,13 +35,13 @@ function onIntersect(isIntersecting, entries, observer) {
     }
 }
 
-const client = useSupabaseClient()
-const { data: dbarticles } = await useAsyncData('dbarticles', async () => {
-    const { data } = await client.from('Articles').select('id, title, fullText, category')
-    //console.log(data)
-    articles.all = data
-    return data
-})
+// const client = useSupabaseClient()
+// const { data: dbarticles } = await useAsyncData('dbarticles', async () => {
+//     const { data } = await client.from('Articles').select('id, title, fullText, category')
+//     //console.log(data)
+//     articles.all = data
+//     return data
+// })
 onMounted(() => {
 
 })

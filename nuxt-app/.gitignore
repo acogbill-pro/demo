@@ -10,3 +10,4 @@ cypress/videos
 yalc.lock
 cypress/videos
 .env
+.DS_Store*
