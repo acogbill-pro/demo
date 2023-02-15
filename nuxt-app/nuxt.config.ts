@@ -18,9 +18,10 @@ export default defineNuxtConfig({
         shopWriteKey: process.env.SHOP_WRITE_KEY,
         CORS_URL: process.env.CORS_URL,
         CORSdomain: process.env.NODE_ENV === 'production' ? 'andycogbill.com' : 'localhost:3000',
-        profileURL: process.env.NODE_ENV === 'production' ? 'https://segment-demo-backend.onrender.com' : 'http://localhost:443',
+        profileURL: process.env.NODE_ENV === 'production' ? 'https://segment-demo-backend.onrender.com:10000' : 'http://localhost:10000',
         profileKey: process.env.BE_API_KEY,
         twilioSMS: process.env.TWILIO_SMS_URL,
+        twilioMMS: process.env.TWILIO_MMS_URL,
         fromTwilioNumbers: process.env.TWILIO_PHONE_NUMBERS,
       }
     },
