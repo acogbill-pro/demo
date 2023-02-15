@@ -58,7 +58,7 @@ onMounted(() => {
         <v-app-bar id="nav" app color="primary" dark nuxt>
             <v-toolbar-title>
                 <h1>
-                    Growing Family Blog
+                    The Blog
                     <!--<NuxtLink to="/">
                         <v-icon small color="white">
                             {{ 'mdi-call-split mdi-rotate-180' }}

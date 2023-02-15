@@ -28,7 +28,7 @@ function redo() {
         <v-app-bar id="nav" app color="#f22f46" nuxt>
             <v-toolbar-title>
                 <h1>
-                    ParentShop
+                    The Shop
                     <!--<NuxtLink to="/">
                         <v-icon small color="white">
                             {{ 'mdi-call-split mdi-rotate-180' }}
