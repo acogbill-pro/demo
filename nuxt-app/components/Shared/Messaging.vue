@@ -13,6 +13,10 @@ function sendSMS() {
     twilio.sendSMS('Button Press', '', '', 'Yet another')
 }
 
+function sendMMS() {
+    twilio.sendMMS('Button Press', '', '', 'Yet another')
+}
+
 const statusColor = computed(() => {
     if (twilio.statusOK) return 'green'
     if (twilio.status === '') return 'gray'
@@ -25,6 +29,7 @@ const statusColor = computed(() => {
         <v-card-actions>
             Messaging
             <v-spacer />
+            <v-btn @click="sendMMS()" icon="mdi-message-image" :color="statusColor" />
             <v-btn @click="sendSMS()" icon="mdi-message" :color="statusColor" />
             <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'" @click="toggleFields()" />
         </v-card-actions>
