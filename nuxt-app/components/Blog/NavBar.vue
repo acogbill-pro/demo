@@ -49,7 +49,7 @@ function redo() {
     console.log('would redo')
 }*/
 onMounted(() => {
-    console.log(user)
+    //console.log(user)
 })
 </script>
 
@@ -60,27 +60,27 @@ onMounted(() => {
                 <h1>
                     The Blog
                     <!--<NuxtLink to="/">
-                        <v-icon small color="white">
-                            {{ 'mdi-call-split mdi-rotate-180' }}
-                        </v-icon>
-                    </NuxtLink>-->
+                            <v-icon small color="white">
+                                {{ 'mdi-call-split mdi-rotate-180' }}
+                            </v-icon>
+                        </NuxtLink>-->
                 </h1>
             </v-toolbar-title>
             <!--<v-btn color="secondary" text rounded dense :disabled="!undoable" @click="undo">
-                <v-icon>mdi-undo-variant</v-icon>
-            </v-btn>
-            <v-btn color="secondary" text rounded dense :disabled="!redoable" @click="redo">
-                <v-icon>mdi-redo-variant</v-icon>
-            </v-btn>
-            <v-spacer />-->
+                    <v-icon>mdi-undo-variant</v-icon>
+                </v-btn>
+                <v-btn color="secondary" text rounded dense :disabled="!redoable" @click="redo">
+                    <v-icon>mdi-redo-variant</v-icon>
+                </v-btn>
+                <v-spacer />-->
             <v-btn color="secondary" text rounded to="/" nuxt>
                 Blog
             </v-btn>
             <v-btn color="secondary" text rounded href="/shop" target="_blank">
                 Shop
             </v-btn>
-            <v-btn v-for="link in topLinks" :key="`${link.label}-nav-link`" color="secondary" text rounded
-                :to="link.url" nuxt>
+            <v-btn v-for="link in topLinks" :key="`${link.label}-nav-link`" color="secondary" text rounded :to="link.url"
+                nuxt>
                 {{ link.label }}
             </v-btn>
             <v-btn @click="login" text rounded color="secondary" v-if="!user">
@@ -92,6 +92,4 @@ onMounted(() => {
 </template>
 
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

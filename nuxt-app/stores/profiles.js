@@ -45,43 +45,25 @@ export const useProfileStore = defineStore('profilesStore', {
     },
   
     actions: {
-      postObject(withObject) {
-        const runtimeConfig = useRuntimeConfig()
-
-        const options = {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`
-          },
-          body: JSON.stringify(withObject)
-        }
-
-        const requestURL = `${runtimeConfig.profileURL}/object`
-
-        fetch(requestURL, options)
-        .then((response) => {
-          console.log('fetch successful, response: ', response)
-        })
-        .catch((error) => {
-          console.log('error in sendObject fetch', error)
-        })
-      },
       loadProfileForUser(attemptsRemaining = 0) {
         const cartStore = useCartStore()
         const articleStore = useArticleCatalog()
         const analytics = useAnalytics()
         const runtimeConfig = useRuntimeConfig()
 
+        const body = {
+          userID: analytics.bestID,
+          anon: analytics.bestIDIsAnonymous
+        }
+
         const options = {
-          method: "GET",
+          method: "POST",
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
-          }
+          },
+          body: JSON.stringify(body)
         }
-
-        const requestURL = `${runtimeConfig.profileURL}/user?id=${analytics.bestID}&anon=${analytics.bestIDIsAnonymous}`
 
         if (!this.isSyncing || analytics.bestID === null || analytics.bestID === '') {
           console.log('bailing on loadProfile since either not syncing or no ID')
@@ -92,7 +74,7 @@ export const useProfileStore = defineStore('profilesStore', {
         this.isLoading = true  
         this.stopSyncingStores() // don't want a loop of trait updates calling this again
 
-        fetch(requestURL, options)
+        fetch('/api/user/profile', options)
         .then((response) => {
           this.isLoading = false  // stop all the downloading
 
@@ -108,7 +90,8 @@ export const useProfileStore = defineStore('profilesStore', {
             return Promise.reject('some other error: ' + response.status)
           }
         })
-        .then((fetchedProfile) => {
+        .then(({data: fetchedProfile}) => {
+          //console.log('fetchedProfile', fetchedProfile)
 
           /* Logic to only update traits if they changed */
           /*if (JSON.stringify(fetchedProfile.traits) !== JSON.stringify(this.traits) || userID !== this.userID) { // If the traits aren't the same OR it's a new user

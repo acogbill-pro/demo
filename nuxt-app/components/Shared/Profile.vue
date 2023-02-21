@@ -8,10 +8,6 @@ const profiles = useProfileStore()
 const articles = useArticleCatalog()
 const cart = useCartStore()
 
-function postObject() {
-    profiles.postObject({ a: 1, b: 2 })
-}
-
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
 const isSyncing = computed({
@@ -80,14 +76,12 @@ function toggleList() {
     <div>
         <v-card class="mb-5">
             <!--<v-form ref="form">
-                    <v-text-field v-model="userID" label="User ID" required />
-                </v-form>-->
+                        <v-text-field v-model="userID" label="User ID" required />
+                    </v-form>-->
             <v-card-actions @click="toggleList()">
                 <span>Profile: {{ IDforPrint }}</span>
                 <v-spacer />
-                <!--<v-btn @click="postObject()" icon="mdi-message" color="black" />-->
-                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
-                    :color="profiles.hasTraits ? 'black' : 'white'" />
+                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'" :color="profiles.hasTraits ? 'black' : 'white'" />
 
             </v-card-actions>
             <v-expand-transition>
@@ -95,7 +89,7 @@ function toggleList() {
                     <p class="mb-5">Anon ID: {{ analytics.anonymousID }}</p>
                     <ul>
                         <li v-for="[key, value] in Object.entries(profiles.cleanTraits)" :key="key">{{ key + ': ' +
-                                value
+                            value
                         }}
                         </li>
                     </ul>
@@ -115,6 +109,4 @@ function toggleList() {
     </div>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
