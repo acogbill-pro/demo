@@ -5,11 +5,9 @@
     <div>
         <SharedEventList />
         <SharedProfile />
-        <SharedMessaging />
-        <SharedSetup />
+        <!-- <SharedMessaging />
+            <SharedSetup /> -->
     </div>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

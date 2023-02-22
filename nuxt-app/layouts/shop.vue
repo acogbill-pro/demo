@@ -44,11 +44,9 @@ onMounted(() => {
             <v-main>
                 <slot />
             </v-main>
-            <ShopFooter />
+            <!-- <ShopFooter /> -->
         </v-app>
     </div>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -38,8 +38,8 @@ function logout() {
 </script>
 
 <template>
-    <v-container>
-        <v-row v-if="!isLoggedIn || (isLoggedIn && !collapse)">
+    <v-container fluid>
+        <v-row v-if="!isLoggedIn || (isLoggedIn && !collapse)" class="bg">
             <v-col>
                 <UserLogin />
             </v-col>
@@ -48,9 +48,11 @@ function logout() {
             </v-col>
 
         </v-row>
-        <v-row v-else>
+        <v-row v-else class="bg">
             <v-col>
-                <p>Logged In</p>
+                <v-card>
+                    <v-card-title>Logged In</v-card-title>
+                </v-card>
             </v-col>
         </v-row>
         <v-row v-if="isLoggedIn" class="my-5">
@@ -63,5 +65,10 @@ function logout() {
 </template>
 
 <style lang="scss" scoped>
-
+.bg {
+    background: url("~/images/kfcBG.jpeg") no-repeat center center;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
 </style>

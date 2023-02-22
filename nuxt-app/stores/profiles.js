@@ -12,7 +12,7 @@ export const useProfileStore = defineStore('profilesStore', {
       isSyncing: false,
       isLoading: false,
       traits: {},
-      traitBlacklist: ['incrementers', 'phone', 'email', 'edge'],
+      traitBlacklist: ['incrementers', 'phone', 'edge'],
       unwatchers: [], // because watch returns a function to call when you want to unwatch
     }),
     getters: {
@@ -99,12 +99,18 @@ export const useProfileStore = defineStore('profilesStore', {
             this.traits = fetchedProfile.traits
             articleStore.loadFavesAndScores(fetchedProfile.traits)
           } */
-          
-          articleStore.profileToEdge(fetchedProfile.traits)
-          cartStore.profileToEdge(fetchedProfile.traits)
+
+          if (!fetchedProfile.traits) {
+            console.log('no traits back from Profile API')
+            this.stopSyncing()
+            return
+          }
+
+          //articleStore.profileToEdge(fetchedProfile.traits)
+          cartStore.profileToEdge(fetchedProfile.traits.cartStore)
           this.traits = fetchedProfile.traits
 
-          this.startSyncingArticleStore()
+          //this.startSyncingArticleStore()
           this.startSyncingCartStore()
 
           if (this.isSyncing && attemptsRemaining > 0) {

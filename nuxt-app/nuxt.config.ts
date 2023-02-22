@@ -9,7 +9,7 @@ export default defineNuxtConfig({
         'process.env.DEBUG': false,
       },
     },
-    modules: ['@pinia/nuxt','@nuxtjs/supabase'],
+    modules: ['@pinia/nuxt'],
     nitro: {
       plugins: ["~/server/index.js"],
     },

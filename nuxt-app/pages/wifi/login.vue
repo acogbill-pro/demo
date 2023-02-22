@@ -4,6 +4,10 @@ import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
 
+const isLoggedIn = computed(() => {
+    return !analytics.bestIDIsAnonymous
+})
+
 definePageMeta({
     layout: "kfc",
     middleware: ["page-analytics"],
@@ -26,7 +30,10 @@ onMounted(() => {
             <v-row class="bg">
                 <v-spacer></v-spacer>
                 <v-col>
-                    <UserRegister />
+                    <UserRegister v-if="!isLoggedIn" />
+                    <v-card v-else>
+                        <v-card-title>Logged In</v-card-title>
+                    </v-card>
                 </v-col>
                 <v-spacer></v-spacer>
             </v-row>

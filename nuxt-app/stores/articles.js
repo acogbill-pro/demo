@@ -171,7 +171,7 @@ export const useArticleCatalog = defineStore('articleCatalog', {
             const asString = JSON.stringify(this.forEdge)
 
             console.log('articles.edgeToProfile')
-            analytics.identify({articleStore: asString}, profiles.isSyncing)
+            //analytics.identify({articleStore: asString}, profiles.isSyncing)
         },
         addFavorite(withArticleID) {
             this.favorites.add(withArticleID)

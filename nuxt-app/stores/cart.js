@@ -125,9 +125,10 @@ export const useCartStore = defineStore('cartStore', {
             const analytics = useAnalytics()
             analytics.track('Product Removed', product)
         },
-        profileToEdge({cartStore = '{}'}) {
+        profileToEdge(cartStore) {
             // handles syncing data FROM Profile API in TO app state
-            console.log('cart.profileToEdge')
+            console.log('cart.profileToEdge', cartStore)
+            if (!cartStore) return
             const toObject = JSON.parse(cartStore)
             const contents = new Map(toObject.cart_contents)
             const lastSyncTime = new Date(toObject.lastSyncTime)
@@ -161,7 +162,6 @@ export const useCartStore = defineStore('cartStore', {
         submitOrder() {
             const analytics = useAnalytics()
             //const twilio = useTwilio()
-
             analytics.track('Order Completed', this.asSummaryObject)
             //twilio.sendSMS('Order Confirmation', '', '', `Thank you for your order, totaling $${this.totalValue}. We'll let you know when it's on its way.`)
 

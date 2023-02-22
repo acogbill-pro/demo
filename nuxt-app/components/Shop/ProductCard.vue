@@ -25,6 +25,8 @@ const props = defineProps({
 
 const localizedPrice = computed(() => '$' + props.product.priceUSD) // TODO: Localize currency
 
+const productImage = computed(() => '../images/products/' + props.product.SKU + '.png')
+
 function addToCart() {
     cart.add(props.product.SKU, 1)
 }
@@ -40,6 +42,7 @@ const ownsProduct = computed(() => {
             <v-icon icon="mdi-check-circle" v-if="ownsProduct" small />
         </v-card-title>
         <v-card-text>
+            <v-img :src="productImage" />
             {{ props.product.description }}
         </v-card-text>
         <v-card-actions>
@@ -53,6 +56,4 @@ const ownsProduct = computed(() => {
     </v-card>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
