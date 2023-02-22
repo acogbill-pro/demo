@@ -19,21 +19,7 @@ const emailRules = [
     v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
 ]
 
-const phone = ref('')
-
-const phoneRules = [
-    v => !!v || 'Phone is required',
-    v => /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(v) || 'Phone must be valid',
-]
-
-/*const select = ref(null)
-const items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-]
-const checkbox = ref(false)*/
+const checkbox = ref(false)
 
 const traitsObject = computed(() => {
     return {
@@ -41,7 +27,6 @@ const traitsObject = computed(() => {
         lname: lname.value,
         name: name.value,
         email: email.value,
-        phone: phone.value
     }
 })
 
@@ -51,7 +36,7 @@ function prePop() {
     fname.value = 'Andy'
     lname.value = 'Cogbill'
     email.value = 'andycogbill@gmail.com'
-    phone.value = "608-788-7808"
+    checkbox.value = true
 }
 
 function randomInt(max) {
@@ -76,15 +61,15 @@ function prePopRandom() {
     fname.value = firstName
     lname.value = lastName
     email.value = (firstName + lastName + '@gmailx.com').toLowerCase()
-    phone.value = randomPhoneNumber()
+    checkbox.value = true
 }
 
 function submit() {
     if (form.value.validate()) {
         analytics.userID = user_id.value
         analytics.identify(traitsObject.value, true)
-        analytics.track("User Registered")
-        analytics.track("Signed In")
+        analytics.track("User Registered for Wifi")
+        analytics.track("Signed In to Wifi")
     } else {
         // go to error page
     }
@@ -112,13 +97,13 @@ function resetValidation() {
 
                 <v-text-field v-model="email" :rules="emailRules" label="E-mail" required />
 
-                <v-text-field v-model="phone" :rules="phoneRules" label="Phone" required />
+
 
                 <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
-        </v-select>-->
+                            </v-select>-->
 
-                <!--<v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?"
-            required></v-checkbox>-->
+                <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']"
+                    label="I consent to Terms & Conditions" required></v-checkbox>
             </v-card-text>
             <v-card-actions>
 
@@ -134,15 +119,11 @@ function resetValidation() {
                 </v-btn>
 
                 <!--<v-btn color="warning" @click="resetValidation">
-            Reset Validation
-        </v-btn>-->
+                                Reset Validation
+                            </v-btn>-->
             </v-card-actions>
         </v-form>
     </v-card>
-
-
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

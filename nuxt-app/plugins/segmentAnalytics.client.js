@@ -2,11 +2,14 @@ import { AnalyticsBrowser } from '@segment/analytics-next'
 import { useAnalytics } from '~/stores/analytics'
 
 export default defineNuxtPlugin(nuxtApp => {
-  const blogWriteKey = nuxtApp.$config.blogWriteKey
-  const blogAnalytics = AnalyticsBrowser.load({ writeKey: blogWriteKey })//.catch((err) => ...);
+  const wifiWriteKey = nuxtApp.$config.wifiWriteKey
+  const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
 
   const shopWriteKey = nuxtApp.$config.shopWriteKey
   const shopAnalytics = AnalyticsBrowser.load({ writeKey: shopWriteKey })//.catch((err) => ...);
+
+  // console.log(wifiAnalytics)
+  // console.log(shopAnalytics)
 
   // From Adding Middleware Dynamically: https://nuxt.com/docs/guide/directory-structure/middleware
   addRouteMiddleware('analytics-env', (to, from) => {
@@ -19,7 +22,7 @@ export default defineNuxtPlugin(nuxtApp => {
 
       const isShop = routeAsArray.length > 1 ? routeAsArray[1] === 'shop' : false
 
-      analytics.activeSource = isShop ? shopAnalytics : blogAnalytics
+      analytics.activeSource = isShop ? shopAnalytics : wifiAnalytics
 
       analytics.setup()
     }

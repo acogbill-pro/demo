@@ -25,26 +25,27 @@ function redo() {
 
 <template>
     <div>
-        <v-app-bar id="nav" app color="#f22f46" nuxt>
+        <v-app-bar id="nav" app color="#E4012B" nuxt>
             <v-toolbar-title>
+
                 <h1>
-                    The Shop
+                    <v-img src="/images/kfcLogo.png" width="150" />
                     <!--<NuxtLink to="/">
-                        <v-icon small color="white">
-                            {{ 'mdi-call-split mdi-rotate-180' }}
-                        </v-icon>
-                    </NuxtLink>-->
+                                                                        <v-icon small color="white">
+                                                                            {{ 'mdi-call-split mdi-rotate-180' }}
+                                                                        </v-icon>
+                                                                    </NuxtLink>-->
                 </h1>
             </v-toolbar-title>
             <!--<v-btn color="secondary" text rounded dense :disabled="!undoable" @click="undo">
-                <v-icon>mdi-undo-variant</v-icon>
-            </v-btn>
-            <v-btn color="secondary" text rounded dense :disabled="!redoable" @click="redo">
-                <v-icon>mdi-redo-variant</v-icon>
-            </v-btn>
-            <v-spacer />-->
+                                                                <v-icon>mdi-undo-variant</v-icon>
+                                                            </v-btn>
+                                                            <v-btn color="secondary" text rounded dense :disabled="!redoable" @click="redo">
+                                                                <v-icon>mdi-redo-variant</v-icon>
+                                                            </v-btn>
+                                                            <v-spacer />-->
             <v-btn text rounded href="/" target="_blank">
-                Blog
+                Home
             </v-btn>
             <v-btn v-for="link in topLinks" :key="`${link.label}-nav-link`" text rounded :to="link.url" nuxt>
                 {{ link.label }}
@@ -56,6 +57,4 @@ function redo() {
 </template>
 
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

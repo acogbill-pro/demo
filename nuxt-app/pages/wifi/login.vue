@@ -10,11 +10,11 @@ definePageMeta({
 })
 
 useHead({
-    title: 'KFC POC Main'
+    title: 'KFC In-Store Wifi'
 })
 
 onMounted(() => {
-    analytics.page('KFC Main page')
+    analytics.page('Wifi Main page')
 
     //profiles.startSyncing(3)
 })
@@ -22,17 +22,23 @@ onMounted(() => {
 
 <template>
     <div>
-        <v-container>
-            <v-row>
-                <v-col cols="6">
-                    <v-btn block to="/wifi" nuxt><v-icon icon="mdi-wifi" block large />Wi-fi Landing Page</v-btn>
+        <v-container fluid>
+            <v-row class="bg">
+                <v-spacer></v-spacer>
+                <v-col>
+                    <UserRegister />
                 </v-col>
-                <v-col cols="6">
-                    <v-btn block to="/shop" nuxt><v-icon icon="mdi-cart" block large />Shop</v-btn>
-                </v-col>
+                <v-spacer></v-spacer>
             </v-row>
         </v-container>
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bg {
+    background: url("../images/kfcBG.jpeg") no-repeat center center;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+</style>
