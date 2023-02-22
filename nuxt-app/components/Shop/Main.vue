@@ -15,15 +15,14 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
 
 <template>
     <v-no-ssr>
-        <v-container>
+        <v-container fluid>
             <v-row>
-                <v-col cols="7">
+                <v-col cols="8">
                     <v-expand-transition>
                         <ShopRecommendedProduct v-if="hasRecommendation" :product="cart.recommendedProduct" />
                     </v-expand-transition>
                     <ShopProductList v-for="category in products.categories" :key="category" :category="category" />
                 </v-col>
-                <v-col cols="1"></v-col>
                 <v-col cols="4">
                     <SharedSidebar />
                 </v-col>
@@ -32,6 +31,4 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
     </v-no-ssr>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

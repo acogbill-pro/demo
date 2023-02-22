@@ -86,5 +86,8 @@ export const useProductCatalog = defineStore('productCatalog', {
     },
   
     actions: {
+        productFromSKU(withSKU) {
+            return this.all.find(element => element.SKU === withSKU)
+        },
     }
   })

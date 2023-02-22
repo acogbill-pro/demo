@@ -22,15 +22,17 @@ onMounted(() => {
 function titleCase(string) {
     return string !== null ? string[0].toUpperCase() + string.slice(1).toLowerCase() : ''
 }
+
+function afterAddToCart() {
+    console.log('reco added to cart')
+}
 </script>
 
 <template>
     <div>
         <h1>Recommended in {{ titleCase(product.category) }}</h1>
-        <ShopProductCard :product="props.product" :show-detail="false" />
+        <ShopProductCard :product="props.product" :show-detail="false" @and-then="afterAddToCart" />
     </div>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

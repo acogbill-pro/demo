@@ -35,13 +35,17 @@ function onIntersect(isIntersecting, entries, observer) {
     }
 }
 
+function afterAddToCart() {
+    console.log('product added to cart from list')
+}
 
 </script>
 
 <template>
     <div>
         <h1 color="primary" class="my-10">{{ categoryToPrint }}</h1>
-        <ShopProductCard v-for="product in productsToShow" :key="product.SKU" :product="product" />
+        <ShopProductCard v-for="product in productsToShow" :key="product.SKU" :product="product"
+            @and-then="afterAddToCart" />
         <v-spacer v-intersect="{
             handler: onIntersect,
             options: {
@@ -52,6 +56,4 @@ function onIntersect(isIntersecting, entries, observer) {
     </div>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

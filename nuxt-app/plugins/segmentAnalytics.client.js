@@ -19,10 +19,11 @@ export default defineNuxtPlugin(nuxtApp => {
 
     if (routePath !== '' && analytics.activeSource === null) {
       const routeAsArray = routePath.split('/')
+      //console.log('route as array', routeAsArray)
 
-      const isShop = routeAsArray.length > 1 ? routeAsArray[1] === 'shop' : false
+      const isWifi = routeAsArray.length > 1 ? routeAsArray[1] === 'wifi' : false
 
-      analytics.activeSource = isShop ? shopAnalytics : wifiAnalytics
+      analytics.activeSource = isWifi ? wifiAnalytics : shopAnalytics
 
       analytics.setup()
     }

@@ -23,12 +23,15 @@ const props = defineProps({
     }
 })
 
+const emit = defineEmits(['andThen'])
+
 const localizedPrice = computed(() => '$' + props.product.priceUSD) // TODO: Localize currency
 
-const productImage = computed(() => '../images/products/' + props.product.SKU + '.png')
+const productImage = computed(() => '/images/products/' + props.product.SKU + '.png')
 
 function addToCart() {
     cart.add(props.product.SKU, 1)
+    emit('andThen')
 }
 
 const ownsProduct = computed(() => {
