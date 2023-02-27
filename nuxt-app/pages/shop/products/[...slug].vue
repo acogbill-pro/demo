@@ -28,7 +28,7 @@ function afterAddToCart() {
 }
 
 onMounted(() => {
-    analytics.page('Product Detail: ' + productToShow.value.name)
+    analytics.page('Product Detail Page', { product: productToShow.value })
 
     //profiles.startSyncing(3)
 })

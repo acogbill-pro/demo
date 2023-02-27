@@ -1,8 +1,10 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles';
+import { useProductCatalog } from '~~/stores/products';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
+const products = useProductCatalog()
 
 definePageMeta({
     layout: "kfc",
@@ -14,7 +16,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('KFC Main page')
+    //analytics.page('KFC Main page')
 
     //profiles.startSyncing(3)
 })
@@ -70,7 +72,8 @@ onMounted(() => {
                         <v-card-actions>
                             <v-btn block
                                 to="/shop/products/0006?utm_campaign=Individual&utm_source=Facebook&utm_content=0010&utm_medium=Social&utm_product=0010"
-                                target="_blank" nuxt>
+                                target="_blank" nuxt
+                                @click="analytics.track('Clicked Ad', { campaign: 'Individual', product: products.productFromSKU('0010') })">
                                 Simulate Click<v-icon icon="mdi-cursor-pointer" />
                             </v-btn>
                         </v-card-actions>
@@ -89,7 +92,8 @@ onMounted(() => {
                         <v-card-actions>
                             <v-btn block
                                 to="/shop/products/0005?utm_campaign=Family&utm_source=Facebook&utm_content=0005&utm_medium=Social&utm_product=0005"
-                                target="_blank" nuxt>
+                                target="_blank" nuxt
+                                @click="analytics.track('Clicked Ad', { campaign: 'Family', product: products.productFromSKU('0005') })">
                                 Simulate Click<v-icon icon="mdi-cursor-pointer" />
                             </v-btn>
                         </v-card-actions>

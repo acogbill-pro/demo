@@ -48,13 +48,13 @@ export const useAnalytics = defineStore('analyticsStore', {
 
         this.identify()
       },
-      page(pageTitle) {
+      page(pageTitle, propertyObject = null) {
         try {
-          this.analytics.page(pageTitle)
+          this.analytics.page(pageTitle, propertyObject)
         } catch {
           console.log('Segment Page call failed; retrying')
           setTimeout(() => {
-            this.page(pageTitle)
+            this.page(pageTitle, propertyObject)
           }, 2000)
         }
       },
