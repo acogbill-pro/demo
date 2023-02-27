@@ -45,7 +45,7 @@ const ownsProduct = computed(() => {
             <v-icon icon="mdi-check-circle" v-if="ownsProduct" small />
         </v-card-title>
         <v-card-text>
-            <v-img :src="productImage" />
+            <v-img :src="productImage" width="500" />
             {{ props.product.description }}
         </v-card-text>
         <v-card-actions>

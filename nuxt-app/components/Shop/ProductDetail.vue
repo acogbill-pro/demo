@@ -11,12 +11,19 @@ const props = defineProps({
         },
     },
 })
+
+const emit = defineEmits(['andThen'])
+
 </script>
 
 <template>
-    <div>
+    <v-card>
+        <v-card-title>Ad Campaign Landing Page: {{ product.category }} Campaign</v-card-title>
+        <v-card-text>
+            <ShopProductCard :product="props.product" @and-then="emit('andThen')" />
+        </v-card-text>
 
-    </div>
+    </v-card>
 </template>
 
 

@@ -28,7 +28,7 @@ function afterAddToCart() {
 }
 
 onMounted(() => {
-    analytics.page('Product Listing Page: ' + productToShow.value.name)
+    analytics.page('Product Detail: ' + productToShow.value.name)
 
     //profiles.startSyncing(3)
 })
@@ -36,7 +36,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <ShopProductCard :product="productToShow" @and-then="afterAddToCart" />
+        <ShopProductDetail :product="productToShow" @and-then="afterAddToCart" />
     </div>
 </template>
 

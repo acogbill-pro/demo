@@ -69,7 +69,7 @@ onMounted(() => {
 
                         <v-card-actions>
                             <v-btn block
-                                to="/shop/products/0006?utm_campaign=Individual&utm_source=Facebook&utm_content=0010&utm_medium=Social"
+                                to="/shop/products/0006?utm_campaign=Individual&utm_source=Facebook&utm_content=0010&utm_medium=Social&utm_product=0010"
                                 target="_blank" nuxt>
                                 Simulate Click<v-icon icon="mdi-cursor-pointer" />
                             </v-btn>
@@ -88,7 +88,7 @@ onMounted(() => {
 
                         <v-card-actions>
                             <v-btn block
-                                to="/shop/products/0005?utm_campaign=Family&utm_source=Facebook&utm_content=0005&utm_medium=Social"
+                                to="/shop/products/0005?utm_campaign=Family&utm_source=Facebook&utm_content=0005&utm_medium=Social&utm_product=0005"
                                 target="_blank" nuxt>
                                 Simulate Click<v-icon icon="mdi-cursor-pointer" />
                             </v-btn>

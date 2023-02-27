@@ -15,7 +15,7 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
 
 <template>
     <v-no-ssr>
-        <v-container fluid>
+        <v-container>
             <v-row>
                 <v-col cols="8">
                     <v-expand-transition>
