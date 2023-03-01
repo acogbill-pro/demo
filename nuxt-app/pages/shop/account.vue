@@ -66,7 +66,7 @@ function logout() {
 
 <style lang="scss" scoped>
 .bg {
-    background: url("~/images/kfcBG.jpeg") no-repeat center center;
+    background: url("/images/kfcBG.jpeg") no-repeat center center;
     object-fit: cover;
     width: 100%;
     height: 100%;
