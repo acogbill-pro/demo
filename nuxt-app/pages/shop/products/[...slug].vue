@@ -15,7 +15,7 @@ definePageMeta({
 })
 
 useHead({
-    title: 'Shop - Product Detail: ' + productToShow.value.name
+    title: 'KFC Shop - Product Detail: ' + productToShow.value.name
 })
 
 function afterAddToCart() {

@@ -71,11 +71,14 @@ onMounted(() => {
 
                         <v-card-actions>
                             <v-btn block
-                                to="/shop/products/0006?utm_campaign=Individual&utm_source=Facebook&utm_content=0010&utm_medium=Social&utm_product=0010"
+                                to="/shop/landing/individual?utm_campaign=Individual&utm_source=Facebook&utm_content=0010&utm_medium=Social&utm_product=0010"
                                 target="_blank" nuxt
                                 @click="analytics.track('Clicked Ad', { campaign: 'Individual', product: products.productFromSKU('0010') })">
+                                <v-tooltip key="Individual" activator="parent"
+                                    location="bottom"><code>.../shop/landing/individual?utm_campaign=Individual&utm_source=Facebook&utm_content=0010&utm_medium=Social&utm_product=0010</code></v-tooltip>
                                 Simulate Click<v-icon icon="mdi-cursor-pointer" />
                             </v-btn>
+
                         </v-card-actions>
                     </v-card>
                 </v-col>
@@ -91,9 +94,11 @@ onMounted(() => {
 
                         <v-card-actions>
                             <v-btn block
-                                to="/shop/products/0005?utm_campaign=Family&utm_source=Facebook&utm_content=0005&utm_medium=Social&utm_product=0005"
+                                to="/shop/landing/family?utm_campaign=Family&utm_source=Facebook&utm_content=0005&utm_medium=Social&utm_product=0005"
                                 target="_blank" nuxt
                                 @click="analytics.track('Clicked Ad', { campaign: 'Family', product: products.productFromSKU('0005') })">
+                                <v-tooltip key="Family" activator="parent"
+                                    location="bottom"><code>.../shop/landing/family?utm_campaign=Family&utm_source=Facebook&utm_content=0005&utm_medium=Social&utm_product=0005</code></v-tooltip>
                                 Simulate Click<v-icon icon="mdi-cursor-pointer" />
                             </v-btn>
                         </v-card-actions>
