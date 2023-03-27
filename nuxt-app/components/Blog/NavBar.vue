@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import { useProfileStore } from '~/stores/profiles'
-const user = useSupabaseUser()
+// const user = useSupabaseUser()
 
 const profile = useProfileStore()
 
@@ -24,7 +24,7 @@ const internalLink = computed(() => {
 const topLinks = computed(() => {
     return [
         {
-            label: user.value !== null ? 'Account' : 'Login',
+            label: 'Account',//user.value !== null ? 'Account' : 'Login',
             url: '/account',
         },
     ]
@@ -60,19 +60,19 @@ onMounted(() => {
                 <h1>
                     The Blog
                     <!--<NuxtLink to="/">
-                            <v-icon small color="white">
-                                {{ 'mdi-call-split mdi-rotate-180' }}
-                            </v-icon>
-                        </NuxtLink>-->
+                                        <v-icon small color="white">
+                                            {{ 'mdi-call-split mdi-rotate-180' }}
+                                        </v-icon>
+                                    </NuxtLink>-->
                 </h1>
             </v-toolbar-title>
             <!--<v-btn color="secondary" text rounded dense :disabled="!undoable" @click="undo">
-                    <v-icon>mdi-undo-variant</v-icon>
-                </v-btn>
-                <v-btn color="secondary" text rounded dense :disabled="!redoable" @click="redo">
-                    <v-icon>mdi-redo-variant</v-icon>
-                </v-btn>
-                <v-spacer />-->
+                                <v-icon>mdi-undo-variant</v-icon>
+                            </v-btn>
+                            <v-btn color="secondary" text rounded dense :disabled="!redoable" @click="redo">
+                                <v-icon>mdi-redo-variant</v-icon>
+                            </v-btn>
+                            <v-spacer />-->
             <v-btn color="secondary" text rounded to="/" nuxt>
                 Blog
             </v-btn>
@@ -83,9 +83,9 @@ onMounted(() => {
                 nuxt>
                 {{ link.label }}
             </v-btn>
-            <v-btn @click="login" text rounded color="secondary" v-if="!user">
-                Auth
-            </v-btn>
+            <!-- <v-btn @click="login" text rounded color="secondary" v-if="!user">
+                        Auth
+                    </v-btn> -->
             <!--<v-btn color="secondary" text rounded @click="emit('toggleTheme', 'nav bar')">Toggle Theme</v-btn>-->
         </v-app-bar>
     </div>
