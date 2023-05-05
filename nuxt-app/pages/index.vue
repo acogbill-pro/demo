@@ -105,6 +105,31 @@ onMounted(() => {
                     </v-card>
                 </v-col>
             </v-row>
+            <v-row>
+                <v-col>
+                    <v-card>
+                        <v-card-title>
+                            Google Search Campaign
+                        </v-card-title>
+                        <v-card-text>
+                            <v-img src="../images/KFC_SEM.png" width="300" />
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-btn block
+                                to="/shop/landing/NFL?utm_campaign=NFL&utm_source=Google&utm_content=0008&utm_medium=SEM&utm_product=0008"
+                                target="_blank" nuxt
+                                @click="analytics.track('Clicked Ad', { campaign: 'NFL', product: products.productFromSKU('0008') })">
+                                <v-tooltip key="NFL" activator="parent"
+                                    location="bottom"><code>.../shop/landing/NFL?utm_campaign=NFL&utm_source=Google&utm_content=0008&utm_medium=SEM&utm_product=0008</code></v-tooltip>
+                                Simulate Click<v-icon icon="mdi-cursor-pointer" />
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-col>
+                <v-col>
+                    <SharedProfile />
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>

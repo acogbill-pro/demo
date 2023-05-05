@@ -24,7 +24,7 @@ function afterAddToCart() {
     navigateTo({
         path: '/shop/cart',
         query: {
-            product,
+            product: JSON.stringify(product),
         }
     })
 }

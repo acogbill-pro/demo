@@ -25,6 +25,7 @@ function titleCase(string) {
 
 function afterAddToCart() {
     console.log('reco added to cart')
+    analytics.track('Product Recommendation Accepted', props.product)
 }
 </script>
 
