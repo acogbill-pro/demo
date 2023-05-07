@@ -3,13 +3,11 @@ import { useAnalytics } from '~/stores/analytics';
 import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
-const runtimeConfig = useRuntimeConfig()
-const brandName = computed(() => runtimeConfig.brandedAssetsPath)
 
 useHead({
     //title: 'Segment App Home',
     // or, instead:
-    titleTemplate: (title) => `${brandName.value} POC - ${title}`,
+    titleTemplate: (title) => `Cogbill Demo App - ${title}`,
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     charset: 'utf-8',
     meta: [
@@ -39,13 +37,15 @@ onMounted(() => {
 <template>
     <div class="default-layout">
         <v-app>
-            <BrandedNavBar />
+            <BlogNavBar />
             <v-main>
                 <slot />
             </v-main>
-            <!-- <KFCFooter /> -->
+            <BlogFooter />
         </v-app>
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>

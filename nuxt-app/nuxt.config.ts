@@ -17,10 +17,11 @@ export default defineNuxtConfig({
       // to use: const runtimeConfig = useRuntimeConfig(); runtimeConfig.varName
       public: {
         // to use: runtimeConfig.public.varName
+        brandedAssetsPath: process.env.BRANDED_ASSETS_DIRECTORY,
         wifiWriteKey: process.env.WIFI_WRITE_KEY,
         shopWriteKey: process.env.SHOP_WRITE_KEY,
-        CORS_URL: process.env.CORS_URL,
-        CORSdomain: process.env.NODE_ENV === 'production' ? 'andycogbill.com' : 'localhost:3000',
+        // CORS_URL: process.env.CORS_URL,
+        // CORSdomain: process.env.NODE_ENV === 'production' ? 'andycogbill.com' : 'localhost:3000',
         //profileURL: process.env.NODE_ENV === 'production' ? 'https://segment-demo-backend.onrender.com:10000' : 'http://localhost:10000',
         profileKey: process.env.BE_API_KEY,
         profilesToken: process.env.PROFILES_ACCESS_TOKEN,

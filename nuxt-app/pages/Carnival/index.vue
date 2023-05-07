@@ -1,19 +1,20 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileStore } from '~~/stores/profiles';
+import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
 
 definePageMeta({
-    layout: "shop",
+    layout: "carnival",
+    middleware: ["page-analytics"],
 })
 
 useHead({
-    title: 'Shop'
+    title: 'Booking Home'
 })
 
 onMounted(() => {
-    analytics.page('Product Listing Page')
+    analytics.page('Booking Home')
 
     //profiles.startSyncing(3)
 })
@@ -21,10 +22,9 @@ onMounted(() => {
 
 <template>
     <div>
-        <ShopMain />
+        <CarnivalShopMain />
     </div>
 </template>
 
-<style lang="scss" scoped>
 
-</style>
+<style lang="scss" scoped></style>

@@ -25,8 +25,7 @@ function hitSourceFunction() {
     console.log('source function')
     const hookURL = 'https://platform.segmentapis.com/webhook?n=qbtwrw5hl3qgs3krfggnnbzfe5e2gsoq&s=A40PHhek&t=1673549858&w=cWBgjiLvqmfWSiUjyonfVR'
 
-    const runtimeConfig = useRuntimeConfig()
-    const requestURL = `${runtimeConfig.CORS_URL}${hookURL}`
+    const requestURL = `${hookURL}`
 
     const options = {
         method: "POST",
@@ -76,8 +75,8 @@ function toggleList() {
     <div>
         <v-card class="mb-5">
             <!--<v-form ref="form">
-                        <v-text-field v-model="userID" label="User ID" required />
-                    </v-form>-->
+                            <v-text-field v-model="userID" label="User ID" required />
+                        </v-form>-->
             <v-card-actions @click="toggleList()">
                 <span>Profile: {{ IDforPrint }}</span>
                 <v-spacer />

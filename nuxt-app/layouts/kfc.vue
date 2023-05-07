@@ -1,6 +1,7 @@
 <script setup>
-import { useAnalytics } from '~/stores/analytics';
+import { useAnalytics } from '~/stores/analytics'
 import { useProfileStore } from '~/stores/profiles';
+import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
 
@@ -21,11 +22,13 @@ useHead({
 function leaving(e) {
     e.returnValue = ""
 
-    analytics.track('Blog Closed')
+    const cart = useCartStore()
+
+    analytics.track('Shop Closed', cart.asSummaryObject)
 }
 
 onMounted(() => {
-    profiles.startSyncingArticleStore()
+    profiles.startSyncingCartStore()
 
     /*window.addEventListener(
         "beforeunload",
@@ -37,11 +40,11 @@ onMounted(() => {
 <template>
     <div class="default-layout">
         <v-app>
-            <KFCNavBar />
+            <ShopNavBar />
             <v-main>
                 <slot />
             </v-main>
-            <!-- <KFCFooter /> -->
+            <!-- <ShopFooter /> -->
         </v-app>
     </div>
 </template>

@@ -8,7 +8,7 @@ const profiles = useProfileStore()
 useHead({
     //title: 'Segment App Home',
     // or, instead:
-    titleTemplate: (title) => `Cogbill Demo App - ${title}`,
+    titleTemplate: (title) => `Carnival POC - ${title}`,
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     charset: 'utf-8',
     meta: [
@@ -24,7 +24,7 @@ function leaving(e) {
 
     const cart = useCartStore()
 
-    analytics.track('Shop Closed', cart.asSummaryObject)
+    // analytics.track('Shop Closed', cart.asSummaryObject)
 }
 
 onMounted(() => {
@@ -40,7 +40,7 @@ onMounted(() => {
 <template>
     <div class="default-layout">
         <v-app>
-            <ShopNavBar />
+            <CarnivalShopNavBar />
             <v-main>
                 <slot />
             </v-main>
