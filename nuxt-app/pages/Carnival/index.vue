@@ -22,7 +22,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <CarnivalShopMain />
+        <CarnivalShopHomeTabs />
     </div>
 </template>
 

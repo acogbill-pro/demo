@@ -59,6 +59,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         }
       },
       track(eventName, propertyObject = null) {
+        // console.log('track call', propertyObject)
         try {
           this.analytics.track(eventName, propertyObject) 
         } catch {

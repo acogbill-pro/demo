@@ -2,12 +2,12 @@
 </script>
 
 <template>
-    <div>
-        <SharedEventList />
+    <ClientOnly>
+    <SharedEventList />
         <SharedProfile />
         <!-- <SharedMessaging />
-            <SharedSetup /> -->
-    </div>
+                <SharedSetup /> -->
+    </ClientOnly>
 </template>
 
 <style lang="scss" scoped></style>

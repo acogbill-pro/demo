@@ -68,8 +68,8 @@ function submit() {
     if (form.value.validate()) {
         analytics.userID = user_id.value
         analytics.identify(traitsObject.value, true)
-        analytics.track("User Registered for Wifi")
-        analytics.track("Signed In to Wifi")
+        analytics.track("User Registered")
+        analytics.track("Signed In")
     } else {
         // go to error page
     }
@@ -100,7 +100,7 @@ function resetValidation() {
 
 
                 <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
-                            </v-select>-->
+                                </v-select>-->
 
                 <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']"
                     label="I consent to Terms & Conditions" required></v-checkbox>
@@ -119,8 +119,8 @@ function resetValidation() {
                 </v-btn>
 
                 <!--<v-btn color="warning" @click="resetValidation">
-                                Reset Validation
-                            </v-btn>-->
+                                    Reset Validation
+                                </v-btn>-->
             </v-card-actions>
         </v-form>
     </v-card>
