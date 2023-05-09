@@ -3,10 +3,13 @@ import { useAnalytics } from '~/stores/analytics'
 
 export default defineNuxtPlugin(nuxtApp => {
   const writeKeys = new Map([
-    ['KFCwifi', AnalyticsBrowser.load({ writeKey: 'r23PTccSinXGqJzzsDiBPWZDbG7ccoQq'})],
-    ['KFCshop', AnalyticsBrowser.load({ writeKey: '8sRWbzi9O0g7ZCK1IUqerqEJ6r7sDLFn'})],
-    ['Demoshop', AnalyticsBrowser.load({ writeKey: 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'})],
-    ['Carnival', AnalyticsBrowser.load({ writeKey: 'Z8CQECFCwALyZEbrCK4FIsJvPUuDR7np'})],
+    ['KFCwifi', 'r23PTccSinXGqJzzsDiBPWZDbG7ccoQq'],
+    ['KFCshop', '8sRWbzi9O0g7ZCK1IUqerqEJ6r7sDLFn'],
+    ['Demoshop', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['Carnival', 'Z8CQECFCwALyZEbrCK4FIsJvPUuDR7np'],
+    ['Carnivalshop', 'Z8CQECFCwALyZEbrCK4FIsJvPUuDR7np'],
+    ['HGV', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
+    ['HGVresorts', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
@@ -33,7 +36,9 @@ export default defineNuxtPlugin(nuxtApp => {
       // console.log(writeKey)
       // const isWifi = routeAsArray.length > 1 ? routeAsArray[1] === 'wifi' : false
       // console.log(AnalyticsBrowser.load)
-      analytics.activeSource = writeKeys.has(currentDirectory) ? writeKeys.get(currentDirectory) : writeKeys.get('Demoshop')
+      analytics.activeSource = writeKeys.has(currentDirectory) ? 
+      AnalyticsBrowser.load({ writeKey: writeKeys.get(currentDirectory)})
+       : AnalyticsBrowser.load({ writeKey: writeKeys.get('Demoshop')})
 
       analytics.setup()
     }
