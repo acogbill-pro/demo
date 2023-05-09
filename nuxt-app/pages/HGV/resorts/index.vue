@@ -39,7 +39,7 @@ onMounted(() => {
         </v-row>
         <v-row>
             <v-col>
-                <v-img src="/HGV/images/homeNav.png" grow />
+                <HGVTabbedSearch />
             </v-col>
         </v-row>
     </v-container>

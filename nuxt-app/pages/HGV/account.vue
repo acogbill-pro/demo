@@ -44,13 +44,13 @@ function logout() {
             <v-col>
                 <UserLogin />
                 <!-- <v-card>
-                            <v-card-title>
-                                Log in with...
-                            </v-card-title>
-                            <v-card-text>
-                                <v-btn icon="mdi:google" @click="auth.signInWithOAuth({ provider: 'google' })" block>Google</v-btn>
-                            </v-card-text>
-                        </v-card> -->
+                                <v-card-title>
+                                    Log in with...
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-btn icon="mdi:google" @click="auth.signInWithOAuth({ provider: 'google' })" block>Google</v-btn>
+                                </v-card-text>
+                            </v-card> -->
             </v-col>
             <v-col>
                 <UserRegister />
@@ -70,6 +70,11 @@ function logout() {
             <v-btn @click="logout()">Logout</v-btn>
             <v-btn v-if="!collapse" @click="toggleCollapse()">Hide Login</v-btn>
             <v-btn v-else @click="toggleCollapse">Login Again</v-btn>
+        </v-row>
+        <v-row>
+            <v-col>
+                <SharedSidebar />
+            </v-col>
         </v-row>
     </v-container>
 </template>
