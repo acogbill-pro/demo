@@ -5,7 +5,7 @@ const analytics = useAnalytics()
 const profiles = useProfileStore()
 
 const promoImage = computed(() => {
-    return '../HGV/images/promo.png'
+    return (profiles.hasTraits && (profiles.traits?.likely_young_family)) ? '../HGV/images/promo-family.png' : '../HGV/images/promo.png'
 })
 </script>
 

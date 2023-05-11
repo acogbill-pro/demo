@@ -10,6 +10,7 @@ export default defineNuxtPlugin(nuxtApp => {
     ['Carnivalshop', 'Z8CQECFCwALyZEbrCK4FIsJvPUuDR7np'],
     ['HGV', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
     ['HGVresorts', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
+    ['HGVaccount', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
@@ -31,7 +32,7 @@ export default defineNuxtPlugin(nuxtApp => {
     if (routePath !== '' && analytics.activeSource === null) {
       const routeAsArray = routePath.split('/')
       
-      const currentDirectory = routeAsArray[1] + routeAsArray[2] || ''
+      const currentDirectory = routeAsArray[1]// + routeAsArray[2] || ''
       // const writeKey = writeKeys.has(currentDirectory) ? writeKeys.get(currentDirectory) : writeKeys.get('Demoshop')
       // console.log(writeKey)
       // const isWifi = routeAsArray.length > 1 ? routeAsArray[1] === 'wifi' : false

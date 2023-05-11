@@ -19,6 +19,7 @@ export default defineEventHandler(async (event) => {
 
     const fetchedProfile = await fetch(requestURL, options)
     const json = await fetchedProfile.json()
+    // console.log(requestURL)
 
     return {
         status: 'OK',
