@@ -3,7 +3,7 @@
 const topLinks = [
     {
         label: 'Discover Ownership',
-        url: '/HGV/discover',
+        url: '/HGV/account',
     },
     {
         label: 'Resorts & Destinations',
@@ -11,7 +11,7 @@ const topLinks = [
     },
     {
         label: 'Plan Your Vacation',
-        url: '/HGV/plan',
+        url: '/HGV/account',
     },
     {
         label: 'Sign In',
@@ -39,22 +39,22 @@ function redo() {
                 <h1>
                     <NuxtLink to="/HGV/"><v-img src="/HGV/images/logo.png" width="150" /></NuxtLink>
                     <!--<NuxtLink to="/">
-                                                                                                                                                                                <v-icon small color="white">
-                                                                                                                                                                                    {{ 'mdi-call-split mdi-rotate-180' }}
-                                                                                                                                                                                </v-icon>
-                                                                                                                                                                            </NuxtLink>-->
+                                                                                                                                                                                        <v-icon small color="white">
+                                                                                                                                                                                            {{ 'mdi-call-split mdi-rotate-180' }}
+                                                                                                                                                                                        </v-icon>
+                                                                                                                                                                                    </NuxtLink>-->
                 </h1>
             </v-toolbar-title>
             <!--<v-btn color="secondary" text rounded dense :disabled="!undoable" @click="undo">
-                                                                                                                                                                        <v-icon>mdi-undo-variant</v-icon>
-                                                                                                                                                                    </v-btn>
-                                                                                                                                                                    <v-btn color="secondary" text rounded dense :disabled="!redoable" @click="redo">
-                                                                                                                                                                        <v-icon>mdi-redo-variant</v-icon>
-                                                                                                                                                                    </v-btn>
-                                                                                                                                                                    <v-spacer />-->
+                                                                                                                                                                                <v-icon>mdi-undo-variant</v-icon>
+                                                                                                                                                                            </v-btn>
+                                                                                                                                                                            <v-btn color="secondary" text rounded dense :disabled="!redoable" @click="redo">
+                                                                                                                                                                                <v-icon>mdi-redo-variant</v-icon>
+                                                                                                                                                                            </v-btn>
+                                                                                                                                                                            <v-spacer />-->
             <!-- <v-btn text rounded href="/HGV/" color="white">
-                                Home
-                            </v-btn> -->
+                                        Home
+                                    </v-btn> -->
             <span v-for="link in topLinks" :key="`${link.label}-nav-link`" class="topLink">
                 <v-btn text rounded :to="link.url" nuxt color="white">
                     {{ link.label }}
