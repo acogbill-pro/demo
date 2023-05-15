@@ -40,24 +40,26 @@ function logout() {
 
 <template>
     <v-container>
-        <v-row v-if="!isLoggedIn || (isLoggedIn && !collapse)">
-            <v-col>
-                <UserLogin />
+        <v-row>
+            <v-col v-if="!isLoggedIn || (isLoggedIn && !collapse)">
+                <!-- <UserLogin /> -->
+                <UserRegister />
                 <!-- <v-card>
-                                <v-card-title>
-                                    Log in with...
-                                </v-card-title>
-                                <v-card-text>
-                                    <v-btn icon="mdi:google" @click="auth.signInWithOAuth({ provider: 'google' })" block>Google</v-btn>
-                                </v-card-text>
-                            </v-card> -->
+                                        <v-card-title>
+                                            Log in with...
+                                        </v-card-title>
+                                        <v-card-text>
+                                            <v-btn icon="mdi:google" @click="auth.signInWithOAuth({ provider: 'google' })" block>Google</v-btn>
+                                        </v-card-text>
+                                    </v-card> -->
             </v-col>
             <v-col>
-                <UserRegister />
+
+                <SharedSidebar />
             </v-col>
 
         </v-row>
-        <v-row v-else>
+        <v-row>
             <v-col>
                 <p>Logged In</p>
             </v-col>
@@ -73,7 +75,7 @@ function logout() {
         </v-row>
         <v-row>
             <v-col>
-                <SharedSidebar />
+
             </v-col>
         </v-row>
     </v-container>
