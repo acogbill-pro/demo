@@ -17,7 +17,6 @@ export default defineNuxtConfig({
       // to use: const runtimeConfig = useRuntimeConfig(); runtimeConfig.varName
       public: {
         // to use: runtimeConfig.public.varName
-        brandedAssetsPath: process.env.BRANDED_ASSETS_DIRECTORY,
         wifiWriteKey: process.env.WIFI_WRITE_KEY,
         shopWriteKey: process.env.SHOP_WRITE_KEY,
         profileKey: process.env.BE_API_KEY,

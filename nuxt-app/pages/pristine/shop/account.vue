@@ -3,10 +3,9 @@ import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles.js'
 const analytics = useAnalytics()
 const profiles = useProfileStore()
-// const { auth } = useSupabaseClient()
 
 definePageMeta({
-    layout: "default",
+    layout: "shop",
 })
 
 useHead({
@@ -39,39 +38,37 @@ function logout() {
 </script>
 
 <template>
-    <v-container>
-        <v-row v-if="!isLoggedIn || (isLoggedIn && !collapse)">
+    <v-container fluid>
+        <v-row v-if="!isLoggedIn || (isLoggedIn && !collapse)" class="bg">
             <v-col>
                 <UserLogin />
-                <v-card>
-                    <v-card-title>
-                        Log in with...
-                    </v-card-title>
-                    <v-card-text>
-                        <v-btn icon="mdi:google" @click="auth.signInWithOAuth({ provider: 'google' })" block>Google</v-btn>
-                    </v-card-text>
-                </v-card>
             </v-col>
             <v-col>
                 <UserRegister />
             </v-col>
 
         </v-row>
-        <v-row v-else>
+        <v-row v-else class="bg">
             <v-col>
-                <p>Logged In</p>
-            </v-col>
-            <v-col>
-
+                <v-card>
+                    <v-card-title>Logged In</v-card-title>
+                </v-card>
             </v-col>
         </v-row>
-        <v-row v-if="isLoggedIn">
-            <NuxtLink to="/"><v-btn class="mr-3">Continue to Blog</v-btn></NuxtLink>
-            <v-btn @click="logout()">Logout</v-btn>
-            <v-btn v-if="!collapse" @click="toggleCollapse()">Hide Login</v-btn>
-            <v-btn v-else @click="toggleCollapse">Login Again</v-btn>
+        <v-row v-if="isLoggedIn" class="my-5">
+            <NuxtLink to="/shop"><v-btn class="mr-3">Continue to Shop</v-btn></NuxtLink>
+            <v-btn @click="logout()" class="mr-3">Logout</v-btn>
+            <v-btn v-if="!collapse" @click="toggleCollapse()" class="mr-3">Hide Login</v-btn>
+            <v-btn v-else @click="toggleCollapse" class="mr-3">Login Again</v-btn>
         </v-row>
     </v-container>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bg {
+    background: url("/images/kfcBG.jpeg") no-repeat center center;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+</style>

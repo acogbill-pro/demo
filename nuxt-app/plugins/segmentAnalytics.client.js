@@ -11,6 +11,9 @@ export default defineNuxtPlugin(nuxtApp => {
     ['HGV', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
     ['HGVresorts', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
     ['HGVaccount', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
+    ['pristine', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['pristineshop', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['NCR', 'iCaiT1qeXR5LWmy8PsnOzZyy7F3ua9GQ'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
@@ -37,11 +40,14 @@ export default defineNuxtPlugin(nuxtApp => {
       // console.log(writeKey)
       // const isWifi = routeAsArray.length > 1 ? routeAsArray[1] === 'wifi' : false
       // console.log(AnalyticsBrowser.load)
-      analytics.activeSource = writeKeys.has(currentDirectory) ? 
-      AnalyticsBrowser.load({ writeKey: writeKeys.get(currentDirectory)})
-       : AnalyticsBrowser.load({ writeKey: writeKeys.get('Demoshop')})
+      if (writeKeys.has(currentDirectory)) {
+        analytics.activeSource = AnalyticsBrowser.load({ writeKey: writeKeys.get(currentDirectory)})
+        analytics.setup()
+      } else {
+        console.log('No valid write key found')
+        // analytics.activeSource = AnalyticsBrowser.load({ writeKey: writeKeys.get('Demoshop')})
+      }
 
-      analytics.setup()
     }
 
   }, { global: true })
