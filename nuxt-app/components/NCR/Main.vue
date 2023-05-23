@@ -6,6 +6,8 @@ const analytics = useAnalytics()
 const products = useProductCatalog()
 const cart = useCartStore()
 
+const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
+
 onMounted(() => {
 
 })
@@ -18,10 +20,12 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
         <v-container>
             <v-row>
                 <v-col cols="12">
+                    Logged in as {{ IDforPrint }}
                     <v-expand-transition>
                         <!-- <BrandedShopRecommendedProduct v-if="hasRecommendation" :product="cart.recommendedProduct" /> -->
                     </v-expand-transition>
                     <!-- <BrandedShopProductList v-for="category in products.categories" :key="category" :category="category" /> -->
+                    <v-btn block to="/NCR/scan" nuxt>Scan Items</v-btn>
                 </v-col>
             </v-row>
         </v-container>

@@ -13,7 +13,7 @@ useHead({
 })
 
 onMounted(() => {
-    // analytics.page('Login Page')
+    analytics.page('Account Page')
 
     //profiles.persistUser()
 })
