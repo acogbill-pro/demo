@@ -23,7 +23,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <pristineScanningMain />
+        <pristineProductsMain />
     </div>
 </template>
 

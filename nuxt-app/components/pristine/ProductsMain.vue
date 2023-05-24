@@ -20,10 +20,18 @@ productCatalog.loadProducts(
             priceUSD: 15,
             image: 'plantains.jpg'
         },
+        {
+            SKU: '0003',
+            name: 'Chocolate Chips',
+            description: '1 Bag',
+            category: 'baking',
+            priceUSD: 20,
+            image: 'choc_chips.jpg'
+        },
     ]
 )
 
-function afterScan(SKU) {
+function afterAdd(SKU) {
     // console.log(SKU)
     navigateTo({
         path: '/pristine/products/confirmItem',
@@ -43,7 +51,7 @@ onMounted(() => {
             <v-col>
                 <div class="items">
                     <pristineItemCard v-for="product in products" :key="product.SKU" :sku="product.SKU"
-                        @and-then="afterScan" />
+                        @and-then="afterAdd" />
                 </div>
             </v-col>
         </v-row>

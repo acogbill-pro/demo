@@ -23,7 +23,7 @@ function addToCart() {
 </script>
 
 <template>
-    <v-card>
+    <v-card class="mb-10">
         <v-card-title>{{ product.name }}</v-card-title>
         <v-card-text>
             <v-img :src="productImage" width="300" />

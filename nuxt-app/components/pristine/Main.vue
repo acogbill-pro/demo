@@ -5,6 +5,26 @@ import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
 const products = useProductCatalog()
 const cart = useCartStore()
+products.loadProducts(
+    [
+        {
+            SKU: '0001',
+            name: 'Bananas',
+            description: '1 Bunch - per Pound',
+            category: 'produce',
+            priceUSD: 10,
+            image: 'bananas.jpg',
+        },
+        {
+            SKU: '0002',
+            name: 'Plantains',
+            description: '1 Bunch - per Pound',
+            category: 'produce',
+            priceUSD: 15,
+            image: 'plantains.jpg'
+        },
+    ]
+)
 
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
@@ -19,7 +39,8 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
     <v-no-ssr>
         <v-container>
             <v-row>
-                <v-col cols="12">
+                <v-col cols="8">
+                    <v-img src="/pristine/images/grocery.jpg" width="800" />
                     Logged in as {{ IDforPrint }}
                     <v-expand-transition>
                         <!-- <BrandedShopRecommendedProduct v-if="hasRecommendation" :product="cart.recommendedProduct" /> -->
@@ -27,10 +48,12 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                     <!-- <BrandedShopProductList v-for="category in products.categories" :key="category" :category="category" /> -->
                     <v-btn block to="/pristine/products" nuxt>Add Items</v-btn>
                 </v-col>
+                <v-col>
+                    <SharedSidebar />
+                </v-col>
             </v-row>
         </v-container>
-    </v-no-ssr>        </v-container>
-        </v-no-ssr>
+    </v-no-ssr>
 </template>
 
 <style lang="scss" scoped></style>
