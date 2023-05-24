@@ -9,7 +9,7 @@ const brandName = computed(() => runtimeConfig.brandedAssetsPath)
 useHead({
     //title: 'Segment App Home',
     // or, instead:
-    titleTemplate: (title) => `${brandName.value} POC - ${title}`,
+    titleTemplate: (title) => `pristine POC - ${title}`,
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     charset: 'utf-8',
     meta: [
@@ -22,8 +22,6 @@ useHead({
 
 function leaving(e) {
     e.returnValue = ""
-
-    analytics.track('Blog Closed')
 }
 
 onMounted(() => {
@@ -39,7 +37,7 @@ onMounted(() => {
 <template>
     <div class="default-layout">
         <v-app>
-            <BrandedNavBar />
+            <pristineNavBar />
             <v-main>
                 <slot />
             </v-main>

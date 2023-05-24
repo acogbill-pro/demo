@@ -5,7 +5,7 @@ const analytics = useAnalytics()
 const profiles = useProfileStore()
 
 definePageMeta({
-    layout: "ncr",
+    layout: "default",
 })
 
 useHead({

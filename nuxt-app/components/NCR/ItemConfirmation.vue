@@ -1,25 +1,15 @@
 <script setup>
 import { useProductCatalog } from '~~/stores/products';
 import { useCartStore } from '~~/stores/cart';
+import { useRoute } from 'vue-router'
 const products = useProductCatalog()
 const cart = useCartStore()
+const route = useRoute()
 
-const props = defineProps({
-    sku: {
-        type: String,
-        default: '0001',
-    },
-})
+const { SKU } = route.query || '0001'
 
-const product = computed(() => products.productFromSKU(props.sku) || { name: 'Loading' })
+const product = computed(() => products.productFromSKU(SKU) || { name: 'Loading', image: 'bananas.jpg' })
 const productImage = computed(() => '/NCR/images/products/' + product.value.image)
-
-const emit = defineEmits(['andThen'])
-
-function addToCart() {
-    cart.add(product.value.SKU, 1)
-    emit('andThen', props.sku)
-}
 </script>
 
 <template>
@@ -30,7 +20,8 @@ function addToCart() {
             {{ product.description }} - SKU: {{ product.SKU }}
         </v-card-text>
         <v-card-actions>
-            <v-btn @click="addToCart">Scan Item</v-btn>
+            <v-btn icon="mdi-cancel"></v-btn>
+            <v-btn icon="mdi-check" to="/NCR/scan"></v-btn>
         </v-card-actions>
     </v-card>
 </template>

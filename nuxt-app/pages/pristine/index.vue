@@ -1,5 +1,6 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
+import { useProductCatalog } from '~~/stores/products';
 import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
@@ -14,7 +15,7 @@ useHead({
 })
 
 onMounted(() => {
-    // analytics.page('Booking Home')
+    analytics.page('POC Home')
 
     //profiles.startSyncing(3)
 })
@@ -22,7 +23,7 @@ onMounted(() => {
 
 <template>
     <div>
-        Pristine Landing
+        <pristineMain />
     </div>
 </template>
 

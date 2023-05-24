@@ -1,21 +1,21 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProductCatalog } from '~~/stores/products';
 import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
 
+
 definePageMeta({
-    layout: "ncr",
+    layout: "default",
     middleware: ["page-analytics"],
 })
 
 useHead({
-    title: 'Landing Page'
+    title: 'Add an Item'
 })
 
 onMounted(() => {
-    analytics.page('POC Home')
+    analytics.page('Product List')
 
     //profiles.startSyncing(3)
 })
@@ -23,7 +23,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <NCRMain />
+        <pristineScanningMain />
     </div>
 </template>
 

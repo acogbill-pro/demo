@@ -6,7 +6,7 @@
 
 <template>
     <div>
-        Pristine Footer
+        pristine Footer
     </div>
 </template>
 

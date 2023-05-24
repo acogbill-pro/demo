@@ -12,7 +12,7 @@ const props = defineProps({
 })
 
 const product = computed(() => products.productFromSKU(props.sku) || { name: 'Loading' })
-const productImage = computed(() => '/NCR/images/products/' + product.value.image)
+const productImage = computed(() => '/pristine/images/products/' + product.value.image)
 
 const emit = defineEmits(['andThen'])
 
@@ -30,7 +30,7 @@ function addToCart() {
             {{ product.description }} - SKU: {{ product.SKU }}
         </v-card-text>
         <v-card-actions>
-            <v-btn @click="addToCart">Scan Item</v-btn>
+            <v-btn @click="addToCart">Add Item</v-btn>
         </v-card-actions>
     </v-card>
 </template>

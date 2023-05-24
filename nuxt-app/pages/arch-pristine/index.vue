@@ -1,12 +1,11 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProductCatalog } from '~~/stores/products';
 import { useProfileStore } from '~/stores/profiles';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
 
 definePageMeta({
-    layout: "ncr",
+    layout: "default",
     middleware: ["page-analytics"],
 })
 
@@ -15,7 +14,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('POC Home')
+    // analytics.page('Booking Home')
 
     //profiles.startSyncing(3)
 })
@@ -23,7 +22,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <NCRMain />
+        pristine Landing
     </div>
 </template>
 

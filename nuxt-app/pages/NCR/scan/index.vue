@@ -1,10 +1,9 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileStore } from '~/stores/profiles';
-import { useProductCatalog } from '~~/stores/products';
 const analytics = useAnalytics()
 const profiles = useProfileStore()
-const { all: products } = useProductCatalog()
+
 
 definePageMeta({
     layout: "ncr",
@@ -24,23 +23,9 @@ onMounted(() => {
 
 <template>
     <div>
-        <v-container>
-            <v-row>
-                <v-col>
-                    <div class="items">
-                        <NCRItemCard v-for="product in products" :key="product.SKU" :sku="product.SKU" />
-                    </div>
-                </v-col>
-            </v-row>
-        </v-container>
+        <NCRScanningMain />
     </div>
 </template>
 
 
-<style lang="scss" scoped>
-.items {
-    column-count: 4;
-    column-gap: 10px;
-    padding: 0 5px;
-}
-</style>
+<style lang="scss" scoped></style>
