@@ -10,6 +10,14 @@ const { SKU } = route.query || '0001'
 
 const product = computed(() => products.productFromSKU(SKU) || { name: 'Loading', image: 'bananas.jpg' })
 const productImage = computed(() => '/pristine/images/products/' + product.value.image)
+
+function removeItem() {
+    cart.remove(SKU)
+
+    navigateTo({
+        path: '/pristine/products/'
+    })
+}
 </script>
 
 <template>
@@ -20,7 +28,7 @@ const productImage = computed(() => '/pristine/images/products/' + product.value
             {{ product.description }} - SKU: {{ product.SKU }}
         </v-card-text>
         <v-card-actions>
-            <v-btn icon="mdi-cancel"></v-btn>
+            <v-btn icon="mdi-cancel" @click="removeItem"></v-btn>
             <v-btn icon="mdi-check" to="/pristine/products"></v-btn>
         </v-card-actions>
     </v-card>

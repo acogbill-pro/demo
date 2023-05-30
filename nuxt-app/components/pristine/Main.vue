@@ -23,6 +23,14 @@ products.loadProducts(
             priceUSD: 15,
             image: 'plantains.jpg'
         },
+        {
+            SKU: '0003',
+            name: 'Chocolate Chips',
+            description: '1 Bag',
+            category: 'baking',
+            priceUSD: 20,
+            image: 'choc_chips.jpg'
+        },
     ]
 )
 
