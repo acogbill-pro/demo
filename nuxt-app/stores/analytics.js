@@ -30,6 +30,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.activateWatcher()
       },
       loadWriteKey(writeKey) {
+        console.log('Loading write key: ', writeKey)
         this.manualWriteKey = writeKey
         this.activeSource = AnalyticsBrowser.load({writeKey})
         this.setup()

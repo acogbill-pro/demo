@@ -11,6 +11,9 @@ export default defineNuxtPlugin(nuxtApp => {
     ['HGV', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
     ['HGVresorts', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
     ['HGVaccount', 'FVJPUjp2wipW2ymsvXFy4IdmkFNUm2Ni'],
+    ['diamond', 'gQUnDkKaHkk4ZZ9HM5pA4rzarr8eJj1v'],
+    ['diamondresorts', 'gQUnDkKaHkk4ZZ9HM5pA4rzarr8eJj1v'],
+    ['diamondaccount', 'gQUnDkKaHkk4ZZ9HM5pA4rzarr8eJj1v'],
     ['pristine', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['pristineshop', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['NCR', 'iCaiT1qeXR5LWmy8PsnOzZyy7F3ua9GQ'],
@@ -44,7 +47,9 @@ export default defineNuxtPlugin(nuxtApp => {
       // const isWifi = routeAsArray.length > 1 ? routeAsArray[1] === 'wifi' : false
       // console.log(AnalyticsBrowser.load)
       if (writeKeys.has(currentDirectory)) {
-        analytics.activeSource = AnalyticsBrowser.load({ writeKey: writeKeys.get(currentDirectory)})
+        const writeKey = writeKeys.get(currentDirectory)
+        console.log(`Loading write key in plugin for ${currentDirectory}: `, writeKey)
+        analytics.activeSource = AnalyticsBrowser.load({ writeKey })
         analytics.setup()
       } else {
         console.log('No valid write key found')

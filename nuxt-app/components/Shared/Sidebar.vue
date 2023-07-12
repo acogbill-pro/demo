@@ -3,8 +3,9 @@
 
 <template>
     <ClientOnly>
-    <SharedEventList />
+        <SharedEventList />
         <SharedProfile />
+        <NuxtLink to="/pristine/sms">Send SMS</NuxtLink>
         <!-- <SharedMessaging />
                 <SharedSetup /> -->
     </ClientOnly>
