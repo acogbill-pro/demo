@@ -14,8 +14,9 @@ function click(tabName) {
 </script>
 
 <template>
-    <div>
-        <v-card class="pa-0">
+    <div class="search">
+        Search
+        <!-- <v-card class="pa-0">
             <v-tabs v-model="tab" @update:modelValue="tabbed" bg-color="#FFFFFF" class="ma-0" align-tabs="end">
                 <v-tab value="locations" @click="click('Locations')">
                     <span style="color: #000000; font-weight: bold;">Locations</span>
@@ -46,9 +47,13 @@ function click(tabName) {
                     </v-window-item>
                 </v-window>
             </v-card-text>
-        </v-card>
+        </v-card> -->
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.search {
+    background-color: #4986BC;
+}
+</style>
 

@@ -28,7 +28,7 @@ function leaving(e) {
 }
 
 onMounted(() => {
-    profiles.startSyncingCartStore()
+    // profiles.startSyncingCartStore()
 
     /*window.addEventListener(
         "beforeunload",
@@ -38,15 +38,27 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="default-layout">
-        <v-app>
-            <DiamondNavBar />
-            <v-main>
-                <slot />
-            </v-main>
-            <!-- <ShopFooter /> -->
-        </v-app>
+    <div class="background-colorer">
+        <v-container>
+            <v-row>
+                <v-col>
+                    <v-app>
+
+                        <DiamondNavBar />
+                        <v-main>
+                            <slot />
+                        </v-main>
+
+                    </v-app>
+                </v-col>
+            </v-row>
+
+        </v-container>
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.background-colorer {
+    background-color: #DDDDDD,
+}
+</style>

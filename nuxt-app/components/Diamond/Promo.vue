@@ -10,8 +10,8 @@ const promoImage = computed(() => {
 </script>
 
 <template>
-    <div>
-        <v-img :src="promoImage" height="400" class="my-5" />
+    <div>Promo
+        <!-- <v-img :src="promoImage" height="400" class="my-5" /> -->
     </div>
 </template>
 

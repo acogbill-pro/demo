@@ -21,19 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <p>Diamond home</p>
-    <!-- <v-container no-gutters>
-        <v-row no-gutters>
-            <v-col>
-                <HGVPromo />
-            </v-col>
-        </v-row>
-        <v-row>
-            <v-col>
-                <v-img src="/diamond/images/homeNav.png" grow />
-            </v-col>
-        </v-row>
-    </v-container> -->
+    <DiamondMain />
 </template>
 
 

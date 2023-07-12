@@ -61,7 +61,7 @@ function redo() {
                     <v-icon icon="mdi-chevron-down" />
                 </v-btn>
             </span>
-            <CarnivalShopCartButton />
+            <!-- <CarnivalShopCartButton /> -->
             <!--<v-btn color="secondary" text rounded @click="emit('toggleTheme', 'nav bar')">Toggle Theme</v-btn>-->
         </v-app-bar>
     </div>

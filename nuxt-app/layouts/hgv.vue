@@ -28,7 +28,7 @@ function leaving(e) {
 }
 
 onMounted(() => {
-    profiles.startSyncingCartStore()
+    // profiles.startSyncingCartStore()
 
     /*window.addEventListener(
         "beforeunload",

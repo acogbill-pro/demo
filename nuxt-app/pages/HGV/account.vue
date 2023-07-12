@@ -42,8 +42,9 @@ function logout() {
     <v-container>
         <v-row>
             <v-col v-if="!isLoggedIn || (isLoggedIn && !collapse)">
-                <!-- <UserLogin /> -->
+
                 <UserRegister />
+                <UserLogin />
                 <!-- <v-card>
                                         <v-card-title>
                                             Log in with...
@@ -59,14 +60,14 @@ function logout() {
             </v-col>
 
         </v-row>
-        <v-row>
+        <!-- <v-row>
             <v-col>
-                <p>Logged In</p>
+                <UserLogin />
             </v-col>
             <v-col>
 
             </v-col>
-        </v-row>
+        </v-row> -->
         <v-row v-if="isLoggedIn">
             <NuxtLink to="/HGV/"><v-btn class="mr-3">Continue to Home</v-btn></NuxtLink>
             <v-btn @click="logout()">Logout</v-btn>

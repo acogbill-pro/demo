@@ -2,19 +2,27 @@
 
 const topLinks = [
     {
-        label: 'Discover Ownership',
+        label: 'Safe Stays',
         url: '/diamond/account',
     },
     {
-        label: 'Resorts & Destinations',
+        label: 'Resorts',
         url: '/diamond/resorts',
     },
     {
-        label: 'Plan Your Vacation',
+        label: 'Deals',
         url: '/diamond/account',
     },
     {
-        label: 'Sign In',
+        label: 'Locations',
+        url: '/diamond/account',
+    },
+    {
+        label: 'Groups',
+        url: '/diamond/account',
+    },
+    {
+        label: 'About',
         url: '/diamond/account',
     },
 ]
@@ -33,7 +41,7 @@ function redo() {
 
 <template>
     <div>
-        <v-app-bar id="nav" app color="#155C7D" nuxt>
+        <v-app-bar id="nav" app color="#FFFFFF" nuxt>
             <v-toolbar-title>
 
                 <h1>
@@ -55,13 +63,19 @@ function redo() {
             <!-- <v-btn text rounded href="/diamond/" color="white">
                                         Home
                                     </v-btn> -->
-            <span v-for="link in topLinks" :key="`${link.label}-nav-link`" class="topLink">
-                <v-btn text rounded :to="link.url" nuxt color="white">
-                    {{ link.label }}
-                    <v-icon icon="mdi-chevron-down" />
-                </v-btn>
-            </span>
-            <CarnivalShopCartButton />
+            <template v-slot:extension extension-height="50">
+                <span v-for="link in topLinks" :key="`${link.label}-nav-link`" class="topLink">
+                    <v-btn text rounded :to="link.url" nuxt color="#6F9AD2">
+                        {{ link.label }}
+                        <v-icon icon="mdi-chevron-down" />
+                    </v-btn>
+
+
+                </span>
+                <v-spacer />
+                <v-btn text rounded nuxt color="#6F9AD2" to="/diamond/account"><span class="topLink">LOGIN</span></v-btn>
+            </template>
+            <!-- <CarnivalShopCartButton /> -->
             <!--<v-btn color="secondary" text rounded @click="emit('toggleTheme', 'nav bar')">Toggle Theme</v-btn>-->
         </v-app-bar>
     </div>
@@ -70,7 +84,7 @@ function redo() {
 
 <style lang="scss" scoped>
 .topLink {
-    color: '#FFFFFF';
+    color: '#6F9AD2';
     font-weight: 'bold';
 }
 </style>

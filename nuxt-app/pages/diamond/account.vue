@@ -6,7 +6,7 @@ const profiles = useProfileStore()
 // const { auth } = useSupabaseClient()
 
 definePageMeta({
-    layout: "hgv",
+    layout: "diamond",
 })
 
 useHead({
@@ -42,8 +42,9 @@ function logout() {
     <v-container>
         <v-row>
             <v-col v-if="!isLoggedIn || (isLoggedIn && !collapse)">
-                <!-- <UserLogin /> -->
+
                 <UserRegister />
+                <UserLogin />
                 <!-- <v-card>
                                         <v-card-title>
                                             Log in with...
@@ -59,16 +60,16 @@ function logout() {
             </v-col>
 
         </v-row>
-        <v-row>
+        <!-- <v-row>
             <v-col>
-                <p>Logged In</p>
+                <UserLogin />
             </v-col>
             <v-col>
 
             </v-col>
-        </v-row>
+        </v-row> -->
         <v-row v-if="isLoggedIn">
-            <NuxtLink to="/HGV/"><v-btn class="mr-3">Continue to Home</v-btn></NuxtLink>
+            <NuxtLink to="/diamond/"><v-btn class="mr-3">Continue to Home</v-btn></NuxtLink>
             <v-btn @click="logout()">Logout</v-btn>
             <v-btn v-if="!collapse" @click="toggleCollapse()">Hide Login</v-btn>
             <v-btn v-else @click="toggleCollapse">Login Again</v-btn>

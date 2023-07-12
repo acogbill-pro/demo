@@ -109,7 +109,7 @@ function resetValidation() {
 </script>
 
 <template>
-    <v-card>
+    <v-card class="mb-4">
         <v-card-title>Register</v-card-title>
         <v-form ref="form" v-model="valid" lazy-validation>
             <v-card-text>
