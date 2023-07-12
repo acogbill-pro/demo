@@ -17,9 +17,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         return state.activeSource
       },
       bestID: (state) => {
-        const ID = state.userID !== null ? state.userID : state.anonymousID
-        console.log('Best ID: ', ID)
-        return ID
+        return state.userID !== null ? state.userID : state.anonymousID
       },
       bestIDIsAnonymous: (state) => {
         return state.userID === null
@@ -42,19 +40,12 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.activeSource = null
         useRouter().go()
       },
-      async refreshIDs() {
-        console.log('refreshing IDs')
-        // console.log(this.activeSource)
-        const userObject = await this.activeSource.user()
-        // console.log('user object:', userObject)
-        const anonID = userObject.anonymousId()
-        const userID = userObject.id()
-        console.log('setting IDs to', anonID, userID)
-        // const promise2 = promise.then((result) => {
-          // console.log(result)
-          this.anonymousID = anonID
-          this.userID = userID
-        // })
+      refreshIDs() {
+        const promise = this.activeSource.user()
+        const promise2 = promise.then((result) => {
+          this.anonymousID = result.anonymousId()
+          this.userID = result.id()
+        })
 
         this.identify()
       },
@@ -115,14 +106,10 @@ export const useAnalytics = defineStore('analyticsStore', {
           console.log('Activate Watcher failed')
         }
       },
-      async reset() {
-        // console.log('running reset')
+      reset() {
         this.userID = null
-        const userObject = await this.activeSource.user()
-        await userObject.reset()
-        console.log('would reset this:', this.activeSource.reset)
-        await this.activeSource.reset()
-        this.refreshIDs()
+        this.analytics.reset()
+        // this.refreshIDs()
       }
     }
   })
