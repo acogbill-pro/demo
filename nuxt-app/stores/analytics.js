@@ -42,15 +42,19 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.activeSource = null
         useRouter().go()
       },
-      refreshIDs() {
+      async refreshIDs() {
         console.log('refreshing IDs')
         // console.log(this.activeSource)
-        const promise = this.activeSource.user()
-        const promise2 = promise.then((result) => {
+        const userObject = await this.activeSource.user()
+        // console.log('user object:', userObject)
+        const anonID = userObject.anonymousId()
+        const userID = userObject.id()
+        console.log('setting IDs to', anonID, userID)
+        // const promise2 = promise.then((result) => {
           // console.log(result)
-          this.anonymousID = result.anonymousId()
-          this.userID = result.id()
-        })
+          this.anonymousID = anonID
+          this.userID = userID
+        // })
 
         this.identify()
       },
