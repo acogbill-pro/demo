@@ -49,7 +49,8 @@ export default defineNuxtPlugin(nuxtApp => {
       if (writeKeys.has(currentDirectory)) {
         const writeKey = writeKeys.get(currentDirectory)
         console.log(`Loading write key in plugin for ${currentDirectory}: `, writeKey)
-        analytics.activeSource = AnalyticsBrowser.load({ writeKey })
+        const analyticsInstance = AnalyticsBrowser.load({ writeKey })
+        analytics.activeSource = analyticsInstance
         analytics.setup()
       } else {
         console.log('No valid write key found')

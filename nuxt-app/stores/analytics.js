@@ -17,7 +17,9 @@ export const useAnalytics = defineStore('analyticsStore', {
         return state.activeSource
       },
       bestID: (state) => {
-        return state.userID !== null ? state.userID : state.anonymousID
+        const ID = state.userID !== null ? state.userID : state.anonymousID
+        console.log('Best ID: ', ID)
+        return ID
       },
       bestIDIsAnonymous: (state) => {
         return state.userID === null
@@ -41,8 +43,10 @@ export const useAnalytics = defineStore('analyticsStore', {
         useRouter().go()
       },
       refreshIDs() {
+        // console.log(this.activeSource)
         const promise = this.activeSource.user()
         const promise2 = promise.then((result) => {
+          // console.log(result)
           this.anonymousID = result.anonymousId()
           this.userID = result.id()
         })
@@ -106,9 +110,9 @@ export const useAnalytics = defineStore('analyticsStore', {
           console.log('Activate Watcher failed')
         }
       },
-      reset() {
+      async reset() {
         this.userID = null
-        this.analytics.reset()
+        await this.analytics.reset()
         this.refreshIDs()
       }
     }
