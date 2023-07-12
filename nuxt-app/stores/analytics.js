@@ -112,9 +112,10 @@ export const useAnalytics = defineStore('analyticsStore', {
         }
       },
       async reset() {
-        console.log('running reset')
+        // console.log('running reset')
         this.userID = null
-        await this.analytics.reset()
+        console.log('would reset this:', this.activeSource.reset)
+        await this.activeSource.reset()
         this.refreshIDs()
       }
     }
