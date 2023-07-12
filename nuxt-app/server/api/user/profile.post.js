@@ -17,12 +17,20 @@ export default defineEventHandler(async (event) => {
     console.log('fetching profile for ID: ', userID)
     const requestURL = `https://profiles.segment.com/v1/spaces/${process.env.PROFILES_SPACE_ID}/collections/users/profiles/${idLabel}:${userID}/traits`
 
-    const fetchedProfile = await fetch(requestURL, options)
-    const json = await fetchedProfile.json()
-    // console.log(requestURL)
+    try {
+            const fetchedProfile = await fetch(requestURL, options)
+            const json = await fetchedProfile.json()
+            console.log(json, fetchedProfile)
 
-    return {
-        status: 'OK',
-        data: json
-    }
+            return {
+                status: 'OK',
+                data: json
+            }
+        } catch(e) {
+            console.log('Error getting profile: ', e, json)
+            return {
+                status: 'Error',
+                data: {}
+            }
+        }
 })
