@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     try {
             const fetchedProfile = await fetch(requestURL, options)
             const json = await fetchedProfile.json()
-            console.log(json, fetchedProfile)
+            // console.log(json, fetchedProfile)
 
             return {
                 status: 'OK',

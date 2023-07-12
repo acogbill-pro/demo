@@ -43,6 +43,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         useRouter().go()
       },
       refreshIDs() {
+        console.log('refreshing IDs')
         // console.log(this.activeSource)
         const promise = this.activeSource.user()
         const promise2 = promise.then((result) => {
@@ -111,6 +112,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         }
       },
       async reset() {
+        console.log('running reset')
         this.userID = null
         await this.analytics.reset()
         this.refreshIDs()
