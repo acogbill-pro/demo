@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <v-img src="/diamond/images/bodyCopy.png" size="400" />
+    <v-img src="/diamond/images/beachBody.png" size="400" />
 </template>
 
 <style lang="scss" scoped></style>

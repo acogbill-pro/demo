@@ -12,7 +12,7 @@ export const useProfileStore = defineStore('profilesStore', {
       isSyncing: false,
       isLoading: false,
       traits: {},
-      traitBlacklist: ['incrementers', 'phone', 'edge'],
+      traitBlacklist: ['incrementers', 'edge'],
       unwatchers: [], // because watch returns a function to call when you want to unwatch
     }),
     getters: {
@@ -25,18 +25,30 @@ export const useProfileStore = defineStore('profilesStore', {
       },
       cleanTraits: (state) => {
 
-        const removeProperty = (obj, prop) => {
+        const removePropertyOLD = (obj, prop) => {
+          console.log('removing property', prop)
           let {[prop]: omit, ...res} = obj
           return res
         }
 
+        const removeProperty = (obj, prop) => {
+          delete obj[prop]
+          return obj
+        }
+
         var traitsToReturn = state.traits
-        console.log(traitsToReturn)
+        // console.log(traitsToReturn)
 
         for (let i = 0; i < state.traitBlacklist.length; i++) {
           traitsToReturn = removeProperty(traitsToReturn, state.traitBlacklist[i])
         }
 
+        Object.keys(traitsToReturn).forEach((trait) => {
+          const firstFour = trait.slice(0, 4)
+          if (firstFour === 'j_o_') removeProperty(traitsToReturn, trait)
+        })
+
+        console.log(traitsToReturn)
         return traitsToReturn
       },
       productSKUsOwned: (state) => {

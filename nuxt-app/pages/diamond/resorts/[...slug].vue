@@ -5,23 +5,25 @@ const analytics = useAnalytics()
 const profiles = useProfileStore()
 
 definePageMeta({
-    layout: "hgv",
+    layout: "diamond",
     middleware: ["page-analytics"],
 })
 
 useHead({
-    title: 'Resorts & Destinations'
+    title: 'Diamond Resorts & Destinations'
 })
 
 onMounted(() => {
-    analytics.page('Resorts & Destinations')
+    analytics.page('Diamond Resorts & Destinations')
 
     //profiles.startSyncing(3)
 })
 </script>
 
 <template>
-    <v-container no-gutters>
+    <DiamondMain />
+    <DiamondBeachBody />
+    <!-- <v-container no-gutters>
         <v-row no-gutters>
             <v-col>
                 <v-img src="/HGV/images/resortsSplash.png" grow />
@@ -42,7 +44,7 @@ onMounted(() => {
                 <HGVTabbedSearch />
             </v-col>
         </v-row>
-    </v-container>
+    </v-container> -->
 </template>
 
 

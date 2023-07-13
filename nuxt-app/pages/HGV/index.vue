@@ -10,11 +10,11 @@ definePageMeta({
 })
 
 useHead({
-    title: 'Booking Home'
+    title: 'HGV Booking Home'
 })
 
 onMounted(() => {
-    analytics.page('Booking Home')
+    analytics.page('HGV Booking Home')
 
     //profiles.startSyncing(3)
 })
