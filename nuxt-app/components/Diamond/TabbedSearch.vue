@@ -1,53 +1,65 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
 const analytics = useAnalytics()
+const { arrayDifference } = useHelpers()
 
-const tab = ref(null)
+const destinationArray = ['Arizona', 'California', 'Colorado', 'Florida', 'Hawaii', 'Indiana', 'Missouri']
 
-function tabbed(tabName) {
-    // console.log(tabName)
+const selectedDestinations = ref([])
+
+watch(selectedDestinations, (newVal, prevVal) => {
+    if (selectedDestinations.value.length < 1) return
+    const valueSelected = arrayDifference(newVal, prevVal)
+    if (valueSelected.length === 1) {
+        analytics.track('Destination Selected', { Destination: valueSelected[0] })
+        analytics.identify({ DiamondDestinations: newVal })
+    }
+})
+
+function isDate(possibleDate) {
+    return !isNaN(Date.parse(possibleDate))
 }
 
-function click(tabName) {
-    analytics.track(`Opened Tab: ${tabName}`)
+const checkInDate = ref('')
+const checkOutDate = ref('')
+
+function checkInChanged(inFocus) {
+    // console.log(inFocus, checkInDate.value)
+    const formatted = new Date(checkInDate.value)
+    if (!inFocus && isDate(checkInDate.value)) analytics.track('Check In Date', { Date: formatted })
+}
+
+function checkOutChanged(inFocus) {
+    // console.log(inFocus, checkOutDate.value)
+    const formatted = new Date(checkOutDate.value)
+    if (!inFocus && isDate(checkOutDate.value)) analytics.track('Check Out Date', { Date: formatted })
 }
 </script>
 
 <template>
     <div class="search">
-        Search
-        <!-- <v-card class="pa-0">
-            <v-tabs v-model="tab" @update:modelValue="tabbed" bg-color="#FFFFFF" class="ma-0" align-tabs="end">
-                <v-tab value="locations" @click="click('Locations')">
-                    <span style="color: #000000; font-weight: bold;">Locations</span>
-                    <v-icon :icon="tab !== 'locations' ? 'mdi-menu-down' : 'mdi-menu-up'" color="#000000" />
-                </v-tab>
-                <v-tab value="amenities" @click="click('Amenities')">
-                    <span style="color: #000000; font-weight: bold;">Amenities</span>
-                    <v-icon :icon="tab !== 'amenities' ? 'mdi-menu-down' : 'mdi-menu-up'" color="#000000" />
-                </v-tab>
-                <v-tab value="types" @click="click('Vacation Types')">
-                    <span style="color: #000000; font-weight: bold;">Vacation Types</span>
-                    <v-icon :icon="tab !== 'types' ? 'mdi-menu-down' : 'mdi-menu-up'" color="#000000" />
-                </v-tab>
-            </v-tabs>
+        <v-container>
+            <v-row>
+                <v-col>
+                    <v-select clearable chips label="DESTINATION" :items="destinationArray" multiple variant="solo"
+                        v-model="selectedDestinations">
+                    </v-select>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
+                    <v-text-field label="Check In Date" variant="solo" v-model="checkInDate"
+                        @update:focused="checkInChanged"></v-text-field>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
+                    <v-text-field label="Check Out Date" variant="solo" v-model="checkOutDate"
+                        @update:focused="checkOutChanged"></v-text-field>
+                </v-col>
+            </v-row>
+        </v-container>
 
-            <v-card-text>
-                <v-window v-model="tab">
-                    <v-window-item value="locations">
-                        <HGVSelectorsLocations />
-                    </v-window-item>
-
-                    <v-window-item value="amenities">
-                        <HGVSelectorsAmenities />
-                    </v-window-item>
-
-                    <v-window-item value="types">
-                        <HGVSelectorsTypes />
-                    </v-window-item>
-                </v-window>
-            </v-card-text>
-        </v-card> -->
     </div>
 </template>
 
