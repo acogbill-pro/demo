@@ -11,7 +11,7 @@ const promoImage = computed(() => {
 
 <template>
     <div>
-        <v-img :src="promoImage" height="400" class="my-5" />
+        <v-img :src="promoImage" />
     </div>
 </template>
 
