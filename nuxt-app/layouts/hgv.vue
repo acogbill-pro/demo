@@ -8,7 +8,7 @@ const profiles = useProfileStore()
 useHead({
     //title: 'Segment App Home',
     // or, instead:
-    titleTemplate: (title) => `HGV POC - ${title}`,
+    titleTemplate: (title) => `${title}`,
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     charset: 'utf-8',
     meta: [

@@ -73,7 +73,7 @@ function redo() {
 
                 </span>
                 <v-spacer />
-                <v-btn text rounded nuxt color="#6F9AD2" to="/diamond/account"><span class="topLink">LOGIN</span></v-btn>
+                <v-btn text rounded nuxt color="#6F9AD2" to="/diamond/account"><span class="topLink">ACCOUNT</span></v-btn>
             </template>
             <!-- <CarnivalShopCartButton /> -->
             <!--<v-btn color="secondary" text rounded @click="emit('toggleTheme', 'nav bar')">Toggle Theme</v-btn>-->

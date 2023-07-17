@@ -22,7 +22,7 @@ const emailRules = [
     v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
 ]
 
-const checkbox = ref(false)
+const consent = ref([])
 
 const traitsObject = computed(() => {
     return {
@@ -30,6 +30,8 @@ const traitsObject = computed(() => {
         lname: lname.value,
         name: name.value,
         email: email.value,
+        consent: consent.value,
+        consentJSON: JSON.stringify(consent.value),
         phone: '917-757-6756'
     }
 })
@@ -40,7 +42,7 @@ function prePop() {
     fname.value = 'Andy'
     lname.value = 'Cogbill'
     email.value = 'andycogbill@gmail.com'
-    checkbox.value = true
+    consent.value = ['email', 'sms']
 }
 
 function randomInt(max) {
@@ -65,7 +67,7 @@ function prePopRandom() {
     fname.value = firstName
     lname.value = lastName
     email.value = (firstName + lastName + '@gmailx.com').toLowerCase()
-    checkbox.value = true
+    consent.value = ['email', 'sms']
 }
 
 // unction submitForm() {
@@ -118,14 +120,14 @@ function resetValidation() {
                 <v-text-field v-model="lname" :counter="10" :rules="nameRules" label="Last Name" required />
 
                 <v-text-field v-model="email" :rules="emailRules" label="E-mail" required />
+            </v-card-text>
 
 
-
-                <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
+            <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
                                                             </v-select>-->
-
-                <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']"
-                    label="I consent to Terms & Conditions" required></v-checkbox>
+            <v-card-text>I consent to:
+                <v-checkbox v-model="consent" label="Email" value="email" dense></v-checkbox>
+                <v-checkbox v-model="consent" label="SMS" value="sms"></v-checkbox>
             </v-card-text>
             <v-card-actions>
 

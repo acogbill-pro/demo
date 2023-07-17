@@ -42,7 +42,7 @@ function checkOutChanged(inFocus) {
             <v-row>
                 <v-col>
                     <v-select clearable chips label="DESTINATION" :items="destinationArray" multiple variant="solo"
-                        v-model="selectedDestinations">
+                        v-model="selectedDestinations" class="mb-0">
                     </v-select>
                 </v-col>
             </v-row>
