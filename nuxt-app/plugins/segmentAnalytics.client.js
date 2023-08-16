@@ -20,6 +20,8 @@ export default defineNuxtPlugin(nuxtApp => {
     ['NCRscan', 'iCaiT1qeXR5LWmy8PsnOzZyy7F3ua9GQ'],
     ['pristine', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['pristineproducts', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['pristineproductscart', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['pristineproductscheckout', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);

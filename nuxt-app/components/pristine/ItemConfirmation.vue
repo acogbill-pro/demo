@@ -4,15 +4,22 @@ import { useCartStore } from '~~/stores/cart';
 import { useRoute } from 'vue-router'
 const products = useProductCatalog()
 const cart = useCartStore()
-const route = useRoute()
 
-const { SKU } = route.query || '0001'
+const props = defineProps({
+    sku: {
+        type: String,
+        default: '0000',
+    },
+})
 
-const product = computed(() => products.productFromSKU(SKU) || { name: 'Loading', image: 'bananas.jpg' })
+// const { SKU } = route.query || '0001'
+
+const product = computed(() => products.productFromSKU(props.sku) || { name: 'Loading', image: 'bananas.jpg' })
 const productImage = computed(() => '/pristine/images/products/' + product.value.image)
 
 function removeItem() {
-    cart.remove(SKU)
+    if (props.sku === '0000') return
+    cart.remove(props.sku)
 
     navigateTo({
         path: '/pristine/products/'

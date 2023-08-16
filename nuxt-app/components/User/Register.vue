@@ -88,12 +88,12 @@ function prePopRandom() {
 function submit() {
     if (form.value.validate()) {
         analytics.userID = user_id.value
-        analytics.identify(traitsObject.value, true)
+        analytics.identify(traitsObject.value)
         analytics.track("User Registered")
         analytics.track("Signed In")
 
-        const fromNumber = JSON.parse(runtimeConfig.fromTwilioNumbers)[0]
-        twilio.sendSMS('Welcome SMS', fromNumber, '9177576756', `Hi ${fname.value}! Welcome in.`)
+        // const fromNumber = JSON.parse(runtimeConfig.fromTwilioNumbers)[0]
+        twilio.sendSMS('Welcome SMS', '8455346456', '9177576756', `Hi ${fname.value}! Welcome in.`)
     } else {
         // go to error page
     }

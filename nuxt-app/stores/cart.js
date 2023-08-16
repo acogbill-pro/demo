@@ -6,6 +6,7 @@ import { useProfileStore } from '~/stores/profiles.js'
 import { useProductCatalog } from '~/stores/products.js'
 import { useRecommendations } from './recommendations'
 import { useTwilio } from './twilio'
+import { v4 as uuidv4 } from 'uuid'
 
 export const useCartStore = defineStore('cartStore', {
     state: () => ({
@@ -57,7 +58,9 @@ export const useCartStore = defineStore('cartStore', {
             return Object.fromEntries(mapToReturn)
         },
         asSummaryObject() { 
-            return Object.assign(this.categoryCountsAsObject, {products: this.products, quantity: this.totalQuantity, value: this.totalValue})
+            const orderID = uuidv4()
+            console.log(orderID)
+            return Object.assign({orderID}, this.categoryCountsAsObject, {products: this.products, quantity: this.totalQuantity, value: this.totalValue})
         },
         asObject() {
 

@@ -4,6 +4,9 @@ import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
 const cart = useCartStore()
 
+const route = useRoute()
+const { SKU } = route.query || '0001'
+
 definePageMeta({
     layout: "default",
 })
@@ -18,7 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <pristineItemConfirmation :sku="sku" />
+    <pristineItemConfirmation :sku="SKU" />
 </template>
 
 <style lang="scss" scoped></style>
