@@ -21,7 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <pristineItemConfirmation :sku="SKU" />
+    <PristineItemConfirmation :sku="SKU" />
 </template>
 
 <style lang="scss" scoped></style>

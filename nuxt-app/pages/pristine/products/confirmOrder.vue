@@ -19,12 +19,18 @@ onMounted(() => {
 
 <template>
     <v-container class="ma-25">
-        <h3>Order Confirmed</h3>
-        <ul>
-            <li>{{ route.query.quantity }} items</li>
-            <li>Order Total: ${{ route.query.value }}</li>
-        </ul>
-        <v-btn block to="/pristine/products" nuxt>Add More</v-btn>
+        <v-card>
+            <v-card-title>Order Confirmed</v-card-title>
+            <v-card-text>
+                <ul>
+                    <li>{{ route.query.quantity }} items</li>
+                    <li>Order Total: ${{ route.query.value }}</li>
+                </ul>
+            </v-card-text>
+            <v-card-actions>
+                <v-btn block to="/pristine/products" nuxt>Add More</v-btn>
+            </v-card-actions>
+        </v-card>
     </v-container>
 </template>
 

@@ -42,7 +42,7 @@ onMounted(() => {
         <v-container>
             <v-row v-if="!analytics.bestIDIsAnonymous">
                 <v-col cols="6">
-                    <NCRCartContents />
+                    <PristineCartContents />
 
                 </v-col>
                 <v-col></v-col>

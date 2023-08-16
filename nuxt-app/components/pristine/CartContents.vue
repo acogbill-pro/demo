@@ -10,18 +10,19 @@ function productFromSKU(withSKU) {
 </script>
 
 <template>
-    <div>
-        <ul>
-            <li v-for="[key, value] in cart.contents.entries()" :key="key">{{ productFromSKU(key).name + ': ' +
+    <v-card>
+        <v-card-title>Shopping Cart</v-card-title>
+        <v-card-text>
+            <ul>
+                <li v-for="[key, value] in cart.contents.entries()" :key="key">{{ productFromSKU(key).name + ': ' +
                     value
-            }}
-            </li>
-            <li>Quantity: {{ cart.totalQuantity }}</li>
-            <li>Total: ${{ cart.totalValue }}</li>
-        </ul>
-    </div>
+                }}
+                </li>
+                <li>Quantity: {{ cart.totalQuantity }}</li>
+                <li>Total: ${{ cart.totalValue }}</li>
+            </ul>
+        </v-card-text>
+    </v-card>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

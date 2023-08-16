@@ -20,10 +20,10 @@ onMounted(() => {
 
 <template>
     <v-card>
-        <v-card-title>Shopping Cart</v-card-title>
+        <!-- <v-card-title>Shopping Cart</v-card-title> -->
 
         <v-card-text v-if="cart.totalQuantity > 0">
-            <pristineCartContents />
+            <PristineCartContents />
         </v-card-text>
         <v-card-text v-else>
             Cart is Empty
