@@ -93,6 +93,7 @@ function toggleList() {
                         </li>
                     </ul>
                     <SharedAddTrait class="my-5" />
+                    <SharedAddDateTrait class="my-5" />
                 </v-card-text>
             </v-expand-transition>
             <v-card-actions>

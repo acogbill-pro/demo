@@ -1,0 +1,77 @@
+<script setup>
+import { useAnalytics } from '~/stores/analytics.js'
+import { useProfileStore } from '~/stores/profiles';
+import { useProductCatalog } from '~/stores/products'
+import { useCartStore } from '~/stores/cart';
+const analytics = useAnalytics()
+const products = useProductCatalog()
+const cart = useCartStore()
+
+function isDate(possibleDate) {
+    return !isNaN(Date.parse(possibleDate))
+}
+
+const deliverByDate = ref('')
+
+function deliverByChanged(inFocus) {
+    // console.log(inFocus, checkInDate.value)
+    const formatted = new Date(deliverByDate.value)
+    if (!inFocus && isDate(deliverByDate.value)) analytics.track('Deliver By Date', { Date: formatted })
+}
+
+function submitOrder() {
+    const quantity = cart.totalQuantity
+    const value = cart.totalValue
+    cart.submitOrder()
+
+    navigateTo({
+        path: '/thd/products/confirmOrder',
+        query: {
+            quantity,
+            value
+        }
+    })
+}
+
+onMounted(() => {
+})
+</script>
+
+<template>
+    <div v-if="!analytics.bestIDIsAnonymous">
+        <v-container>
+            <v-row v-if="!analytics.bestIDIsAnonymous">
+                <v-col cols="6">
+                    <ThdCartContents />
+
+                </v-col>
+                <v-col></v-col>
+            </v-row><v-row>
+                <v-col cols="4">
+                    <v-text-field label="Deliver By Date" variant="solo" v-model="deliverByDate"
+                        @update:focused="deliverByChanged"></v-text-field>
+                </v-col>
+                <v-col></v-col>
+            </v-row>
+            <v-row>
+                <v-col>
+                    <v-btn @click="submitOrder()">Complete Purchase</v-btn>
+                </v-col>
+            </v-row>
+        </v-container>
+    </div>
+    <div v-else>
+        <v-container>
+            <v-row>
+                <v-col>
+                    <UserLogin />
+                </v-col>
+                <v-col>
+                    <UserRegister />
+                </v-col>
+            </v-row>
+        </v-container>
+    </div>
+</template>
+
+<style lang="scss" scoped></style>

@@ -23,7 +23,7 @@ export const useTwilio = defineStore('twilioStore', {
           // Payload for eventual call to SMS API includes `body`, `to`, and `from`
             const analytics = useAnalytics()
             const runtimeConfig = useRuntimeConfig()
-
+            analytics.track('SMS Sent', {eventName, message: withMessage})
             this.status = ''
 
             const toNumberToUse = toNumberString !== '' ? toNumberString : this.manualToNumber !== '' ? this.manualToNumber : '9177576756'
@@ -44,7 +44,7 @@ export const useTwilio = defineStore('twilioStore', {
               const status = convertToJSON.then((json) => {
                 this.status = json.status
                 if (this.statusOK) {
-                  analytics.track('SMS Sent', {eventName, message: withMessage})
+                  // analytics.track('SMS Sent', {eventName, message: withMessage})
                   setTimeout(() => {
                     this.status = ''
                   }, 20000)

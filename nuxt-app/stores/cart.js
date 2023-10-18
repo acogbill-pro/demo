@@ -41,6 +41,10 @@ export const useCartStore = defineStore('cartStore', {
             const productList = products.filter(value => skuArray.includes(value.SKU))
             return productList
         },
+        firstProduct() {
+            // console.log(this.products[0])
+            return this.products[0] || {}
+        },
         categoryCountsAsObject() {
             const products = useProductCatalog()
 
@@ -164,9 +168,9 @@ export const useCartStore = defineStore('cartStore', {
         }, 
         submitOrder() {
             const analytics = useAnalytics()
-            //const twilio = useTwilio()
+            const twilio = useTwilio()
             analytics.track('Order Completed', this.asSummaryObject)
-            //twilio.sendSMS('Order Confirmation', '', '', `Thank you for your order, totaling $${this.totalValue}. We'll let you know when it's on its way.`)
+            twilio.sendSMS('Order Confirmation', '', '', `Thank you for your order, totaling $${this.totalValue}. We'll let you know when it's on its way.`)
 
             this.reset()
         },

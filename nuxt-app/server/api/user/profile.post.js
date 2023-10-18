@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     // Because the URL changes if sending an anonymous ID
     const idLabel = rawBody.anon === 'true' ? 'anonymous_id' : 'user_id'
     console.log('fetching profile for ID: ', userID)
-    const requestURL = `https://profiles.segment.com/v1/spaces/${process.env[spaceIDString]}/collections/users/profiles/${idLabel}:${userID}/traits`
+    const requestURL = `https://profiles.segment.com/v1/spaces/${process.env[spaceIDString]}/collections/users/profiles/${idLabel}:${userID}/traits?limit=200`
 
     try {
             const fetchedProfile = await fetch(requestURL, options)

@@ -73,6 +73,17 @@ export const useAnalytics = defineStore('analyticsStore', {
       identify(traitsObject = {}, syncAfter = false) {
         const profiles = useProfileStore()
 
+        // if (useID !== null) {  // ID override
+        //   this.analytics.identify(useID, traitsObject)     
+
+        //   if (syncAfter) {
+        //     setTimeout(() => {
+        //       profiles.startSyncing(3)
+        //     }, 2000)
+        //   }
+        //   return
+        // }
+
         if (this.userID !== null) {  // can be anonymous
           this.analytics.identify(this.userID, traitsObject)     
 

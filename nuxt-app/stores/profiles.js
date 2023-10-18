@@ -32,7 +32,7 @@ export const useProfileStore = defineStore('profilesStore', {
         }
 
         const removeProperty = (obj, prop) => {
-          delete obj[prop]
+          //delete obj[prop]
           return obj
         }
 
@@ -48,8 +48,8 @@ export const useProfileStore = defineStore('profilesStore', {
           if (firstFour === 'j_o_') removeProperty(traitsToReturn, trait)
         })
 
-        console.log(traitsToReturn)
-        return traitsToReturn
+        console.log(state.traits)
+        return state.traits
       },
       productSKUsOwned: (state) => {
         return scripts.listToArray(state.traits.products_owned ?? '')

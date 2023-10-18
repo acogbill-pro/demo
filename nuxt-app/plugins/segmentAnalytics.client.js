@@ -16,12 +16,22 @@ export default defineNuxtPlugin(nuxtApp => {
     ['diamondaccount', 'gQUnDkKaHkk4ZZ9HM5pA4rzarr8eJj1v'],
     ['pristine', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['pristineshop', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['thd', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['thdshop', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['thdproducts', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['thdproductscart', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['thdproductscheckout', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['NCR', 'iCaiT1qeXR5LWmy8PsnOzZyy7F3ua9GQ'],
     ['NCRscan', 'iCaiT1qeXR5LWmy8PsnOzZyy7F3ua9GQ'],
     ['pristine', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['pristineproducts', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['pristineproductscart', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['pristineproductscheckout', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['purina', 'n73xoambQhDylsw3nCgF1YhhBsdzyIBv'],
+    ['purinapetfinder', 'n73xoambQhDylsw3nCgF1YhhBsdzyIBv'],
+    ['purinapetfindercart', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['purinapetfindercheckout', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['purinafoodfinder', 'LZ86EB5XrkwcXI5mPHP4HvCOrOblKEM4'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
@@ -43,9 +53,9 @@ export default defineNuxtPlugin(nuxtApp => {
     if (routePath !== '' && analytics.activeSource === null) {
       const routeAsArray = routePath.split('/')
       
-      const currentDirectory = routeAsArray[1]// + routeAsArray[2] || ''
+      const currentDirectory = routeAsArray[1] + routeAsArray[2] || ''
       // const writeKey = writeKeys.has(currentDirectory) ? writeKeys.get(currentDirectory) : writeKeys.get('Demoshop')
-      // console.log(writeKey)
+      console.log(currentDirectory)
       // const isWifi = routeAsArray.length > 1 ? routeAsArray[1] === 'wifi' : false
       // console.log(AnalyticsBrowser.load)
       if (writeKeys.has(currentDirectory)) {
