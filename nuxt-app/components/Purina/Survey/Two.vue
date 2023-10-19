@@ -39,9 +39,11 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
 
 <template>
     <v-container>
-        <!-- <v-row>
-            <v-col><v-text-field v-model="name" label="Name" solo /></v-col>
-        </v-row> -->
+        <v-row>
+            <v-col>
+                <v-img src="/purina/images/survey/screen2.png" width="800" />
+            </v-col>
+        </v-row>
         <v-row>
             <v-col>
                 <v-radio-group v-model="genderFlag" inline block>

@@ -15,7 +15,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Adoption Home')
+    analytics.page('Food Finder: Step One.5')
 
     //profiles.startSyncing(3)
 })
@@ -23,7 +23,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <PurinaSurveyFive />
+        <PurinaSurveyOneFive />
     </div>
 </template>
 

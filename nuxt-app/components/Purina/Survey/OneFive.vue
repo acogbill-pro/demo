@@ -11,17 +11,17 @@ const profile = useProfileStore()
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
 // const name = ref('')
-const ageSelection = ref(null)
+const size = ref(null)
 
 function submit() {
-    if (ageSelection.value === null) return
-    const age = ageSelection.value
-    const payload = { age }
+    if (size.value === null) return
+    // const gender = genderFlag.value ? 'female' : 'male'
+    const payload = { size: size.value }
     console.log(payload)
     analytics.track('Owner Confirmed', payload)
 
     navigateTo({
-        path: '/purina/foodfinder/four',
+        path: '/purina/foodfinder/two',
         // query: {
         //     quantity,
         //     value
@@ -41,13 +41,18 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
     <v-container>
         <v-row>
             <v-col>
-                <v-img src="/purina/images/survey/screen3.png" width="800" />
+                <v-img src="/purina/images/survey/screen15.png" width="800" />
             </v-col>
         </v-row>
         <v-row>
             <v-col>
-                <v-select v-model="ageSelection" label="Select Age" :items="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-                    variant="solo"></v-select>
+                <v-radio-group v-model="size" inline block>
+                    <v-radio label="Toy" value="toy"></v-radio>
+                    <v-radio label="Small" value="small"></v-radio>
+                    <v-radio label="Medium" value="medium"></v-radio>
+                    <v-radio label="Large" value="large"></v-radio>
+                    <v-radio label="Giant" value="giant"></v-radio>
+                </v-radio-group>
             </v-col>
         </v-row>
     </v-container>

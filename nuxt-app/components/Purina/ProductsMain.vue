@@ -12,6 +12,7 @@ productCatalog.loadProducts(
             category: 'dog',
             subCategory: 'puppy',
             breed: 'Mixed',
+            size: 'large',
             location: 'NY',
             image: 'Cupid.jpeg',
             priceUSD: 150
@@ -24,6 +25,7 @@ productCatalog.loadProducts(
             category: 'dog',
             subCategory: 'puppy',
             breed: 'Unknown',
+            size: 'medium',
             location: 'PA',
             priceUSD: 400,
             image: 'Jason.jpeg'
@@ -36,6 +38,7 @@ productCatalog.loadProducts(
             category: 'dog',
             subCategory: 'puppy',
             breed: 'Mixed',
+            size: 'medium',
             priceUSD: 200,
             image: 'Monkey.jpeg'
         },

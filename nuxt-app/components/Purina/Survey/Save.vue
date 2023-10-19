@@ -62,7 +62,7 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
         </v-row>
 
     </v-container>
-    <v-btn @click="submit" block>Continue</v-btn>
+    <v-btn @click="submit" block color="#0C7978">Continue</v-btn>
 </template>
 
 <style lang="scss" scoped></style>

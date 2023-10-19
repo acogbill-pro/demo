@@ -21,7 +21,7 @@ function submit() {
     analytics.track('Owner Confirmed', payload)
 
     navigateTo({
-        path: '/purina/foodfinder/two',
+        path: '/purina/foodfinder/oneFive',
         // query: {
         //     quantity,
         //     value
@@ -39,6 +39,11 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
 
 <template>
     <v-container>
+        <v-row>
+            <v-col>
+                <v-img src="/purina/images/survey/screen1.png" width="800" />
+            </v-col>
+        </v-row>
         <v-row>
             <v-col><v-text-field v-model="name" label="Name" solo /></v-col>
         </v-row>

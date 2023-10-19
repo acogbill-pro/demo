@@ -44,7 +44,7 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
         </v-row> -->
         <v-row>
             <v-col cols="7">
-                <v-img src="/purina/images/foodResult.png" width="150" />
+                <v-img src="/purina/images/foodResult.png" width="450" />
             </v-col>
             <v-col cols="5">
                 <h3>Purina One</h3>
@@ -52,7 +52,7 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
             </v-col>
         </v-row>
     </v-container>
-    <v-btn @click="submit" block>Continue</v-btn>
+    <v-btn @click="submit" block color="#0C7978">Save</v-btn>
 </template>
 
 <style lang="scss" scoped></style>

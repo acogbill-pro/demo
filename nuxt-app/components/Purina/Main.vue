@@ -14,9 +14,10 @@ products.loadProducts(
             name: 'Cupid',
             description: 'You will know why we named her Cupid!',
             age: 1,
-            category: 'dog',
+            species: 'dog',
             subCategory: 'puppy',
             breed: 'Mixed',
+            size: 'large',
             location: 'NY',
             image: 'Cupid.jpeg',
             priceUSD: 150
@@ -26,9 +27,10 @@ products.loadProducts(
             name: 'Jason',
             description: 'He just seems like a Jason.',
             age: 0,
-            category: 'dog',
+            species: 'dog',
             subCategory: 'puppy',
             breed: 'Unknown',
+            size: 'medium',
             location: 'PA',
             priceUSD: 400,
             image: 'Jason.jpeg'
@@ -38,9 +40,10 @@ products.loadProducts(
             name: 'Monkey',
             description: 'Worry not, this is not an actual monkey.',
             age: 1,
-            category: 'dog',
+            species: 'dog',
             subCategory: 'puppy',
             breed: 'Mixed',
+            size: 'medium',
             location: 'NJ',
             priceUSD: 200,
             image: 'Monkey.jpeg'
@@ -50,7 +53,7 @@ products.loadProducts(
 
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
-const heroImagePath = computed(() => profile.hasTraits ? '/purina/images/dogsPlaying.jpeg' : '/purina/images/dogsPlaying.jpeg')
+const heroImagePath = computed(() => profile.hasTraits ? '/purina/images/dogsPlaying.jpeg' : '/purina/images/puppyPlaying.jpeg')
 
 const deliveryDifference = computed(() => new Date(profile.traits.order_delivery_date) - new Date(profile.traits.confirmed_delivery_date))
 

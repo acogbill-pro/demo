@@ -15,7 +15,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Adoption Home')
+    analytics.page('Food Finder: Save Result')
 
     //profiles.startSyncing(3)
 })

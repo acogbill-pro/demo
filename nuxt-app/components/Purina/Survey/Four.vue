@@ -11,17 +11,16 @@ const profile = useProfileStore()
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
 // const name = ref('')
-const ageSelection = ref(null)
+const selected = ref([])
 
 function submit() {
-    if (ageSelection.value === null) return
-    const age = ageSelection.value
-    const payload = { age }
+    if (selected.value === null) return
+    const payload = { dietary: selected.value }
     console.log(payload)
     analytics.track('Owner Confirmed', payload)
 
     navigateTo({
-        path: '/purina/foodfinder/five',
+        path: '/purina/foodfinder/result',
         // query: {
         //     quantity,
         //     value
@@ -39,13 +38,35 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
 
 <template>
     <v-container>
-        <!-- <v-row>
-            <v-col><v-text-field v-model="name" label="Name" solo /></v-col>
-        </v-row> -->
         <v-row>
             <v-col>
-                <v-select v-model="ageSelection" label="Select Age" :items="[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-                    variant="solo"></v-select>
+                <v-img src="/purina/images/survey/screen4.png" width="800" />
+            </v-col>
+        </v-row>
+        <v-row>
+            <v-col>
+                <!-- <v-row>
+                    <v-col cols="4">
+                        Natural
+                    </v-col>
+                    <v-col cols="4">
+                        Grain-Free
+                    </v-col>
+                    <v-col cols="4">
+                        Organic
+                    </v-col>
+                </v-row> -->
+                <v-row>
+                    <v-col cols="4">
+                        <v-checkbox v-model="selected" value="natural" label="Natural"></v-checkbox>
+                    </v-col>
+                    <v-col cols="4">
+                        <v-checkbox v-model="selected" value="grain-free" label="Grain-Free"></v-checkbox>
+                    </v-col>
+                    <v-col cols="4">
+                        <v-checkbox v-model="selected" value="organic" label="Organic"></v-checkbox>
+                    </v-col>
+                </v-row>
             </v-col>
         </v-row>
     </v-container>

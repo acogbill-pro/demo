@@ -43,10 +43,10 @@ onMounted(() => {
                 <!-- <v-no-ssr> -->
                 <v-container>
                     <v-row>
-                        <v-col cols="8">
+                        <v-col cols="9">
                             <slot />
                         </v-col>
-                        <v-col cols="4">
+                        <v-col cols="3">
                             <SharedSidebar />
                         </v-col>
                     </v-row>
