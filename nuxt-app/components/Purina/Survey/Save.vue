@@ -23,7 +23,7 @@ function submit() {
     // const payload = JSON.parse(JSON.stringify(payloadRef))
     console.log(payload)
 
-    analytics.identify(payload)
+    analytics.identify(payload, true)
 
     navigateTo({
         path: '/purina/foodfinder/confirm',
