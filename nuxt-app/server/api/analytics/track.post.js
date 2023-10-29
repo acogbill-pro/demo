@@ -13,23 +13,8 @@ export default defineEventHandler(async (event) => {
     try {
         const rawBody = await readBody(event)
 
-        const {userID, isAnon, event, properties} = rawBody
-
-        if (!isAnon) {
-            analytics.track({
-                userId: userID,
-                event,
-                properties,
-            });
-        } else {
-            analytics.track({
-                anonymousId: userID,
-                event,
-                properties,
-            });
-        }
-        
-
+        analytics.track(rawBody)
+    
         return {
             status: 'OK',
             data,

@@ -70,6 +70,46 @@ export const useAnalytics = defineStore('analyticsStore', {
           }, 2000)
         }
       },
+      async trackServerSide(eventName, propertyObject = null) {
+        try {
+          const body = {
+            event: eventName,
+            properties: propertyObject,
+          }
+
+          if (!this.bestIDIsAnonymous){
+            body.userId = this.userID
+          } else {
+            body.anonymousId = this.anonID
+          }
+
+          // console.log('body', body)
+  
+          const options = {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+            //   'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
+            },
+            body: JSON.stringify(body)
+          }
+  
+          const response = await fetch('/api/analytics/track', options)
+
+          if (response.ok) {
+            // console.log('fetch went OK')
+            const {data} = await response.json()
+            return data
+          } else {
+            return Promise.reject({error: 'Server-side Track error: ' + response.status})
+          }
+        } catch {
+          console.log('Segment Server-side Track call failed; retrying')
+          setTimeout(() => {
+            this.trackServerSide(eventName, propertyObject)
+          }, 2000)
+        }
+      },
       identify(traitsObject = {}, syncAfter = false) {
         const profiles = useProfileStore()
 
@@ -102,6 +142,51 @@ export const useAnalytics = defineStore('analyticsStore', {
               profiles.startSyncing(10)
             }, 2000)
           }
+        }
+      },
+      async identifyServerSide(traitsObject = {}, syncAfter = false) {
+        try {
+          const body = {
+            traits: traitsObject,
+          }
+
+          if (!this.bestIDIsAnonymous){
+            body.userId = this.userID
+          } else {
+            body.anonymousId = this.anonID
+          }
+
+          // console.log('body', body)
+  
+          const options = {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+            //   'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
+            },
+            body: JSON.stringify(body)
+          }
+  
+          const response = await fetch('/api/analytics/identify', options)
+
+          if (response.ok) {
+            // console.log('fetch went OK')
+            const {data} = await response.json()
+            if (syncAfter) {
+              const profiles = useProfileStore()
+              setTimeout(() => {
+                profiles.startSyncing(10)
+              }, 2000)
+            }
+            return data
+          } else {
+            return Promise.reject({error: 'Server-side Track error: ' + response.status})
+          }
+        } catch {
+          console.log('Segment Server-side Track call failed; retrying')
+          setTimeout(() => {
+            this.trackServerSide(eventName, propertyObject)
+          }, 2000)
         }
       },
       activateWatcher() {

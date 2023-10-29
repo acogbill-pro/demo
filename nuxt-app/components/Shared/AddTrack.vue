@@ -10,6 +10,10 @@ const eventName = ref('')
 const eventProperties = ref('')
 const valid = ref(true)
 const showCalendar = ref(false)
+const serverSide = ref(false)
+const switchLabel = computed(() => {
+    return serverSide.value ? 'Server-side' : 'Client-side'
+})
 
 const propertiesAsObject = computed(() => {
     if (eventProperties.value === '') return null
@@ -62,7 +66,11 @@ const propertiesRules = [
 ]
 
 function submitForm() {
-    analytics.track(eventName.value, propertiesAsObject.value)
+    if (!serverSide.value) {
+        analytics.track(eventName.value, propertiesAsObject.value)
+    } else {
+        analytics.trackServerSide(eventName.value, propertiesAsObject.value)
+    }
     //console.log(propertiesAsObject.value)
     eventName.value = ''
     eventProperties.value = ''
@@ -80,16 +88,15 @@ function submitForm() {
             </v-row>
             <v-row>
 
-                <v-col cols="10">
+                <v-col cols="12">
                     <v-text-field v-model="eventName" :rules="validationRules" required density="compact" variant="solo"
                         single-line hide-details label="Event Name" />
                 </v-col>
                 <!--<v-col cols="2">
                     <v-btn icon="mdi-calendar" @click="showCalendar = !showCalendar" variant="plain" block />
                 </v-col>-->
-                <v-col cols="2">
-                    <v-btn icon="mdi-check" @click="submitForm" variant="plain" block :disabled="!valid" />
-                </v-col>
+
+
             </v-row>
             <v-expand-transition>
                 <v-row v-if="!showCalendar">
@@ -104,10 +111,16 @@ function submitForm() {
                     </v-col>
                 </v-row>
             </v-expand-transition>
+            <v-row>
+                <v-col cols="10">
+                    <v-switch v-model="serverSide" :label="switchLabel"></v-switch>
+                </v-col>
+                <v-col cols="2">
+                    <v-btn icon="mdi-check" @click="submitForm" variant="plain" block :disabled="!valid" />
+                </v-col>
+            </v-row>
         </v-form>
     </v-container>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
