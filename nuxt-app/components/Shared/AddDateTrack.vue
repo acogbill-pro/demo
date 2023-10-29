@@ -20,7 +20,7 @@ const showCalendar = ref(false)
 
 const propertiesAsObject = computed(() => {
     // const Date = new Date(eventDate.value)
-    return { ['Date']: new Date(eventDate.value) }
+    return { ['timestamp']: new Date(eventDate.value) }
 })
 
 function submitForm() {

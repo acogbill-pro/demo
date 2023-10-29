@@ -4,6 +4,8 @@ import { useAnalytics } from '~/stores/analytics.js'
 const analytics = useAnalytics()
 const route = useRoute()
 
+const { orderID, quantity, value } = route.query
+
 definePageMeta({
     layout: "default",
 })
@@ -20,11 +22,11 @@ onMounted(() => {
 <template>
     <v-container class="ma-25">
         <v-card>
-            <v-card-title>Order Confirmed</v-card-title>
+            <v-card-title>Order {{ orderID }} Confirmed</v-card-title>
             <v-card-text>
                 <ul>
-                    <li>{{ route.query.quantity }} items</li>
-                    <li>Order Total: ${{ route.query.value }}</li>
+                    <li>{{ quantity }} items</li>
+                    <li>Order Total: ${{ value }}</li>
                 </ul>
             </v-card-text>
             <v-card-actions>

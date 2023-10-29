@@ -19,18 +19,15 @@ function deliverByChanged(inFocus) {
     if (!inFocus && isDate(deliverByDate.value)) analytics.track('Deliver By Date', { Date: formatted })
 }
 
-function submitOrder() {
-    const quantity = cart.totalQuantity
-    const value = cart.totalValue
-    cart.submitOrder()
+async function submitOrder() {
 
+    const response = await cart.submitOrder()
+    console.log('passing as query', response)
     navigateTo({
         path: '/pristine/products/confirmOrder',
-        query: {
-            quantity,
-            value
-        }
+        query: response
     })
+
 }
 
 onMounted(() => {

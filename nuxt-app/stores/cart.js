@@ -6,7 +6,6 @@ import { useProfileStore } from '~/stores/profiles.js'
 import { useProductCatalog } from '~/stores/products.js'
 import { useRecommendations } from './recommendations'
 import { useTwilio } from './twilio'
-import { v4 as uuidv4 } from 'uuid'
 
 export const useCartStore = defineStore('cartStore', {
     state: () => ({
@@ -62,12 +61,7 @@ export const useCartStore = defineStore('cartStore', {
             return Object.fromEntries(mapToReturn)
         },
         asSummaryObject() { 
-            const orderID = uuidv4()
-            console.log(orderID)
-            return Object.assign({orderID}, this.categoryCountsAsObject, {products: this.products, quantity: this.totalQuantity, value: this.totalValue})
-        },
-        asObject() {
-
+            return Object.assign(this.categoryCountsAsObject, {products: this.products, quantity: this.totalQuantity, value: this.totalValue})
         },
         forEdge: (state) => {
             const syncTime = new Date()
@@ -166,13 +160,34 @@ export const useCartStore = defineStore('cartStore', {
             this.lastSyncTime = new Date(0)
             this.edgeToProfile()
         }, 
-        submitOrder() {
+        async submitOrder() {
             const analytics = useAnalytics()
-            const twilio = useTwilio()
-            analytics.track('Order Completed', this.asSummaryObject)
-            twilio.sendSMS('Order Confirmation', '', '', `Thank you for your order, totaling $${this.totalValue}. We'll let you know when it's on its way.`)
+            const body = {
+                userID: analytics.bestID,
+                // isAnon: analytics.bestIDIsAnonymous,
+                contents: this.asSummaryObject,
+              }
+      
+              const options = {
+                method: "POST",
+                headers: {
+                  'Content-Type': 'application/json',
+                //   'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
+                },
+                body: JSON.stringify(body)
+              }
+      
+              const response = await fetch('/api/order/place', options)
 
-            this.reset()
+              if (response.ok) {
+                const {data} = await response.json()
+                analytics.track('Order Completed', data)
+                this.reset()
+                return data
+              } else {
+                analytics.track('Order Error', {details: response.status})
+                return Promise.reject({error: 'some other error: ' + response.status})
+              }
         },
     }
   })

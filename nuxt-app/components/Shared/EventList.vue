@@ -22,7 +22,7 @@ function toggleList() {
                     <li v-for="(event, index) in analytics.allEvents" :key="`event-${index}`">{{ event }}</li>
                 </ul>
                 <SharedAddTrack class="my-5" />
-                <SharedAddDateTrack event-name="Confirmed Delivery Date" />
+                <SharedAddDateTrack event-name="Date Event" />
             </v-card-text>
         </v-expand-transition>
 
