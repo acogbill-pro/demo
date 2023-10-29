@@ -99,6 +99,7 @@ export const useAnalytics = defineStore('analyticsStore', {
           if (response.ok) {
             // console.log('fetch went OK')
             const {data} = await response.json()
+            this.allEvents.unshift(eventName + ' (Server)')
             return data
           } else {
             return Promise.reject({error: 'Server-side Track error: ' + response.status})
