@@ -22,7 +22,7 @@ function deliverByChanged(inFocus) {
 async function submitOrder() {
 
     const response = await cart.submitOrder()
-    console.log('passing as query', response)
+    // console.log('passing as query', response)
     navigateTo({
         path: '/pristine/products/confirmOrder',
         query: response

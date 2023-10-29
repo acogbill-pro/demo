@@ -164,7 +164,7 @@ export const useCartStore = defineStore('cartStore', {
             const analytics = useAnalytics()
             const body = {
                 userID: analytics.bestID,
-                // isAnon: analytics.bestIDIsAnonymous,
+                isAnon: analytics.bestIDIsAnonymous,
                 contents: this.asSummaryObject,
               }
       

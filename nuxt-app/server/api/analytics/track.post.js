@@ -13,23 +13,22 @@ export default defineEventHandler(async (event) => {
     try {
         const rawBody = await readBody(event)
 
-        const {userID, isAnon, contents} = rawBody
-        const orderID = Math.floor(new Date() / 1000)
-        const data = {orderID, ...contents}
+        const {userID, isAnon, event, properties} = rawBody
 
         if (!isAnon) {
             analytics.track({
                 userId: userID,
-                event: 'Order Confirmed',
-                properties: data
+                event,
+                properties,
             });
         } else {
             analytics.track({
                 anonymousId: userID,
-                event: 'Order Confirmed',
-                properties: data
+                event,
+                properties,
             });
         }
+        
 
         return {
             status: 'OK',
