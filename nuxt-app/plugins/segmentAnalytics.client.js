@@ -59,10 +59,14 @@ export default defineNuxtPlugin(nuxtApp => {
 
     if (routePath !== '' && analytics.activeSource === null) {
       const routeAsArray = routePath.split('/')
+
+      const currentDirectory = routeAsArray.reduce((accumulator, value) => {
+        return accumulator + value
+    }, '')
       
-      const currentDirectory = routeAsArray[1] + routeAsArray[2] || ''
+      //const currentDirectory = routeAsArray[1] + routeAsArray[2] || ''
       // const writeKey = writeKeys.has(currentDirectory) ? writeKeys.get(currentDirectory) : writeKeys.get('Demoshop')
-      console.log(currentDirectory)
+      // console.log(currentDirectory)
       // const isWifi = routeAsArray.length > 1 ? routeAsArray[1] === 'wifi' : false
       // console.log(AnalyticsBrowser.load)
       if (writeKeys.has(currentDirectory)) {

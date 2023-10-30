@@ -89,8 +89,8 @@ function submit() {
     if (form.value.validate()) {
         analytics.userID = user_id.value
         analytics.identify(traitsObject.value)
-        analytics.track("User Registered")
-        analytics.track("Signed In")
+        analytics.track("User Registered", traitsObject.value)
+        analytics.track("Signed In", traitsObject.value)
 
         // const fromNumber = JSON.parse(runtimeConfig.fromTwilioNumbers)[0]
         twilio.sendSMS('Welcome SMS', '8455346456', '9177576756', `Hi ${fname.value}! Welcome in.`)
