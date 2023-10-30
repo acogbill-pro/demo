@@ -28,7 +28,7 @@ function submitForm() {
 }
 
 onMounted(() => {
-    fromNumber.value = JSON.parse(runtimeConfig.fromTwilioNumbers)[0]
+    fromNumber.value = JSON.parse(runtimeConfig.public.fromTwilioNumbers)[0]
     toNumber.value = twilio.manualToNumber
 })
 </script>
@@ -43,7 +43,7 @@ onMounted(() => {
             </v-row>
             <v-row>
                 <v-col cols="12">
-                    <v-select v-model="fromNumber" :items="JSON.parse(runtimeConfig.fromTwilioNumbers)" label="From"
+                    <v-select v-model="fromNumber" :items="JSON.parse(runtimeConfig.public.fromTwilioNumbers)" label="From"
                         density="compact" />
                 </v-col>
             </v-row>
@@ -67,6 +67,4 @@ onMounted(() => {
     </v-container>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -23,6 +23,7 @@ export default defineNuxtConfig({
         twilioSMS: process.env.TWILIO_SMS_URL,
         twilioMMS: process.env.TWILIO_MMS_URL,
         fromTwilioNumbers: process.env.TWILIO_PHONE_NUMBERS,
+        env: process.env.ENVIRONMENT,
       }
     },
     /*head: {

@@ -36,7 +36,7 @@ export const useTwilio = defineStore('twilioStore', {
             }
 
             const requestURL = 
-            `${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberToUse)}&Body=${encodeURIComponent(withMessage)}`
+            `${runtimeConfig.public.twilioSMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.public.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberToUse)}&Body=${encodeURIComponent(withMessage)}`
 
             const response = fetch(requestURL, {headers})
             const status = response.then((data) => {
@@ -74,7 +74,7 @@ export const useTwilio = defineStore('twilioStore', {
             }
 
             const requestURL = 
-            `${runtimeConfig.public.twilioMMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberToUse)}&Body=${encodeURIComponent(withMessage)}`
+            `${runtimeConfig.public.twilioMMS}?From=${encodeURIComponent('+1')}${encodeURIComponent(fromNumberString === '' ? JSON.parse(runtimeConfig.public.fromTwilioNumbers)[0] : fromNumberString)}&To=${encodeURIComponent('+1')}${encodeURIComponent(toNumberToUse)}&Body=${encodeURIComponent(withMessage)}`
 
             const response = fetch(requestURL, {headers})
             const status = response.then((data) => {

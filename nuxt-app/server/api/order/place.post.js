@@ -3,7 +3,8 @@ import { Analytics } from '@segment/analytics-node'
 // const { Analytics } = require('@segment/analytics-node')
 
 // instantiation
-const writeKey = process.env.SERVER_SIDE_WRITE_KEY
+const writeKeyString = process.env.PREFIX_TO_USE + 'SERVER_SIDE_WRITE_KEY'
+const writeKey = process.env[writeKeyString]
 const analytics = new Analytics({ writeKey })
 
 export default defineEventHandler(async (event) => {
