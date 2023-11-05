@@ -107,15 +107,16 @@ export const useCartStore = defineStore('cartStore', {
     },
     
     actions: {
-        add(withSKU, withQuantity) {
+        add(withSKU, withQuantity, withColor = null) {
             const prevQuantity = this.contents.has(withSKU) ? this.contents.get(withSKU) : 0
             this.contents.set(withSKU, prevQuantity + withQuantity)
 
             const productCatalog = useProductCatalog()
             const product = productCatalog.all.find(product => product.SKU === withSKU)
+            const productWithColor = Object.assign({},product,{color: withColor})
 
             const analytics = useAnalytics()
-            analytics.track('Product Added', product)
+            analytics.track('Product Added', withColor ? productWithColor : product)
         },
         remove(withSKU) {
             this.contents.delete(withSKU)
@@ -181,7 +182,7 @@ export const useCartStore = defineStore('cartStore', {
 
               if (response.ok) {
                 const {data} = await response.json()
-                analytics.track('Order Completed', data)
+                // analytics.track('Order Completed', data)
                 this.reset()
                 return data
               } else {

@@ -17,7 +17,7 @@ const productImage = computed(() => '/att/images/products/' + product.value.imag
 const emit = defineEmits(['andThen'])
 
 function addToCart() {
-    cart.add(product.value.SKU, 1)
+
     emit('andThen', props.sku)
 }
 </script>

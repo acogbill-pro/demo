@@ -4,6 +4,7 @@ import { Analytics } from '@segment/analytics-node'
 
 // instantiation
 const writeKeyString = process.env.PREFIX_TO_USE + 'SERVER_SIDE_WRITE_KEY'
+console.log('OMS using write key ', writeKeyString)
 const writeKey = process.env[writeKeyString]
 const analytics = new Analytics({ writeKey })
 

@@ -21,7 +21,13 @@ onMounted(() => {
 </script>
 
 <template>
-    <ATTItemConfirmation :sku="SKU" />
+    <v-container>
+        <v-row>
+            <v-col cols="12">
+                <ATTItemConfirmation :sku="SKU" />
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <style lang="scss" scoped></style>
