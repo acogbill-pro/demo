@@ -32,7 +32,7 @@ const traitsObject = computed(() => {
         email: email.value,
         consent: consent.value,
         consentJSON: JSON.stringify(consent.value),
-        phone: '917-757-6756'
+        phone: '+19177576756'
     }
 })
 
@@ -93,7 +93,7 @@ function submit() {
         analytics.track("Signed In", traitsObject.value)
 
         // const fromNumber = JSON.parse(runtimeConfig.fromTwilioNumbers)[0]
-        twilio.sendSMS('Welcome SMS', '8455346456', '9177576756', `Hi ${fname.value}! Welcome in.`)
+        // twilio.sendSMS('Welcome SMS', '8455346456', '9177576756', `Hi ${fname.value}! Welcome in.`)
     } else {
         // go to error page
     }

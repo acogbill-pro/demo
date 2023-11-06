@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
     try {
         const rawBody = await readBody(event)
 
-        // analytics.track(rawBody)
+        const {userID, isAnon} = rawBody
     
         return {
             status: 'OK',
