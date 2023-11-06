@@ -20,7 +20,9 @@ export default defineEventHandler(async (event) => {
         return {
             status: 'OK',
             data: {
-                example: 'object'
+                traits: {
+                    enriched: true,
+                }
             },
         }
     } catch(e) {
