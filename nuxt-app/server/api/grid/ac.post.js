@@ -22,6 +22,8 @@ export default defineEventHandler(async (event) => {
             data: {
                 traits: {
                     enriched: true,
+                    TUID: '12345678',
+                    address: 'Grid AC',
                 }
             },
         }
