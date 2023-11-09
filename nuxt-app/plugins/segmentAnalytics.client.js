@@ -39,6 +39,7 @@ export default defineNuxtPlugin(nuxtApp => {
     ['attproducts', env == 'WORKSHOP' ? 'E7CNEVtnlSr4AFMQPsKDRuQvnGfjSMar' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
     ['attproductscart', env == 'WORKSHOP' ? 'E7CNEVtnlSr4AFMQPsKDRuQvnGfjSMar' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
     ['attproductscheckout', env == 'WORKSHOP' ? 'E7CNEVtnlSr4AFMQPsKDRuQvnGfjSMar' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
+    ['attaccount', env == 'WORKSHOP' ? 'E7CNEVtnlSr4AFMQPsKDRuQvnGfjSMar' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
     
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
