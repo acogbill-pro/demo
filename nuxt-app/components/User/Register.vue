@@ -26,13 +26,13 @@ const consent = ref([])
 
 const traitsObject = computed(() => {
     return {
-        fname: fname.value,
-        lname: lname.value,
+        first_name: fname.value,
+        last_name: lname.value,
         name: name.value,
         email: email.value,
-        consent: consent.value,
-        consentJSON: JSON.stringify(consent.value),
-        phone: '+19177576756'
+        // consent: consent.value,
+        // consentJSON: JSON.stringify(consent.value),
+        // phone: '+19177576756'
     }
 })
 
