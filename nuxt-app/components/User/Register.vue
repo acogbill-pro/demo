@@ -26,8 +26,8 @@ const consent = ref([])
 
 const traitsObject = computed(() => {
     return {
-        first_name: fname.value,
-        last_name: lname.value,
+        fname: fname.value,
+        lname: lname.value,
         name: name.value,
         email: email.value,
         // consent: consent.value,
