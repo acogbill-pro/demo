@@ -35,11 +35,16 @@ export default defineNuxtPlugin(nuxtApp => {
     ['purinapetfindercart', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['purinapetfindercheckout', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['purinafoodfinder', 'LZ86EB5XrkwcXI5mPHP4HvCOrOblKEM4'],
-    ['att', env == 'WORKSHOP' ? 'E7CNEVtnlSr4AFMQPsKDRuQvnGfjSMar' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
-    ['attproducts', env == 'WORKSHOP' ? 'E7CNEVtnlSr4AFMQPsKDRuQvnGfjSMar' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
-    ['attproductscart', env == 'WORKSHOP' ? 'E7CNEVtnlSr4AFMQPsKDRuQvnGfjSMar' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
-    ['attproductscheckout', env == 'WORKSHOP' ? 'E7CNEVtnlSr4AFMQPsKDRuQvnGfjSMar' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
-    ['attaccount', env == 'WORKSHOP' ? 'E7CNEVtnlSr4AFMQPsKDRuQvnGfjSMar' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
+    ['att', env == 'PROD' ? 'cg4RoJC5nmcN0i3EkZla6c9DPWOSS3po' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
+    ['attproducts', env == 'PROD' ? 'cg4RoJC5nmcN0i3EkZla6c9DPWOSS3po' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
+    ['attproductscart', env == 'PROD' ? 'cg4RoJC5nmcN0i3EkZla6c9DPWOSS3po' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
+    ['attproductscheckout', env == 'PROD' ? 'cg4RoJC5nmcN0i3EkZla6c9DPWOSS3po' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
+    ['attaccount', env == 'PROD' ? 'cg4RoJC5nmcN0i3EkZla6c9DPWOSS3po' : 'A7HqCYdHvkWNRVnPZEzc9ZwvZkFBjpwn'],
+    ['jpmc', env == 'PROD' ? 'TaEbZ6MZYdQMmSRYWfbz6jFr5zSIJtLA' : 'Ksxj14676B7Jw2QHF7DDMJSegDBlzBSk'],
+    ['jpmcproducts', env == 'PROD' ? 'TaEbZ6MZYdQMmSRYWfbz6jFr5zSIJtLA' : 'Ksxj14676B7Jw2QHF7DDMJSegDBlzBSk'],
+    ['jpmcproductscart', env == 'PROD' ? 'TaEbZ6MZYdQMmSRYWfbz6jFr5zSIJtLA' : 'Ksxj14676B7Jw2QHF7DDMJSegDBlzBSk'],
+    ['jpmcproductscheckout', env == 'PROD' ? 'TaEbZ6MZYdQMmSRYWfbz6jFr5zSIJtLA' : 'Ksxj14676B7Jw2QHF7DDMJSegDBlzBSk'],
+    ['jpmcaccount', env == 'PROD' ? 'TaEbZ6MZYdQMmSRYWfbz6jFr5zSIJtLA' : 'Ksxj14676B7Jw2QHF7DDMJSegDBlzBSk'],
     
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
