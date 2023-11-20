@@ -24,6 +24,7 @@ export default defineNuxtConfig({
         twilioMMS: process.env.TWILIO_MMS_URL,
         fromTwilioNumbers: process.env.TWILIO_PHONE_NUMBERS,
         env: process.env.ENVIRONMENT,
+        openAIKey: process.env.OPENAI_API_KEY,
       }
     },
     /*head: {

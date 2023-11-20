@@ -1,19 +1,31 @@
 import { Analytics } from '@segment/analytics-node'
-
-// instantiation
+import OpenAI from "openai";
+const { openAIKey } = useRuntimeConfig().public
 const writeKeyString = process.env.PREFIX_TO_USE + 'SERVER_SIDE_WRITE_KEY'
-console.log('OMS using write key ', writeKeyString)
+console.log('AI using write key ', writeKeyString)
 const writeKey = process.env[writeKeyString]
 const analytics = new Analytics({ writeKey })
+
+// instantiation
+const openai = new OpenAI({
+    apiKey: openAIKey,
+});
+
+async function main() {
+    const completion = await openai.chat.completions.create({
+        messages: [{ role: "system", content: "You are a helpful assistant." }],
+        model: "gpt-3.5-turbo",
+    });
+
+    console.log(completion.choices[0]);
+}
 
 export default defineEventHandler(async (event) => {
 
     try {
         const rawBody = await readBody(event)
 
-        const {userID, isAnon, contents} = rawBody
-        const orderID = Math.floor(new Date() / 1000)
-        const data = {orderID, ...contents}
+        const {userID, isAnon} = rawBody
 
         if (!isAnon) {
             analytics.track({
