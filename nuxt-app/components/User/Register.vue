@@ -88,7 +88,7 @@ function prePopRandom() {
 function submit() {
     if (form.value.validate()) {
         analytics.userID = user_id.value
-        analytics.identify(traitsObject.value)
+        analytics.identify(traitsObject.value, true)
         analytics.track("User Registered", traitsObject.value)
         analytics.track("Signed In", traitsObject.value)
 

@@ -1,7 +1,7 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProductCatalog } from '~~/stores/products';
-import { useProfileTraitsStore } from '~/stores/profiles';
+import { useProfileTraitsStore } from '~/stores/profileTraits';
 const analytics = useAnalytics()
 const profiles = useProfileTraitsStore()
 

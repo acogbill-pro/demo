@@ -1,7 +1,7 @@
 // Wrapper store for analytics.js
 import { AnalyticsBrowser } from '@segment/analytics-next'
 import {defineStore} from 'pinia'
-import {useProfileTraitsStore} from '~/stores/profiles'
+import {useProfileTraitsStore} from '~/stores/profileTraits'
 
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({

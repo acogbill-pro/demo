@@ -2,7 +2,7 @@
   
 import {defineStore} from 'pinia'
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileTraitsStore } from '~/stores/profiles.js'
+import { useProfileTraitsStore } from '~/stores/profileTraits.js'
 import { useRecommendations } from '~/stores/recommendations'
 
 

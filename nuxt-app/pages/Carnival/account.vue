@@ -1,6 +1,6 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileTraitsStore } from '~/stores/profiles.js'
+import { useProfileTraitsStore } from '~/stores/profileTraits.js'
 const analytics = useAnalytics()
 const profiles = useProfileTraitsStore()
 // const { auth } = useSupabaseClient()

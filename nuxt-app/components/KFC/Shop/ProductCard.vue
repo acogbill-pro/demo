@@ -1,7 +1,7 @@
 <script setup>
 import { useProductCatalog } from '~/stores/products.js'
 import { useCartStore } from '~/stores/cart';
-import { useProfileTraitsStore } from '~/stores/profiles';
+import { useProfileTraitsStore } from '~/stores/profileTraits';
 const products = useProductCatalog()
 const cart = useCartStore()
 const profiles = useProfileTraitsStore()

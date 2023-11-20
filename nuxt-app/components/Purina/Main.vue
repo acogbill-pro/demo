@@ -2,7 +2,7 @@
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProductCatalog } from '~/stores/products'
 import { useCartStore } from '~/stores/cart';
-import { useProfileTraitsStore } from '~~/stores/profiles';
+import { useProfileTraitsStore } from '~~/stores/profileTraits';
 const analytics = useAnalytics()
 const products = useProductCatalog()
 const cart = useCartStore()

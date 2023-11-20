@@ -1,7 +1,7 @@
 <script setup>
 import scripts from '~/middleware/scripts.js'
 import { useAnalytics } from '~/stores/analytics'
-import { useProfileTraitsStore } from '~~/stores/profiles';
+import { useProfileTraitsStore } from '~~/stores/profileTraits';
 const analytics = useAnalytics()
 const profiles = useProfileTraitsStore()
 
