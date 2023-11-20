@@ -7,7 +7,7 @@ import { useArticleCatalog } from '~/stores/articles'
 import { useCartStore } from './cart'
 import scripts from '~/middleware/scripts.js'
 
-export const useProfileTraitsStore = defineStore('profilesStore', {
+export const useProfileTraitsStore = defineStore('profileTraitsStore', {
     state: () => ({
       isSyncing: false,
       isLoading: false,

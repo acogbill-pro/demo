@@ -3,7 +3,6 @@
 import {defineStore, storeToRefs} from 'pinia'
 import { Buffer } from 'buffer'
 import { useAnalytics } from '~/stores/analytics'
-import scripts from '~/middleware/scripts.js'
 
 export const useProfileEventsStore = defineStore('profileEventsStore', {
     state: () => ({
