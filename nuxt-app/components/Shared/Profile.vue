@@ -1,6 +1,6 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileStore } from '~/stores/profiles.js'
+import { useProfileStore } from '~/stores/profile.js'
 import { useProfileTraitsStore } from '~/stores/profileTraits.js'
 import { useArticleCatalog } from '~/stores/articles.js'
 import { useCartStore } from '~/stores/cart';
