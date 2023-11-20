@@ -22,6 +22,9 @@ export const useAnalytics = defineStore('analyticsStore', {
       bestIDIsAnonymous: (state) => {
         return state.userID === null
       },
+      hasIDs(state) {
+        return !(state.bestID === null || state.bestID === '')
+      },
     },
     actions: {
       setup() {

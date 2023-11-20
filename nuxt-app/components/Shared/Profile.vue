@@ -1,22 +1,24 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
+import { useProfileStore } from '~/stores/profiles.js'
 import { useProfileTraitsStore } from '~/stores/profileTraits.js'
 import { useArticleCatalog } from '~/stores/articles.js'
 import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
-const profiles = useProfileTraitsStore()
+const profile = useProfileStore()
+const traitStore = useProfileTraitsStore()
 const articles = useArticleCatalog()
 const cart = useCartStore()
 
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
-const isSyncing = computed({
-    get: () => profiles.isSyncing,
+const syncing = computed({
+    get: () => profile.isSyncing,
     set: (value) => {
         if (value === true) {
-            profiles.startSyncing(10)
+            profile.startSyncing(10)
         } else {
-            profiles.stopSyncing()
+            profile.stopSyncing()
         }
     }
 })
@@ -57,7 +59,7 @@ function hitSourceFunction() {
 }
 
 function resetProfile() {
-    profiles.unload()
+    profile.unload()
 }
 
 onMounted(() => {
@@ -80,14 +82,15 @@ function toggleList() {
             <v-card-actions @click="toggleList()">
                 <span>Profile: {{ IDforPrint }}</span>
                 <v-spacer />
-                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'" :color="profiles.hasTraits ? 'black' : 'white'" />
+                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
+                    :color="traitStore.hasTraits ? 'black' : 'white'" />
 
             </v-card-actions>
             <v-expand-transition>
                 <v-card-text v-if="!collapse">
                     <p class="mb-5">Anon ID: {{ analytics.anonymousID }}</p>
                     <ul>
-                        <li v-for="[key, value] in Object.entries(profiles.cleanTraits)" :key="key">{{ key + ': ' +
+                        <li v-for="[key, value] in Object.entries(traitStore.cleanTraits)" :key="key">{{ key + ': ' +
                             value
                         }}
                         </li>
@@ -97,7 +100,7 @@ function toggleList() {
                 </v-card-text>
             </v-expand-transition>
             <v-card-actions>
-                <v-switch v-model="isSyncing" :loading="profiles.isLoading ? 'gray' : false" class="my-0">
+                <v-switch v-model="syncing" :loading="profile.storesLoading ? 'gray' : false" class="my-0">
                     <template v-slot:label>
                         <v-icon icon="mdi-cached" color="gray" />
                     </template>

@@ -9,7 +9,6 @@ import scripts from '~/middleware/scripts.js'
 
 export const useProfileTraitsStore = defineStore('profileTraitsStore', {
     state: () => ({
-      isSyncing: false,
       isLoading: false,
       traits: {},
       traitBlacklist: ['incrementers', 'edge'],
@@ -17,6 +16,7 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
     }),
     getters: {
       hasTraits: (state) => {
+        // console.log(state?.traits)
         if (state?.traits instanceof Object) {
           return Object.keys(state.traits).length > 0
         } else {
@@ -24,12 +24,6 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
         }
       },
       cleanTraits: (state) => {
-
-        const removePropertyOLD = (obj, prop) => {
-          console.log('removing property', prop)
-          let {[prop]: omit, ...res} = obj
-          return res
-        }
 
         const removeProperty = (obj, prop) => {
           //delete obj[prop]
@@ -57,16 +51,11 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
     },
   
     actions: {
-      loadTraitsForUser(attemptsRemaining = 0) {
+      loadTraitsForUser(IDObject) {
         const cartStore = useCartStore()
         const articleStore = useArticleCatalog()
-        const analytics = useAnalytics()
-        const runtimeConfig = useRuntimeConfig()
 
-        const body = {
-          userID: analytics.bestID,
-          anon: analytics.bestIDIsAnonymous
-        }
+        const runtimeConfig = useRuntimeConfig()
 
         const options = {
           method: "POST",
@@ -74,13 +63,7 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
             'Content-Type': 'application/json',
             'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
           },
-          body: JSON.stringify(body)
-        }
-
-        if (!this.isSyncing || analytics.bestID === null || analytics.bestID === '') {
-          console.log('bailing on loadProfile since either not syncing or no ID')
-          this.stopSyncing()
-          return
+          body: JSON.stringify(IDObject)
         }
 
         this.isLoading = true  
@@ -94,10 +77,10 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
             return response.json()
           } else if(response.status === 404) {
             console.log('404 error')
-            this.stopSyncing()
+            this.isLoading = false
             return Promise.reject('error 404')
           } else {
-            this.stopSyncing()
+            this.isLoading = false
             console.log('error in profile API response')
             return Promise.reject('some other error: ' + response.status)
           }
@@ -114,7 +97,7 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
 
           if (!fetchedProfile.traits) {
             console.log('no traits back from Profile API')
-            this.stopSyncing()
+            this.isLoading = false
             return
           }
 
@@ -124,35 +107,10 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
 
           //this.startSyncingArticleStore()
           this.startSyncingCartStore()
-
-          if (this.isSyncing && attemptsRemaining > 0) {
-            setTimeout(() => {
-              this.loadTraitsForUser(attemptsRemaining - 1)
-            }, 2000)
-          } else {
-            this.isSyncing = false
-          }
         })
         .catch((error) => {
-          this.stopSyncing()
           console.log(error)
         });
-      },
-      startSyncing(retryCount) {
-        const analytics = useAnalytics()
-        analytics.refreshIDs()
-
-        if (analytics.bestID !== null && !this.isSyncing) {
-          this.isSyncing = true
-          
-          this.loadTraitsForUser(retryCount)
-        } else {
-          //console.log('no User ID to sync in startSyncing()')
-        }
-      },
-      stopSyncing() {
-        this.isSyncing = false
-        this.isLoading = false
       },
       startSyncingArticleStore() {
         const articles = useArticleCatalog()
@@ -179,16 +137,12 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
 
         const traitObject = {[withTraitName]: valueToUse}
 
-        const analytics = useAnalytics()
-        analytics.identify(traitObject, true)
+        const {identify} = useAnalytics()
+        identify(traitObject, true)
       },
       unload() {
-        this.isSyncing = false
-
         this.traits = {}
 
-        const analytics = useAnalytics()
-        analytics.reset()
       },
       
     }
