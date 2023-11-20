@@ -20,10 +20,11 @@ export const useProfileEventsStore = defineStore('profileEventsStore', {
         }
       },
       cleanEvents: (state) => {
-
         // remove metadata
-
-        return state.events
+        return state.events.map((rawEvent) => {
+          const {event,properties} = rawEvent
+          return {event, properties}
+        })
       },
     },
   
@@ -60,7 +61,7 @@ export const useProfileEventsStore = defineStore('profileEventsStore', {
           }
         })
         .then(({data: fetchedProfile}) => {
-          console.log('fetchedEvents', fetchedProfile)
+          // console.log('fetchedEvents', fetchedProfile)
 
           if (!fetchedProfile.data) {
             console.log('no events back from Profile API')

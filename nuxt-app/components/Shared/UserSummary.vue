@@ -1,7 +1,6 @@
 <script setup>
-import { useAnalytics } from '~/stores/analytics'
-
-const analytics = useAnalytics()
+import { useProfileStore } from '~/stores/profile';
+const profileStore = useProfileStore()
 
 const collapse = ref(true)
 
@@ -23,7 +22,11 @@ onMounted(() => {
         </v-card-actions>
         <v-expand-transition>
             <v-card-text v-if="!collapse">
-                Summary will go here
+                <ul>
+                    <li v-for="(event, index) in eventStore.cleanEvents" :key="index">
+                        {{ event.event }}
+                    </li>
+                </ul>
             </v-card-text>
         </v-expand-transition>
     </v-card>
