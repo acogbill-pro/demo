@@ -27,19 +27,21 @@ export default defineEventHandler(async (event) => {
 
         const {userID, isAnon} = rawBody
 
-        if (!isAnon) {
-            analytics.track({
-                userId: userID,
-                event: 'Order Confirmed',
-                properties: data
-            });
-        } else {
-            analytics.track({
-                anonymousId: userID,
-                event: 'Order Confirmed',
-                properties: data
-            });
-        }
+        const data = await main()
+
+        // if (!isAnon) {
+        //     analytics.track({
+        //         userId: userID,
+        //         event: 'Order Confirmed',
+        //         properties: data
+        //     });
+        // } else {
+        //     analytics.track({
+        //         anonymousId: userID,
+        //         event: 'Order Confirmed',
+        //         properties: data
+        //     });
+        // }
 
         return {
             status: 'OK',

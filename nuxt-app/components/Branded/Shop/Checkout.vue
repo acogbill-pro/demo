@@ -1,6 +1,6 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileStore } from '~/stores/profiles';
+import { useProfileTraitsStore } from '~/stores/profiles';
 import { useProductCatalog } from '~/stores/products'
 import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
@@ -46,6 +46,4 @@ onMounted(() => {
     </v-container>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -2,7 +2,7 @@
   
 import {defineStore} from 'pinia'
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileStore } from '~/stores/profiles.js'
+import { useProfileTraitsStore } from '~/stores/profiles.js'
 import { useProductCatalog } from '~/stores/products.js'
 import { useRecommendations } from './recommendations'
 import { useTwilio } from './twilio'
@@ -149,7 +149,7 @@ export const useCartStore = defineStore('cartStore', {
         edgeToProfile() {  
             // handles syncing data TO Profile FROM app state
             const analytics = useAnalytics()
-            const profiles = useProfileStore()
+            const profiles = useProfileTraitsStore()
 
             const asString = JSON.stringify(this.forEdge)
 

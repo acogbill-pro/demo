@@ -1,8 +1,8 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics';
-import { useProfileStore } from '~/stores/profiles';
+import { useProfileTraitsStore } from '~/stores/profiles';
 const analytics = useAnalytics()
-const profiles = useProfileStore()
+const profiles = useProfileTraitsStore()
 const runtimeConfig = useRuntimeConfig()
 const brandName = computed(() => runtimeConfig.brandedAssetsPath)
 

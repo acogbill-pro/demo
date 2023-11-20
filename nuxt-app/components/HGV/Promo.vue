@@ -1,8 +1,8 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileStore } from '~/stores/profiles.js'
+import { useProfileTraitsStore } from '~/stores/profiles.js'
 const analytics = useAnalytics()
-const profiles = useProfileStore()
+const profiles = useProfileTraitsStore()
 
 const promoImage = computed(() => {
     return (profiles.hasTraits && (profiles.traits?.likely_young_family)) ? '../HGV/images/promo-family.png' : '../HGV/images/promo.png'

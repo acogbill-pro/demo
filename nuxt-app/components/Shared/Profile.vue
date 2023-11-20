@@ -1,10 +1,10 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileStore } from '~/stores/profiles.js'
+import { useProfileTraitsStore } from '~/stores/profiles.js'
 import { useArticleCatalog } from '~/stores/articles.js'
 import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
-const profiles = useProfileStore()
+const profiles = useProfileTraitsStore()
 const articles = useArticleCatalog()
 const cart = useCartStore()
 

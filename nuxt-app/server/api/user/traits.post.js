@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     const idLabel = isAnon === 'true' ? 'anonymous_id' : 'user_id'
     
     const requestURL = `https://profiles.segment.com/v1/spaces/${process.env[spaceIDString]}/collections/users/profiles/${idLabel}:${userID}/traits?limit=200`
-    console.log('fetching profile for ID: ', userID, requestURL)
+    console.log('fetching traits for ID: ', userID, requestURL)
     try {
             const fetchedProfile = await fetch(requestURL, options)
             const json = await fetchedProfile.json()

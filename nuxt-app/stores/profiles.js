@@ -7,7 +7,7 @@ import { useArticleCatalog } from '~/stores/articles'
 import { useCartStore } from './cart'
 import scripts from '~/middleware/scripts.js'
 
-export const useProfileStore = defineStore('profilesStore', {
+export const useProfileTraitsStore = defineStore('profilesStore', {
     state: () => ({
       isSyncing: false,
       isLoading: false,
@@ -57,7 +57,7 @@ export const useProfileStore = defineStore('profilesStore', {
     },
   
     actions: {
-      loadProfileForUser(attemptsRemaining = 0) {
+      loadTraitsForUser(attemptsRemaining = 0) {
         const cartStore = useCartStore()
         const articleStore = useArticleCatalog()
         const analytics = useAnalytics()
@@ -86,7 +86,7 @@ export const useProfileStore = defineStore('profilesStore', {
         this.isLoading = true  
         this.stopSyncingStores() // don't want a loop of trait updates calling this again
 
-        fetch('/api/user/profile', options)
+        fetch('/api/user/traits', options)
         .then((response) => {
           this.isLoading = false  // stop all the downloading
 
@@ -127,7 +127,7 @@ export const useProfileStore = defineStore('profilesStore', {
 
           if (this.isSyncing && attemptsRemaining > 0) {
             setTimeout(() => {
-              this.loadProfileForUser(attemptsRemaining - 1)
+              this.loadTraitsForUser(attemptsRemaining - 1)
             }, 2000)
           } else {
             this.isSyncing = false
@@ -145,7 +145,7 @@ export const useProfileStore = defineStore('profilesStore', {
         if (analytics.bestID !== null && !this.isSyncing) {
           this.isSyncing = true
           
-          this.loadProfileForUser(retryCount)
+          this.loadTraitsForUser(retryCount)
         } else {
           //console.log('no User ID to sync in startSyncing()')
         }

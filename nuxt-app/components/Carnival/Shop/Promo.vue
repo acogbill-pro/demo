@@ -1,8 +1,8 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileStore } from '~/stores/profiles.js'
+import { useProfileTraitsStore } from '~/stores/profiles.js'
 const analytics = useAnalytics()
-const profiles = useProfileStore()
+const profiles = useProfileTraitsStore()
 
 const promoImage = computed(() => {
     return (profiles.hasTraits && (profiles.traits?.interested_in_alaska || profiles.traits?.most_frequent_destination === 'Alaska')) ? '../Carnival/images/promo-alaska.jpg' : '../Carnival/images/promo.png'

@@ -8,7 +8,7 @@ export const useAnalytics = () => {
 // Wrapper store for analytics.js
 // import { AnalyticsBrowser } from '@segment/analytics-next'
 // import {defineStore} from 'pinia'
-// import {useProfileStore} from '~/stores/profiles'
+// import {useProfileTraitsStore} from '~/stores/profiles'
 
 // export const useAnalytics = defineStore('analyticsStore', {
 //     state: () => ({
@@ -78,7 +78,7 @@ export const useAnalytics = () => {
 //         }
 //       },
 //       identify(traitsObject = {}, syncAfter = false) {
-//         const profiles = useProfileStore()
+//         const profiles = useProfileTraitsStore()
 
 //         if (this.userID !== null) {  // can be anonymous
 //           this.analytics.identify(this.userID, traitsObject)     

@@ -1,9 +1,9 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
-import { useProfileStore } from '~~/stores/profiles';
+import { useProfileTraitsStore } from '~~/stores/profiles';
 import { useProductCatalog } from '~~/stores/products';
 const analytics = useAnalytics()
-const profiles = useProfileStore()
+const profiles = useProfileTraitsStore()
 const products = useProductCatalog()
 
 definePageMeta({

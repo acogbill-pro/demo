@@ -1,8 +1,8 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics'
-import { useProfileStore } from '~~/stores/profiles';
+import { useProfileTraitsStore } from '~~/stores/profiles';
 const analytics = useAnalytics()
-const profiles = useProfileStore()
+const profiles = useProfileTraitsStore()
 
 const form = ref(null)
 const traitName = ref('')
@@ -39,8 +39,8 @@ function submitForm() {
                         single-line hide-details label="Trait Name" />
                 </v-col>
                 <v-col cols="5">
-                    <v-text-field v-model="traitValue" required density="compact" variant="solo" single-line
-                        hide-details label="Value" />
+                    <v-text-field v-model="traitValue" required density="compact" variant="solo" single-line hide-details
+                        label="Value" />
                 </v-col>
                 <v-col cols="2">
                     <v-btn icon="mdi-check" @click="submitForm" variant="plain" block :disabled="!valid" />
@@ -51,6 +51,4 @@ function submitForm() {
     </v-container>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

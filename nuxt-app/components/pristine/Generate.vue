@@ -1,10 +1,10 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
 import { useCartStore } from '~/stores/cart';
-import { useProfileStore } from '~~/stores/profiles';
+import { useProfileTraitsStore } from '~~/stores/profiles';
 const analytics = useAnalytics()
 const cart = useCartStore()
-const profile = useProfileStore()
+const profile = useProfileTraitsStore()
 
 const heroImagePath = computed(() => profile.hasTraits ? '/pristine/images/bread.png' : '/pristine/images/grocery.jpg')
 

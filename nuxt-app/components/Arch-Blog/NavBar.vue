@@ -1,8 +1,8 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import { useProfileStore } from '~/stores/profiles'
+import { useProfileTraitsStore } from '~/stores/profiles'
 
-const profile = useProfileStore()
+const profile = useProfileTraitsStore()
 
 const route = useRoute()
 

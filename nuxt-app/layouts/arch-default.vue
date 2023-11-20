@@ -1,8 +1,8 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics';
-import { useProfileStore } from '~/stores/profiles';
+import { useProfileTraitsStore } from '~/stores/profiles';
 const analytics = useAnalytics()
-const profiles = useProfileStore()
+const profiles = useProfileTraitsStore()
 
 useHead({
     //title: 'Segment App Home',
@@ -46,6 +46,4 @@ onMounted(() => {
     </div>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

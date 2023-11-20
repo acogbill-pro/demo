@@ -1,9 +1,9 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics'
-import { useProfileStore } from '~/stores/profiles';
+import { useProfileTraitsStore } from '~/stores/profiles';
 import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
-const profiles = useProfileStore()
+const profiles = useProfileTraitsStore()
 
 useHead({
     //title: 'Segment App Home',
