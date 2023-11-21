@@ -1,11 +1,21 @@
 <script setup>
+import { useProfileStore } from '~/stores/profile'
 import { useProfileEventsStore } from '~/stores/profileEvents';
 const eventStore = useProfileEventsStore()
 
-const collapse = ref(true)
+const profile = useProfileStore()
 
-function toggleExpand() {
+const collapse = ref(true)
+const loading = ref(true)
+
+async function toggleExpand() {
+    loading.value = true
+
+    profile.loadSummary()
+
     collapse.value = !collapse.value
+
+    loading.value = false
 }
 
 onMounted(() => {
@@ -22,11 +32,18 @@ onMounted(() => {
         </v-card-actions>
         <v-expand-transition>
             <v-card-text v-if="!collapse">
-                <ul>
+                <!-- <ul>
                     <li v-for="(event, index) in eventStore.cleanEvents" :key="index">
                         {{ event.event }}
                     </li>
-                </ul>
+                </ul> -->
+                <div v-if="loading">
+                    <v-skeleton-loader type="text">Loading</v-skeleton-loader>
+                </div>
+                <div v-else>
+                    {{ profile.summary }}
+                </div>
+
             </v-card-text>
         </v-expand-transition>
     </v-card>
