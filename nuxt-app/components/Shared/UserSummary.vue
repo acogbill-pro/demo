@@ -12,9 +12,9 @@ async function toggleExpand() {
     if (!profile.hasLoaded) return
     loading.value = true
 
-    profile.loadSummary()
-
     collapse.value = !collapse.value
+
+    if (!collapse.value) profile.loadSummary()
 
     loading.value = false
 }

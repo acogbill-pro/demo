@@ -42,7 +42,7 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
           if (firstFour === 'j_o_') removeProperty(traitsToReturn, trait)
         })
 
-        console.log(state.traits)
+        // console.log(state.traits)
         return state.traits
       },
       productSKUsOwned: (state) => {

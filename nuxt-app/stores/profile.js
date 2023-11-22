@@ -12,10 +12,10 @@ export const useProfileStore = defineStore('profileStore', {
     }),
     getters: {
       profile: (state) => {
-        const {traits} = useProfileTraitsStore()
-        const {events} = useProfileEventsStore()
+        const {cleanTraits} = useProfileTraitsStore()
+        const {cleanEvents} = useProfileEventsStore()
         
-        return {traits, events}
+        return {traits: cleanTraits, events: cleanEvents}
       },
       storesLoading: (state) => {
         const {isLoading: traitsLoading} = useProfileTraitsStore()
@@ -87,15 +87,14 @@ export const useProfileStore = defineStore('profileStore', {
       loadSummary() {
         const analytics = useAnalytics()
 
-        if (!analytics.hasIDs) {
-          console.log('bailing on summary load because no ID')
+        if (!analytics.hasIDs || !this.hasLoaded) {
+          console.log('bailing on summary load because no ID or no Profile loaded')
           return
         }
 
-        const IDObject = {
-          userID: analytics.bestID,
-          anon: analytics.bestIDIsAnonymous
-        }
+        const profileAsString = JSON.stringify(this.profile)
+
+        // console.log('Profile object:', profileAsString)
 
         const options = {
           method: "POST",
@@ -103,7 +102,7 @@ export const useProfileStore = defineStore('profileStore', {
             'Content-Type': 'application/json',
             // 'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
           },
-          body: JSON.stringify(IDObject)
+          body: profileAsString,
         }
 
         fetch('/api/user/summary', options)
@@ -125,7 +124,7 @@ export const useProfileStore = defineStore('profileStore', {
         })
         .then((response) => {
           // console.log('fetchedEvents', fetchedProfile)
-          console.log(response)
+          // console.log(response)
 
           if (!response) {
             console.log('no summary generated from  OpenAI')
@@ -134,7 +133,7 @@ export const useProfileStore = defineStore('profileStore', {
 
           const {data} = response
           const {summary} = JSON.parse(data)
-          console.log(summary)
+          // console.log(summary)
           this.summary = summary
         })
         .catch((error) => {

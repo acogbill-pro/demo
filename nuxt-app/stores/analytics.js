@@ -1,7 +1,7 @@
 // Wrapper store for analytics.js
 import { AnalyticsBrowser } from '@segment/analytics-next'
 import {defineStore} from 'pinia'
-import {useProfileTraitsStore} from '~/stores/profileTraits'
+import {useProfileStore} from '~/stores/profile'
 
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
@@ -156,7 +156,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         }
       },
       identify(traitsObject = {}, syncAfter = false) {
-        const profiles = useProfileTraitsStore()
+        const profile = useProfileStore()
 
         // if (useID !== null) {  // ID override
         //   this.analytics.identify(useID, traitsObject)     
@@ -174,7 +174,7 @@ export const useAnalytics = defineStore('analyticsStore', {
 
           if (syncAfter) {
             setTimeout(() => {
-              profiles.startSyncing(3)
+              profile.startSyncing(3)
             }, 2000)
           }
           
@@ -184,12 +184,13 @@ export const useAnalytics = defineStore('analyticsStore', {
 
           if (syncAfter) {
             setTimeout(() => {
-              profiles.startSyncing(10)
+              profile.startSyncing(10)
             }, 2000)
           }
         }
       },
       async identifyServerSide(traitsObject = {}, syncAfter = false) {
+        const profile = useProfileStore()
         try {
           const body = {
             traits: traitsObject,
@@ -218,9 +219,8 @@ export const useAnalytics = defineStore('analyticsStore', {
             // console.log('fetch went OK')
             const {data} = await response.json()
             if (syncAfter) {
-              const profiles = useProfileTraitsStore()
               setTimeout(() => {
-                profiles.startSyncing(10)
+                profile.startSyncing(10)
               }, 2000)
             }
             return data
