@@ -22,6 +22,11 @@ export const useProfileStore = defineStore('profileStore', {
         const {isLoading: eventsLoading} = useProfileEventsStore()
         return traitsLoading || eventsLoading
       },
+      hasLoaded: (state) => {
+        const {hasTraits} = useProfileTraitsStore()
+        const {hasEvents} = useProfileEventsStore()
+        return hasTraits || hasEvents
+      },
     },
   
     actions: {
@@ -80,7 +85,61 @@ export const useProfileStore = defineStore('profileStore', {
         analytics.reset()
       },
       loadSummary() {
-        this.summary = 'Summary'
+        const analytics = useAnalytics()
+
+        if (!analytics.hasIDs) {
+          console.log('bailing on summary load because no ID')
+          return
+        }
+
+        const IDObject = {
+          userID: analytics.bestID,
+          anon: analytics.bestIDIsAnonymous
+        }
+
+        const options = {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
+          },
+          body: JSON.stringify(IDObject)
+        }
+
+        fetch('/api/user/summary', options)
+        .then((response) => {
+
+          // console.log('Response from API', response)
+
+          if (response.ok) {
+            return response.json()
+          } else if(response.status === 404) {
+            console.log('404 error')
+            this.isLoading = false
+            return Promise.reject('error 404')
+          } else {
+            this.isLoading = false
+            console.log('error in profile API response')
+            return Promise.reject('some other error: ' + response.status)
+          }
+        })
+        .then((response) => {
+          // console.log('fetchedEvents', fetchedProfile)
+          console.log(response)
+
+          if (!response) {
+            console.log('no summary generated from  OpenAI')
+            return
+          }
+
+          const {data} = response
+          const {summary} = JSON.parse(data)
+          console.log(summary)
+          this.summary = summary
+        })
+        .catch((error) => {
+          console.log(error)
+        });
       },
     }
   })

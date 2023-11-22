@@ -9,6 +9,7 @@ const collapse = ref(true)
 const loading = ref(true)
 
 async function toggleExpand() {
+    if (!profile.hasLoaded) return
     loading.value = true
 
     profile.loadSummary()
@@ -19,11 +20,12 @@ async function toggleExpand() {
 }
 
 onMounted(() => {
+
 })
 </script>
 
 <template>
-    <v-card class="mb-5">
+    <v-card class="mb-5" v-if="profile.hasLoaded">
         <v-card-actions @click="toggleExpand">
             <v-img src="/images/openai-logomark.png" height="20" />
             User Summary
@@ -38,7 +40,8 @@ onMounted(() => {
                     </li>
                 </ul> -->
                 <div v-if="loading">
-                    <v-skeleton-loader type="text">Loading</v-skeleton-loader>
+                    <!-- <v-skeleton-loader type="text">Loading</v-skeleton-loader> -->
+                    Loading
                 </div>
                 <div v-else>
                     {{ profile.summary }}
