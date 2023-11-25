@@ -21,7 +21,7 @@ async function main(profileData) {
         messages: [
           {
             role: "system",
-            content: "Refactor a business customer's 'traits' (key-value pairs of human attributes) and 'events' (array of their interactions with the business; please emphasize recent/significant and deemphasize default or frequent activities like Home Page visits) into a JSON 'summary' with two prioritized sentences. The second sentence should suggest an action to a customer service agent to provide added value to the customer, while also increasing revenue for the business extracted from that customer.",
+            content: "Refactor a business customer's 'traits' (key-value pairs of human attributes) and 'events' (array of their interactions with the business into a single sentence; please emphasize recent/significant and deemphasize default or frequent activities like Home Page visits) into a JSON object as 'summary'. Also in the JSON object include 'nba', where you suggest in a single sentence an action to a customer service agent to provide added value to the customer, increase revenue for the business extracted from that customer, while minimizing costs to the business. If you think additional traits can be inferred from the 'events' not already reflected in 'traits', include them in the JSON as name-value pairs as another object, 'inferred'",
           },
           { role: "user", content: JSON.stringify(profileData) },
         ],

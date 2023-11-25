@@ -5,16 +5,16 @@ const eventStore = useProfileEventsStore()
 
 const profile = useProfileStore()
 
-const collapse = ref(true)
+const collapseSummary = ref(true)
 const loading = ref(true)
 
 async function toggleExpand() {
     if (!profile.hasLoaded) return
     loading.value = true
 
-    collapse.value = !collapse.value
+    collapseSummary.value = !collapseSummary.value
 
-    if (!collapse.value) profile.loadSummary()
+    if (!collapseSummary.value) profile.loadSummary()
 
     loading.value = false
 }
@@ -30,10 +30,10 @@ onMounted(() => {
             <v-img src="/images/openai-logomark.png" height="20" />
             User Summary
             <v-spacer />
-            <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'" />
+            <v-btn :icon="collapseSummary ? 'mdi-menu-down' : 'mdi-menu-up'" />
         </v-card-actions>
         <v-expand-transition>
-            <v-card-text v-if="!collapse">
+            <v-card-text v-if="!collapseSummary">
                 <!-- <ul>
                     <li v-for="(event, index) in eventStore.cleanEvents" :key="index">
                         {{ event.event }}
@@ -44,12 +44,25 @@ onMounted(() => {
                     Loading
                 </div>
                 <div v-else>
-                    {{ profile.summary }}
+                    <p>{{ profile.summary }}</p>
                 </div>
 
             </v-card-text>
         </v-expand-transition>
     </v-card>
+    <v-card class="mb-5" v-if="profile.hasLoaded && profile.nba">
+        <v-card-actions>
+            <v-img src="/images/openai-logomark.png" height="20" />
+            Next Best Action
+            <v-spacer />
+        </v-card-actions>
+        <v-expand-transition>
+            <v-card-text>
+                <p>{{ profile.nba }}</p>
+            </v-card-text>
+        </v-expand-transition>
+    </v-card>
+    <SharedSuggestedTraits :traits-object="profile.inferred" v-if="profile.hasLoaded && profile.inferred" />
 </template>
 
 <style lang="scss" scoped></style>

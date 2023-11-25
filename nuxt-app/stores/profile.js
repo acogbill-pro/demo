@@ -9,6 +9,8 @@ export const useProfileStore = defineStore('profileStore', {
     state: () => ({
       isSyncing: false,
       summary: '',
+      nba: null,
+      inferred: null,
     }),
     getters: {
       profile: (state) => {
@@ -132,9 +134,11 @@ export const useProfileStore = defineStore('profileStore', {
           }
 
           const {data} = response
-          const {summary} = JSON.parse(data)
+          const {summary, nba, inferred} = JSON.parse(data)
           // console.log(summary)
           this.summary = summary
+          this.nba = nba
+          this.inferred = inferred
         })
         .catch((error) => {
           console.log(error)
