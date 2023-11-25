@@ -82,6 +82,10 @@ export const useProfileStore = defineStore('profileStore', {
 
         unloadTraits()
         unloadEvents()
+        
+        this.summary = ''
+        this.nba = null
+        this.inferred = null
 
         const analytics = useAnalytics()
         analytics.reset()
