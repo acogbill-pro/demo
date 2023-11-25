@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
                 traits: {
                     enriched: true,
                     BAN: '12345678',
-                    enrichmentSource: 'Grid AC',
+                    enrichment_source: 'Grid AC',
                     wireless_plan: 'Family',
                     upgrade_eligible: true,
                     broadband_customer: true,
