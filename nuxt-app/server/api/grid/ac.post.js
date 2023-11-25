@@ -8,9 +8,6 @@ import { Analytics } from '@segment/analytics-node'
 // const analytics = new Analytics({ writeKey })
 
 export default defineEventHandler(async (event) => {
-    
-    // console.log(orderID)
-
 
     try {
         const rawBody = await readBody(event)
@@ -24,9 +21,9 @@ export default defineEventHandler(async (event) => {
                     enriched: true,
                     BAN: '12345678',
                     enrichmentSource: 'Grid AC',
-                    wirelessPlan: 'Family',
-                    upgradeEligible: true,
-                    broadbandCustomer: true,
+                    wireless_plan: 'Family',
+                    upgrade_eligible: true,
+                    broadband_customer: true,
                     contract_expires_this_month: false,
                 }
             },

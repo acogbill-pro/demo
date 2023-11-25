@@ -21,11 +21,12 @@ async function main(profileData) {
         messages: [
           {
             role: "system",
-            content: "Refactor a business customer's 'traits' (key-value pairs of human attributes) and 'events' (array of their interactions with the business into a single sentence; please emphasize recent/significant and deemphasize default or frequent activities like Home Page visits) into a JSON object as 'summary'. Also in the JSON object include 'nba', where you suggest in a single sentence an action to a customer service agent to provide added value to the customer, increase revenue for the business extracted from that customer, while minimizing costs to the business. If you think additional traits can be inferred from the 'events' not already reflected in 'traits', include them in the JSON as name-value pairs as another object, 'inferred'",
+            content: "Refactor a business customer's 'traits' (key-value pairs of human attributes) and 'events' (array of their interactions with the business into a single sentence; please emphasize recent/significant and deemphasize default or frequent activities like Home Page visits) into a JSON object with key 'summary'. Also in the JSON object include key 'nba', where you suggest in a single sentence an action to a customer service agent to provide added value to the customer, increase revenue for the business extracted from that customer, while minimizing costs to the business. If you think additional traits can be inferred from the 'events' not already reflected in 'traits', include them in the JSON as name-value pairs as another object with key 'inferred'",
           },
           { role: "user", content: JSON.stringify(profileData) },
         ],
         model: "gpt-4-1106-preview",//"gpt-3.5-turbo-1106",
+        temperature: 0.2,
         response_format: { type: "json_object" },
       });
 
