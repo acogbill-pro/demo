@@ -6,17 +6,13 @@ const eventStore = useProfileEventsStore()
 const profile = useProfileStore()
 
 const collapseSummary = ref(true)
-const loading = ref(true)
 
 async function toggleExpand() {
     if (!profile.hasLoaded) return
-    loading.value = true
 
     collapseSummary.value = !collapseSummary.value
 
     if (!collapseSummary.value) profile.loadSummary()
-
-    loading.value = false
 }
 
 onMounted(() => {
@@ -39,9 +35,8 @@ onMounted(() => {
                         {{ event.event }}
                     </li>
                 </ul> -->
-                <div v-if="loading">
-                    <!-- <v-skeleton-loader type="text">Loading</v-skeleton-loader> -->
-                    Loading
+                <div v-if="profile.summary === ''">
+                    <v-skeleton-loader type="card"></v-skeleton-loader>
                 </div>
                 <div v-else>
                     <p>{{ profile.summary }}</p>
