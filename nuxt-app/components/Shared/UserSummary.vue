@@ -36,7 +36,7 @@ onMounted(() => {
                     </li>
                 </ul> -->
                 <div v-if="profile.summary === ''">
-                    <!-- <v-skeleton-loader type="card"></v-skeleton-loader> -->
+                    <v-skeleton-loader type="card"></v-skeleton-loader>
                 </div>
                 <div v-else>
                     <p>{{ profile.summary }}</p>
