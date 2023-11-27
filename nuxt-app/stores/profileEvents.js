@@ -26,6 +26,13 @@ export const useProfileEventsStore = defineStore('profileEventsStore', {
           return {event, properties}
         })
       },
+      cleanEventNames: (state) => {
+        // remove metadata
+        return state.events.map((rawEvent) => {
+          const {event} = rawEvent
+          return event
+        })
+      },
     },
   
     actions: {

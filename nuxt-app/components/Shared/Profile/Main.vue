@@ -7,8 +7,7 @@ import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
 const profile = useProfileStore()
 const traitStore = useProfileTraitsStore()
-const articles = useArticleCatalog()
-const cart = useCartStore()
+const tab = ref(null)
 
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
@@ -75,6 +74,7 @@ function toggleList() {
 
 <template>
     <div>
+
         <v-card class="mb-5">
             <!--<v-form ref="form">
                             <v-text-field v-model="userID" label="User ID" required />
@@ -86,19 +86,24 @@ function toggleList() {
                     :color="traitStore.hasTraits ? 'black' : 'white'" />
 
             </v-card-actions>
-            <v-expand-transition>
-                <v-card-text v-if="!collapse">
-                    <p class="mb-5">Anon ID: {{ analytics.anonymousID }}</p>
-                    <ul>
-                        <li v-for="[key, value] in Object.entries(traitStore.cleanTraits)" :key="key">{{ key + ': ' +
-                            value
-                        }}
-                        </li>
-                    </ul>
-                    <SharedAddTrait class="my-5" />
-                    <SharedAddDateTrait class="my-5" />
-                </v-card-text>
-            </v-expand-transition>
+            <div v-show="!collapse">
+                <v-tabs v-model="tab" bg-color="secondary">
+                    <v-tab value="traits">
+                        Traits
+                    </v-tab>
+                    <v-tab value="events">
+                        Events
+                    </v-tab>
+                </v-tabs>
+                <v-window v-model="tab">
+                    <v-window-item value="traits">
+                        <SharedProfileTraits />
+                    </v-window-item>
+                    <v-window-item value="events">
+                        <SharedProfileEvents />
+                    </v-window-item>
+                </v-window>
+            </div>
             <v-card-actions>
                 <v-switch v-model="syncing" :loading="profile.storesLoading ? 'gray' : false" class="my-0">
                     <template v-slot:label>
