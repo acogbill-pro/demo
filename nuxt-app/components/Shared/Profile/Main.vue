@@ -79,11 +79,11 @@ function toggleList() {
             <!--<v-form ref="form">
                             <v-text-field v-model="userID" label="User ID" required />
                         </v-form>-->
-            <v-card-actions @click="toggleList()">
+            <v-card-actions>
                 <span>Profile: {{ IDforPrint }}</span>
                 <v-spacer />
-                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
-                    :color="traitStore.hasTraits ? 'black' : 'white'" />
+                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'" :color="traitStore.hasTraits ? 'black' : 'white'"
+                    @click="toggleList()" />
 
             </v-card-actions>
             <div v-show="!collapse">

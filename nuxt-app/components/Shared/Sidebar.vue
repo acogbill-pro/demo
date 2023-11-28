@@ -7,7 +7,7 @@
         <SharedEventList />
         <!--  -->
         <SharedProfileMain />
-        <SharedUserSummary />
+        <SharedB2bGroupCaller />
         <!-- <NuxtLink to="/pristine/sms">Send SMS</NuxtLink> -->
         <!-- <SharedMessaging />
                 <SharedSetup /> -->

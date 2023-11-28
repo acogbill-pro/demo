@@ -51,12 +51,16 @@ function logout() {
             </v-col>`
         </v-row>
         <v-row v-else class="bg">
-            <v-col>
+            <v-col cols="8">
                 <v-card>
                     <v-card-title>Logged In</v-card-title>
+                    <v-card-text>
+
+                        <SharedUserSummary />
+                    </v-card-text>
                 </v-card>
             </v-col>
-            <v-col>
+            <v-col cols="4">
                 <SharedSidebar />
             </v-col>`
         </v-row>

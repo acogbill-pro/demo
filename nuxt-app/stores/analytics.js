@@ -234,6 +234,10 @@ export const useAnalytics = defineStore('analyticsStore', {
           }, 2000)
         }
       },
+      group(accountId, accountTraits = {}) {
+        if (this.userID === null && this.anonymousID === '') return
+        this.analytics.group(accountId, accountTraits) 
+      },
       activateWatcher() {
         // analytics.js emitter
         // works for alias, group, identify, track, and page
