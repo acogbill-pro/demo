@@ -36,7 +36,7 @@ async function main(postedBody) {
         return response
     } catch(e) {
         console.log('Error in generating image', e)
-        return [{url:''}]
+        return {data:[{url:''}]}
     }
   }
 
