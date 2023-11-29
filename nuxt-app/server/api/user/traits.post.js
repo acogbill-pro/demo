@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
                 data: json
             }
         } catch(e) {
-            console.log('Error getting profile: ', e, json)
+            console.log('Error getting profile: ', e)
             return {
                 status: 'Error',
                 data: {}
