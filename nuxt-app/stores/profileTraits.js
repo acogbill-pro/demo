@@ -63,6 +63,7 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
             'Content-Type': 'application/json',
             'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
           },
+          compress: false,
           body: JSON.stringify(IDObject)
         }
 
