@@ -148,5 +148,39 @@ export const useProfileStore = defineStore('profileStore', {
           console.log(error)
         });
       },
+      async fetchPersonalizedImage(prompt) {
+        const analytics = useAnalytics()
+        const traitStore = useProfileTraitsStore()
+
+        if (!analytics.hasIDs || !this.hasLoaded) {
+          console.log('bailing on personalized image load because no ID or no Profile loaded')
+          return
+        }
+
+        // const profileAsString = JSON.stringify(this.profile)
+
+        // console.log('Profile object:', profileAsString)
+
+        const options = {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
+          },
+          body: JSON.stringify({prompt, traits: traitStore.cleanTraits}),
+        }
+
+        const response = await fetch('/api/openai/images/generate', options)
+
+        if (response?.ok) {
+          const {data} = await response.json()
+          const image_url = data[0].url
+          console.log(image_url)
+          return image_url
+        } else {
+          return null
+        }
+        
+      },
     }
   })

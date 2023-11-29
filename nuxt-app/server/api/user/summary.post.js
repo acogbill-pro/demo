@@ -49,23 +49,6 @@ export default defineEventHandler(async (event) => {
 
         console.log('rawBody', rawBody)
 
-        // const {userID, isAnon} = rawBody
-
-        const sampleData = {
-            traits: {
-                favoriteColor: 'blue',
-                age: 45,
-            },
-            events: [
-                {
-                    event: 'Page Viewed',
-                    properties: {
-                        page_name: 'Shopping home'
-                    },
-                }
-            ]
-        }
-
         const data = await main(rawBody)
 
         // console.log('AI response: ', data)
