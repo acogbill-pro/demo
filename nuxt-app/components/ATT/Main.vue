@@ -80,15 +80,18 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                     <v-fade-transition>
                         <v-img :src="heroImagePath" width="800" />
                     </v-fade-transition>
-                    <!-- Logged in as {{ IDforPrint }} -->
+                    <v-btn v-if="profile.hasLoaded" :loading="imageLoading" :disabled="imageLoading" block nuxt class="mt-2"
+                        @click="loadPhoto">Load Personalized Photo
+                        <template v-slot:prepend>
+                            <v-icon icon="mdi-image" />
+                        </template>
+                    </v-btn>
                     <v-expand-transition>
                         <!-- <BrandedShopRecommendedProduct v-if="hasRecommendation" :product="cart.recommendedProduct" /> -->
                     </v-expand-transition>
                     <!-- <BrandedShopProductList v-for="category in products.categories" :key="category" :category="category" /> -->
                     <v-btn block to="/att/products" nuxt class="mt-2">Add Items</v-btn>
-                    <v-btn v-if="profile.hasLoaded" :loading="imageLoading" block nuxt class="mt-2" @click="loadPhoto">Load
-                        Personalized
-                        Photo</v-btn>
+
                 </v-col>
                 <v-col cols="4">
                     <SharedSidebar />

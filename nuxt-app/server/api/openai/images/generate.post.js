@@ -16,7 +16,7 @@ async function main(postedBody) {
     const {prompt: originalPrompt, traits} = postedBody
     const traitsAsString = JSON.stringify(traits)
 
-    const combinedPrompt = `${originalPrompt}, featuring colors, objects, products, and methods of communication preferred by the human business customer described by the key-value pairs of human attributes in this object: ${traitsAsString}.`
+    const combinedPrompt = `${originalPrompt}, featuring colors, objects, products, and methods of communication preferred by the business customer described by the key-value pairs of human attributes in this object: ${traitsAsString}. The image should not feature any words.`
 
     console.log(combinedPrompt)
 
