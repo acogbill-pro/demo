@@ -24,26 +24,13 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
         }
       },
       cleanTraits: (state) => {
+        const traitsCopy = Object.assign({}, state.traits)
 
-        const removeProperty = (obj, prop) => {
-          delete obj[prop]
-          return obj
-        }
-
-        var traitsToReturn = state.traits
-        // console.log(traitsToReturn)
-
-        for (let i = 0; i < state.traitBlacklist.length; i++) {
-          traitsToReturn = removeProperty(traitsToReturn, state.traitBlacklist[i])
-        }
-
-        Object.keys(traitsToReturn).forEach((trait) => {
-          const firstFour = trait.slice(0, 4)
-          if (firstFour === 'j_o_') removeProperty(traitsToReturn, trait)
+        state.traitBlacklist.forEach((trait) => {
+          delete traitsCopy[trait]
         })
 
-        // console.log(state.traits)
-        return state.traits
+        return traitsCopy
       },
       productSKUsOwned: (state) => {
         return scripts.listToArray(state.traits.products_owned ?? '')
