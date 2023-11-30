@@ -11,7 +11,7 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
     state: () => ({
       isLoading: false,
       traits: {},
-      traitBlacklist: ['incrementers', 'edge'],
+      traitBlacklist: ['incrementers', 'edge', 'personalized_hero_image'],
       unwatchers: [], // because watch returns a function to call when you want to unwatch
     }),
     getters: {
@@ -26,7 +26,7 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
       cleanTraits: (state) => {
 
         const removeProperty = (obj, prop) => {
-          //delete obj[prop]
+          delete obj[prop]
           return obj
         }
 
@@ -140,6 +140,9 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
 
         const {identify} = useAnalytics()
         identify(traitObject, true)
+      },
+      hasSpecificTrait(traitName) {
+        return Object.keys(this.traits).includes(traitName)
       },
       unload() {
         this.traits = {}

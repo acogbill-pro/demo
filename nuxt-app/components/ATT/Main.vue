@@ -52,6 +52,7 @@ const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : an
 const heroImageOverrideURL = ref(null)
 const heroImagePath = computed(() => {
     if (heroImageOverrideURL.value) return heroImageOverrideURL.value
+    if (profileTraits.hasSpecificTrait('personalized_hero_image')) return profileTraits.traits.personalized_hero_image
     return profileTraits.hasTraits ? '/att/images/iPhonePromo.jpeg' : '/att/images/inStore.png'
 })
 
@@ -62,6 +63,7 @@ async function loadPhoto() {
     const generatedPhoto = await profile.fetchPersonalizedImage('Image of a person smiling and talking with a loved one via a smartphone')
     // console.log('gen photo URL', generatedPhoto)
     if (generatedPhoto !== '') heroImageOverrideURL.value = generatedPhoto
+    analytics.identify({ 'personalized_hero_image': generatedPhoto })
     imageLoading.value = false
 }
 

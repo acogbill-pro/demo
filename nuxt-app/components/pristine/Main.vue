@@ -43,6 +43,7 @@ const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : an
 const heroImageOverrideURL = ref(null)
 const heroImagePath = computed(() => {
     if (heroImageOverrideURL.value) return heroImageOverrideURL.value
+    if (profileTraits.hasSpecificTrait('personalized_hero_image')) return profileTraits.traits.personalized_hero_image
     return profileTraits.hasTraits ? '/pristine/images/bread.png' : '/pristine/images/grocery.jpg'
 })
 
@@ -52,7 +53,10 @@ async function loadPhoto() {
     imageLoading.value = true
     const generatedPhoto = await profile.fetchPersonalizedImage('Image of a happy person standing in front of an outdoor market display of food')
     // console.log('gen photo URL', generatedPhoto)
-    if (generatedPhoto !== '') heroImageOverrideURL.value = generatedPhoto
+    if (generatedPhoto !== '') {
+        heroImageOverrideURL.value = generatedPhoto
+        analytics.identify({ 'personalized_hero_image': generatedPhoto })
+    }
     imageLoading.value = false
 }
 
