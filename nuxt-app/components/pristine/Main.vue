@@ -50,7 +50,7 @@ const imageLoading = ref(false)
 
 async function loadPhoto() {
     imageLoading.value = true
-    const generatedPhoto = await profile.fetchPersonalizedImage('Image of a happy person in a grocery store aisle')
+    const generatedPhoto = await profile.fetchPersonalizedImage('Image of a happy person standing in front of an outdoor market display of food')
     // console.log('gen photo URL', generatedPhoto)
     if (generatedPhoto !== '') heroImageOverrideURL.value = generatedPhoto
     imageLoading.value = false
