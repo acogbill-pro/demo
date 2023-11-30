@@ -46,10 +46,14 @@ const heroImagePath = computed(() => {
     return profileTraits.hasTraits ? '/pristine/images/bread.png' : '/pristine/images/grocery.jpg'
 })
 
+const imageLoading = ref(false)
+
 async function loadPhoto() {
-    const generatedPhoto = await profile.fetchPersonalizedImage('Image of a grocery store aisle')
+    imageLoading.value = true
+    const generatedPhoto = await profile.fetchPersonalizedImage('Image of a happy person in a grocery store aisle')
     // console.log('gen photo URL', generatedPhoto)
     if (generatedPhoto !== '') heroImageOverrideURL.value = generatedPhoto
+    imageLoading.value = false
 }
 
 onMounted(() => {
@@ -68,13 +72,14 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                         <v-img :src="heroImagePath" width="800" />
                     </v-fade-transition>
                     <!-- Logged in as {{ IDforPrint }} -->
-                    <v-expand-transition>
-                        <!-- <BrandedShopRecommendedProduct v-if="hasRecommendation" :product="cart.recommendedProduct" /> -->
-                    </v-expand-transition>
+                    <v-btn v-if="profile.hasLoaded" :loading="imageLoading" :disabled="imageLoading" block nuxt class="mt-2"
+                        @click="loadPhoto">Load Personalized Photo
+                        <template v-slot:prepend>
+                            <v-icon icon="mdi-image" />
+                        </template>
+                    </v-btn>
                     <!-- <BrandedShopProductList v-for="category in products.categories" :key="category" :category="category" /> -->
                     <v-btn block to="/pristine/products" nuxt class="mt-2">Add Items</v-btn>
-                    <v-btn v-if="profile.hasLoaded" block nuxt class="mt-2" @click="loadPhoto">Load Personalized
-                        Photo</v-btn>
                 </v-col>
                 <v-col cols="4">
                     <SharedSidebar />
