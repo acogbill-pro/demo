@@ -26,7 +26,7 @@ async function main(profileData, prompt) {
           { role: "user", content: JSON.stringify(profileData) },
         ],
         model: "gpt-4-1106-preview",//"gpt-3.5-turbo-1106",
-        temperature: 0.2,
+        temperature: 0.5,
         response_format: { type: "json_object" },
       });
 
