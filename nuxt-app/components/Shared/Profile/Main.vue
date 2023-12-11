@@ -97,8 +97,9 @@ function toggleList() {
                     class="ma-1" />
                 <v-btn icon="mdi-gender-female" @click="addTrait({ gender: 'female' })" class="ma-1" />
                 <v-btn icon="mdi-gender-male" @click="addTrait({ gender: 'male' })" class="ma-1" />
-                <v-btn icon="mdi-weather-lightning-rainy" @click="addTrait({ weather: 'cold, rainstorm' })" class="ma-1" />
+                <v-btn icon="mdi-weather-lightning-rainy" @click="addTrait({ weather: 'dark, rainstorm' })" class="ma-1" />
                 <v-btn icon="mdi-weather-sunny" @click="addTrait({ weather: 'warm, sunny' })" class="ma-1" />
+                <v-btn icon="mdi-weather-snowy" @click="addTrait({ weather: 'cold, snowy' })" class="ma-1" />
             </v-card-text>
             <div v-show="!collapse">
                 <v-tabs v-model="tab" bg-color="secondary">
