@@ -38,11 +38,14 @@ onMounted(() => {
     <div v-if="!analytics.bestIDIsAnonymous">
         <v-container>
             <v-row v-if="!analytics.bestIDIsAnonymous">
-                <v-col cols="6">
+                <v-col cols="5">
                     <ATTCartContents />
 
                 </v-col>
-                <v-col></v-col>
+                <v-col cols="3"></v-col>
+                <v-col cols="4">
+                    <SharedEventList />
+                </v-col>
             </v-row><v-row>
                 <v-col cols="4">
                     <v-text-field label="Deliver By Date" variant="solo" v-model="deliverByDate"
