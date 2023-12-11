@@ -29,6 +29,7 @@ onMounted(() => {
             <v-img src="/images/openai-logomark.png" height="20" />
             Other Prompt
             <v-spacer />
+            <v-btn v-if="profile.other" icon="mdi-refresh" @click="reset" variant="plain" block />
         </v-card-actions>
         <v-expand-transition>
             <v-card-text v-if="profile.other === ''">
@@ -55,14 +56,7 @@ onMounted(() => {
                 </div>
             </v-card-text>
             <v-card-text v-else>
-                <v-container>
-                    <v-row>
-                        <v-col cols="10">{{ profile.other }}</v-col>
-                        <v-col cols="2">
-                            <v-btn icon="mdi-refresh" @click="reset" variant="plain" block />
-                        </v-col>
-                    </v-row>
-                </v-container>
+                {{ profile.other }}
 
             </v-card-text>
         </v-expand-transition>
