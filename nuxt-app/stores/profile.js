@@ -11,6 +11,7 @@ export const useProfileStore = defineStore('profileStore', {
       summary: '',
       nba: null,
       inferred: null,
+      other: '',
     }),
     getters: {
       profile: (state) => {
@@ -84,6 +85,7 @@ export const useProfileStore = defineStore('profileStore', {
         unloadEvents()
         
         this.summary = ''
+        this.other = ''
         this.nba = null
         this.inferred = null
 
@@ -98,7 +100,7 @@ export const useProfileStore = defineStore('profileStore', {
           return
         }
 
-        const profileAsString = JSON.stringify(this.profile)
+        const body = JSON.stringify({profile: this.profile})
 
         // console.log('Profile object:', profileAsString)
 
@@ -108,7 +110,7 @@ export const useProfileStore = defineStore('profileStore', {
             'Content-Type': 'application/json',
             // 'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
           },
-          body: profileAsString,
+          body,
         }
 
         fetch('/api/user/summary', options)
@@ -143,6 +145,61 @@ export const useProfileStore = defineStore('profileStore', {
           this.summary = summary
           this.nba = nba
           this.inferred = inferred
+        })
+        .catch((error) => {
+          console.log(error)
+        });
+      },
+      loadOther(prompt) {
+        const analytics = useAnalytics()
+
+        if (!analytics.hasIDs || !this.hasLoaded) {
+          console.log('bailing on summary load because no ID or no Profile loaded')
+          return
+        }
+
+        const body = JSON.stringify({profile: this.profile, prompt})
+
+        // console.log('Profile object:', profileAsString)
+
+        const options = {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
+          },
+          body,
+        }
+
+        fetch('/api/user/prompt', options)
+        .then((response) => {
+
+          // console.log('Response from API', response)
+
+          if (response.ok) {
+            return response.json()
+          } else if(response.status === 404) {
+            console.log('404 error')
+            return Promise.reject('error 404')
+          } else {
+            console.log('error in profile API response')
+            return Promise.reject('some other error: ' + response.status)
+          }
+        })
+        .then((response) => {
+          // console.log('fetchedEvents', fetchedProfile)
+          // console.log(response)
+
+          if (!response) {
+            console.log('no summary generated from  OpenAI')
+            return
+          }
+
+          console.log('response', response)
+          const {data} = response
+          const {result} = JSON.parse(data)
+          console.log(result)
+          this.other = result
         })
         .catch((error) => {
           console.log(error)

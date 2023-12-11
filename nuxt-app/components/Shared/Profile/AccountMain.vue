@@ -1,8 +1,10 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProfileTraitsStore } from '~/stores/profileTraits.js'
+import { useProfileStore } from '~/stores/profile';
+const profile = useProfileStore()
 const analytics = useAnalytics()
-const profiles = useProfileTraitsStore()
+const traits = useProfileTraitsStore()
 
 const collapse = ref(true)
 
@@ -15,7 +17,7 @@ const isLoggedIn = computed(() => {
 })
 
 function logout() {
-    profiles.unload()
+    profile.unload()
 }
 </script>
 
@@ -39,7 +41,8 @@ function logout() {
                     <v-card-title>Logged In</v-card-title>
                     <v-card-text>
 
-                        <SharedUserSummary />
+                        <SharedProfileUserSummary />
+                        <SharedProfilePrompter />
                     </v-card-text>
                 </v-card>
             </v-col>

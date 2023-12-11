@@ -18,7 +18,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <SharedProfileAccount />>
+    <SharedProfileAccountMain />>
 </template>
 
 <style lang="scss" scoped></style>

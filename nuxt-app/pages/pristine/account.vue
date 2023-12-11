@@ -1,9 +1,12 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
+import { useProfileStore } from '~/stores/profile';
 const analytics = useAnalytics()
+const profile = useProfileStore()
 
 definePageMeta({
     layout: "default",
+    middleware: ["page-analytics"],
 })
 
 useHead({
@@ -12,13 +15,12 @@ useHead({
 
 onMounted(() => {
     analytics.page('Account Page')
-
     //profiles.persistUser()
 })
 </script>
 
 <template>
-    <SharedProfileAccount />>
+    <SharedProfileAccountMain />
 </template>
 
 <style lang="scss" scoped></style>

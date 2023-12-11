@@ -15,13 +15,13 @@ const AI = new OpenAI({
     apiKey: openAIKey,
 });
 
-async function main(profileData) {
+async function main(profileData, prompt) {
 
     const completion = await AI.chat.completions.create({
         messages: [
           {
             role: "system",
-            content: "Refactor a business customer's 'traits' (key-value pairs of human attributes) and 'events' (array of their interactions with the business; the order of these events is reverse-chronological and important to the customer experience; please emphasize recent/extraordinary behaviors and deemphasize default or frequent activities like Home Page and Account Page visits) into a single sentence, included in a JSON object with key 'summary'. Also in the JSON object include key 'nba', where you suggest in a single sentence an action to a customer service agent to provide added value to the customer, increase revenue for the business extracted from that customer, while minimizing costs to the business. If you think additional traits can be inferred from the 'events' not already reflected in 'traits', include them in the JSON as name-value pairs as another object with key 'inferred'",
+            content: `Refactor a business customer's 'traits' (key-value pairs of human attributes) and 'events' (array of their interactions with the business; the order of these events is reverse-chronological and important to the customer experience; please emphasize recent/extraordinary behaviors and deemphasize default or frequent activities like Home Page and Account Page visits), in a JSON object under the key 'result'. The result should only contain one sentence, and follow this prompt: ${prompt}.`,
           },
           { role: "user", content: JSON.stringify(profileData) },
         ],
@@ -45,9 +45,9 @@ function countTokens(messages) {
 export default defineEventHandler(async (event) => {
 
     try {
-        const {profile} = await readBody(event)
+        const {profile, prompt} = await readBody(event)
 
-        const data = await main(profile)
+        const data = await main(profile, prompt)
 
         // console.log('AI response: ', data)
 

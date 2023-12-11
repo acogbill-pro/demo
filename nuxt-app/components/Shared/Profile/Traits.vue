@@ -11,7 +11,7 @@ const traitStore = useProfileTraitsStore()
             <p class="mb-5">Anon ID: {{ analytics.anonymousID }}</p>
             <ul>
                 <li v-for="[key, value] in Object.entries(traitStore.cleanTraits)" :key="key">{{ key + ': ' +
-                    value
+                    JSON.stringify(value)
                 }}
                 </li>
             </ul>

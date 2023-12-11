@@ -22,6 +22,10 @@ function submitForm() {
         form.value.resetValidation()
     }
 }
+
+function addTrait(withTraitObject) {
+    analytics.identify(withTraitObject)
+}
 </script>
 
 <template>
@@ -30,6 +34,16 @@ function submitForm() {
             <v-row>
                 <v-col cols="12">
                     <h5>Add a Trait</h5>
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col>
+                    <v-btn icon="mdi-paw" @click="addTrait({ pets: [{ species: 'dog', name: 'Rover' }] })" class="mr-1" />
+                    <v-btn icon="mdi-human-child" @click="addTrait({ children: [{ gender: 'girl', name: 'Violet' }] })"
+                        class="mr-1" />
+                    <v-btn icon="mdi-gender-female" @click="addTrait({ gender: 'female' })" class="mr-1" />
+                    <v-btn icon="mdi-gender-male" @click="addTrait({ gender: 'male' })" class="mr-1" />
+
                 </v-col>
             </v-row>
             <v-row>

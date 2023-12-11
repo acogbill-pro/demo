@@ -16,7 +16,7 @@ async function toggleExpand() {
 }
 
 onMounted(() => {
-
+    if (profile.summary !== '') collapseSummary.value = false
 })
 </script>
 
@@ -59,7 +59,7 @@ onMounted(() => {
             </v-card-text>
         </v-expand-transition>
     </v-card>
-    <SharedSuggestedTraits :traits-object="profile.inferred" v-if="profile.hasLoaded && profile.inferred" />
+    <SharedProfileSuggestedTraits :traits-object="profile.inferred" v-if="profile.hasLoaded && profile.inferred" />
 </template>
 
 <style lang="scss" scoped></style>

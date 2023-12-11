@@ -19,7 +19,7 @@ const props = defineProps({
         <v-expand-transition>
             <v-card-text>
                 <v-container>
-                    <SharedSingleSuggestedTrait v-for="[key, value] in Object.entries(traitsObject)" :key="key"
+                    <SharedProfileSingleSuggestedTrait v-for="[key, value] in Object.entries(traitsObject)" :key="key"
                         :object-key="key" :object-value="value" />
                 </v-container>
             </v-card-text>
