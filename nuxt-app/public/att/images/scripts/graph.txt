@@ -1,0 +1,163 @@
+data_graph {
+    version =  "v0.0.5"
+
+    #define a profile entity
+    profile {
+         profile_folder = "MARKETING_EAST"
+         materialization = "none"
+
+         #relate profile to accounts
+         relationship "promotions" {
+              name = "PROMOTIONS"              
+              #related_entity = "promotion-entity"         
+              external_id {
+                   type = "email"
+                   join_key = "EMAIL_ID"
+              }
+         }
+
+
+#relate profile to accounts
+         relationship "affiliate" {
+              name = "AFFILIATE ACCOUNTS"              
+              related_entity = "affiliate-entity"         
+              external_id {
+                   type = "email"
+                   join_key = "EMAIL_ID"
+              }
+
+  #relate profile to accounts
+         relationship "parent_accounts" {                                                   # this is just naming the relationship (does not need to be capitolized)
+              name = "PARENT ACCOUNTS"                                                      # this is the name on the data graph (doesnt need to be capitolized)
+              related_entity = "account-entity"                                             # this pulls the entity that you list out below (doesnt need to be capitolized)
+              join_on = "affiliate-entity.PARENT_ACCOUNT_ID = account-entity.ACCOUNT_ID"    # the IDs you are joining on NEED TO BE CAPITOLIZED
+
+
+
+       #relate profile to accounts
+         relationship "account_products" {
+              name = "ACCOUNT PRODUCTS"
+              related_entity = "account_product-entity"
+              join_on = "account_product-entity.ACCOUNT_ID = account-entity.ACCOUNT_ID"
+                   
+              }
+
+                   
+              }
+
+
+         }
+
+         #relate profile to accounts
+         relationship "accounts" {
+              name = "PARENT ACCOUNTS"
+              related_entity = "account-entity"
+              external_id {
+                   type = "email"
+                   join_key = "EMAIL_ID"
+              }
+           
+
+              #relate account to carts
+              relationship "carts" { 
+                   name = "CARTS"
+                   related_entity = "cart-entity"
+                   join_on = "account-entity.ID = cart-entity.ACCOUNT_ID"
+
+                   #relate products to carts
+                   relationship "products" { 
+                        name = "PRODUCTS"
+                        related_entity = "product-entity"
+                        junction_table {
+                           primary_key = "ID"
+                           table_ref = "MARKETING_EAST.CART_PRODUCTS"
+                           left_join_on = "cart-entity.ID = CART_ID"
+                           #schema.table is implied within the cart_id key
+                           right_join_on = "PRODUCT_ID = product-entity.SKU"
+                        }
+                   }
+              }
+
+
+               #relate account to orders
+              relationship "orders" { 
+                   name = "ORDERS"
+                   related_entity = "orders-entity"
+                   join_on = "account-entity.ID = orders-entity.ACCOUNT_ID"
+
+              #relate orders to carts
+              relationship "order_carts" { 
+                   name = "CARTS"
+                   related_entity = "cart-entity"
+                   join_on = "orders-entity.ORDERID = cart-entity.ACCOUNT_ID"
+
+                   
+              }
+
+              }
+
+         }
+              relationship "consumer_account" {
+              name = "CONSUMER ACCOUNTS"
+              related_entity = "account-entity"
+              external_id {
+                   type = "email"
+                   join_key = "EMAIL_ID"
+              }
+                   relationship "consumer_products" {
+                   name = "CONSUMER PRODUCTS"
+                   related_entity = "account_product-entity"
+                   join_on = "account_product-entity.ACCOUNT_ID = account-entity.ACCOUNT_ID"
+                           
+                   }
+              }
+
+
+    }
+
+    #define account, product, and cart entities
+    entity "account-entity" {                   #name of entity in data graph (does not need to be updated)
+         name = "ACCOUNTS"                      #name of entity for enrichment (does not need to be capitolized)
+         table_ref = "MARKETING_EAST.ACCOUNTS"  #name of table in Snowflake (NEEDS TO BE CAPITOLIZED)
+         primary_key = "ID"                     #name of primary ID on table in Snowflake (NEEDS TO BE CAPITOLIZED)  
+         enrichment_enabled = true
+    }
+
+
+
+   entity "affiliate-entity" {                     #name of entity in data graph (does not need to be updated)
+         name = "AFFILIATE_ACCOUNT"
+         table_ref = "MARKETING_EAST.AFFILIATE_ACCOUNT"
+         primary_key = "ID"
+         enrichment_enabled = true
+    }
+
+   entity "account_product-entity" {
+         name = "ACCOUNT PRODUCTS"
+         table_ref = "MARKETING_EAST.ACCOUNT_PRODUCTS"
+         primary_key = "SKU"
+         enrichment_enabled = true
+    }
+    entity "product-entity" {
+         name = "PRODUCTS"
+         table_ref = "MARKETING_EAST.PRODUCTS"
+         primary_key = "SKU"
+         enrichment_enabled = true
+    }
+
+    entity "cart-entity" {
+         name = "CARTS"
+         table_ref = "MARKETING_EAST.CARTS"
+         primary_key = "ID"
+         enrichment_enabled = true
+
+    }
+    entity "orders-entity" {
+         name = "ORDERS"
+         table_ref = "MARKETING_EAST.ORDERS"
+         primary_key = "ORDERID"
+         enrichment_enabled = true
+
+    }
+    
+}
