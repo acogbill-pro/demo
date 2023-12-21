@@ -12,7 +12,9 @@ export default defineEventHandler(async (event) => {
             'Content-Type': 'application/json',
             // NOTE the `:` after the Token in the below
             'Authorization': `Basic ${Buffer.from(`${process.env[tokenString]}:`).toString('base64')}`,
+            'accept-encoding': 'gzip,deflate',
         },
+        
     }
 
     // Because the URL changes if sending an anonymous ID

@@ -48,9 +48,15 @@ const heroImagePath = computed(() => {
 })
 
 const imageLoading = ref(false)
+const keepLoading = ref(false)
 
 async function loadPhoto() {
+    if (keepLoading.value) {
+        keepLoading.value = false
+        return
+    }
     imageLoading.value = true
+    keepLoading.value = true
     const generatedPhoto = await profile.fetchPersonalizedImage('Image of a happy person standing in front of an outdoor market display of food')
     // console.log('gen photo URL', generatedPhoto)
     if (generatedPhoto !== '') {
@@ -58,6 +64,15 @@ async function loadPhoto() {
         analytics.identify({ 'personalized_hero_image': generatedPhoto })
     }
     imageLoading.value = false
+
+
+    setTimeout(() => {
+        if (keepLoading.value) {
+            keepLoading.value = false
+            return
+        }
+        loadPhoto()
+    }, 5000)
 }
 
 onMounted(() => {
@@ -80,6 +95,9 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                         @click="loadPhoto">Load Personalized Photo
                         <template v-slot:prepend>
                             <v-icon icon="mdi-image" />
+                        </template>
+                        <template v-slot:append>
+                            <v-icon icon="mdi-refresh" v-if="keepLoading" />
                         </template>
                     </v-btn>
                     <!-- <BrandedShopProductList v-for="category in products.categories" :key="category" :category="category" /> -->
