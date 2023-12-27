@@ -1,13 +1,13 @@
 import { Analytics } from '@segment/analytics-node'
 import OpenAI from "openai";
 import assert from "node:assert";
-import { getEncoding, encodingForModel } from "js-tiktoken";
 
 
 const { openAIKey } = useRuntimeConfig().public
 const writeKeyString = process.env.PREFIX_TO_USE + 'SERVER_SIDE_WRITE_KEY'
 console.log('AI using write key ', writeKeyString)
 const writeKey = process.env[writeKeyString]
+console.log('WRITE KEY', writeKey)
 const analytics = new Analytics({ writeKey })
 
 // instantiation

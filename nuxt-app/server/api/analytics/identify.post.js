@@ -5,8 +5,9 @@ import { Analytics } from '@segment/analytics-node'
 // instantiation
 const writeKeyString = process.env.PREFIX_TO_USE + 'SERVER_SIDE_WRITE_KEY'
 const writeKey = process.env[writeKeyString]
+console.log('WRITE KEY', writeKey)
 const analytics = new Analytics({ writeKey })
-
+// console.log(analytics)
 export default defineEventHandler(async (event) => {
     
     // console.log(orderID)
