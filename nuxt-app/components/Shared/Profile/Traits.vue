@@ -15,8 +15,11 @@ const traitStore = useProfileTraitsStore()
                 }}
                 </li>
             </ul>
+            <v-divider />
             <SharedProfileAddTrait class="my-5" />
+            <v-divider />
             <SharedProfileAddSmartTrait class="my-5" />
+            <v-divider />
             <SharedProfileAddDateTrait class="my-5" />
         </v-card-text>
     </ClientOnly>

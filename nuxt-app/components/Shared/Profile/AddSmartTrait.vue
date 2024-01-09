@@ -43,7 +43,7 @@ onMounted(() => {
 <template>
     <v-container>
         <v-form ref="form" v-model="valid" lazy-validation>
-            <v-row>
+            <!-- <v-row>
                 <v-col cols="2">
                     <v-img src="/images/openai-logomark.png" height="20" />
                 </v-col>
@@ -54,48 +54,51 @@ onMounted(() => {
 
             </v-row>
 
-            <v-row>
+            <v-row> -->
 
-                <v-col cols="10">
+            <!-- <v-col cols="10">
                     <v-text-field v-model="traitName" :rules="validationRules" required density="compact" variant="solo"
                         single-line hide-details label="Trait Name" />
                 </v-col>
                 <v-col cols="2">
                     <v-btn icon="mdi-check" @click="submitPrompt" variant="plain" block :disabled="!valid" />
-                </v-col>
+                </v-col> -->
 
-            </v-row><v-row>
-                <v-col cols="12">
-                    <!-- <v-text-field v-model="traitValue" required density="compact" variant="solo" single-line hide-details
+            <!-- </v-row><v-row> -->
+            <!-- <v-col cols="12"> -->
+            <!-- <v-text-field v-model="traitValue" required density="compact" variant="solo" single-line hide-details
                     label="Value" /> -->
-                    <v-card variant="outlined">
-                        <v-card-text>
-                            <div v-if="profile.smartTrait === '' && !profile.loading">
-                                <v-textarea v-model="traitPrompt" density="compact" variant="solo" hide-details
-                                    :rules="validationRules" required label="Trait Logic" />
-                            </div>
+            <v-card variant="outlined">
+                <v-card-title><v-img src="/images/openai-logomark.png" height="20" />Add a Smart
+                    Trait</v-card-title>
+                <v-card-text>
+                    <v-text-field v-model="traitName" :rules="validationRules" required density="compact" variant="solo"
+                        single-line hide-details label="Trait Name" class="mb-3" />
+                    <div v-if="profile.smartTrait === '' && !profile.loading">
+                        <v-textarea v-model="traitPrompt" density="compact" variant="solo" hide-details
+                            :rules="validationRules" required label="Trait Logic" />
+                    </div>
 
-                            <div v-if="profile.loading">
-                                <v-progress-circular indeterminate></v-progress-circular>
-                            </div>
-                            <div v-if="profile.smartTrait !== ''">
+                    <div v-if="profile.loading">
+                        <v-progress-circular indeterminate></v-progress-circular>
+                    </div>
+                    <div v-if="profile.smartTrait !== ''">
 
-                                {{ profile.smartTrait }}
+                        {{ profile.smartTrait }}
 
 
-                            </div>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-btn icon="mdi-close" @click="profile.clearSmartTrait()"
-                                :disabled="profile.smartTrait === ''" />
-                            <v-spacer></v-spacer>
-                            <v-btn icon="mdi-check" @click="addTrait(profile.smartTrait)"
-                                :disabled="profile.smartTrait === ''" />
-
-                        </v-card-actions>
-                    </v-card>
-                </v-col>
-            </v-row>
+                    </div>
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn icon="mdi-close" @click="profile.clearSmartTrait()" :disabled="profile.smartTrait === ''" />
+                    <v-spacer></v-spacer>
+                    <v-btn icon="mdi-check" @click="submitPrompt(profile.smartTrait)"
+                        :disabled="traitName === '' || traitPrompt === ''" />
+                    <v-btn icon="mdi-upload" @click="addTrait(profile.smartTrait)" v-if="profile.smartTrait !== ''" />
+                </v-card-actions>
+            </v-card>
+            <!-- </v-col> -->
+            <!-- </v-row> -->
         </v-form>
     </v-container>
 </template>
