@@ -12,6 +12,8 @@ export const useProfileStore = defineStore('profileStore', {
       nba: null,
       inferred: null,
       other: '',
+      smartTrait: '',
+      loading: false,
     }),
     getters: {
       profile: (state) => {
@@ -149,6 +151,65 @@ export const useProfileStore = defineStore('profileStore', {
         .catch((error) => {
           console.log(error)
         });
+      },
+      async loadSmartTrait(traitPrompt) {
+        const analytics = useAnalytics()
+
+        if (!analytics.hasIDs || !this.hasLoaded) {
+          console.log('bailing on smart trait load because no ID or no Profile loaded')
+          return
+        }
+
+        const body = JSON.stringify({profile: this.profile, traitPrompt})
+
+        // console.log('Profile object:', profileAsString)
+
+        const options = {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
+          },
+          body,
+        }
+        this.loading = true
+        fetch('/api/user/smartTrait', options)
+        .then((response) => {
+
+          // console.log('Response from API', response)
+
+          if (response.ok) {
+            return response.json()
+          } else if(response.status === 404) {
+            console.log('404 error')
+            return Promise.reject('error 404')
+          } else {
+            console.log('error in profile API response')
+            return Promise.reject('some other error: ' + response.status)
+          }
+        })
+        .then((response) => {
+          // console.log('fetchedEvents', fetchedProfile)
+          // console.log(response)
+
+          if (!response) {
+            console.log('no smartTrait generated from  OpenAI')
+            return
+          }
+
+          console.log('response', response)
+          const {data} = response
+          const result = JSON.parse(data)
+          console.log(result)
+          this.smartTrait = result
+          this.loading = false
+        })
+        .catch((error) => {
+          console.log(error)
+        }).finally(() => Promise.resolve())
+      },
+      clearSmartTrait() {
+        this.smartTrait = ''
       },
       loadOther(prompt) {
         const analytics = useAnalytics()

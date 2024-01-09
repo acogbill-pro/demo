@@ -16,6 +16,7 @@ const traitStore = useProfileTraitsStore()
                 </li>
             </ul>
             <SharedProfileAddTrait class="my-5" />
+            <SharedProfileAddSmartTrait class="my-5" />
             <SharedProfileAddDateTrait class="my-5" />
         </v-card-text>
     </ClientOnly>

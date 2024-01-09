@@ -57,10 +57,6 @@ function hitSourceFunction() {
 
 }
 
-function addTrait(withTraitObject) {
-    analytics.identify(withTraitObject)
-}
-
 function resetProfile() {
     profile.unload()
 }
@@ -91,15 +87,7 @@ function toggleList() {
 
             </v-card-actions>
             <v-card-text>
-                <v-btn icon="mdi-paw" @click="addTrait({ pets: [{ species: 'dog', name: 'Rover', size: 'large' }] })"
-                    class="ma-1" />
-                <v-btn icon="mdi-human-child" @click="addTrait({ children: [{ gender: 'girl', name: 'Violet', age: 3 }] })"
-                    class="ma-1" />
-                <v-btn icon="mdi-gender-female" @click="addTrait({ gender: 'female' })" class="ma-1" />
-                <v-btn icon="mdi-gender-male" @click="addTrait({ gender: 'male' })" class="ma-1" />
-                <v-btn icon="mdi-weather-lightning-rainy" @click="addTrait({ weather: 'dark, rainstorm' })" class="ma-1" />
-                <v-btn icon="mdi-weather-sunny" @click="addTrait({ weather: 'warm, sunny' })" class="ma-1" />
-                <v-btn icon="mdi-weather-snowy" @click="addTrait({ weather: 'cold, snowy' })" class="ma-1" />
+                <SharedProfileTraitTiles />
             </v-card-text>
             <div v-show="!collapse">
                 <v-tabs v-model="tab" bg-color="secondary">
