@@ -6,7 +6,8 @@ import { useProfileTraitsStore } from '~~/stores/profileTraits';
 const analytics = useAnalytics()
 const products = useProductCatalog()
 const cart = useCartStore()
-const profile = useProfileTraitsStore()
+const profileTraits = useProfileTraitsStore()
+const profile = useProfileStore()
 products.loadProducts(
     [
         {
@@ -53,16 +54,51 @@ products.loadProducts(
 
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
-const heroImagePath = computed(() => profile.hasTraits ? '/purina/images/dogsPlaying.jpeg' : '/purina/images/puppyPlaying.jpeg')
+// const heroImagePath = computed(() => profile.hasTraits ? '/purina/images/dogsPlaying.jpeg' : '/purina/images/puppyPlaying.jpeg')
 
-const deliveryDifference = computed(() => new Date(profile.traits.order_delivery_date) - new Date(profile.traits.confirmed_delivery_date))
+// const deliveryDifference = computed(() => new Date(profile.traits.order_delivery_date) - new Date(profile.traits.confirmed_delivery_date))
 
-const deliveryCopy = computed(() => {
-    console.log(deliveryDifference.value, profile.traits.order_delivery_date, profile.traits.confirmed_delivery_date)
-    if (deliveryDifference.value > 0) return 'Your delivery will arrive early!'
-    if (deliveryDifference.value < 0) return 'Your delivery will arrive late.'
-    else return 'Your delivery is on time.'
+// const deliveryCopy = computed(() => {
+//     console.log(deliveryDifference.value, profile.traits.order_delivery_date, profile.traits.confirmed_delivery_date)
+//     if (deliveryDifference.value > 0) return 'Your delivery will arrive early!'
+//     if (deliveryDifference.value < 0) return 'Your delivery will arrive late.'
+//     else return 'Your delivery is on time.'
+// })
+
+const heroImageOverrideURL = ref(null)
+const heroImagePath = computed(() => {
+    if (heroImageOverrideURL.value) return heroImageOverrideURL.value
+    if (profileTraits.hasSpecificTrait('personalized_hero_image')) return profileTraits.traits.personalized_hero_image
+    return profileTraits.hasTraits ? '/purina/images/dogsPlaying.jpeg' : '/purina/images/puppyPlaying.jpeg'
 })
+
+const imageLoading = ref(false)
+const keepLoading = ref(false)
+
+async function loadPhoto() {
+    if (keepLoading.value) {
+        keepLoading.value = false
+        return
+    }
+    imageLoading.value = true
+    keepLoading.value = true
+    const generatedPhoto = await profile.fetchPersonalizedImage('Image of the customer\'s pets, as identified in traits, running happily in a sunny field.')
+    // console.log('gen photo URL', generatedPhoto)
+    if (generatedPhoto !== '') {
+        heroImageOverrideURL.value = generatedPhoto
+        analytics.identify({ 'personalized_hero_image': generatedPhoto })
+    }
+    imageLoading.value = false
+
+
+    setTimeout(() => {
+        if (keepLoading.value) {
+            keepLoading.value = false
+            return
+        }
+        loadPhoto()
+    }, 5000)
+}
 
 onMounted(() => {
 
@@ -83,6 +119,15 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                         <v-img :src="heroImagePath" width="800" />
                     </v-fade-transition>
                     <!-- Logged in as {{ IDforPrint }} -->
+                    <v-btn v-if="profile.hasLoaded" :loading="imageLoading" :disabled="imageLoading" block nuxt class="mt-2"
+                        @click="loadPhoto">Load Personalized Photo
+                        <template v-slot:prepend>
+                            <v-icon icon="mdi-image" />
+                        </template>
+                        <template v-slot:append>
+                            <v-icon icon="mdi-refresh" v-if="keepLoading" />
+                        </template>
+                    </v-btn>
                     <v-expand-transition>
                         <!-- <BrandedShopRecommendedProduct v-if="hasRecommendation" :product="cart.recommendedProduct" /> -->
                     </v-expand-transition>
