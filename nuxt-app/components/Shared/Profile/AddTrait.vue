@@ -8,6 +8,10 @@ const form = ref(null)
 const traitName = ref('')
 const traitValue = ref('')
 const valid = ref(true)
+const serverSide = ref(false)
+const switchLabel = computed(() => {
+    return serverSide.value ? 'Server-side' : 'Client-side'
+})
 
 const validationRules = [
     v => !!v || 'Name is required',
@@ -15,12 +19,10 @@ const validationRules = [
 ]
 
 function submitForm() {
-    if (traitName.value !== '' && traitValue.value !== '') {
-        profiles.addTrait(traitName.value, traitValue.value)
-        traitName.value = ''
-        traitValue.value = ''
-        form.value.resetValidation()
-    }
+    profiles.addTrait(traitName.value, traitValue.value, serverSide.value)
+    traitName.value = ''
+    traitValue.value = ''
+    form.value.resetValidation()
 }
 
 function addTrait(withTraitObject) {
@@ -39,18 +41,22 @@ function addTrait(withTraitObject) {
 
             <v-row>
 
-                <v-col cols="5">
+                <v-col cols="6">
                     <v-text-field v-model="traitName" :rules="validationRules" required density="compact" variant="solo"
                         single-line hide-details label="Trait Name" />
                 </v-col>
-                <v-col cols="5">
+                <v-col cols="6">
                     <v-text-field v-model="traitValue" required density="compact" variant="solo" single-line hide-details
                         label="Value" />
+                </v-col>
+            </v-row>
+            <v-row>
+                <v-col cols="10">
+                    <v-switch v-model="serverSide" :label="switchLabel"></v-switch>
                 </v-col>
                 <v-col cols="2">
                     <v-btn icon="mdi-check" @click="submitForm" variant="plain" block :disabled="!valid" />
                 </v-col>
-
             </v-row>
         </v-form>
     </v-container>

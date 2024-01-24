@@ -14,6 +14,7 @@ export const useAnalytics = defineStore('analyticsStore', {
   
     getters: {
       analytics: (state) => {
+        // console.log(state.activeSource)
         return state.activeSource
       },
       bestID: (state) => {
@@ -170,7 +171,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         // }
 
         if (this.userID !== null) {  // can be anonymous
-          this.analytics.identify(this.userID, traitsObject)     
+          this.analytics.identify(this.userID, traitsObject).then((result) => console.log(result))     
 
           if (syncAfter) {
             setTimeout(() => {

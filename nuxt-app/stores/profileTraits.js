@@ -116,7 +116,7 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
       stopSyncingStores() {
         this.unwatchers.forEach(unwatcher => unwatcher());
       },
-      addTrait(withTraitName, withTraitValue) {
+      addTrait(withTraitName, withTraitValue, serverSide = false) {
         if (withTraitName === '' || withTraitValue === '') {
           return
         }
@@ -125,8 +125,12 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
 
         const traitObject = {[withTraitName]: valueToUse}
 
-        const {identify} = useAnalytics()
-        identify(traitObject, true)
+        const {identify, identifyServerSide} = useAnalytics()
+        if (!serverSide) {
+          identify(traitObject, true)
+        } else {
+          identifyServerSide(traitObject, true)
+        }
       },
       hasSpecificTrait(traitName) {
         return Object.keys(this.traits).includes(traitName)

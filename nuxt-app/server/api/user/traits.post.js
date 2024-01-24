@@ -13,7 +13,6 @@ export default defineEventHandler(async (event) => {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
-            // NOTE the `:` after the Token in the below
             'Authorization': `Basic ${Buffer.from(token).toString('base64')}`,
             'Accept-Encoding': 'zlib',
         },
@@ -27,8 +26,9 @@ export default defineEventHandler(async (event) => {
     console.log('fetching traits for ID: ', userID, requestURL)
     try {
             const fetchedProfile = await fetch(requestURL, options)
+            // console.log(fetchedProfile.ok)
             const json = await fetchedProfile.json()
-            // console.log(json, fetchedProfile)
+            // console.log('json from papi', json)
 
             return {
                 status: 'OK',

@@ -14,8 +14,8 @@ export default defineEventHandler(async (event) => {
 
     try {
         const rawBody = await readBody(event)
-
-        analytics.identify(rawBody)
+        const {identify} = analytics
+        identify(rawBody, (err, ctx) => console.log('Node Identify results', ctx.event.traits))
 
         return {
             status: 'OK',
