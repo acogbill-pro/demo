@@ -42,6 +42,18 @@ productCatalog.loadProducts(
             priceUSD: 200,
             image: 'Monkey.jpeg'
         },
+        {
+            SKU: '0004',
+            name: 'Luigi',
+            description: 'The perfect sidekick.',
+            age: 4,
+            category: 'dog',
+            subCategory: 'young',
+            breed: 'Shar Pei',
+            size: 'medium',
+            priceUSD: 500,
+            image: 'luigi.jpg'
+        },
     ]
 )
 

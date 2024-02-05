@@ -26,9 +26,9 @@ export default defineEventHandler(async (event) => {
     console.log('fetching traits for ID: ', userID, requestURL)
     try {
             const fetchedProfile = await fetch(requestURL, options)
-            // console.log(fetchedProfile.ok)
+            
             const json = await fetchedProfile.json()
-            // console.log('json from papi', json)
+            console.log(json)
 
             return {
                 status: 'OK',
