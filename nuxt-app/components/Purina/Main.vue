@@ -11,6 +11,18 @@ const profile = useProfileStore()
 products.loadProducts(
     [
         {
+            SKU: '0004',
+            name: 'Luigi',
+            description: 'The perfect sidekick.',
+            age: 4,
+            category: 'dog',
+            subCategory: 'young',
+            breed: 'Shar Pei',
+            size: 'medium',
+            priceUSD: 500,
+            image: 'luigi.jpg'
+        },
+        {
             SKU: '0001',
             name: 'Cupid',
             description: 'You will know why we named her Cupid!',
@@ -23,6 +35,7 @@ products.loadProducts(
             image: 'Cupid.jpeg',
             priceUSD: 150
         },
+
         {
             SKU: '0002',
             name: 'Jason',
@@ -49,18 +62,7 @@ products.loadProducts(
             priceUSD: 200,
             image: 'Monkey.jpeg'
         },
-        {
-            SKU: '0004',
-            name: 'Luigi',
-            description: 'The perfect sidekick.',
-            age: 4,
-            category: 'dog',
-            subCategory: 'young',
-            breed: 'Shar Pei',
-            size: 'medium',
-            priceUSD: 500,
-            image: 'luigi.jpg'
-        },
+
     ]
 )
 
