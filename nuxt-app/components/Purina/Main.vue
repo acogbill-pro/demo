@@ -8,61 +8,61 @@ const products = useProductCatalog()
 const cart = useCartStore()
 const profileTraits = useProfileTraitsStore()
 const profile = useProfileStore()
-// products.loadProducts(
-//     [
-//         {
-//             SKU: '0001',
-//             name: 'Cupid',
-//             description: 'You will know why we named her Cupid!',
-//             age: 1,
-//             species: 'dog',
-//             subCategory: 'puppy',
-//             breed: 'Mixed',
-//             size: 'large',
-//             location: 'NY',
-//             image: 'Cupid.jpeg',
-//             priceUSD: 150
-//         },
-//         {
-//             SKU: '0002',
-//             name: 'Jason',
-//             description: 'He just seems like a Jason.',
-//             age: 0,
-//             species: 'dog',
-//             subCategory: 'puppy',
-//             breed: 'Unknown',
-//             size: 'medium',
-//             location: 'PA',
-//             priceUSD: 400,
-//             image: 'Jason.jpeg'
-//         },
-//         {
-//             SKU: '0003',
-//             name: 'Monkey',
-//             description: 'Worry not, this is not an actual monkey.',
-//             age: 1,
-//             species: 'dog',
-//             subCategory: 'puppy',
-//             breed: 'Mixed',
-//             size: 'medium',
-//             location: 'NJ',
-//             priceUSD: 200,
-//             image: 'Monkey.jpeg'
-//         },
-//         {
-//             SKU: '0004',
-//             name: 'Luigi',
-//             description: 'The perfect sidekick.',
-//             age: 4,
-//             category: 'dog',
-//             subCategory: 'young',
-//             breed: 'Shar Pei',
-//             size: 'medium',
-//             priceUSD: 500,
-//             image: 'luigi.jpg'
-//         },
-//     ]
-// )
+products.loadProducts(
+    [
+        {
+            SKU: '0001',
+            name: 'Cupid',
+            description: 'You will know why we named her Cupid!',
+            age: 1,
+            species: 'dog',
+            subCategory: 'puppy',
+            breed: 'Mixed',
+            size: 'large',
+            location: 'NY',
+            image: 'Cupid.jpeg',
+            priceUSD: 150
+        },
+        {
+            SKU: '0002',
+            name: 'Jason',
+            description: 'He just seems like a Jason.',
+            age: 0,
+            species: 'dog',
+            subCategory: 'puppy',
+            breed: 'Unknown',
+            size: 'medium',
+            location: 'PA',
+            priceUSD: 400,
+            image: 'Jason.jpeg'
+        },
+        {
+            SKU: '0003',
+            name: 'Monkey',
+            description: 'Worry not, this is not an actual monkey.',
+            age: 1,
+            species: 'dog',
+            subCategory: 'puppy',
+            breed: 'Mixed',
+            size: 'medium',
+            location: 'NJ',
+            priceUSD: 200,
+            image: 'Monkey.jpeg'
+        },
+        {
+            SKU: '0004',
+            name: 'Luigi',
+            description: 'The perfect sidekick.',
+            age: 4,
+            category: 'dog',
+            subCategory: 'young',
+            breed: 'Shar Pei',
+            size: 'medium',
+            priceUSD: 500,
+            image: 'luigi.jpg'
+        },
+    ]
+)
 
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
