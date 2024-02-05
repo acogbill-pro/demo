@@ -13,7 +13,7 @@ useHead({
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     charset: 'utf-8',
     meta: [
-        { name: 'description', content: 'My amazing site.' }
+        { name: 'description', content: 'Example web application integrated with Segment' }
     ],
     bodyAttrs: {
         class: 'from-useHead-default-layout'
