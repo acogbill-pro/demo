@@ -46,7 +46,11 @@ export default defineNuxtPlugin(nuxtApp => {
     ['jpmcproductscart', env == 'PROD' ? 'TaEbZ6MZYdQMmSRYWfbz6jFr5zSIJtLA' : 'Ksxj14676B7Jw2QHF7DDMJSegDBlzBSk'],
     ['jpmcproductscheckout', env == 'PROD' ? 'TaEbZ6MZYdQMmSRYWfbz6jFr5zSIJtLA' : 'Ksxj14676B7Jw2QHF7DDMJSegDBlzBSk'],
     ['jpmcaccount', env == 'PROD' ? 'TaEbZ6MZYdQMmSRYWfbz6jFr5zSIJtLA' : 'Ksxj14676B7Jw2QHF7DDMJSegDBlzBSk'],
-    
+    ['icb', env == 'PROD' ? 'En5gCdEpRGqwDrcp6b3JVazpUHn4n0Ye' : '4uaRq5AOj7aBZuFdGhLUxCPnqArMgW42'],
+    ['icbproducts', env == 'PROD' ? 'En5gCdEpRGqwDrcp6b3JVazpUHn4n0Ye' : '4uaRq5AOj7aBZuFdGhLUxCPnqArMgW42'],
+    ['icbproductscart', env == 'PROD' ? 'En5gCdEpRGqwDrcp6b3JVazpUHn4n0Ye' : '4uaRq5AOj7aBZuFdGhLUxCPnqArMgW42'],
+    ['icbproductscheckout', env == 'PROD' ? 'En5gCdEpRGqwDrcp6b3JVazpUHn4n0Ye' : '4uaRq5AOj7aBZuFdGhLUxCPnqArMgW42'],
+    ['icbaccount', env == 'PROD' ? 'En5gCdEpRGqwDrcp6b3JVazpUHn4n0Ye' : '4uaRq5AOj7aBZuFdGhLUxCPnqArMgW42'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
