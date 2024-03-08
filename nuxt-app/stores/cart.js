@@ -61,7 +61,7 @@ export const useCartStore = defineStore('cartStore', {
             return Object.fromEntries(mapToReturn)
         },
         asSummaryObject() { 
-            return Object.assign(this.categoryCountsAsObject, {products: this.products, quantity: this.totalQuantity, value: this.totalValue})
+            return Object.assign(this.categoryCountsAsObject, {contents: Array.from(this.contents), products: this.products, quantity: this.totalQuantity, value: this.totalValue})
         },
         forEdge: (state) => {
             const syncTime = new Date()
@@ -182,7 +182,7 @@ export const useCartStore = defineStore('cartStore', {
 
               if (response.ok) {
                 const {data} = await response.json()
-                // analytics.track('Order Completed', data)
+                analytics.track('Order Completed', data)
                 this.reset()
                 return data
               } else {
