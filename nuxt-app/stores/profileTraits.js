@@ -32,9 +32,9 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
 
         Object.keys(traitsCopy).forEach((key) => {
           if (key.substring(0,4) === 'j_o_') delete traitsCopy[key]
+          if (traitsCopy[key] instanceof Object) traitsCopy[key] = decodeURIComponent(JSON.stringify(traitsCopy[key]))
         })
   
-
         return traitsCopy
       },
       productSKUsOwned: (state) => {
