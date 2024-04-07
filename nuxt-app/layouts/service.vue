@@ -1,10 +1,5 @@
 <script setup>
-import { useAnalytics } from '~/stores/analytics';
-import { useProfileTraitsStore } from '~/stores/profileTraits';
-const analytics = useAnalytics()
-const profiles = useProfileTraitsStore()
 const runtimeConfig = useRuntimeConfig()
-const brandName = computed(() => runtimeConfig.brandedAssetsPath)
 
 useHead({
     //title: 'Segment App Home',
@@ -20,24 +15,15 @@ useHead({
     },
 })
 
-function leaving(e) {
-    e.returnValue = ""
-}
-
 onMounted(() => {
-    profiles.startSyncingArticleStore()
 
-    /*window.addEventListener(
-        "beforeunload",
-        leaving
-    )*/
 })
 </script>
 
 <template>
     <div class="default-layout">
         <v-app>
-            <pristineNavBar :cart="true" />
+            <pristineNavBar :cart="false" />
             <v-main>
                 <slot />
             </v-main>

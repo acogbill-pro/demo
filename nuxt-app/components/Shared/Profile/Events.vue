@@ -9,8 +9,8 @@ const eventStore = useProfileEventsStore()
     <ClientOnly>
         <v-card-text>
             <p class="mb-5">Anon ID: {{ analytics.anonymousID }}</p>
-            <ul>
-                <li v-for="name in eventStore.cleanEventNames" :key="name">
+            <ul class="ml-2">
+                <li v-for="name in eventStore.cleanEventNames" :key="name" class="mb-1">
                     {{ name }}
                 </li>
             </ul>

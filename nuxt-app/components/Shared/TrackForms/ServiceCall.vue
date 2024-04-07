@@ -82,7 +82,7 @@ function submitForm() {
 </script>
 
 <template>
-    <v-card>
+    <v-card width="500">
         <v-form ref="form" v-model="valid" lazy-validation>
             <v-card-title>
                 <h5>Add a Service Call</h5>

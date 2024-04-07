@@ -9,13 +9,15 @@ const traitStore = useProfileTraitsStore()
     <ClientOnly>
         <v-card-text>
             <p class="mb-5">Anon ID: {{ analytics.anonymousID }}</p>
-            <ul>
-                <li v-for="[key, value] in Object.entries(traitStore.cleanTraits)" :key="key">{{ key + ': ' +
-                    JSON.stringify(value)
-                }}
+            <ul class="ml-2">
+                <li v-for="[key, value] in Object.entries(traitStore.cleanTraits)" :key="key" class="mb-1">
+                    {{ key }}
+                    <b>{{ ': ' +
+                        value
+                    }}</b>
                 </li>
             </ul>
-            <v-divider />
+            <v-divider class="mt-8" />
             <SharedProfileAddTrait class="my-5" />
             <v-divider />
             <SharedProfileAddSmartTrait class="my-5" />

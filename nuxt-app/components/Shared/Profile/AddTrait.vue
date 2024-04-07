@@ -33,12 +33,16 @@ function addTrait(withTraitObject) {
 <template>
     <v-container>
         <v-form ref="form" v-model="valid" lazy-validation>
+
             <v-row>
                 <v-col cols="12">
                     <h5>Add a Trait</h5>
                 </v-col>
             </v-row>
-
+            <v-row>
+                <SharedProfileTraitTiles />
+            </v-row>
+            <v-divider class="my-9" />
             <v-row>
 
                 <v-col cols="6">

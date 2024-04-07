@@ -76,6 +76,7 @@ function toggleList() {
     <div>
 
         <v-card class="mb-5">
+
             <!--<v-form ref="form">
                             <v-text-field v-model="userID" label="User ID" required />
                         </v-form>-->
@@ -86,10 +87,17 @@ function toggleList() {
                     @click="toggleList()" />
 
             </v-card-actions>
-            <v-card-text>
-                <SharedProfileTraitTiles />
-            </v-card-text>
+            <v-card-actions>
+                <v-switch v-model="syncing" :loading="profile.storesLoading ? 'gray' : false" class="my-0">
+                    <template v-slot:label>
+                        <v-icon icon="mdi-cached" color="gray" />
+                    </template>
+                </v-switch>
+                <v-btn @click="hitSourceFunction()" icon="mdi-webhook" color="gray" />
+                <v-btn @click="resetProfile()" icon="mdi-delete" color="gray" />
+            </v-card-actions>
             <div v-show="!collapse">
+
                 <v-tabs v-model="tab" bg-color="secondary">
                     <v-tab value="traits">
                         Traits
@@ -106,16 +114,11 @@ function toggleList() {
                         <SharedProfileEvents />
                     </v-window-item>
                 </v-window>
+                <!-- <v-card-text>
+                    <SharedProfileTraitTiles />
+                </v-card-text> -->
             </div>
-            <v-card-actions>
-                <v-switch v-model="syncing" :loading="profile.storesLoading ? 'gray' : false" class="my-0">
-                    <template v-slot:label>
-                        <v-icon icon="mdi-cached" color="gray" />
-                    </template>
-                </v-switch>
-                <v-btn @click="hitSourceFunction()" icon="mdi-webhook" color="gray" />
-                <v-btn @click="resetProfile()" icon="mdi-delete" color="gray" />
-            </v-card-actions>
+
         </v-card>
     </div>
 </template>
