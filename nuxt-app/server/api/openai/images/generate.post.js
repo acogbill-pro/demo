@@ -25,7 +25,7 @@ async function main(postedBody) {
             model: "dall-e-3",
             prompt: combinedPrompt,
             n: 1,
-            size: "1792x1024",
+            size: "1024x1024",
         });
         
         // console.log(`${response.usage.prompt_tokens} OpenAI tokens used`)

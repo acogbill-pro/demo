@@ -9,7 +9,52 @@ const profile = useProfileStore()
 const traitStore = useProfileTraitsStore()
 const tab = ref(null)
 
-const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
+const heroImageOverrideURL = ref(null)
+const heroImagePath = computed(() => {
+    if (heroImageOverrideURL.value) return heroImageOverrideURL.value
+    if (traitStore.hasSpecificTrait('personalized_hero_image')) return traitStore.traits.personalized_hero_image
+    return traitStore.hasTraits ? '/sq/unknownUser.jpeg' : '/sq/unknownUser.jpeg'
+})
+
+const nameFromTraits = computed(() => (traitStore.hasSpecificTrait('first_name') && traitStore.hasSpecificTrait('last_name')) ? `${traitStore.traits.first_name} ${traitStore.traits.last_name}` : analytics.bestID)
+const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : nameFromTraits.value)
+
+async function loadPhoto() {
+    console.log('loading profile photo from Dall-E')
+    // if (keepLoading.value) {
+    //     keepLoading.value = false
+    //     return
+    // }
+    // imageLoading.value = true
+    // keepLoading.value = true
+    const generatedPhoto = await profile.fetchPersonalizedImage('Image of a happy person sitting comfortably on a couch talking into a phone, using the first name to determine gender')
+    // console.log('gen photo URL', generatedPhoto)
+    if (generatedPhoto !== '') {
+        heroImageOverrideURL.value = generatedPhoto
+        // analytics.identify({ 'personalized_hero_image': generatedPhoto })
+    } else {
+        console.log('error fetching profile photo from dall-e')
+    }
+    // imageLoading.value = false
+
+
+    // setTimeout(() => {
+    //     if (keepLoading.value) {
+    //         keepLoading.value = false
+    //         return
+    //     }
+    //     loadPhoto()
+    // }, 5000)
+}
+
+watch(nameFromTraits, (newValue, oldValue) => {
+    if (newValue.indexOf(' ') > -1) {
+        loadPhoto()
+    } else {
+        heroImageOverrideURL.value = null
+        // tab.value = null
+    }
+})
 
 const syncing = computed({
     get: () => profile.isSyncing,
@@ -81,11 +126,14 @@ function toggleList() {
                             <v-text-field v-model="userID" label="User ID" required />
                         </v-form>-->
             <v-card-actions>
+                <v-fade-transition>
+                    <v-img v-if="heroImagePath" :src="heroImagePath" width="125" height="125" />
+                </v-fade-transition>
                 <span>Profile: {{ IDforPrint }}</span>
                 <v-spacer />
-                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'" :color="traitStore.hasTraits ? 'black' : 'white'"
-                    @click="toggleList()" />
-
+                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
+                    :color="traitStore.hasTraits ? 'black' : 'white'" @click="toggleList()" />
+                <v-spacer />
             </v-card-actions>
             <v-card-actions>
                 <v-switch v-model="syncing" :loading="profile.storesLoading ? 'gray' : false" class="my-0">
@@ -98,7 +146,7 @@ function toggleList() {
             </v-card-actions>
             <div v-show="!collapse">
 
-                <v-tabs v-model="tab" bg-color="secondary">
+                <v-tabs v-model="tab" bg-color="#08ACC7">
                     <v-tab value="traits">
                         Traits
                     </v-tab>

@@ -1,9 +1,11 @@
 <script setup>
 import { useProfileStore } from '~/stores/profile'
 import { useProfileEventsStore } from '~/stores/profileEvents';
+import { useAnalytics } from '~/stores/analytics'
 const eventStore = useProfileEventsStore()
 
 const profile = useProfileStore()
+const analytics = useAnalytics()
 
 const collapseSummary = ref(true)
 
@@ -58,8 +60,17 @@ onMounted(() => {
                 <p>{{ profile.nba }}</p>
             </v-card-text>
         </v-expand-transition>
+
+
     </v-card>
-    <SharedProfileSuggestedTraits :traits-object="profile.inferred" v-if="profile.hasLoaded && profile.inferred" />
+    <v-card v-if="profile.hasLoaded && profile.inferred">
+        <SharedProfileSuggestedTraits :traits-object="profile.inferred" />
+
+    </v-card>
+
+    <v-card v-if="!profile.hasLoaded">
+        <UserLogin v-if="analytics.bestIDIsAnonymous" />
+    </v-card>
 </template>
 
 <style lang="scss" scoped></style>
