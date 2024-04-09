@@ -69,7 +69,7 @@ onMounted(() => {
     </v-card>
 
     <v-card v-if="!profile.hasLoaded">
-        <UserLogin v-if="analytics.bestIDIsAnonymous" />
+        <UserPhoneLogin />
     </v-card>
 </template>
 

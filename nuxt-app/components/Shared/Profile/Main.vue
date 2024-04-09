@@ -16,8 +16,8 @@ const heroImagePath = computed(() => {
     return traitStore.hasTraits ? '/sq/unknownUser.jpeg' : '/sq/unknownUser.jpeg'
 })
 
-const nameFromTraits = computed(() => (traitStore.hasSpecificTrait('first_name') && traitStore.hasSpecificTrait('last_name')) ? `${traitStore.traits.first_name} ${traitStore.traits.last_name}` : analytics.bestID)
-const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : nameFromTraits.value)
+const nameFromTraits = computed(() => (traitStore.hasSpecificTrait('first_name') && traitStore.hasSpecificTrait('last_name')) ? `${traitStore.traits.first_name} ${traitStore.traits.last_name}` : null)
+const IDforPrint = computed(() => nameFromTraits.value ? nameFromTraits.value : 'Anonymous')
 
 async function loadPhoto() {
     console.log('loading profile photo from Dall-E')
@@ -131,42 +131,62 @@ function toggleList() {
                 </v-fade-transition>
                 <span>Profile: {{ IDforPrint }}</span>
                 <v-spacer />
-                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
-                    :color="traitStore.hasTraits ? 'black' : 'white'" @click="toggleList()" />
-                <v-spacer />
-            </v-card-actions>
-            <v-card-actions>
                 <v-switch v-model="syncing" :loading="profile.storesLoading ? 'gray' : false" class="my-0">
                     <template v-slot:label>
                         <v-icon icon="mdi-cached" color="gray" />
                     </template>
                 </v-switch>
-                <v-btn @click="hitSourceFunction()" icon="mdi-webhook" color="gray" />
-                <v-btn @click="resetProfile()" icon="mdi-delete" color="gray" />
+                <v-spacer />
             </v-card-actions>
-            <div v-show="!collapse">
 
-                <v-tabs v-model="tab" bg-color="#08ACC7">
-                    <v-tab value="traits">
-                        Traits
-                    </v-tab>
-                    <v-tab value="events">
-                        Events
-                    </v-tab>
-                </v-tabs>
-                <v-window v-model="tab">
-                    <v-window-item value="traits">
-                        <SharedProfileTraits />
-                    </v-window-item>
-                    <v-window-item value="events">
-                        <SharedProfileEvents />
-                    </v-window-item>
-                </v-window>
-                <!-- <v-card-text>
+            <v-container v-if="profile.hasLoaded">
+                <v-row>
+                    <v-col cols="4">
+                        <SharedProfileTraitHighlightsGeneral trait="most_frequent_call_disposition" label="Usual Mood"
+                            icon="mdi-emoticon" />
+                    </v-col>
+                    <v-col cols="4">
+                        <SharedProfileTraitHighlightsGeneral trait="ltv" label="Lifetime Value"
+                            icon="mdi-currency-usd" />
+                    </v-col>
+                    <v-col cols="4">
+                        <SharedProfileTraitHighlightsGeneral trait="recommended_upsell" label="Reco. Upsell"
+                            icon="mdi-chat" />
+                    </v-col>
+                </v-row>
+            </v-container>
+            <v-card-actions>
+                <v-btn @click="resetProfile()" icon="mdi-delete" color="gray" />
+                <v-spacer />
+                <!-- <v-btn @click="hitSourceFunction()" icon="mdi-webhook" color="gray" /> -->
+
+                <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'"
+                    :color="traitStore.hasTraits ? 'black' : 'white'" @click="toggleList()" />
+            </v-card-actions>
+            <v-expand-transition>
+                <div v-show="!collapse">
+
+                    <v-tabs v-model="tab" bg-color="#08ACC7">
+                        <v-tab value="traits">
+                            Traits
+                        </v-tab>
+                        <v-tab value="events">
+                            Events
+                        </v-tab>
+                    </v-tabs>
+                    <v-window v-model="tab">
+                        <v-window-item value="traits">
+                            <SharedProfileTraits />
+                        </v-window-item>
+                        <v-window-item value="events">
+                            <SharedProfileEvents />
+                        </v-window-item>
+                    </v-window>
+                    <!-- <v-card-text>
                     <SharedProfileTraitTiles />
                 </v-card-text> -->
-            </div>
-
+                </div>
+            </v-expand-transition>
         </v-card>
     </div>
 </template>

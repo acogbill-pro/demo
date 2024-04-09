@@ -7,6 +7,7 @@ export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
       allEvents: [],
       userID: null,
+      IDLabel: null,
       anonymousID: '',
       activeSource: null, // make sure to run setup!
       manualWriteKey: '',

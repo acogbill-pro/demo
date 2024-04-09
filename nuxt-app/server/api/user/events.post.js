@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Because the URL changes if sending an anonymous ID
-    const idLabel = isAnon === 'true' ? 'anonymous_id' : 'user_id'
+    const idLabel = isAnon ? 'anonymous_id' : 'user_id'
     const exclusions = encodeURIComponent('Audience Entered,Audience Exited,Trait Computed')
     const requestURL = `https://profiles.segment.com/v1/spaces/${spaceID}/collections/users/profiles/${idLabel}:${userID}/events?limit=100&exclude=${exclusions}`
     console.log('fetching events for ID: ', userID, requestURL)

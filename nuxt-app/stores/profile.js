@@ -50,7 +50,7 @@ export const useProfileStore = defineStore('profileStore', {
 
         const IDObject = {
           userID: bestID,
-          anon: bestIDIsAnonymous
+          isAnon: bestIDIsAnonymous
         }
 
         loadTraitsForUser(IDObject)

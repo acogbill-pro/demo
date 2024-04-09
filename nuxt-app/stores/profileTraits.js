@@ -140,6 +140,9 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
       hasSpecificTrait(traitName) {
         return Object.keys(this.traits).includes(traitName)
       },
+      getSpecificTrait(traitName) {
+        return this.traits[traitName] || ''
+      },
       unload() {
         this.traits = {}
 
