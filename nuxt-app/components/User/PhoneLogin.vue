@@ -45,7 +45,7 @@ const traitsObject = computed(() => {
 
 function prePop() {
     user_id.value = 'Andy_Cogbill_id'
-    phone.value = 'phone'
+    phone.value = '146-765-2592'
     /*email.value = 'andycogbill@gmail.com'
     phone.value = "608-788-7808"*/
 }
@@ -67,22 +67,20 @@ function reset() {
 function resetValidation() {
     form.value.resetValidation()
 }
-
-const show = ref(false)
 </script>
 
 <template>
     <v-card>
-        <v-card-title>Login</v-card-title>
+        <v-card-title>
+            <h5 class="branded">Customer Lookup</h5>
+        </v-card-title>
 
         <v-form ref="form" v-model="valid" lazy-validation>
             <v-card-text>
                 <!-- <v-text-field v-model="user_id" :counter="10" label="User ID" required>
                 </v-text-field> -->
 
-                <v-text-field v-model="phone" :counter="10" label="Phone" required
-                    :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" :type="show ? 'text' : 'phone'"
-                    @click:append="show = !show">
+                <v-text-field v-model="phone" :counter="10" label="Phone">
                 </v-text-field>
 
                 <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
@@ -97,9 +95,9 @@ const show = ref(false)
                     Submit
                 </v-btn>
 
-                <v-btn color="warning" class="mr-4" @click="reset">
+                <!-- <v-btn color="warning" class="mr-4" @click="reset">
                     Reset
-                </v-btn>
+                </v-btn> -->
                 <v-btn variant="plain" @click="prePop()">
                     Populate
                 </v-btn>
@@ -112,4 +110,8 @@ const show = ref(false)
     </v-card>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.branded {
+    color: #08ACC7;
+}
+</style>
