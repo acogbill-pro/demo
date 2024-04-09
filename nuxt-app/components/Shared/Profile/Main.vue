@@ -121,7 +121,11 @@ function toggleList() {
     <div>
 
         <v-card class="mb-5">
-
+            <v-card-title>
+                <h5>
+                    Profile: <span :class="profile.hasLoaded ? 'branded' : null">{{ IDforPrint }}</span>
+                </h5>
+            </v-card-title>
             <!--<v-form ref="form">
                             <v-text-field v-model="userID" label="User ID" required />
                         </v-form>-->
@@ -129,7 +133,7 @@ function toggleList() {
                 <v-fade-transition>
                     <v-img v-if="heroImagePath" :src="heroImagePath" width="125" height="125" />
                 </v-fade-transition>
-                <span>Profile: {{ IDforPrint }}</span>
+                <span></span>
                 <v-spacer />
                 <v-switch v-model="syncing" :loading="profile.storesLoading ? 'gray' : false" class="my-0">
                     <template v-slot:label>
@@ -191,4 +195,8 @@ function toggleList() {
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.branded {
+    color: #08ACC7;
+}
+</style>

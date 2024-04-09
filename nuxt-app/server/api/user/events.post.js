@@ -1,7 +1,7 @@
 export default defineEventHandler(async (event) => {
     const rawBody = await readBody(event)
 
-    const {userID, isAnon} = rawBody
+    const {idValue, idLabel} = rawBody
 
     const tokenString = process.env.PREFIX_TO_USE + 'PROFILES_ACCESS_TOKEN'
     const token = `${process.env[tokenString]}:`
@@ -21,10 +21,10 @@ export default defineEventHandler(async (event) => {
     }
 
     // Because the URL changes if sending an anonymous ID
-    const idLabel = isAnon ? 'anonymous_id' : 'user_id'
+    // const idLabel = isAnon ? 'anonymous_id' : 'user_id'
     const exclusions = encodeURIComponent('Audience Entered,Audience Exited,Trait Computed')
-    const requestURL = `https://profiles.segment.com/v1/spaces/${spaceID}/collections/users/profiles/${idLabel}:${userID}/events?limit=100&exclude=${exclusions}`
-    console.log('fetching events for ID: ', userID, requestURL)
+    const requestURL = `https://profiles.segment.com/v1/spaces/${spaceID}/collections/users/profiles/${idLabel}:${idValue}/events?limit=100&exclude=${exclusions}`
+    console.log(`fetching events for ${idLabel}: ${idValue}`, requestURL)
     try {
             const fetchedProfile = await fetch(requestURL, options)
             const json = await fetchedProfile.json()

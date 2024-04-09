@@ -14,9 +14,10 @@ function toggleList() {
 
 <template>
     <v-card class="mb-5">
-        <v-card-actions>
+        <!-- <v-card-title>
             User Events
-            <v-spacer />
+        </v-card-title> -->
+        <v-card-actions>
             <v-btn icon="mdi-phone" @click="callOverlay = true" />
             <v-overlay v-model="callOverlay" location-strategy="static" class="align-center justify-center">
                 <SharedTrackFormsServiceCall v-on:and-then="callOverlay = false" />
@@ -45,4 +46,8 @@ function toggleList() {
     </v-card>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.branded {
+    color: #08ACC7;
+}
+</style>

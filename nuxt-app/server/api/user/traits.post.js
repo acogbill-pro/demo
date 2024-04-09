@@ -1,9 +1,8 @@
 export default defineEventHandler(async (event) => {
     const rawBody = await readBody(event)
 
-    // const {userID, isAnon} = rawBody
+    const {idValue, idLabel} = rawBody
     // console.log('isAnon:', typeof isAnon)
-    const userID = '146-765-2592'
 
     const tokenString = process.env.PREFIX_TO_USE + 'PROFILES_ACCESS_TOKEN'
     const token = `${process.env[tokenString]}:`
@@ -22,10 +21,10 @@ export default defineEventHandler(async (event) => {
     }
 
     // Because the URL changes if sending an anonymous ID
-    const idLabel = 'phone'//isAnon ? 'anonymous_id' : 'user_id'
+    // const idLabel = 'phone'//isAnon ? 'anonymous_id' : 'user_id'
     
-    const requestURL = `https://profiles.segment.com/v1/spaces/${spaceID}/collections/users/profiles/${idLabel}:${userID}/traits?limit=200`
-    console.log('fetching traits for ID: ', userID, requestURL)
+    const requestURL = `https://profiles.segment.com/v1/spaces/${spaceID}/collections/users/profiles/${idLabel}:${idValue}/traits?limit=200`
+    console.log(`fetching traits for ${idLabel}: ${idValue}`, requestURL)
     try {
             const fetchedProfile = await fetch(requestURL, options)
             

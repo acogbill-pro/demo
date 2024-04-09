@@ -49,8 +49,8 @@ export const useProfileStore = defineStore('profileStore', {
         }
 
         const IDObject = {
-          userID: bestID,
-          isAnon: bestIDIsAnonymous
+          idValue: '146-765-2592',
+          idLabel: 'phone'
         }
 
         loadTraitsForUser(IDObject)
