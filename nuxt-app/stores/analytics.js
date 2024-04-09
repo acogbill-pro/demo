@@ -7,7 +7,7 @@ export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
       allEvents: [],
       userID: null,
-      IDLabel: null,
+      IDLabel: 'anonymous_id',
       anonymousID: '',
       activeSource: null, // make sure to run setup!
       manualWriteKey: '',
@@ -19,13 +19,13 @@ export const useAnalytics = defineStore('analyticsStore', {
         return state.activeSource
       },
       bestID: (state) => {
-        return '146-765-2592'
+        return state.userID
       },
       bestIDLabel: (state) => {
-        return 'phone'
+        return state.IDLabel
       },
       bestIDIsAnonymous: (state) => {
-        return state.userID === null
+        return state.userID === 'anonymous_id'
       },
       hasIDs(state) {
         return !(state.bestID === null || state.bestID === '')
@@ -159,6 +159,25 @@ export const useAnalytics = defineStore('analyticsStore', {
             this.trackTransaction(eventName, propertyObject)
           }, 2000)
         }
+      },
+      async loginWithTraits(traitsObject) {
+        const {user_id, anonymous_id, phone} = traitsObject
+        if (user_id) {
+          this.userID = user_id
+          this.IDLabel = 'user_id'
+          this.identify(traitsObject, true)
+          return
+        }
+
+        if (phone) {
+          this.userID = phone
+          this.IDLabel = 'phone'
+          this.identify(traitsObject, true)
+          return
+        }
+
+        this.anonymousID = anonymous_id
+        this.identify(traitsObject, true)
       },
       identify(traitsObject = {}, syncAfter = false) {
         const profile = useProfileStore()

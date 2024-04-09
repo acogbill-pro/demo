@@ -48,6 +48,7 @@ async function loadPhoto() {
 }
 
 watch(nameFromTraits, (newValue, oldValue) => {
+    if (!newValue) return
     if (newValue.indexOf(' ') > -1) {
         loadPhoto()
     } else {
@@ -144,10 +145,7 @@ function toggleList() {
 
             <v-container v-if="profile.hasLoaded">
                 <v-row>
-                    <v-col cols="4">
-                        <SharedProfileTraitHighlightsGeneral trait="most_frequent_call_disposition" label="Usual Mood"
-                            icon="mdi-emoticon" />
-                    </v-col>
+
                     <v-col cols="4">
                         <SharedProfileTraitHighlightsGeneral trait="ltv" label="Lifetime Value"
                             icon="mdi-currency-usd" />
@@ -155,6 +153,13 @@ function toggleList() {
                     <v-col cols="4">
                         <SharedProfileTraitHighlightsGeneral trait="recommended_upsell" label="Reco. Upsell"
                             icon="mdi-chat" />
+                    </v-col>
+                    <v-col cols="4">
+                        <SharedProfileTraitHighlightsGeneral
+                            v-if="traitStore.hasSpecificTrait('most_frequent_call_disposition')"
+                            trait="most_frequent_call_disposition" label="Usual Mood" icon="mdi-emoticon" />
+                        <SharedProfileTraitHighlightsGeneral v-else trait="likelihood_to_buy" label="Intent Score"
+                            icon="mdi-counter" />
                     </v-col>
                 </v-row>
             </v-container>

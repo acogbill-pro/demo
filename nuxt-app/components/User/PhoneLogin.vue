@@ -53,7 +53,7 @@ function prePop() {
 function submit() {
     if (form.value.validate()) {
         // analytics.userID = user_id.value
-        analytics.identify({ phone: phone.value }, true)
+        analytics.loginWithTraits({ phone: phone.value })
         // analytics.track("Signed In")
     } else {
         // go to error page
