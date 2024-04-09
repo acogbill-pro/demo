@@ -40,7 +40,7 @@ export const useProfileStore = defineStore('profileStore', {
         const {loadTraitsForUser} = useProfileTraitsStore()
         const {loadEventsForUser} = useProfileEventsStore()
 
-        const {bestID, bestIDIsAnonymous, hasIDs} = useAnalytics()
+        const {bestID, bestIDLabel, hasIDs} = useAnalytics()
 
         if (!hasIDs) {
           console.log('bailing on loadProfile since no ID')
@@ -49,8 +49,8 @@ export const useProfileStore = defineStore('profileStore', {
         }
 
         const IDObject = {
-          idValue: '146-765-2592',
-          idLabel: 'phone'
+          idValue: bestID,
+          idLabel: bestIDLabel
         }
 
         loadTraitsForUser(IDObject)

@@ -26,7 +26,7 @@ onMounted(() => {
 
             </v-col>
             <v-col cols="4">
-                <SharedEventList />
+                <!-- <SharedEventList /> -->
                 <SharedProfileUserSummary />
             </v-col>
         </v-row>

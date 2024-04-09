@@ -125,6 +125,7 @@ function toggleList() {
                 <h5>
                     Profile: <span :class="profile.hasLoaded ? 'branded' : null">{{ IDforPrint }}</span>
                 </h5>
+
             </v-card-title>
             <!--<v-form ref="form">
                             <v-text-field v-model="userID" label="User ID" required />
@@ -133,14 +134,12 @@ function toggleList() {
                 <v-fade-transition>
                     <v-img v-if="heroImagePath" :src="heroImagePath" width="125" height="125" />
                 </v-fade-transition>
-                <span></span>
                 <v-spacer />
                 <v-switch v-model="syncing" :loading="profile.storesLoading ? 'gray' : false" class="my-0">
                     <template v-slot:label>
                         <v-icon icon="mdi-cached" color="gray" />
                     </template>
                 </v-switch>
-                <v-spacer />
             </v-card-actions>
 
             <v-container v-if="profile.hasLoaded">

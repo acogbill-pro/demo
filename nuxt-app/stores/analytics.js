@@ -19,7 +19,10 @@ export const useAnalytics = defineStore('analyticsStore', {
         return state.activeSource
       },
       bestID: (state) => {
-        return state.userID !== null ? state.userID : state.anonymousID
+        return '146-765-2592'
+      },
+      bestIDLabel: (state) => {
+        return 'phone'
       },
       bestIDIsAnonymous: (state) => {
         return state.userID === null
