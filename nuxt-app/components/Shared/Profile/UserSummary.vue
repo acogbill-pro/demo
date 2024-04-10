@@ -26,7 +26,7 @@ onMounted(() => {
     <v-card class="mb-5" v-if="profile.hasLoaded">
         <v-card-actions @click="toggleExpand">
             <v-img src="/images/openai-logomark.png" height="20" />
-            User Summary
+            <b>User Summary</b>
             <v-spacer />
             <v-btn :icon="collapseSummary ? 'mdi-menu-down' : 'mdi-menu-up'" />
         </v-card-actions>
@@ -52,7 +52,7 @@ onMounted(() => {
     <v-card class="mb-5" v-if="profile.hasLoaded && profile.nba">
         <v-card-actions>
             <v-img src="/images/openai-logomark.png" height="20" />
-            Next Best Action
+            <b>Next Best Action</b>
             <v-spacer />
         </v-card-actions>
         <v-expand-transition>

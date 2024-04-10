@@ -13,7 +13,7 @@ const props = defineProps({
     <v-card class="mb-5">
         <v-card-actions>
             <v-img src="/images/openai-logomark.png" height="20" />
-            Suggested Traits
+            <b>Suggested Traits</b>
             <v-spacer />
         </v-card-actions>
         <v-expand-transition>
