@@ -87,7 +87,7 @@ function prePopRandom() {
 
 function submit() {
     if (form.value.validate()) {
-        analytics.loginWithTraits({ user_id: user_id.value })
+        analytics.loginWithTraits({ user_id: user_id.value, fname: fname.value, lname: lname.value, name: name.value, email: email.value })
 
         analytics.track("User Registered", traitsObject.value)
 
