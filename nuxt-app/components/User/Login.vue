@@ -52,7 +52,7 @@ function prePop() {
 
 function submit() {
     if (form.value.validate()) {
-        analytics.userID = user_id.value
+        analytics.loginWithTraits({ user_id: user_id.value })
         analytics.identify({}, true)
         analytics.track("Signed In")
     } else {
@@ -112,6 +112,4 @@ const show = ref(false)
     </v-card>
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

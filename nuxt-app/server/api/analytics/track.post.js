@@ -9,7 +9,7 @@ console.log('WRITE KEY', writeKey)
 const analytics = new Analytics({ writeKey })
 
 export default defineEventHandler(async (event) => {
-    
+    console.log('server side track')
     // console.log(orderID)
 
     try {
@@ -22,6 +22,7 @@ export default defineEventHandler(async (event) => {
             data,
         }
     } catch(e) {
+        console.log('error in server side Track', e)
         return {
             status: 'Error',
             data: {}

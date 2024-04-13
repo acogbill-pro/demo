@@ -112,6 +112,6 @@ function resetValidation() {
 
 <style lang="scss" scoped>
 .branded {
-    color: #08ACC7;
+    color: #75CAAA;
 }
 </style>

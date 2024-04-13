@@ -22,6 +22,7 @@ export default defineEventHandler(async (event) => {
             data,
         }
     } catch(e) {
+        console.log('error in server side Identify', e)
         return {
             status: 'Error',
             data: {}

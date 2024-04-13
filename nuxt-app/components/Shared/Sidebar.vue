@@ -4,7 +4,7 @@
 <template>
     <ClientOnly>
 
-        <SharedEventList />
+        <!-- <SharedEventList /> -->
         <!--  -->
         <SharedProfileMain />
         <SharedB2BGroupCaller />

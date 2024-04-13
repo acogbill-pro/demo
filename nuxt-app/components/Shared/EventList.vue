@@ -6,6 +6,7 @@ const collapse = ref(true)
 const callOverlay = ref(false)
 const truckOverlay = ref(false)
 const storeOverlay = ref(false)
+const reviewOverlay = ref(false)
 
 function toggleList() {
     collapse.value = !collapse.value
@@ -30,6 +31,10 @@ function toggleList() {
             <v-overlay v-model="storeOverlay" location-strategy="static" class="align-center justify-center">
                 <SharedTrackFormsStoreVisit v-on:and-then="storeOverlay = false" />
             </v-overlay>
+            <v-btn icon="mdi-store" @click="reviewOverlay = true" />
+            <v-overlay v-model="reviewOverlay" location-strategy="static" class="align-center justify-center">
+                <SharedTrackFormsReview v-on:and-then="reviewOverlay = false" />
+            </v-overlay>
             <v-spacer />
             <v-btn :icon="collapse ? 'mdi-menu-down' : 'mdi-menu-up'" @click="toggleList()" />
         </v-card-actions>
@@ -48,6 +53,6 @@ function toggleList() {
 
 <style lang="scss" scoped>
 .branded {
-    color: #08ACC7;
+    color: #75CAAA;
 }
 </style>

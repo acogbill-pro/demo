@@ -20,6 +20,12 @@ function addToCart() {
     cart.add(product.value.SKU, 1)
     emit('andThen', props.sku)
 }
+
+function addReview() {
+    reviewOverlay.value = true
+}
+
+const reviewOverlay = ref(false)
 </script>
 
 <template>
@@ -31,6 +37,11 @@ function addToCart() {
         </v-card-text>
         <v-card-actions>
             <v-btn @click="addToCart">Add Item</v-btn>
+            <v-spacer />
+            <v-btn icon="mdi-comment" @click="addReview"></v-btn>
+            <v-overlay v-model="reviewOverlay" location-strategy="static" class="align-center justify-center">
+                <SharedTrackFormsReview :product="product" v-on:and-then="reviewOverlay = false" />
+            </v-overlay>
         </v-card-actions>
     </v-card>
 </template>

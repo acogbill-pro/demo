@@ -34,9 +34,12 @@ function logout() {
                 <SharedSidebar />
             </v-col>`
         </v-row>
-        <v-row v-else class="bg">
-            <v-col cols="2" />
-            <v-col cols="5">
+        <v-row v-else>
+            <v-col cols="1" />
+            <v-col cols="6">
+                <SharedSidebar />
+            </v-col>`
+            <v-col cols="4">
                 <v-card>
                     <v-card-title>Logged In</v-card-title>
                     <v-card-text>
@@ -46,10 +49,8 @@ function logout() {
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="3">
-                <SharedSidebar />
-            </v-col>`
-            <v-col cols="2" />
+
+            <v-col cols="1" />
         </v-row>
         <v-row v-if="isLoggedIn" class="my-5">
             <v-btn @click="logout()" class="mr-3">Logout</v-btn>

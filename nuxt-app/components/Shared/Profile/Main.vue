@@ -16,7 +16,7 @@ const heroImagePath = computed(() => {
     return traitStore.hasTraits ? '/sq/unknownUser.jpeg' : '/sq/unknownUser.jpeg'
 })
 
-const nameFromTraits = computed(() => (traitStore.hasSpecificTrait('first_name') && traitStore.hasSpecificTrait('last_name')) ? `${traitStore.traits.first_name} ${traitStore.traits.last_name}` : null)
+const nameFromTraits = computed(() => (traitStore.hasSpecificTrait('name') ? `${traitStore.traits.name}` : null))
 const IDforPrint = computed(() => nameFromTraits.value ? nameFromTraits.value : 'Anonymous')
 
 async function loadPhoto() {
@@ -174,7 +174,7 @@ function toggleList() {
             <v-expand-transition>
                 <div v-show="!collapse">
 
-                    <v-tabs v-model="tab" bg-color="#08ACC7">
+                    <v-tabs v-model="tab" bg-color="#75CAAA">
                         <v-tab value="traits">
                             Traits
                         </v-tab>
@@ -201,6 +201,6 @@ function toggleList() {
 
 <style lang="scss" scoped>
 .branded {
-    color: #08ACC7;
+    color: #75CAAA;
 }
 </style>

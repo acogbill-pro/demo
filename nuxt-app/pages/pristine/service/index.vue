@@ -19,8 +19,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <v-container>
-        <v-row>
+    <v-container class="bg-gray">
+        <v-row class="bg-gray">
             <v-col cols="8">
                 <SharedProfileMain />
 

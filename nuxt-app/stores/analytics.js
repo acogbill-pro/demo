@@ -19,13 +19,13 @@ export const useAnalytics = defineStore('analyticsStore', {
         return state.activeSource
       },
       bestID: (state) => {
-        return state.userID
+        return state.userID ? state.userID : state.anonymousID
       },
       bestIDLabel: (state) => {
         return state.IDLabel
       },
       bestIDIsAnonymous: (state) => {
-        return state.userID === 'anonymous_id'
+        return state.IDLabel === 'anonymous_id'
       },
       hasIDs(state) {
         return !(state.bestID === null || state.bestID === '')
@@ -166,6 +166,7 @@ export const useAnalytics = defineStore('analyticsStore', {
           this.userID = user_id
           this.IDLabel = 'user_id'
           this.identify(traitsObject, true)
+          this.track("Signed In", traitsObject.value)
           return
         }
 
@@ -173,6 +174,7 @@ export const useAnalytics = defineStore('analyticsStore', {
           this.userID = phone
           this.IDLabel = 'phone'
           this.identify(traitsObject, true)
+          this.track("Signed In", traitsObject.value)
           return
         }
 
@@ -277,7 +279,9 @@ export const useAnalytics = defineStore('analyticsStore', {
       },
       reset() {
         this.userID = null
+        
         this.analytics.reset()
+        this.IDLabel = 'anonymous_id'
         // this.refreshIDs()
       }
     }
