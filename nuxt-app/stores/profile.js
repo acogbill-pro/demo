@@ -11,6 +11,7 @@ export const useProfileStore = defineStore('profileStore', {
       summary: '',
       nba: null,
       inferred: null,
+      photo: null,
       other: '',
       smartTrait: '',
       loading: false,
@@ -63,6 +64,9 @@ export const useProfileStore = defineStore('profileStore', {
         } else {
           this.isSyncing = false
         }
+      },
+      loadPhoto(photoURL) {
+        this.photo = photoURL
       },
       startSyncing(retryCount) {
         const {bestID, refreshIDs} = useAnalytics()

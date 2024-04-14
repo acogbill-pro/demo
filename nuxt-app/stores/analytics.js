@@ -53,6 +53,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         const promise2 = promise.then((result) => {
           this.anonymousID = result.anonymousId()
           this.userID = result.id()
+          if (this.userID) this.IDLabel = "user_id"
         })
 
         this.identify()

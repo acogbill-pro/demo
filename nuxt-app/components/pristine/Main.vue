@@ -92,7 +92,7 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                     </v-fade-transition>
                     <!-- Logged in as {{ IDforPrint }} -->
                     <v-btn v-if="profile.hasLoaded" :loading="imageLoading" :disabled="imageLoading" block nuxt
-                        class="mt-2" @click="loadPhoto">Load Personalized Photo
+                        class="mt-2" @click="loadPhoto">Load Personalized Hero
                         <template v-slot:prepend>
                             <v-icon icon="mdi-image" />
                         </template>

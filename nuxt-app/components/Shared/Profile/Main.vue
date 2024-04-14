@@ -12,11 +12,11 @@ const tab = ref(null)
 const heroImageOverrideURL = ref(null)
 const heroImagePath = computed(() => {
     if (heroImageOverrideURL.value) return heroImageOverrideURL.value
-    if (traitStore.hasSpecificTrait('personalized_hero_image')) return traitStore.traits.personalized_hero_image
-    return traitStore.hasTraits ? '/sq/unknownUser.jpeg' : '/sq/unknownUser.jpeg'
+    if (profile.photo) return profile.photo
+    return '/sq/unknownUser.jpeg'
 })
 
-const nameFromTraits = computed(() => (traitStore.hasSpecificTrait('name') ? `${traitStore.traits.name}` : null))
+const nameFromTraits = computed(() => (traitStore.hasSpecificTrait('name') ? `${traitStore.traits.name}` : analytics.userID))
 const IDforPrint = computed(() => nameFromTraits.value ? nameFromTraits.value : 'Anonymous')
 
 async function loadPhoto() {
@@ -31,6 +31,7 @@ async function loadPhoto() {
     // console.log('gen photo URL', generatedPhoto)
     if (generatedPhoto !== '') {
         heroImageOverrideURL.value = generatedPhoto
+        profile.loadPhoto(generatedPhoto)
         // analytics.identify({ 'personalized_hero_image': generatedPhoto })
     } else {
         console.log('error fetching profile photo from dall-e')
