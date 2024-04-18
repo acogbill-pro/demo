@@ -3,6 +3,8 @@ import { useProfileStore } from '~/stores/profile'
 const profile = useProfileStore()
 
 const loading = ref(false)
+const promptString = 'You are a human who works with customers to find them the right mortgage and get them excited about working with Rocket Mortgage. Reference their city by looking up the zip code and make it feel local by referencing specific neighborhoods and points of interest.'
+//const promptString = 'You are a human store associate, with the goal of getting a customer excited about the store, the products it sells, the product or products they own, and give them personalized reasons to spend time in the store.'
 const prompt = ref('')
 
 async function submitPrompt() {
@@ -15,11 +17,11 @@ function reset() {
     prompt.value = ''
     loading.value = false
     profile.other = ''
-    prompt.value = 'You are a human store associate, with the goal of getting a customer excited about the store, the products it sells, the product or products they own, and give them personalized reasons to spend time in the store.'
+    prompt.value = promptString
 }
 
 onMounted(() => {
-    prompt.value = 'You are a human store associate, with the goal of getting a customer excited about the store, the products it sells, the product or products they own, and give them personalized reasons to spend time in the store.'
+    prompt.value = promptString
 })
 </script>
 
