@@ -27,9 +27,9 @@ onMounted(() => {
     <v-card class="mb-5" v-if="profile.hasLoaded">
         <v-card-actions>
             <v-img src="/images/openai-logomark.png" height="20" />
-            Other Prompt
+            <b>Prompt</b>
             <v-spacer />
-            <v-btn v-if="profile.other" icon="mdi-refresh" @click="reset" variant="plain" block />
+            <v-btn v-if="profile.other" icon="mdi-refresh" @click="reset" variant="plain" />
         </v-card-actions>
         <v-expand-transition>
             <v-card-text v-if="profile.other === ''">
