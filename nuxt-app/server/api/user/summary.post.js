@@ -4,11 +4,11 @@ import assert from "node:assert";
 
 
 const { openAIKey } = useRuntimeConfig().public
-const writeKeyString = process.env.PREFIX_TO_USE + 'SERVER_SIDE_WRITE_KEY'
-console.log('AI using write key ', writeKeyString)
-const writeKey = process.env[writeKeyString]
-console.log('WRITE KEY', writeKey)
-const analytics = new Analytics({ writeKey })
+// const writeKeyString = process.env.PREFIX_TO_USE + 'SERVER_SIDE_WRITE_KEY'
+// console.log('AI using write key ', writeKeyString)
+// const writeKey = process.env[writeKeyString]
+// console.log('WRITE KEY', writeKey)
+// const analytics = new Analytics({ writeKey })
 
 // instantiation
 const AI = new OpenAI({

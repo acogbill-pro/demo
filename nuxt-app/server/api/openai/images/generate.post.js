@@ -2,10 +2,10 @@ import { Analytics } from '@segment/analytics-node'
 import OpenAI from "openai";
 
 const { openAIKey } = useRuntimeConfig().public
-const writeKeyString = process.env.PREFIX_TO_USE + 'SERVER_SIDE_WRITE_KEY'
-console.log('AI using write key ', writeKeyString)
-const writeKey = process.env[writeKeyString]
-const analytics = new Analytics({ writeKey })
+// const writeKeyString = process.env.PREFIX_TO_USE + 'SERVER_SIDE_WRITE_KEY'
+// console.log('AI using write key ', writeKeyString)
+// const writeKey = process.env[writeKeyString]
+// const analytics = new Analytics({ writeKey })
 
 // instantiation
 const AI = new OpenAI({
