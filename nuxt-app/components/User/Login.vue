@@ -73,17 +73,17 @@ const show = ref(false)
 
 <template>
     <v-card>
-        <v-card-title>Login</v-card-title>
+        <!-- <v-card-title>Login</v-card-title> -->
 
         <v-form ref="form" v-model="valid" lazy-validation>
             <v-card-text>
                 <v-text-field v-model="user_id" :counter="10" label="User ID" required>
                 </v-text-field>
 
-                <v-text-field v-model="password" :counter="10" label="Password" required
+                <!-- <v-text-field v-model="password" :counter="10" label="Password" required
                     :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" :type="show ? 'text' : 'password'"
                     @click:append="show = !show">
-                </v-text-field>
+                </v-text-field> -->
 
                 <!--<v-select v-model="select" :items="items" :rules="[v => !!v || 'Item is required']" label="Item" required>
         </v-select>-->

@@ -3,7 +3,7 @@ import { useAnalytics } from '~/stores/analytics.js'
 const analytics = useAnalytics()
 
 definePageMeta({
-    layout: "sq",
+    layout: "default",
     middleware: ["page-analytics"],
 })
 

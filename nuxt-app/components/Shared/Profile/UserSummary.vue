@@ -69,7 +69,8 @@ onMounted(() => {
     </v-card>
 
     <v-card v-if="!profile.hasLoaded">
-        <UserPhoneLogin />
+        <v-card-title>Customer Lookup</v-card-title>
+        <UserLogin />
     </v-card>
 </template>
 
