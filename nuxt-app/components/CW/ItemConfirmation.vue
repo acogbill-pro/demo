@@ -1,9 +1,9 @@
 <script setup>
 import { useProductCatalog } from '~~/stores/products';
 import { useCartStore } from '~~/stores/cart';
-import { useRoute } from 'vue-router'
+import { useAnalytics } from '~/stores/analytics.js'
+const analytics = useAnalytics()
 const products = useProductCatalog()
-const cart = useCartStore()
 
 const props = defineProps({
     sku: {
@@ -17,14 +17,20 @@ const props = defineProps({
 const product = computed(() => products.productFromSKU(props.sku) || { name: 'Loading', image: 'bananas.jpg' })
 const productImage = computed(() => '/cw/images/products/' + product.value.image)
 
-function removeItem() {
-    if (props.sku === '0000') return
-    cart.remove(props.sku)
+const progress = ref([0])
+const checkboxOptions = ref([0, 25, 50, 75, 100])
 
-    navigateTo({
-        path: '/cw/products/'
-    })
+function boxChecked(option, index) {
+    analytics.track('Video Progress', { video: product.value, amount: option })
+    if (option === 100) analytics.track('Video End')
 }
+
+function play() {
+    if (props.sku === '0000') return
+    console.log('playin')
+}
+
+onMounted(() => analytics.track('Video Start', { video: product.value }))
 </script>
 
 <template>
@@ -32,11 +38,17 @@ function removeItem() {
         <v-card-title>{{ product.name }}</v-card-title>
         <v-card-text>
             <v-img :src="productImage" width="300" />
-            {{ product.description }} - SKU: {{ product.SKU }}
+            {{ product.description }}
         </v-card-text>
         <v-card-actions>
-            <v-btn icon="mdi-cancel" @click="removeItem"></v-btn>
-            <v-btn icon="mdi-check" to="/cw/products"></v-btn>
+
+        </v-card-actions>
+        <v-card-actions>
+            <v-btn icon="mdi-arrow-left" to="/cw/products"></v-btn>
+            <v-checkbox v-for="(option, index) in checkboxOptions" v-model="progress" :label="`${option}%`"
+                :value="option" :disabled="progress.includes(option)" class="ma-0"
+                @update:model-value="boxChecked(option, index)" />
+            <v-btn icon="mdi-play" @click="play"></v-btn>
         </v-card-actions>
     </v-card>
 </template>
