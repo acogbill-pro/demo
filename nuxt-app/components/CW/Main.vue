@@ -16,7 +16,6 @@ products.loadProducts(
             name: 'Tom Segura - Completely Normal',
             description: 'Tom Segura shares a few off-hand appraisals on hotels and hobbies with a cool and thoughtful demeanor.',
             category: 'standup',
-            priceUSD: 10,
             image: 'segura.jpg',
         },
         {
@@ -24,7 +23,6 @@ products.loadProducts(
             name: 'Bob Saget - Zero to Sixty',
             description: 'Bob Saget declares himself the last TV father viewers can trust in his hour of stories and songs.',
             category: 'standup',
-            priceUSD: 15,
             image: 'bob.jpeg'
         },
         {
@@ -32,7 +30,6 @@ products.loadProducts(
             name: 'Running Wilde',
             description: 'Steve Wilde has never performed a selfless act. But why should he - he\'s rich!',
             category: 'comedy',
-            priceUSD: 20,
             image: 'wilde.jpg'
         },
         {
@@ -40,7 +37,6 @@ products.loadProducts(
             name: 'The Bernie Mac Show',
             description: 'Comedian Bernie Mac becomes the guardian of his sister\'s three children, only to realize how much constant attention and love they need.',
             category: 'comedy',
-            priceUSD: 20,
             image: 'bernie.jpg'
         },
     ]

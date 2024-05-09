@@ -12,11 +12,11 @@ definePageMeta({
 })
 
 useHead({
-    title: 'Confirm Item Add'
+    title: 'Title Detail'
 })
 
 onMounted(() => {
-    analytics.page('Confirm Item Add')
+    analytics.page('Title Detail')
 })
 </script>
 

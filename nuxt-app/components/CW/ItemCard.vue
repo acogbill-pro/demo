@@ -1,6 +1,8 @@
 <script setup>
 import { useProductCatalog } from '~~/stores/products';
 import { useCartStore } from '~~/stores/cart';
+import { useAnalytics } from '~/stores/analytics.js'
+const analytics = useAnalytics()
 const products = useProductCatalog()
 const cart = useCartStore()
 
@@ -18,6 +20,7 @@ const emit = defineEmits(['andThen'])
 
 function addToCart() {
     // cart.add(product.value.SKU, 1)
+    analytics.track('Title Loaded', product.value)
     emit('andThen', props.sku)
 }
 
@@ -33,10 +36,10 @@ const reviewOverlay = ref(false)
         <v-card-title>{{ product.name }}</v-card-title>
         <v-card-text>
             <v-img :src="productImage" width="300" />
-            {{ product.description }} - SKU: {{ product.SKU }}
+            {{ product.description }}
         </v-card-text>
         <v-card-actions>
-            <v-btn @click="addToCart">Add Item</v-btn>
+            <v-btn @click="addToCart">View Title</v-btn>
             <v-spacer />
             <v-btn icon="mdi-comment" @click="addReview"></v-btn>
             <v-overlay v-model="reviewOverlay" location-strategy="static" class="align-center justify-center">
