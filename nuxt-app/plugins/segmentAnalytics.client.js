@@ -52,6 +52,11 @@ export default defineNuxtPlugin(nuxtApp => {
     ['icbproductscart', env == 'PROD' ? 'En5gCdEpRGqwDrcp6b3JVazpUHn4n0Ye' : '4uaRq5AOj7aBZuFdGhLUxCPnqArMgW42'],
     ['icbproductscheckout', env == 'PROD' ? 'En5gCdEpRGqwDrcp6b3JVazpUHn4n0Ye' : '4uaRq5AOj7aBZuFdGhLUxCPnqArMgW42'],
     ['icbaccount', env == 'PROD' ? 'En5gCdEpRGqwDrcp6b3JVazpUHn4n0Ye' : '4uaRq5AOj7aBZuFdGhLUxCPnqArMgW42'],
+    ['cw', env == 'PROD' ? 'ayJQ1oI0N2xQ1t4V9JExpdJwgCinAGVG' : 'BvUU64vVuAWLxLEFSNMh5YXNauQDYfYT'],
+    ['cwproducts', env == 'PROD' ? 'ayJQ1oI0N2xQ1t4V9JExpdJwgCinAGVG' : 'BvUU64vVuAWLxLEFSNMh5YXNauQDYfYT'],
+    ['cwproductscart', env == 'PROD' ? 'ayJQ1oI0N2xQ1t4V9JExpdJwgCinAGVG' : 'BvUU64vVuAWLxLEFSNMh5YXNauQDYfYT'],
+    ['cwproductscheckout', env == 'PROD' ? 'ayJQ1oI0N2xQ1t4V9JExpdJwgCinAGVG' : 'BvUU64vVuAWLxLEFSNMh5YXNauQDYfYT'],
+    ['cwaccount', env == 'PROD' ? 'ayJQ1oI0N2xQ1t4V9JExpdJwgCinAGVG' : 'BvUU64vVuAWLxLEFSNMh5YXNauQDYfYT'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
