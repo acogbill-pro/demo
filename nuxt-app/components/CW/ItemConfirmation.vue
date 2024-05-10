@@ -37,16 +37,18 @@ onMounted(() => analytics.track('Video Start', { video: product.value }))
     <v-card>
         <!-- <v-card-title class="text-h5">{{ product.name }}</v-card-title> -->
         <v-card-text>
-            <v-img :src="productImage" width="300" />
+            <v-img :src="productImage" width="300" class="mb-2" />
             <span class="text-body-1">{{ product.description }}</span>
         </v-card-text>
 
         <v-card-actions>
             <v-spacer />
             <v-btn icon="mdi-arrow-left" to="/cw/products"></v-btn>
+            <v-spacer />
             <v-checkbox v-for="(option, index) in checkboxOptions" v-model="progress" :label="`${option}%`"
                 :value="option" :disabled="progress.includes(option)" class="ma-0"
                 @update:model-value="boxChecked(option, index)" />
+            <v-spacer />
             <v-btn icon="mdi-play" @click="play"></v-btn>
             <v-spacer />
         </v-card-actions>

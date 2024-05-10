@@ -2,25 +2,12 @@
 import scripts from '~/middleware/scripts.js'
 import { useAnalytics } from '~/stores/analytics'
 import { useProfileTraitsStore } from '~~/stores/profileTraits';
-import { useProductCatalog } from '~~/stores/products';
-const products = useProductCatalog()
 const analytics = useAnalytics()
-const { bestID } = analytics
 const profiles = useProfileTraitsStore()
 
-const props = defineProps({
-    product: {
-        type: Object,
-        default: { sku: '0001', name: 'Loading' },
-    },
-})
-
-// const product = computed(() => products.productFromSKU(props.sku) || { name: 'Loading' })
-const productImage = computed(() => '/pristine/images/products/' + product.value.image)
-
 const form = ref(null)
-const eventName = ref('Product Review')
-const eventText = ref(null)
+const eventName = ref('Call to Customer Service')
+const eventProperties = ref('{"disposition":"Product Question","resolved":true,"case_still_open":false,"hold_time_minutes":23}')
 const valid = ref(true)
 const showCalendar = ref(false)
 const serverSide = ref(true)
@@ -30,23 +17,65 @@ const switchLabel = computed(() => {
 
 const emit = defineEmits(['andThen'])
 
+const propertiesAsObject = computed(() => {
+    if (eventProperties.value === '') return null
+    try {
+        const toReturn = JSON.parse(eventProperties.value)
+        //console.log(toReturn)
+
+        Object.entries(toReturn).forEach(
+            ([key, value]) => {
+                toReturn[key] = scripts.transformStringToType(value) // Number, Date, Boolean, etc.
+            }
+        )
+        //console.log(toReturn)
+        return toReturn
+    } catch (error) {
+        console.log(error)
+        return null
+    }
+})
+
 const validationRules = [
     v => !!v || 'Name is required',
     v => (v && v !== '') || 'Name must be less than 10 characters',
 ]
 
+function isValidJSON(withString) {
+    try {
+        JSON.parse(withString);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+function hasSpacesInObjectKeys(withString) {
+    try {
+        const asObject = JSON.parse(withString)
+        const arrayOfKeys = Object.keys(asObject)
+        const joinedArray = arrayOfKeys.join('')
+        return joinedArray.split(' ').length > 1
+    } catch (e) {
+        return false;
+    }
+}
+
+const propertiesRules = [
+    //v => !(v.split(' ').length > 1) || 'No spaces allowed',
+    v => !hasSpacesInObjectKeys(v) || 'Object keys cannot have spaces',
+    v => isValidJSON(v) || 'Must be valid JSON',
+]
+
 function submitForm() {
-    if (!eventText.value || eventText.value === '' || !eventName.value) return
-    const propertiesObject = { user: bestID, contents: eventText.value, product: props.product }
-    // console.log('would calll Tracks here', propertiesObject)
     if (!serverSide.value) {
-        analytics.track(eventName.value, propertiesObject)
+        analytics.track(eventName.value, propertiesAsObject.value)
     } else {
-        analytics.trackServerSide(eventName.value, propertiesObject)
+        analytics.trackServerSide(eventName.value, propertiesAsObject.value)
     }
     //console.log(propertiesAsObject.value)
-    eventName.value = 'Product Review'
-    eventText.value = null
+    eventName.value = 'Call to Customer Service'
+    eventProperties.value = '{"disposition":"Product Question","resolved":true,"case_still_open":false,"hold_time_minutes":23}'
     form.value.resetValidation()
     emit('andThen')
 }
@@ -56,7 +85,7 @@ function submitForm() {
     <v-card width="500">
         <v-form ref="form" v-model="valid" lazy-validation>
             <v-card-title>
-                <h5>Add a Product Review for {{ product.name }}</h5>
+                <h5>Add an Event</h5>
             </v-card-title>
             <v-card-text>
                 <v-container>
@@ -75,7 +104,8 @@ function submitForm() {
                     <v-expand-transition>
                         <v-row v-if="!showCalendar">
                             <v-col cols="12">
-                                <v-textarea v-model="eventText" variant="solo" auto-grow label="Write Your Review:" />
+                                <v-textarea v-model="eventProperties" :rules="propertiesRules" variant="solo" auto-grow
+                                    :label="`Properties: ${JSON.stringify({ name: 'value' })}`" />
                             </v-col>
                         </v-row>
                         <v-row v-else>
