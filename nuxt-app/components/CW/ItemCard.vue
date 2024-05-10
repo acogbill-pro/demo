@@ -25,10 +25,10 @@ function addToCart() {
 }
 
 function addReview() {
-    reviewOverlay.value = true
+    otherOverlay.value = true
 }
 
-const reviewOverlay = ref(false)
+const otherOverlay = ref(false)
 </script>
 
 <template>
@@ -42,8 +42,8 @@ const reviewOverlay = ref(false)
             <v-btn @click="addToCart">View Title</v-btn>
             <v-spacer />
             <v-btn icon="mdi-comment" @click="addReview"></v-btn>
-            <v-overlay v-model="reviewOverlay" location-strategy="static" class="align-center justify-center">
-                <SharedTrackFormsReview :product="product" v-on:and-then="reviewOverlay = false" />
+            <v-overlay v-model="otherOverlay" location-strategy="static" class="align-center justify-center">
+                <SharedTrackFormsOther :product="product" v-on:and-then="otherOverlay = false" />
             </v-overlay>
         </v-card-actions>
     </v-card>
