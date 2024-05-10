@@ -21,7 +21,20 @@ onMounted(() => {
 </script>
 
 <template>
-    <CWItemConfirmation :sku="SKU" />
+    <v-container>
+        <v-row>
+            <v-col>
+
+            </v-col>
+            <v-col cols="8">
+                <CWItemConfirmation :sku="SKU" />
+            </v-col>
+            <v-col>
+
+            </v-col>
+        </v-row>
+    </v-container>
+
 </template>
 
 <style lang="scss" scoped></style>

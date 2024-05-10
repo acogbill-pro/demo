@@ -33,10 +33,10 @@ const reviewOverlay = ref(false)
 
 <template>
     <v-card class="mb-10">
-        <v-card-title>{{ product.name }}</v-card-title>
+        <!-- <v-card-title>{{ product.name }}</v-card-title> -->
         <v-card-text>
             <v-img :src="productImage" width="300" />
-            {{ product.description }}
+            <span class="text-body-1">{{ product.description }}</span>
         </v-card-text>
         <v-card-actions>
             <v-btn @click="addToCart">View Title</v-btn>

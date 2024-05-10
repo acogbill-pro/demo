@@ -48,7 +48,7 @@ const heroImageOverrideURL = ref(null)
 const heroImagePath = computed(() => {
     if (heroImageOverrideURL.value) return heroImageOverrideURL.value
     if (profileTraits.hasSpecificTrait('personalized_hero_image')) return profileTraits.traits.personalized_hero_image
-    return profileTraits.hasTraits ? '/cw/images/bread.png' : '/cw/images/grocery.jpg'
+    return profileTraits.hasTraits ? '/cw/images/home.png' : '/cw/images/home.png'
 })
 
 const imageLoading = ref(false)
