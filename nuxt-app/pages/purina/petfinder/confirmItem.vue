@@ -16,7 +16,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('Confirm Item Add')
+    analytics.page('Pet Detail')
 })
 </script>
 

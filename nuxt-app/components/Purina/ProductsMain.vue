@@ -38,7 +38,7 @@ productCatalog.loadProducts(
             category: 'dog',
             subCategory: 'puppy',
             breed: 'Unknown',
-            size: 'medium',
+            size: 'small',
             location: 'PA',
             priceUSD: 400,
             image: 'Jason.jpeg'
@@ -49,7 +49,7 @@ productCatalog.loadProducts(
             description: 'Worry not, this is not an actual monkey.',
             age: 1,
             category: 'dog',
-            subCategory: 'puppy',
+            subCategory: 'young',
             breed: 'Mixed',
             size: 'medium',
             priceUSD: 200,

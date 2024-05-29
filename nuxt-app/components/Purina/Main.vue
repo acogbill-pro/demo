@@ -14,7 +14,7 @@ products.loadProducts(
             SKU: '0004',
             name: 'Luigi',
             description: 'The perfect sidekick.',
-            age: 4,
+            age: 3,
             category: 'dog',
             subCategory: 'young',
             breed: 'Shar Pei',
@@ -44,7 +44,7 @@ products.loadProducts(
             species: 'dog',
             subCategory: 'puppy',
             breed: 'Unknown',
-            size: 'medium',
+            size: 'small',
             location: 'PA',
             priceUSD: 400,
             image: 'Jason.jpeg'
@@ -53,9 +53,9 @@ products.loadProducts(
             SKU: '0003',
             name: 'Monkey',
             description: 'Worry not, this is not an actual monkey.',
-            age: 1,
+            age: 4,
             species: 'dog',
-            subCategory: 'puppy',
+            subCategory: 'young',
             breed: 'Mixed',
             size: 'medium',
             location: 'NJ',
@@ -133,8 +133,8 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                         <v-img :src="heroImagePath" width="800" />
                     </v-fade-transition>
                     <!-- Logged in as {{ IDforPrint }} -->
-                    <v-btn v-if="profile.hasLoaded" :loading="imageLoading" :disabled="imageLoading" block nuxt class="mt-2"
-                        @click="loadPhoto">Load Personalized Photo
+                    <v-btn v-if="profile.hasLoaded" :loading="imageLoading" :disabled="imageLoading" block nuxt
+                        class="mt-2" @click="loadPhoto">Load Personalized Photo
                         <template v-slot:prepend>
                             <v-icon icon="mdi-image" />
                         </template>

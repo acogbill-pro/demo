@@ -17,7 +17,7 @@ const productImage = computed(() => '/purina/images/products/' + product.value.i
 const emit = defineEmits(['andThen'])
 
 function addToCart() {
-    cart.add(product.value.SKU, 1)
+    // cart.add(product.value.SKU, 1)
     emit('andThen', props.sku)
 }
 </script>
@@ -30,7 +30,7 @@ function addToCart() {
             {{ product.description }} - SKU: {{ product.SKU }}
         </v-card-text>
         <v-card-actions>
-            <v-btn @click="addToCart">Add Item</v-btn>
+            <v-btn @click="addToCart">View Details</v-btn>
         </v-card-actions>
     </v-card>
 </template>
