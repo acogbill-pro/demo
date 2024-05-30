@@ -44,11 +44,11 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
         </v-row> -->
         <v-row>
             <v-col cols="7">
-                <v-img src="/purina/images/foodResult.png" width="450" />
+                <v-img src="/purina/images/products/puppyFood.png" width="450" />
             </v-col>
             <v-col cols="5">
                 <h3>Purina One</h3>
-                Purina ONE Plus Classic Ground Vibrant Maturity Adult 7 Plus Turkey And Barley Entree Senior Dog Food
+                Purina ONE +Plus Healthy Puppy Classic Ground Lamb & Long Grain Rice Entrée Wet Dog Food
             </v-col>
         </v-row>
     </v-container>
