@@ -9,7 +9,7 @@
             <v-toolbar-title>
 
                 <h1>
-                    <NuxtLink to="/purina/foodfinder">
+                    <NuxtLink to="/purina/">
                         <v-img src="/purina/images/logo.png" width="200" />
                     </NuxtLink>
                     <!--<NuxtLink to="/">

@@ -18,10 +18,16 @@ const heroImageOverrideURL = ref(null)
 const heroImagePath = computed(() => {
     if (heroImageOverrideURL.value) return heroImageOverrideURL.value
     // if (profiles.hasSpecificTrait('personalized_hero_image')) return profiles.traits.personalized_hero_image
-    return '/purina/images/puppyPlaying.jpeg'//profiles.hasTraits ? '/purina/images/dogsPlaying.jpeg' : '/purina/images/puppyPlaying.jpeg'
+    return '/purina/images/products/Cupid.jpeg'//profiles.hasTraits ? '/purina/images/dogsPlaying.jpeg' : '/purina/images/puppyPlaying.jpeg'
 })
 
 const petInTraits = ref(true)
+
+function skipPetInfo() {
+    navigateTo({
+        path: '/purina/foodfinder/four/',
+    })
+}
 
 onMounted(() => {
     analytics.page('Food Finder: Step One')
@@ -41,7 +47,8 @@ onMounted(() => {
         </v-row>
         <v-row no-gutters v-if="profiles.hasTraits && petInTraits">
             <v-col>
-                <v-switch v-model="petInTraits" label="This food is for Jake"></v-switch>
+                <v-switch v-model="petInTraits" label="This food is for Cupid"></v-switch>
+                <v-btn @click="skipPetInfo">Continue</v-btn>
             </v-col>
         </v-row>
         <v-row no-gutters v-else>
