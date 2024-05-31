@@ -57,11 +57,11 @@ export default defineNuxtPlugin(nuxtApp => {
     ['cwproductscart', env == 'PROD' ? 'ayJQ1oI0N2xQ1t4V9JExpdJwgCinAGVG' : 'BvUU64vVuAWLxLEFSNMh5YXNauQDYfYT'],
     ['cwproductscheckout', env == 'PROD' ? 'ayJQ1oI0N2xQ1t4V9JExpdJwgCinAGVG' : 'BvUU64vVuAWLxLEFSNMh5YXNauQDYfYT'],
     ['cwaccount', env == 'PROD' ? 'ayJQ1oI0N2xQ1t4V9JExpdJwgCinAGVG' : 'BvUU64vVuAWLxLEFSNMh5YXNauQDYfYT'],
-    ['discover', env == 'PROD' ? 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
-    ['discoverproducts', env == 'PROD' ? 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
-    ['discoverproductscart', env == 'PROD' ? 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
-    ['discoverproductscheckout', env == 'PROD' ? 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
-    ['discoveraccount', env == 'PROD' ? 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
+    ['discover', env == 'PROD' ? '8ZKE6rXsnudmAOteFgvXhhSWq0PWqvO2' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
+    ['discoverproducts', env == 'PROD' ? '8ZKE6rXsnudmAOteFgvXhhSWq0PWqvO2' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
+    ['discoverproductscart', env == 'PROD' ? '8ZKE6rXsnudmAOteFgvXhhSWq0PWqvO2' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
+    ['discoverproductscheckout', env == 'PROD' ? '8ZKE6rXsnudmAOteFgvXhhSWq0PWqvO2' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
+    ['discoveraccount', env == 'PROD' ? '8ZKE6rXsnudmAOteFgvXhhSWq0PWqvO2' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
