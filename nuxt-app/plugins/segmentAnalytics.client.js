@@ -62,6 +62,11 @@ export default defineNuxtPlugin(nuxtApp => {
     ['discoverproductscart', env == 'PROD' ? '8ZKE6rXsnudmAOteFgvXhhSWq0PWqvO2' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
     ['discoverproductscheckout', env == 'PROD' ? '8ZKE6rXsnudmAOteFgvXhhSWq0PWqvO2' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
     ['discoveraccount', env == 'PROD' ? '8ZKE6rXsnudmAOteFgvXhhSWq0PWqvO2' : 'j4qvuWVRFTvdUz3kTJ1hI62CRRn0Qtn7'],
+    ['adtalem', env == 'PROD' ? 'mPGxS7AfQ24SWZ7myj6zwDnk96jSqywJ' : 'Ap6NqnibxbEOqSilo3Evav43dZzz9waM'],
+    ['adtalemproducts', env == 'PROD' ? 'mPGxS7AfQ24SWZ7myj6zwDnk96jSqywJ' : 'Ap6NqnibxbEOqSilo3Evav43dZzz9waM'],
+    ['adtalemproductscart', env == 'PROD' ? 'mPGxS7AfQ24SWZ7myj6zwDnk96jSqywJ' : 'Ap6NqnibxbEOqSilo3Evav43dZzz9waM'],
+    ['adtalemproductscheckout', env == 'PROD' ? 'mPGxS7AfQ24SWZ7myj6zwDnk96jSqywJ' : 'Ap6NqnibxbEOqSilo3Evav43dZzz9waM'],
+    ['adtalemaccount', env == 'PROD' ? 'mPGxS7AfQ24SWZ7myj6zwDnk96jSqywJ' : 'Ap6NqnibxbEOqSilo3Evav43dZzz9waM'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);

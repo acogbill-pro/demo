@@ -175,7 +175,7 @@ function toggleList() {
             <v-expand-transition>
                 <div v-show="!collapse">
 
-                    <v-tabs v-model="tab" bg-color="#E75B18">
+                    <v-tabs v-model="tab" bg-color="#023A80">
                         <v-tab value="traits">
                             Traits
                         </v-tab>
@@ -202,6 +202,6 @@ function toggleList() {
 
 <style lang="scss" scoped>
 .branded {
-    color: #E75B18;
+    color: #023A80;
 }
 </style>
