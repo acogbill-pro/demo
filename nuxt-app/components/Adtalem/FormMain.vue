@@ -39,10 +39,10 @@ function identifyField(fieldName, fieldValue, isInFocus) {
     propertyObject[fieldName] = fieldValue
     const identifyDict = ['first_name', 'last_name', 'email', 'phone', 'zip_code', 'state', 'gradYear', 'education']
     if (identifyDict.includes(fieldName)) {
-        if (fieldName === 'last_name' && user_id.value) {
-            propertyObject.user_id = user_id.value
+        // if (fieldName === 'last_name' && user_id.value) {
+        //     propertyObject.user_id = user_id.value
 
-        }
+        // }
         if (fieldName === 'last_name' && name.value) {
             propertyObject.name = name.value
 

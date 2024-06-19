@@ -45,7 +45,8 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
     actions: {
       loadTraitsForUser(IDObject) {
         const cartStore = useCartStore()
-        const articleStore = useArticleCatalog()
+        // const articleStore = useArticleCatalog()
+        const analytics = useAnalytics()
 
         const runtimeConfig = useRuntimeConfig()
 
@@ -97,6 +98,8 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
           //articleStore.profileToEdge(fetchedProfile.traits)
           cartStore.profileToEdge(fetchedProfile.traits.cartStore)
           this.traits = fetchedProfile.traits
+          const {user_id} = fetchedProfile.traits
+          if (user_id && analytics.bestIDIsAnonymous) analytics.loginWithTraits(fetchedProfile.traits)
 
           //this.startSyncingArticleStore()
           this.startSyncingCartStore()
