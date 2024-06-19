@@ -62,7 +62,7 @@ const syncing = computed({
     get: () => profile.isSyncing,
     set: (value) => {
         if (value === true) {
-            profile.startSyncing(10)
+            profile.startSyncing(50)
         } else {
             profile.stopSyncing()
         }
@@ -122,7 +122,7 @@ function toggleList() {
 <template>
     <div>
 
-        <v-card class="mb-5">
+        <v-card class="my-8">
             <v-card-title>
                 <h5>
                     Profile: <span :class="profile.hasLoaded ? 'branded' : null">{{ IDforPrint }}</span>

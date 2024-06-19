@@ -183,6 +183,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.identify(traitsObject, true)
       },
       identify(traitsObject = {}, syncAfter = false) {
+        console.log('identify call',traitsObject)
         const profile = useProfileStore()
 
         // if (useID !== null) {  // ID override

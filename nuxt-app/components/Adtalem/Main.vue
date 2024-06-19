@@ -87,7 +87,8 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
         <v-container>
             <v-row>
                 <v-col cols="8">
-                    <v-img src="adtalem/images/formHeader.png" width="600" class="mt-8" />
+                    <v-img src="/adtalem/images/formHeader.png" width="600" class="mt-8" />
+                    <AdtalemFormMain />
                     <!-- <v-fade-transition>
                         <v-img :src="heroImagePath" width="800" />
                     </v-fade-transition>
