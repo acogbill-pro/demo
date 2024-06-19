@@ -14,12 +14,13 @@ export default defineEventHandler(async (event) => {
 
     try {
         const rawBody = await readBody(event)
+        // console.log('rawBody',rawBody)
 
         analytics.track(rawBody)
     
         return {
             status: 'OK',
-            data,
+            data: {},
         }
     } catch(e) {
         console.log('error in server side Track', e)

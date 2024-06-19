@@ -8,10 +8,10 @@ const stateOptions = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 
 const programOptions = ['RN to BSN Online Option', 'RN-BSN to MSN Option', 'Bachelor of Science in Nursing', 'Master of Physician Assistant Studies']
 const expand = true//computed(() => levelOfEd.value && gradYear.value && state.value && programOfInterest.value)
 
-const fname = ref(null)
-const lname = ref(null)
-const name = computed(() => fname.value + ' ' + lname.value)
-const user_id = computed(() => fname.value + '_' + lname.value + '_id')
+const first_name = ref(null)
+const last_name = ref(null)
+const name = computed(() => first_name.value + ' ' + last_name.value)
+const user_id = computed(() => first_name.value + '_' + last_name.value + '_id')
 const levelOfEducation = ref(null)
 const gradYear = ref(null)
 const programOfInterest = ref(null)
@@ -27,11 +27,11 @@ function identifyField(fieldName, fieldValue, isInFocus) {
     propertyObject[fieldName] = fieldValue
     const identifyDict = ['first_name', 'last_name', 'email', 'phone', 'zip_code', 'state', 'gradYear', 'education']
     if (identifyDict.includes(fieldName)) {
-        if (fieldName === 'lname' && user_id.value) {
+        if (fieldName === 'last_name' && user_id.value) {
             propertyObject.user_id = user_id.value
 
         }
-        if (fieldName === 'lname' && name.value) {
+        if (fieldName === 'last_name' && name.value) {
             propertyObject.name = name.value
 
         }
@@ -89,12 +89,12 @@ onMounted(() => analytics.page('Get Information'))
             </v-row>
             <v-row>
                 <v-col cols="6">
-                    <v-text-field label="First Name" variant="outlined" v-model="fname"
-                        @update:focused="(isInFocus) => identifyField('first_name', fname, isInFocus)"></v-text-field>
+                    <v-text-field label="First Name" variant="outlined" v-model="first_name"
+                        @update:focused="(isInFocus) => identifyField('first_name', first_name, isInFocus)"></v-text-field>
                 </v-col>
                 <v-col cols="6">
-                    <v-text-field label="Last Name" variant="outlined" v-model="lname"
-                        @update:focused="(isInFocus) => identifyField('last_name', lname, isInFocus)"></v-text-field>
+                    <v-text-field label="Last Name" variant="outlined" v-model="last_name"
+                        @update:focused="(isInFocus) => identifyField('last_name', last_name, isInFocus)"></v-text-field>
                 </v-col>
             </v-row>
             <v-row>

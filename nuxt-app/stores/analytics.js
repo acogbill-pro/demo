@@ -89,7 +89,8 @@ export const useAnalytics = defineStore('analyticsStore', {
           if (!this.bestIDIsAnonymous){
             body.userId = this.userID
           } else {
-            body.anonymousId = this.anonID
+            // console.log('setting body ID to anonymousId', this.anonymousID)
+            body.anonymousId = this.anonymousID
           }
 
           // console.log('body', body)
@@ -130,7 +131,7 @@ export const useAnalytics = defineStore('analyticsStore', {
           if (!this.bestIDIsAnonymous){
             body.userId = this.userID
           } else {
-            body.anonymousId = this.anonID
+            body.anonymousId = this.anonymousId
           }
 
           // console.log('body', body)
@@ -227,7 +228,7 @@ export const useAnalytics = defineStore('analyticsStore', {
           if (!this.bestIDIsAnonymous){
             body.userId = this.userID
           } else {
-            body.anonymousId = this.anonID
+            body.anonymousId = this.anonymousId
           }
 
           // console.log('body', body)

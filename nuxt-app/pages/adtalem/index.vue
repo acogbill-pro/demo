@@ -15,7 +15,7 @@ useHead({
 })
 
 onMounted(() => {
-    analytics.page('POC Home')
+    // analytics.page('POC Home')
 
     //profiles.startSyncing(3)
 })
