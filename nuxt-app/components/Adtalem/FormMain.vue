@@ -1,5 +1,10 @@
 <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
+import { useProfileStore } from '~/stores/profile.js'
+import { useProfileTraitsStore } from '~/stores/profileTraits.js'
+const profile = useProfileStore()
+const traitStore = useProfileTraitsStore()
+const currentTraits = computed(() => traitStore.cleanTraits)
 const analytics = useAnalytics()
 
 const levelOptions = ['High School Diploma/GED', 'Nursing Diploma', 'Associate Degree', 'Bachelors Degree', 'Masters Degree']
@@ -19,6 +24,13 @@ const email = ref(null)
 const phone = ref(null)
 const state = ref(null)
 const zipCode = ref(null)
+
+watch(currentTraits, (newValue) => {
+    console.log('detected trait change')
+    if (newValue.first_name) first_name.value = newValue.first_name
+    if (newValue.last_name) last_name.value = newValue.last_name
+    if (newValue.levelOfEducation) levelOfEducation.value = newValue.levelOfEducation
+})
 
 function identifyField(fieldName, fieldValue, isInFocus) {
     // console.log('identifyField called')

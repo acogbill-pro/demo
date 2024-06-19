@@ -16,8 +16,8 @@ const heroImagePath = computed(() => {
     return '/sq/unknownUser.jpeg'
 })
 
-const nameFromTraits = computed(() => (traitStore.hasSpecificTrait('name') ? `${traitStore.traits.name}` : analytics.userID))
-const IDforPrint = computed(() => nameFromTraits.value ? nameFromTraits.value : 'Anonymous')
+const nameFromTraits = computed(() => (traitStore.hasSpecificTrait('name') ? `${traitStore.traits.name}` : `${traitStore.traits.first_name ?? 'User'} ${traitStore.traits.last_name ?? analytics.userID}`))
+const IDforPrint = computed(() => nameFromTraits.value !== 'User null' ? nameFromTraits.value : 'Anonymous')
 
 async function loadPhoto() {
     console.log('loading profile photo from Dall-E')

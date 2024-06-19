@@ -2,6 +2,7 @@
 import { AnalyticsBrowser } from '@segment/analytics-next'
 import {defineStore} from 'pinia'
 import {useProfileStore} from '~/stores/profile'
+import { useProfileTraitsStore } from '~/stores/profileTraits.js'
 
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
@@ -183,7 +184,9 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.anonymousID = anonymous_id
         this.identify(traitsObject, true)
       },
-      identify(traitsObject = {}, syncAfter = false) {
+      identify(newTraits = {}, syncAfter = false) {
+        const profileTraits = useProfileTraitsStore()
+        const traitsObject = Object.assign(profileTraits.cleanTraits ?? {}, newTraits)
         console.log('identify call',traitsObject)
         const profile = useProfileStore()
 
