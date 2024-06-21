@@ -11,15 +11,15 @@ const profile = useProfileTraitsStore()
 const IDforPrint = computed(() => analytics.bestIDIsAnonymous ? 'Anonymous' : analytics.bestID)
 
 // const name = ref('')
-const fname = ref('')
-const lname = ref('')
+const first_name = ref('')
+const last_name = ref('')
 const email = ref('')
 const zip = ref('')
 const birthMonth = ref(null)
 
 function submit() {
     if (birthMonth.value === null) return
-    const payload = { fname: fname.value, lname: lname.value, email: email.value, zip: zip.value, birthMonth: birthMonth.value }
+    const payload = { first_name: first_name.value, last_name: last_name.value, email: email.value, zip: zip.value, birthMonth: birthMonth.value }
     // const payload = JSON.parse(JSON.stringify(payloadRef))
     console.log(payload)
 
@@ -45,10 +45,10 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
 <template>
     <v-container>
         <v-row>
-            <v-col><v-text-field v-model="fname" label="First Name" solo /></v-col>
+            <v-col><v-text-field v-model="first_name" label="First Name" solo /></v-col>
         </v-row>
         <v-row>
-            <v-col><v-text-field v-model="lname" label="Last Name" solo /></v-col>
+            <v-col><v-text-field v-model="last_name" label="Last Name" solo /></v-col>
         </v-row>
         <v-row>
             <v-col><v-text-field v-model="email" label="Email" solo /></v-col>
