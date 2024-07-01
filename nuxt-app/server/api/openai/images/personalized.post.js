@@ -13,9 +13,10 @@ const AI = new OpenAI({
 });
 
 async function main(postedBody) {
-    const {prompt} = postedBody
+    const {prompt: originalPrompt, traits} = postedBody
+    const traitsAsString = JSON.stringify(traits)
 
-    const combinedPrompt = `A scene depicting the following, in a simple image not featuring any words, graphics, diagrams, or other markings: ${prompt}`
+    const combinedPrompt = `${originalPrompt}, featuring colors, objects, products, and methods of communication preferred by the business customer described by the key-value pairs of human attributes in this object: ${traitsAsString}. The image should not feature any words, and be as simple as possible, with no graphics or diagrams.`
 
     console.log(combinedPrompt)
 

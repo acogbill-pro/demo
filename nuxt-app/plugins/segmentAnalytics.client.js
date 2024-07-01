@@ -24,6 +24,8 @@ export default defineNuxtPlugin(nuxtApp => {
     ['pristineservice', 'R8qzxqLg4tuPE5Z4xFbrTqgxNpq9sCDN'],
     ['pristineproductscart', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['pristineproductscheckout', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['pristinejourneystart', 'geL9yYmf01qZvBceHXtBoVsqZffdMdJH'],
+    ['pristineai', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['thd', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['thdshop', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['thdproducts', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],

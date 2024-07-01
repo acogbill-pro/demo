@@ -270,6 +270,33 @@ export const useProfileStore = defineStore('profileStore', {
           console.log(error)
         });
       },
+      async fetchGenAIImage(prompt) {
+
+        // const profileAsString = JSON.stringify(this.profile)
+
+        // console.log('Profile object:', profileAsString)
+
+        const options = {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
+          },
+          body: JSON.stringify({prompt}),
+        }
+
+        const response = await fetch('/api/openai/images/generate', options)
+
+        if (response?.ok) {
+          const {data} = await response.json()
+          const image_url = data[0].url
+          console.log(image_url)
+          return image_url
+        } else {
+          return null
+        }
+        
+      },
       async fetchPersonalizedImage(prompt) {
         const analytics = useAnalytics()
         const traitStore = useProfileTraitsStore()
@@ -292,7 +319,7 @@ export const useProfileStore = defineStore('profileStore', {
           body: JSON.stringify({prompt, traits: traitStore.cleanTraits}),
         }
 
-        const response = await fetch('/api/openai/images/generate', options)
+        const response = await fetch('/api/openai/images/personalized', options)
 
         if (response?.ok) {
           const {data} = await response.json()
