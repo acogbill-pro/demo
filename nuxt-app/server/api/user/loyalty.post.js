@@ -24,7 +24,6 @@ export default defineEventHandler(async (event) => {
                     loyalty_tier: 'Gold',
                     likely_subscriber: true,
                     phone: '+19177576756',
-                    adoption_count: 3,
                 }
             },
         }
