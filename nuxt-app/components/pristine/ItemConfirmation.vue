@@ -17,6 +17,13 @@ const props = defineProps({
 const product = computed(() => products.productFromSKU(props.sku) || { name: 'Loading', image: 'bananas.jpg' })
 const productImage = computed(() => '/pristine/images/products/' + product.value.image)
 
+function addItem() {
+    cart.add(props.sku, 1)
+    navigateTo({
+        path: '/pristine/products/'
+    })
+}
+
 function removeItem() {
     if (props.sku === '0000') return
     cart.remove(props.sku)
@@ -36,7 +43,7 @@ function removeItem() {
         </v-card-text>
         <v-card-actions>
             <v-btn icon="mdi-cancel" @click="removeItem"></v-btn>
-            <v-btn icon="mdi-check" to="/pristine/products"></v-btn>
+            <v-btn icon="mdi-check" @click="addItem"></v-btn>
         </v-card-actions>
     </v-card>
 </template>

@@ -6,27 +6,39 @@ productCatalog.loadProducts(
     [
         {
             SKU: '0001',
-            name: 'Bananas',
-            description: '1 Bunch - per Pound',
-            category: 'produce',
+            name: 'Coffee Mate',
+            description: 'Coffee mate French Vanilla Flavored Iced Coffee',
+            category: 'coffee',
+            subCategory: 'creamers',
             priceUSD: 10,
-            image: 'bananas.jpg',
+            image: 'coffeeMate.jpg',
         },
         {
             SKU: '0002',
-            name: 'Plantains',
-            description: '1 Bunch - per Pound',
-            category: 'produce',
+            name: 'Nesquik',
+            description: 'Chocolate Flavored Powder 44.9 oz. Canister',
+            category: 'powders',
+            subCategory: 'bulk',
             priceUSD: 15,
-            image: 'plantains.jpg'
+            image: 'nesquik.jpg'
         },
         {
             SKU: '0003',
             name: 'Chocolate Chips',
             description: '1 Bag',
             category: 'baking',
+            subCategory: 'chocolate',
             priceUSD: 20,
             image: 'choc_chips.jpg'
+        },
+        {
+            SKU: '0004',
+            name: 'Natural Bliss',
+            description: 'Original Oat Milk Beverage - 64 oz.',
+            category: 'coffee',
+            subCategory: 'creamers',
+            priceUSD: 20,
+            image: 'naturalBliss.jpg'
         },
     ]
 )
