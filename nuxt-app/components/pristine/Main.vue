@@ -38,6 +38,15 @@ products.loadProducts(
             priceUSD: 20,
             image: 'choc_chips.jpg'
         },
+        {
+            SKU: '0004',
+            name: 'Natural Bliss',
+            description: 'Original Oat Milk Beverage - 64 oz.',
+            category: 'coffee',
+            subCategory: 'creamers',
+            priceUSD: 20,
+            image: 'naturalBliss.jpg'
+        },
     ]
 )
 
