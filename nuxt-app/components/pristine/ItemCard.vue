@@ -40,7 +40,7 @@ const reviewOverlay = ref(false)
             <v-spacer />
             <v-btn icon="mdi-comment" @click="addReview"></v-btn>
             <v-overlay v-model="reviewOverlay" location-strategy="static" class="align-center justify-center">
-                <SharedTrackFormsReview :product="product" v-on:and-then="reviewOverlay = false" />
+                <SharedTrackFormsProductEvent :product="product" v-on:and-then="reviewOverlay = false" />
             </v-overlay>
         </v-card-actions>
     </v-card>
