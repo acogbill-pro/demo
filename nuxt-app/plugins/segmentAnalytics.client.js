@@ -69,6 +69,11 @@ export default defineNuxtPlugin(nuxtApp => {
     ['adtalemproductscart', env == 'PROD' ? 'mPGxS7AfQ24SWZ7myj6zwDnk96jSqywJ' : 'Ap6NqnibxbEOqSilo3Evav43dZzz9waM'],
     ['adtalemproductscheckout', env == 'PROD' ? 'mPGxS7AfQ24SWZ7myj6zwDnk96jSqywJ' : 'Ap6NqnibxbEOqSilo3Evav43dZzz9waM'],
     ['adtalemaccount', env == 'PROD' ? 'mPGxS7AfQ24SWZ7myj6zwDnk96jSqywJ' : 'Ap6NqnibxbEOqSilo3Evav43dZzz9waM'],
+    ['llbean', env == 'PROD' ? 'B6zkni5ilD2oREczeYQEgstwGELdGWbG' : 'yiv0CRpwf5YADmQ8HbaUYT1jnKaQwUzZ'],
+    ['llbeanproducts', env == 'PROD' ? 'B6zkni5ilD2oREczeYQEgstwGELdGWbG' : 'yiv0CRpwf5YADmQ8HbaUYT1jnKaQwUzZ'],
+    ['llbeanproductscart', env == 'PROD' ? 'B6zkni5ilD2oREczeYQEgstwGELdGWbG' : 'yiv0CRpwf5YADmQ8HbaUYT1jnKaQwUzZ'],
+    ['llbeanproductscheckout', env == 'PROD' ? 'B6zkni5ilD2oREczeYQEgstwGELdGWbG' : 'yiv0CRpwf5YADmQ8HbaUYT1jnKaQwUzZ'],
+    ['llbeanaccount', env == 'PROD' ? 'B6zkni5ilD2oREczeYQEgstwGELdGWbG' : 'yiv0CRpwf5YADmQ8HbaUYT1jnKaQwUzZ'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);

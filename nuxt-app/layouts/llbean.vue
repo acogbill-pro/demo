@@ -9,7 +9,7 @@ const brandName = computed(() => runtimeConfig.brandedAssetsPath)
 useHead({
     //title: 'Segment App Home',
     // or, instead:
-    titleTemplate: (title) => `pristine POC - ${title}`,
+    titleTemplate: (title) => `LLBean POC - ${title}`,
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     charset: 'utf-8',
     meta: [
@@ -36,8 +36,8 @@ onMounted(() => {
 
 <template>
     <div class="default-layout">
-        <v-app class="bg-light-blue-lighten-5">
-            <pristineNavBar :cart="true" />
+        <v-app class="bg-green-lighten-5">
+            <LLBeanNavBar :cart="true" />
             <v-main>
                 <slot />
             </v-main>

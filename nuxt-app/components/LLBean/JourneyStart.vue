@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { useAnalytics } from '~/stores/analytics.js'
 const analytics = useAnalytics()
 
@@ -42,12 +42,6 @@ const subject = ref('')
 const hero = ref('')
 const body = ref('')
 
-function populate() {
-    subject.value = 'User Onboarding Journey',
-        hero.value = 'http://www.example.com/image.jpg',
-        body.value = 'We recommend that the first step in your journey be downloading our app.'
-}
-
 const propertiesObject = computed(() => {
     return {
         journeyId: "bcd234",
@@ -87,7 +81,7 @@ function start() {
             <v-container class="bg-white">
                 <v-row>
                     <v-col>
-                        <v-textarea variant="solo" v-model="audienceDescription" label="Describe your audience">
+                        <v-textarea v-model="audienceDescription" label="Describe your audience">
                             <template v-slot:append>
                                 <v-btn icon="mdi-content-save" @click="createOverlay = false" />
                             </template>
@@ -98,7 +92,7 @@ function start() {
         </v-overlay>
         <v-row>
             <v-col>
-                <v-select variant="solo" v-model="audience" :items="audienceOptions" item-title="name" item-value="id"
+                <v-select v-model="audience" :items="audienceOptions" item-title="name" item-value="id"
                     label="Select Audience">
                     <template v-slot:append>
                         <v-btn icon="mdi-pencil" @click="createNew" />
@@ -109,28 +103,23 @@ function start() {
         <v-row>
             <v-col cols="6">
                 <v-checkbox v-model="facebookToggle" @update:model-value="toggleFacebook"
-                    :label="`Facebook Campaign ${facebookCampaign}`" variant="solo"></v-checkbox>
+                    :label="`Facebook Campaign ${facebookCampaign}`"></v-checkbox>
             </v-col>
-            <!-- <v-col>
-                <div v-if="facebookToggle">Campaign ID `def456`</div>
-            </v-col> -->
         </v-row>
         <v-row>
             <v-col>
                 <h3>Email Touch 1</h3>
-                <v-text-field v-model="subject" label="Subject Line" variant="solo"></v-text-field>
-                <v-text-field v-model="hero" label="Hero Image" variant="solo"></v-text-field>
-                <v-text-field v-model="body" label="Body Copy" variant="solo"></v-text-field>
+                <v-text-field v-model="subject" label="Subject Line"></v-text-field>
+                <v-text-field v-model="hero" label="Hero Image"></v-text-field>
+                <v-text-field v-model="body" label="Body Copy"></v-text-field>
             </v-col>
         </v-row>
         <v-row>
-            <!-- <v-col> -->
-            <v-btn @click="start">Start Journey</v-btn>
-            <v-spacer />
-            <v-btn @click="populate" icon="mdi-check" />
-            <!-- </v-col> -->
+            <v-col>
+                <v-btn @click="start">Start Journey</v-btn>
+            </v-col>
         </v-row>
     </v-container>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped></style> -->

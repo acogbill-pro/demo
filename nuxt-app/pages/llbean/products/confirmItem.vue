@@ -8,7 +8,7 @@ const route = useRoute()
 const { SKU } = route.query || '0001'
 
 definePageMeta({
-    layout: "default",
+    layout: "llbean",
 })
 
 useHead({
@@ -24,11 +24,10 @@ onMounted(() => {
     <v-container>
         <v-row>
             <v-col>
-                <PristineItemConfirmation :sku="SKU" />
+                <LLBeanItemConfirmation :sku="SKU" />
             </v-col>
         </v-row>
     </v-container>
-
 </template>
 
 <style lang="scss" scoped></style>

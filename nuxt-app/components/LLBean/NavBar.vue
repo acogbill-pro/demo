@@ -15,8 +15,8 @@ const props = defineProps({
             <v-toolbar-title>
 
                 <h1>
-                    <NuxtLink to="/pristine">
-                        <v-img src="/pristine/images/chaseLogo.png" width="150" />
+                    <NuxtLink to="/llbean">
+                        <v-img src="/llbean/images/logo.png" width="150" />
                     </NuxtLink>
                     <!--<NuxtLink to="/">
                                                                                                                                                 <v-icon small color="white">
@@ -32,8 +32,8 @@ const props = defineProps({
                                                                                                                                                                     <v-icon>mdi-redo-variant</v-icon>
                                                                                                                                                                 </v-btn>
                                                                                                                                                                 <v-spacer />-->
-            <v-btn text rounded to="/pristine/account" color="white" nuxt icon="mdi-account" />
-            <pristineCartButton v-if="cart" />
+            <v-btn text rounded to="/llbean/account" color="#0B5640" nuxt icon="mdi-account" />
+            <LLBeanCartButton v-if="cart" />
             <!--<v-btn color="secondary" text rounded @click="emit('toggleTheme', 'nav bar')">Toggle Theme</v-btn>-->
         </v-app-bar>
     </div>
