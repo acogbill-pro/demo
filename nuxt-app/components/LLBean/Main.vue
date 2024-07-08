@@ -33,21 +33,21 @@ products.loadProducts(
         },
         {
             SKU: '0003',
-            name: 'Chocolate Chips',
-            description: '1 Bag',
-            category: 'baking',
-            subCategory: 'chocolate',
-            priceUSD: 20,
-            image: 'choc_chips.jpg'
+            name: 'L.L.Bean Ridge Runner Pack, 26L',
+            description: 'The perfect-size pack for carrying all your necessities on day hikes. Its built with lightweight, ultra-durable materials that wont weigh you down whether youre hiking your favorite peak or heading into town.',
+            category: 'bags & travel',
+            subCategory: 'hiking backpacks',
+            priceUSD: 119,
+            image: 'ridgeRunner.jpeg'
         },
         {
             SKU: '0004',
-            name: 'Natural Bliss',
-            description: 'Original Oat Milk Beverage - 64 oz.',
+            name: 'Indoor/Outdoor Vacationland Rug, Dog Canoe',
+            description: 'Instantly enhance any doorway -- indoors or out -- with this vibrant rug, featuring a fun handhooked dog motif. Found only at L.L.Bean.',
             category: 'coffee',
             subCategory: 'creamers',
-            priceUSD: 20,
-            image: 'naturalBliss.jpg'
+            priceUSD: 50,
+            image: 'doormat.jpeg'
         },
     ]
 )
@@ -58,7 +58,7 @@ const heroImageOverrideURL = ref(null)
 const heroImagePath = computed(() => {
     if (heroImageOverrideURL.value) return heroImageOverrideURL.value
     if (profileTraits.hasSpecificTrait('personalized_hero_image')) return profileTraits.traits.personalized_hero_image
-    return profileTraits.hasTraits ? '/llbean/images/bread.png' : '/llbean/images/grocery.jpg'
+    return profileTraits.hasTraits ? '/llbean/images/inStore.jpg' : '/llbean/images/inStore.jpg'
 })
 
 const imageLoading = ref(false)

@@ -16,7 +16,7 @@ const props = defineProps({
 
                 <h1>
                     <NuxtLink to="/pristine">
-                        <v-img src="/pristine/images/chaseLogo.png" width="150" />
+                        <v-img src="/pristine/images/logo.png" width="150" />
                     </NuxtLink>
                     <!--<NuxtLink to="/">
                                                                                                                                                 <v-icon small color="white">

@@ -74,6 +74,7 @@ export default defineNuxtPlugin(nuxtApp => {
     ['llbeanproductscart', env == 'PROD' ? 'B6zkni5ilD2oREczeYQEgstwGELdGWbG' : 'yiv0CRpwf5YADmQ8HbaUYT1jnKaQwUzZ'],
     ['llbeanproductscheckout', env == 'PROD' ? 'B6zkni5ilD2oREczeYQEgstwGELdGWbG' : 'yiv0CRpwf5YADmQ8HbaUYT1jnKaQwUzZ'],
     ['llbeanaccount', env == 'PROD' ? 'B6zkni5ilD2oREczeYQEgstwGELdGWbG' : 'yiv0CRpwf5YADmQ8HbaUYT1jnKaQwUzZ'],
+    ['llbeancatalogrequest', env == 'PROD' ? 'B6zkni5ilD2oREczeYQEgstwGELdGWbG' : 'yiv0CRpwf5YADmQ8HbaUYT1jnKaQwUzZ'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
