@@ -72,7 +72,7 @@ async function loadPhoto() {
     }
     imageLoading.value = true
     keepLoading.value = true
-    const generatedPhoto = await profile.fetchPersonalizedImage('Image of a happy person standing in front of an outdoor market display of food')
+    const generatedPhoto = await profile.fetchPersonalizedImage('Image of a happy person standing by a wild and remote mountain lake they have just hiked to wearing a plaid shirt, hiking boots, and a baseball cap featuring a national park logo')
     // console.log('gen photo URL', generatedPhoto)
     if (generatedPhoto !== '') {
         heroImageOverrideURL.value = generatedPhoto
