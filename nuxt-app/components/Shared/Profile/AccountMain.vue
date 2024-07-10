@@ -25,7 +25,7 @@ function logout() {
     <v-container fluid>
         <v-row v-if="!isLoggedIn || (isLoggedIn && !collapse)" class="bg">
             <v-col>
-                <UserLogin />
+                <UserEmailLogin />
             </v-col>
             <v-col>
                 <UserRegister />
