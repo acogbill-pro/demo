@@ -137,7 +137,7 @@ export const useCartStore = defineStore('cartStore', {
 
             const stateIsMaster = this.contents.size > 0 // should NOT merge
 
-            const needsSync = this.lastSyncTime < lastSyncTime
+            const needsSync = this.lastSyncTime < lastSyncTime || stateIsMaster
 
             if (needsSync) { // needs to merge Profile return
                 this.contents = new Map([...this.contents, ...contents]) 
