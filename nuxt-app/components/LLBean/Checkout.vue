@@ -6,6 +6,7 @@ import { useCartStore } from '~/stores/cart';
 const analytics = useAnalytics()
 const products = useProductCatalog()
 const cart = useCartStore()
+const profileTraits = useProfileTraitsStore()
 
 function isDate(possibleDate) {
     return !isNaN(Date.parse(possibleDate))
@@ -30,6 +31,8 @@ async function submitOrder() {
 
 }
 
+const showPromo = computed(() => profileTraits.hasSpecificTrait('promotable'))
+
 onMounted(() => {
 })
 </script>
@@ -43,6 +46,10 @@ onMounted(() => {
 
                 </v-col>
                 <v-col></v-col>
+                </v-row><v-row v-if="showPromo">
+                    <v-col>
+                        <v-chip class="bg-orange-darken-4" variant="elevated">Promo Added: 10% Off</v-chip>
+                    </v-col>
             </v-row><v-row>
                 <v-col cols="4">
                     <v-text-field label="Deliver By Date" variant="solo" v-model="deliverByDate"

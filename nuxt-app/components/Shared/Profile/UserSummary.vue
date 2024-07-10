@@ -67,9 +67,9 @@ onMounted(() => {
         <SharedProfileSuggestedTraits :traits-object="profile.inferred" />
 
     </v-card>
-    <v-card v-if="profile.hasLoaded">
+    <!-- <v-card v-if="profile.hasLoaded">
         <SharedProfilePrompter />
-    </v-card>
+    </v-card> -->
 
     <v-card v-if="!profile.hasLoaded">
         <v-card-title>Customer Lookup</v-card-title>

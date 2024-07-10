@@ -7,7 +7,7 @@ const profiles = useProfileTraitsStore()
 
 const form = ref(null)
 const eventName = ref('Inbound Call')
-const eventProperties = ref('{"disposition":"Program Question","resolved":true,"case_still_open":false,"hold_time_minutes":23}')
+const eventProperties = ref('{"disposition":"Product Question","resolved":true,"case_still_open":false,"hold_time_minutes":23}')
 const valid = ref(true)
 const showCalendar = ref(false)
 const serverSide = ref(true)
@@ -75,7 +75,7 @@ function submitForm() {
     }
     //console.log(propertiesAsObject.value)
     eventName.value = 'Inbound Call'
-    eventProperties.value = '{"disposition":"Program Question","resolved":true,"case_still_open":false,"hold_time_minutes":23}'
+    eventProperties.value = '{"disposition":"Product Question","resolved":true,"case_still_open":false,"hold_time_minutes":23}'
     form.value.resetValidation()
     emit('andThen')
 }
