@@ -51,7 +51,7 @@ onMounted(() => {
                 </v-col>
                 </v-row><v-row v-if="showPromo">
                     <v-col>
-                        <v-chip class="bg-orange-darken-4" variant="elevated">Promo Added: 10% Off</v-chip>
+                        <v-chip class="bg-red-darken-4" variant="elevated">Promo Added: 10% Off</v-chip>
                     </v-col>
             </v-row><v-row>
                 <v-col cols="4">

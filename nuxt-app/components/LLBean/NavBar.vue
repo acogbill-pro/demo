@@ -30,7 +30,7 @@ const showPromo = computed(() => profiles.hasSpecificTrait('promotable'))
                 </h1>
                 
             </v-toolbar-title>
-            <v-chip v-if="showPromo" class="bg-orange-darken-4" variant="elevated">It's your birthday
+            <v-chip v-if="showPromo" class="bg-red-darken-4" variant="elevated">It's your birthday
                     month! Take 10%
                     off</v-chip>
                     <v-spacer /><v-spacer />
