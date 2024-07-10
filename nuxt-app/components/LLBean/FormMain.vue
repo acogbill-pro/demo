@@ -17,12 +17,17 @@ const zip_code = ref(null)
 
 watch(currentTraits, (newValue) => {
     console.log('detected trait change')
+    refreshFields(newValue)
+})
+
+function refreshFields(newValue) {
+    console.log('refreshing fields', newValue)
     if (newValue.first_name) first_name.value = newValue.first_name
     if (newValue.last_name) last_name.value = newValue.last_name
     if (newValue.street_address) street_address.value = newValue.street_address
     if (newValue.zip_code) zip_code.value = newValue.zip_code
     if (newValue.email) email.value = newValue.email
-})
+}
 
 function identifyField(fieldName, fieldValue, isInFocus) {
     // console.log('identifyField called')
@@ -59,7 +64,10 @@ function trackField(eventName, propertyObject, isInFocus) {
     }
 }
 
-onMounted(() => analytics.page('Get Information'))
+onMounted(() => {
+    analytics.page('Get Information')
+    refreshFields(currentTraits.value)
+})
 </script>
 
 <template>

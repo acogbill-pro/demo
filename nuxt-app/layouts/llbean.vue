@@ -38,7 +38,10 @@ onMounted(() => {
     <div class="default-layout">
         <v-app class="bg-green-lighten-5">
             <LLBeanNavBar :cart="true" />
+
+
             <v-main>
+
                 <slot />
             </v-main>
             <!-- <KFCFooter /> -->

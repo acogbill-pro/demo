@@ -1,10 +1,14 @@
 <script setup>
+import { useProfileTraitsStore } from '~/stores/profileTraits';
+const profiles = useProfileTraitsStore()
 const props = defineProps({
     cart: {
         type: Boolean,
         default: false,
     },
 })
+
+const showPromo = computed(() => profiles.hasSpecificTrait('promotable'))
 </script>
 
 
@@ -24,7 +28,12 @@ const props = defineProps({
                                                                                     </v-icon>
                                                                                 </NuxtLink>-->
                 </h1>
+                
             </v-toolbar-title>
+            <v-chip v-if="showPromo" class="bg-orange-darken-4" variant="elevated">It's your birthday
+                    month! Take 10%
+                    off</v-chip>
+                    <v-spacer /><v-spacer />
             <!--<v-btn color="secondary" text rounded dense :disabled="!undoable" @click="undo">
                                                                                                         <v-icon>mdi-undo-variant</v-icon>
                                                                                                                                                                 </v-btn>

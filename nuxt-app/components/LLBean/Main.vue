@@ -63,6 +63,7 @@ const heroImagePath = computed(() => {
 
 const imageLoading = ref(false)
 const keepLoading = ref(false)
+const showPromo = computed(() => profileTraits.hasSpecificTrait('promotable'))
 
 async function loadPhoto() {
     if (keepLoading.value) {
@@ -99,12 +100,20 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
 <template>
     <ClientOnly>
         <v-container>
+
             <v-row>
                 <v-col cols="8">
                     <v-fade-transition>
                         <v-img :src="heroImagePath" width="800" />
                     </v-fade-transition>
                     <!-- Logged in as {{ IDforPrint }} -->
+                    
+                    <!-- <BrandedShopProductList v-for="category in products.categories" :key="category" :category="category" /> -->
+                    <v-btn block to="/llbean/products" nuxt class="mt-2">Shop Items</v-btn>
+                    <v-btn block to="/llbean/catalog/request" nuxt class="mt-2">Request a Catalog</v-btn>
+                </v-col>
+                <v-col cols="4">
+                    <SharedSidebar />
                     <v-btn v-if="profile.hasLoaded" :loading="imageLoading" :disabled="imageLoading" block nuxt
                         class="mt-2" @click="loadPhoto">Load Personalized Hero
                         <template v-slot:prepend>
@@ -114,11 +123,6 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                             <v-icon icon="mdi-refresh" v-if="keepLoading" />
                         </template>
                     </v-btn>
-                    <!-- <BrandedShopProductList v-for="category in products.categories" :key="category" :category="category" /> -->
-                    <v-btn block to="/llbean/products" nuxt class="mt-2">Shop Items</v-btn>
-                </v-col>
-                <v-col cols="4">
-                    <SharedSidebar />
                 </v-col>
             </v-row>
         </v-container>
