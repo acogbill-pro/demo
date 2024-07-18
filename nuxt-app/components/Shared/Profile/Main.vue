@@ -122,7 +122,7 @@ function toggleList() {
 <template>
     <div>
 
-        <v-card class="my-0">
+        <v-card class="my-4">
             <v-card-title>
                 <h5>
                     Profile: <span :class="profile.hasLoaded ? 'branded' : null">{{ IDforPrint }}</span>
