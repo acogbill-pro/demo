@@ -43,7 +43,7 @@ function logout() {
                 <v-card>
                     <v-card-title>Logged In</v-card-title>
                     <v-card-text>
-
+                        <SharedProfileConsent />
                         <SharedProfileUserSummary />
                         <SharedProfilePrompter />
                     </v-card-text>

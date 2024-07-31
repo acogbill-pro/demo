@@ -25,6 +25,9 @@ const props = defineProps({
                                                                                 </NuxtLink>-->
                 </h1>
             </v-toolbar-title>
+            <v-btn nuxt to="/adtalem/review" color="#F4B610">
+                Review
+            </v-btn>
             <!--<v-btn color="secondary" text rounded dense :disabled="!undoable" @click="undo">
                                                                                                         <v-icon>mdi-undo-variant</v-icon>
                                                                                                                                                                 </v-btn>
