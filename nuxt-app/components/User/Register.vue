@@ -30,8 +30,8 @@ const traitsObject = computed(() => {
         last_name: last_name.value,
         name: name.value,
         email: email.value,
-        // consent: consent.value,
-        // consentJSON: JSON.stringify(consent.value),
+        consent: consent.value,
+        consentJSON: JSON.stringify(consent.value),
         // phone: '+19177576756'
     }
 })
