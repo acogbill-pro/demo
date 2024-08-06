@@ -13,39 +13,39 @@ products.loadProducts(
     [
         {
             SKU: '0001',
-            name: 'Coffee Mate',
-            description: 'Coffee mate French Vanilla Flavored Iced Coffee',
-            category: 'coffee',
-            subCategory: 'creamers',
-            priceUSD: 10,
-            image: 'coffeeMate.jpg',
+            name: 'Luxury',
+            description: 'Chrysler 300 or similar',
+            category: 'sedan',
+            subCategory: 'luxury',
+            priceUSD: 1000,
+            image: 'product-sedan.png',
         },
         {
             SKU: '0002',
-            name: 'Nesquik',
-            description: 'Chocolate Flavored Powder 44.9 oz. Canister',
-            category: 'powders',
-            subCategory: 'bulk',
-            priceUSD: 15,
-            image: 'nesquik.jpg'
+            name: 'Full-Size Pickup Truck',
+            description: 'RAM 1500 or similar',
+            category: 'truck',
+            subCategory: 'full',
+            priceUSD: 950,
+            image: 'product-pickup.png'
         },
         {
             SKU: '0003',
-            name: 'Chocolate Chips',
-            description: '1 Bag',
-            category: 'baking',
-            subCategory: 'chocolate',
-            priceUSD: 20,
-            image: 'choc_chips.jpg'
+            name: 'Standard SUV',
+            description: 'Ford Edge or similar',
+            category: 'suv',
+            subCategory: 'full',
+            priceUSD: 800,
+            image: 'product-suv.png'
         },
         {
             SKU: '0004',
-            name: 'Natural Bliss',
-            description: 'Original Oat Milk Beverage - 64 oz.',
-            category: 'coffee',
-            subCategory: 'creamers',
-            priceUSD: 20,
-            image: 'naturalBliss.jpg'
+            name: 'Standard Elite Electric',
+            description: 'Ford Mustang Mach-E or similar',
+            category: 'suv',
+            subCategory: 'electric',
+            priceUSD: 840,
+            image: 'product-electric.png'
         },
     ]
 )
