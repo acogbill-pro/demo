@@ -11,11 +11,11 @@ definePageMeta({
 })
 
 useHead({
-    title: 'Add a Vehicle'
+    title: 'Add-ons'
 })
 
 onMounted(() => {
-    analytics.page('Product List: Vehicles')
+    analytics.page('Product List: Add-ons')
 
     //profiles.startSyncing(3)
 })
@@ -23,7 +23,7 @@ onMounted(() => {
 
 <template>
     <div>
-        <AvisProductsMain />
+        <AvisProductsAddons />
     </div>
 </template>
 

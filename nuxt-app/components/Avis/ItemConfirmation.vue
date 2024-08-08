@@ -20,7 +20,7 @@ const productImage = computed(() => '/avis/images/products/' + product.value.ima
 function addItem() {
     cart.add(props.sku, 1)
     navigateTo({
-        path: '/avis/products/'
+        path: '/avis/products/addons'
     })
 }
 
