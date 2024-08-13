@@ -79,6 +79,8 @@ productCatalog.loadProducts(
     ]
 )
 
+const productsToDisplay = computed(() => products.slice(1).slice(-4))
+
 function afterAdd(SKU) {
     // console.log(SKU)
     navigateTo({
@@ -98,7 +100,7 @@ onMounted(() => {
         <v-row>
             <v-col>
                 <div class="items">
-                    <AvisItemCard v-for="product in products" :key="product.SKU" :sku="product.SKU"
+                    <AvisItemCard v-for="product in productsToDisplay" :key="product.SKU" :sku="product.SKU"
                         @and-then="afterAdd" />
                 </div>
             </v-col>

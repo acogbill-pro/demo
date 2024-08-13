@@ -11,6 +11,8 @@ const zip_code = ref(null)
 const date = ref(null)
 const time = ref(null)
 
+const disableSubmit = computed(() => !zip_code.value && !date.value && !time.value)
+
 watch(currentTraits, (newValue) => {
     console.log('detected trait change')
     refreshFields(newValue)
@@ -157,7 +159,7 @@ onMounted(() => {
         </div> -->
         <v-row>
             <v-col>
-                <v-btn color="#000000" block @click="submit">Select My Car</v-btn>
+                <v-btn color="#000000" block @click="submit" :disabled="disableSubmit">Select My Car</v-btn>
             </v-col>
             <v-col cols="3">
                 <v-btn variant="outlined" @click="populate">Populate</v-btn>
