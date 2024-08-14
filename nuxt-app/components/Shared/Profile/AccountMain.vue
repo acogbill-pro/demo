@@ -41,11 +41,12 @@ function logout() {
             </v-col>`
             <v-col cols="4">
                 <v-card>
-                    <v-card-title>Logged In</v-card-title>
+                    <!-- <v-card-title>Logged In</v-card-title> -->
                     <v-card-text>
-                        <SharedProfileConsent />
+
                         <SharedProfileUserSummary />
                         <SharedProfilePrompter />
+                        <SharedProfileConsent />
                     </v-card-text>
                 </v-card>
             </v-col>
