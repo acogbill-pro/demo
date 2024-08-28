@@ -36,7 +36,7 @@ onMounted(() => {
 
 <template>
     <div class="default-layout">
-        <v-app class="bg-light-blue-lighten-5">
+        <v-app class="bg-red-lighten-5">
             <pristineNavBar :cart="true" />
             <v-main>
                 <slot />

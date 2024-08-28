@@ -4,41 +4,77 @@ const productCatalog = useProductCatalog()
 const { all: products } = productCatalog
 productCatalog.loadProducts(
     [
+        // {
+        //     SKU: '0001',
+        //     name: 'Coffee Mate',
+        //     description: 'Coffee mate French Vanilla Flavored Iced Coffee',
+        //     category: 'coffee',
+        //     subCategory: 'creamers',
+        //     priceUSD: 10,
+        //     image: 'coffeeMate.jpg',
+        // },
+        // {
+        //     SKU: '0002',
+        //     name: 'Nesquik',
+        //     description: 'Chocolate Flavored Powder 44.9 oz. Canister',
+        //     category: 'powders',
+        //     subCategory: 'bulk',
+        //     priceUSD: 15,
+        //     image: 'nesquik.jpg'
+        // },
+        // {
+        //     SKU: '0003',
+        //     name: 'Chocolate Chips',
+        //     description: '1 Bag',
+        //     category: 'baking',
+        //     subCategory: 'chocolate',
+        //     priceUSD: 20,
+        //     image: 'choc_chips.jpg'
+        // },
+        // {
+        //     SKU: '0004',
+        //     name: 'Natural Bliss',
+        //     description: 'Original Oat Milk Beverage - 64 oz.',
+        //     category: 'coffee',
+        //     subCategory: 'creamers',
+        //     priceUSD: 20,
+        //     image: 'naturalBliss.jpg'
+        // },
         {
             SKU: '0001',
-            name: 'Coffee Mate',
-            description: 'Coffee mate French Vanilla Flavored Iced Coffee',
-            category: 'coffee',
-            subCategory: 'creamers',
+            name: 'Bee Berry Sting Bowl',
+            description: 'Savor the ripe mango and fresh berries over a pitaya base, topped with a honey drizzle and Purely Elizabeth Granola.',
+            category: 'Smoothie Bowls',
+            subCategory: 'berry',
             priceUSD: 10,
-            image: 'coffeeMate.jpg',
+            image: 'bee-berry-sting-bowl-ingredients-final.png',
         },
         {
             SKU: '0002',
-            name: 'Nesquik',
-            description: 'Chocolate Flavored Powder 44.9 oz. Canister',
-            category: 'powders',
-            subCategory: 'bulk',
+            name: 'Gladiator Chocolate',
+            description: 'Fuel up for it, grab hold of it and show it your strength with the help of this protein-rich Smoothie.',
+            category: 'Get Fit Blends',
+            subCategory: 'chocolate',
             priceUSD: 15,
-            image: 'nesquik.jpg'
+            image: 'sk-fitness-gladiator-chocolate-with-ingredients.png'
         },
         {
             SKU: '0003',
-            name: 'Chocolate Chips',
-            description: '1 Bag',
-            category: 'baking',
-            subCategory: 'chocolate',
+            name: 'Blueberry Lemonade',
+            description: 'Filled with tasty, whole ingredients, this Smoothie blends flavor and joy into every moment.',
+            category: 'Enjoy a Treat Blends',
+            subCategory: 'berry',
             priceUSD: 20,
-            image: 'choc_chips.jpg'
+            image: 'blueberry-lemonade-with-ingredients.png'
         },
         {
             SKU: '0004',
-            name: 'Natural Bliss',
-            description: 'Original Oat Milk Beverage - 64 oz.',
-            category: 'coffee',
-            subCategory: 'creamers',
+            name: 'Choc-A-Laka',
+            description: 'The other half is knowing this Smoothie will help fuel their future and feed their mind.',
+            category: 'Kids Blends',
+            subCategory: 'chocolate',
             priceUSD: 20,
-            image: 'naturalBliss.jpg'
+            image: 'sk-kids-choc-a-laka-with-ingredients.png'
         },
     ]
 )
