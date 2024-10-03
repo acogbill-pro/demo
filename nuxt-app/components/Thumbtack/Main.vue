@@ -47,42 +47,6 @@ products.loadProducts(
             priceUSD: 20,
             image: 'naturalBliss.jpg'
         },
-        // {
-        //     SKU: '0001',
-        //     name: 'Bee Berry Sting Bowl',
-        //     description: 'Savor the ripe mango and fresh berries over a pitaya base, topped with a honey drizzle and Purely Elizabeth Granola.',
-        //     category: 'Smoothie Bowls',
-        //     subCategory: 'berry',
-        //     priceUSD: 10,
-        //     image: 'bee-berry-sting-bowl-ingredients-final.png',
-        // },
-        // {
-        //     SKU: '0002',
-        //     name: 'Gladiator Chocolate',
-        //     description: 'Fuel up for it, grab hold of it and show it your strength with the help of this protein-rich Smoothie.',
-        //     category: 'Get Fit Blends',
-        //     subCategory: 'chocolate',
-        //     priceUSD: 15,
-        //     image: 'sk-fitness-gladiator-chocolate-with-ingredients.png'
-        // },
-        // {
-        //     SKU: '0003',
-        //     name: 'Blueberry Lemonade',
-        //     description: 'Filled with tasty, whole ingredients, this Smoothie blends flavor and joy into every moment.',
-        //     category: 'Enjoy a Treat Blends',
-        //     subCategory: 'berry',
-        //     priceUSD: 20,
-        //     image: 'blueberry-lemonade-with-ingredients.png'
-        // },
-        // {
-        //     SKU: '0004',
-        //     name: 'Choc-A-Laka',
-        //     description: 'The other half is knowing this Smoothie will help fuel their future and feed their mind.',
-        //     category: 'Kids Blends',
-        //     subCategory: 'chocolate',
-        //     priceUSD: 20,
-        //     image: 'sk-kids-choc-a-laka-with-ingredients.png'
-        // },
     ]
 )
 
@@ -92,7 +56,7 @@ const heroImageOverrideURL = ref(null)
 const heroImagePath = computed(() => {
     if (heroImageOverrideURL.value) return heroImageOverrideURL.value
     if (profileTraits.hasSpecificTrait('personalized_hero_image')) return profileTraits.traits.personalized_hero_image
-    return profileTraits.hasTraits ? '/pristine/images/grocery.jpg' : '/pristine/images/grocery.jpg'
+    return profileTraits.hasTraits ? '/thumbtack/images/Smoothie+King+Small.jpg' : '/thumbtack/images/Smoothie+King+Small.jpg'
 })
 
 const imageLoading = ref(false)
@@ -149,7 +113,7 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                         </template>
                     </v-btn>
                     <!-- <BrandedShopProductList v-for="category in products.categories" :key="category" :category="category" /> -->
-                    <v-btn block to="/pristine/products" nuxt class="mt-2">Shop Items</v-btn>
+                    <v-btn block to="/thumbtack/products" nuxt class="mt-2">Shop Items</v-btn>
                 </v-col>
                 <v-col cols="4">
                     <SharedSidebar />

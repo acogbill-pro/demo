@@ -6,7 +6,7 @@ useHead({
 })
 
 navigateTo({
-    path: '/pristine/',
+    path: '/thumbtack/',
     // query: {
     //     quantity,
     //     value

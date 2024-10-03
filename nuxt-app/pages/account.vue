@@ -6,7 +6,7 @@ const profiles = useProfileTraitsStore()
 // const { auth } = useSupabaseClient()
 
 definePageMeta({
-    layout: "default",
+    layout: "thumbtack",
 })
 
 useHead({
@@ -48,7 +48,8 @@ function logout() {
                         Log in with...
                     </v-card-title>
                     <v-card-text>
-                        <v-btn icon="mdi:google" @click="auth.signInWithOAuth({ provider: 'google' })" block>Google</v-btn>
+                        <v-btn icon="mdi:google" @click="auth.signInWithOAuth({ provider: 'google' })"
+                            block>Google</v-btn>
                     </v-card-text>
                 </v-card>
             </v-col>

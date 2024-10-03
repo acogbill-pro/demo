@@ -9,7 +9,7 @@ const brandName = computed(() => runtimeConfig.brandedAssetsPath)
 useHead({
     //title: 'Segment App Home',
     // or, instead:
-    titleTemplate: (title) => `pristine POC - ${title}`,
+    titleTemplate: (title) => `Thumbtack POC - ${title}`,
     viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     charset: 'utf-8',
     meta: [
@@ -18,6 +18,9 @@ useHead({
     bodyAttrs: {
         class: 'from-useHead-default-layout'
     },
+    // script: [
+    //     "https://cdn.jsdelivr.net/npm/@statsig/js-client@3/build/statsig-js-client+session-replay+web-analytics.min.js?apikey=client-Jw0SnohUaBLKPx5qjuQWWC2cTQfmsa7yq0m1GDfINcq",
+    // ],
 })
 
 function leaving(e) {
@@ -27,17 +30,14 @@ function leaving(e) {
 onMounted(() => {
     profiles.startSyncingArticleStore()
 
-    /*window.addEventListener(
-        "beforeunload",
-        leaving
-    )*/
+
 })
 </script>
 
 <template>
     <div class="default-layout">
-        <v-app class="bg-teal-lighten-5">
-            <pristineNavBar :cart="true" />
+        <v-app class="bg-red-lighten-5">
+            <ThumbtackNavBar :cart="true" />
             <v-main>
                 <slot />
             </v-main>

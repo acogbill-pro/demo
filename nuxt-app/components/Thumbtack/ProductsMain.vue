@@ -40,49 +40,13 @@ productCatalog.loadProducts(
             priceUSD: 20,
             image: 'naturalBliss.jpg'
         },
-        // {
-        //     SKU: '0001',
-        //     name: 'Bee Berry Sting Bowl',
-        //     description: 'Savor the ripe mango and fresh berries over a pitaya base, topped with a honey drizzle and Purely Elizabeth Granola.',
-        //     category: 'Smoothie Bowls',
-        //     subCategory: 'berry',
-        //     priceUSD: 10,
-        //     image: 'bee-berry-sting-bowl-ingredients-final.png',
-        // },
-        // {
-        //     SKU: '0002',
-        //     name: 'Gladiator Chocolate',
-        //     description: 'Fuel up for it, grab hold of it and show it your strength with the help of this protein-rich Smoothie.',
-        //     category: 'Get Fit Blends',
-        //     subCategory: 'chocolate',
-        //     priceUSD: 15,
-        //     image: 'sk-fitness-gladiator-chocolate-with-ingredients.png'
-        // },
-        // {
-        //     SKU: '0003',
-        //     name: 'Blueberry Lemonade',
-        //     description: 'Filled with tasty, whole ingredients, this Smoothie blends flavor and joy into every moment.',
-        //     category: 'Enjoy a Treat Blends',
-        //     subCategory: 'berry',
-        //     priceUSD: 20,
-        //     image: 'blueberry-lemonade-with-ingredients.png'
-        // },
-        // {
-        //     SKU: '0004',
-        //     name: 'Choc-A-Laka',
-        //     description: 'The other half is knowing this Smoothie will help fuel their future and feed their mind.',
-        //     category: 'Kids Blends',
-        //     subCategory: 'chocolate',
-        //     priceUSD: 20,
-        //     image: 'sk-kids-choc-a-laka-with-ingredients.png'
-        // },
     ]
 )
 
 function afterAdd(SKU) {
     // console.log(SKU)
     navigateTo({
-        path: '/pristine/products/confirmItem',
+        path: '/thumbtack/products/confirmItem',
         query: {
             SKU
         }
@@ -98,7 +62,7 @@ onMounted(() => {
         <v-row>
             <v-col>
                 <div class="items">
-                    <pristineItemCard v-for="product in products" :key="product.SKU" :sku="product.SKU"
+                    <ThumbtackItemCard v-for="product in products" :key="product.SKU" :sku="product.SKU"
                         @and-then="afterAdd" />
                 </div>
             </v-col>
