@@ -27,6 +27,7 @@ export default defineNuxtConfig({
         openAIKey: process.env.OPENAI_API_KEY,
       }
     },
+    ssr: false,
     /*head: {
       "meta": [
         {

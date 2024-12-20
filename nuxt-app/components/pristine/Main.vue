@@ -13,76 +13,44 @@ products.loadProducts(
     [
         {
             SKU: '0001',
-            name: 'Coffee Mate',
-            description: 'Coffee mate French Vanilla Flavored Iced Coffee',
-            category: 'coffee',
-            subCategory: 'creamers',
-            priceUSD: 10,
-            image: 'coffeeMate.jpg',
+            name: 'Premium Stretch Jeans',
+            description: 'Resilient stretch denim made incredibly soft. Yes, jeans can be unbelievably comfortable.',
+            category: 'pants',
+            subCategory: 'jeans',
+            fit: 'slim',
+            priceUSD: 149,
+            image: 'jeans.jpg',
         },
         {
             SKU: '0002',
-            name: 'Nesquik',
-            description: 'Chocolate Flavored Powder 44.9 oz. Canister',
-            category: 'powders',
-            subCategory: 'bulk',
-            priceUSD: 15,
-            image: 'nesquik.jpg'
+            name: 'The Chino 2.0',
+            description: 'Our signature washed chino, updated for smart performance & maximum versatility.',
+            category: 'pants',
+            subCategory: 'chinos',
+            fit: 'tailored',
+            priceUSD: 99,
+            image: 'chino.jpg'
         },
         {
             SKU: '0003',
-            name: 'Chocolate Chips',
-            description: '1 Bag',
-            category: 'baking',
-            subCategory: 'chocolate',
-            priceUSD: 20,
-            image: 'choc_chips.jpg'
+            name: 'Riviera Short Sleeve Shirt',
+            description: 'Our best seller for a reason. A few reasons, actually: Original prints, comfy stretch & a better fit.',
+            category: 'shirts',
+            subCategory: 'casual',
+            fit: 'slim',
+            priceUSD: 85,
+            image: 'casual.jpg'
         },
         {
             SKU: '0004',
-            name: 'Natural Bliss',
-            description: 'Original Oat Milk Beverage - 64 oz.',
-            category: 'coffee',
-            subCategory: 'creamers',
-            priceUSD: 20,
-            image: 'naturalBliss.jpg'
+            name: 'Jetsetter Premium Dress Shirt',
+            description: 'A luxurious dress shirt with premium cotton from one of Portugals most celebrated mills.',
+            category: 'shirts',
+            subCategory: 'formal',
+            fit: 'tailored',
+            priceUSD: 179,
+            image: 'formal.jpg'
         },
-        // {
-        //     SKU: '0001',
-        //     name: 'Bee Berry Sting Bowl',
-        //     description: 'Savor the ripe mango and fresh berries over a pitaya base, topped with a honey drizzle and Purely Elizabeth Granola.',
-        //     category: 'Smoothie Bowls',
-        //     subCategory: 'berry',
-        //     priceUSD: 10,
-        //     image: 'bee-berry-sting-bowl-ingredients-final.png',
-        // },
-        // {
-        //     SKU: '0002',
-        //     name: 'Gladiator Chocolate',
-        //     description: 'Fuel up for it, grab hold of it and show it your strength with the help of this protein-rich Smoothie.',
-        //     category: 'Get Fit Blends',
-        //     subCategory: 'chocolate',
-        //     priceUSD: 15,
-        //     image: 'sk-fitness-gladiator-chocolate-with-ingredients.png'
-        // },
-        // {
-        //     SKU: '0003',
-        //     name: 'Blueberry Lemonade',
-        //     description: 'Filled with tasty, whole ingredients, this Smoothie blends flavor and joy into every moment.',
-        //     category: 'Enjoy a Treat Blends',
-        //     subCategory: 'berry',
-        //     priceUSD: 20,
-        //     image: 'blueberry-lemonade-with-ingredients.png'
-        // },
-        // {
-        //     SKU: '0004',
-        //     name: 'Choc-A-Laka',
-        //     description: 'The other half is knowing this Smoothie will help fuel their future and feed their mind.',
-        //     category: 'Kids Blends',
-        //     subCategory: 'chocolate',
-        //     priceUSD: 20,
-        //     image: 'sk-kids-choc-a-laka-with-ingredients.png'
-        // },
     ]
 )
 
@@ -92,7 +60,7 @@ const heroImageOverrideURL = ref(null)
 const heroImagePath = computed(() => {
     if (heroImageOverrideURL.value) return heroImageOverrideURL.value
     if (profileTraits.hasSpecificTrait('personalized_hero_image')) return profileTraits.traits.personalized_hero_image
-    return profileTraits.hasTraits ? '/pristine/images/grocery.jpg' : '/pristine/images/grocery.jpg'
+    return profileTraits.hasTraits ? '/pristine/images/bread.png' : '/pristine/images/grocery.jpg'
 })
 
 const imageLoading = ref(false)
@@ -105,7 +73,7 @@ async function loadPhoto() {
     }
     imageLoading.value = true
     keepLoading.value = true
-    const generatedPhoto = await profile.fetchPersonalizedImage('Image of a happy person standing in front of an outdoor market display of food')
+    const generatedPhoto = await profile.fetchPersonalizedImage('Image of a person happily admiring themselves in the clothes they like most')
     // console.log('gen photo URL', generatedPhoto)
     if (generatedPhoto !== '') {
         heroImageOverrideURL.value = generatedPhoto
@@ -132,31 +100,56 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
 
 <template>
     <v-no-ssr>
-        <v-container>
-            <v-row>
-                <v-col cols="8">
-                    <v-fade-transition>
+        <div class="hero">
+            <v-container>
+                <v-row>
+
+                    <v-col cols="8">
+                        <v-container height="600" />
+                        <!-- <v-fade-transition>
                         <v-img :src="heroImagePath" width="800" />
-                    </v-fade-transition>
-                    <!-- Logged in as {{ IDforPrint }} -->
-                    <v-btn v-if="profile.hasLoaded" :loading="imageLoading" :disabled="imageLoading" block nuxt
-                        class="mt-2" @click="loadPhoto">Load Personalized Hero
-                        <template v-slot:prepend>
-                            <v-icon icon="mdi-image" />
-                        </template>
-                        <template v-slot:append>
-                            <v-icon icon="mdi-refresh" v-if="keepLoading" />
-                        </template>
-                    </v-btn>
-                    <!-- <BrandedShopProductList v-for="category in products.categories" :key="category" :category="category" /> -->
-                    <v-btn block to="/pristine/products" nuxt class="mt-2">Shop Items</v-btn>
-                </v-col>
-                <v-col cols="4">
-                    <SharedSidebar />
-                </v-col>
-            </v-row>
-        </v-container>
+                    </v-fade-transition> -->
+                        <v-btn v-if="profile.hasLoaded" :loading="imageLoading" :disabled="imageLoading" block nuxt
+                            class="mt-2" @click="loadPhoto">Load Personalized Hero
+                            <template v-slot:prepend>
+                                <v-icon icon="mdi-image" />
+                            </template>
+                            <template v-slot:append>
+                                <v-icon icon="mdi-refresh" v-if="keepLoading" />
+                            </template>
+                        </v-btn>
+                        <v-btn block to="/pristine/products" nuxt class="mt-2">Shop Items</v-btn>
+                    </v-col>
+                    <v-col cols="4">
+                        <SharedSidebar />
+                    </v-col>
+                </v-row>
+                <!-- <v-row class="mt-10">
+                    <v-col>
+                        <v-btn v-if="profile.hasLoaded" :loading="imageLoading" :disabled="imageLoading" block nuxt
+                            class="mt-2" @click="loadPhoto">Load Personalized Hero
+                            <template v-slot:prepend>
+                                <v-icon icon="mdi-image" />
+                            </template>
+                            <template v-slot:append>
+                                <v-icon icon="mdi-refresh" v-if="keepLoading" />
+                            </template>
+                        </v-btn>
+                        <BrandedShopProductList v-for="category in products.categories" :key="category" :category="category" />
+                        <v-btn block to="/pristine/products" nuxt class="mt-2">Shop Items</v-btn>
+                    </v-col>
+                </v-row> -->
+            </v-container>
+        </div>
     </v-no-ssr>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.hero {
+    background: url('../pristine/images/gifts.svg');
+    background-size: cover;
+    // height: 100vh;
+    height: 600px;
+    background-position-x: 0px;
+}
+</style>

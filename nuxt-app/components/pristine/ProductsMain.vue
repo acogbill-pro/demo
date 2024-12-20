@@ -6,39 +6,43 @@ productCatalog.loadProducts(
     [
         {
             SKU: '0001',
-            name: 'Coffee Mate',
-            description: 'Coffee mate French Vanilla Flavored Iced Coffee',
-            category: 'coffee',
-            subCategory: 'creamers',
-            priceUSD: 10,
-            image: 'coffeeMate.jpg',
+            name: 'Premium Stretch Jeans',
+            description: 'Resilient stretch denim made incredibly soft. Yes, jeans can be unbelievably comfortable.',
+            category: 'pants',
+            subCategory: 'jeans',
+            fit: 'slim',
+            priceUSD: 149,
+            image: 'jeans.jpg',
         },
         {
             SKU: '0002',
-            name: 'Nesquik',
-            description: 'Chocolate Flavored Powder 44.9 oz. Canister',
-            category: 'powders',
-            subCategory: 'bulk',
-            priceUSD: 15,
-            image: 'nesquik.jpg'
+            name: 'The Chino 2.0',
+            description: 'Our signature washed chino, updated for smart performance & maximum versatility.',
+            category: 'pants',
+            subCategory: 'chinos',
+            fit: 'tailored',
+            priceUSD: 99,
+            image: 'chino.jpg'
         },
         {
             SKU: '0003',
-            name: 'Chocolate Chips',
-            description: '1 Bag',
-            category: 'baking',
-            subCategory: 'chocolate',
-            priceUSD: 20,
-            image: 'choc_chips.jpg'
+            name: 'Riviera Short Sleeve Shirt',
+            description: 'Our best seller for a reason. A few reasons, actually: Original prints, comfy stretch & a better fit.',
+            category: 'shirts',
+            subCategory: 'casual',
+            fit: 'slim',
+            priceUSD: 85,
+            image: 'casual.jpg'
         },
         {
             SKU: '0004',
-            name: 'Natural Bliss',
-            description: 'Original Oat Milk Beverage - 64 oz.',
-            category: 'coffee',
-            subCategory: 'creamers',
-            priceUSD: 20,
-            image: 'naturalBliss.jpg'
+            name: 'Jetsetter Premium Dress Shirt',
+            description: 'A luxurious dress shirt with premium cotton from one of Portugals most celebrated mills.',
+            category: 'shirts',
+            subCategory: 'formal',
+            fit: 'tailored',
+            priceUSD: 179,
+            image: 'formal.jpg'
         },
         // {
         //     SKU: '0001',

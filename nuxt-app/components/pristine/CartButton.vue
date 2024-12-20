@@ -10,7 +10,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <v-btn rounded to="/pristine/products/cart" nuxt color="#52BF97">
+    <v-btn rounded to="/pristine/products/cart" nuxt color="#000000">
         <v-icon icon="mdi-cart" /> {{ cart.totalQuantity }} - ${{ cart.totalValue }}
     </v-btn>
 </template>

@@ -2,7 +2,9 @@
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProductCatalog } from '~~/stores/products';
 import { useProfileTraitsStore } from '~/stores/profileTraits';
+
 const analytics = useAnalytics()
+const { activeSource } = analytics
 const profiles = useProfileTraitsStore()
 
 definePageMeta({
@@ -16,6 +18,7 @@ useHead({
 
 onMounted(() => {
     analytics.page('POC Home')
+
 
     //profiles.startSyncing(3)
 })

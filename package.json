@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@segment/analytics-signals": "^1.7.1"
+  }
+}

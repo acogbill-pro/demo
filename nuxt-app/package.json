@@ -12,6 +12,7 @@
     "@pinia/nuxt": "^0.5.1",
     "@segment/analytics-next": "^1.62.0",
     "@segment/analytics-node": "^1.1.4",
+    "@segment/analytics-signals": "^1.7.1",
     "@statsig/js-client": "^3.0.0",
     "buffer": "^6.0.3",
     "nuxt": "^3.12.0",

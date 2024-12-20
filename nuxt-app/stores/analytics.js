@@ -3,6 +3,7 @@ import { AnalyticsBrowser } from '@segment/analytics-next'
 import {defineStore} from 'pinia'
 import {useProfileStore} from '~/stores/profile'
 import { useProfileTraitsStore } from '~/stores/profileTraits.js'
+// import { SignalsPlugin } from '@segment/analytics-signals'
 
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
@@ -33,7 +34,8 @@ export const useAnalytics = defineStore('analyticsStore', {
       },
     },
     actions: {
-      setup() {
+      setup(withAJSInstance) {
+        this.activeSource = withAJSInstance
         this.refreshIDs()
         
         this.activateWatcher()

@@ -1,5 +1,6 @@
 import { AnalyticsBrowser } from '@segment/analytics-next'
 import { useAnalytics } from '~/stores/analytics'
+import { SignalsPlugin } from '@segment/analytics-signals'
 
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig()
@@ -17,13 +18,13 @@ export default defineNuxtPlugin(nuxtApp => {
     ['diamond', 'gQUnDkKaHkk4ZZ9HM5pA4rzarr8eJj1v'],
     ['diamondresorts', 'gQUnDkKaHkk4ZZ9HM5pA4rzarr8eJj1v'],
     ['diamondaccount', 'gQUnDkKaHkk4ZZ9HM5pA4rzarr8eJj1v'],
-    ['pristineaccount', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
-    ['pristine', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
-    ['pristineshop', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
-    ['pristineproducts', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['pristineaccount', env == 'PROD' ? 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe' : 'hPJYl2dkQVcetyZge9PNTMHwOLPgTy9F'],
+    ['pristine', env == 'PROD' ? 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe' : 'hPJYl2dkQVcetyZge9PNTMHwOLPgTy9F'],
+    ['pristineshop', env == 'PROD' ? 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe': 'hPJYl2dkQVcetyZge9PNTMHwOLPgTy9F'],
+    ['pristineproducts', env == 'PROD' ? 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe' : 'hPJYl2dkQVcetyZge9PNTMHwOLPgTy9F'],
     ['pristineservice', 'R8qzxqLg4tuPE5Z4xFbrTqgxNpq9sCDN'],
-    ['pristineproductscart', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
-    ['pristineproductscheckout', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
+    ['pristineproductscart', env == 'PROD' ? 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe' : 'hPJYl2dkQVcetyZge9PNTMHwOLPgTy9F'],
+    ['pristineproductscheckout', env == 'PROD' ? 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe' : 'hPJYl2dkQVcetyZge9PNTMHwOLPgTy9F'],
     ['pristinejourneystart', 'geL9yYmf01qZvBceHXtBoVsqZffdMdJH'],
     ['pristineai', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
     ['thd', 'vit8lA1X9mBPVlkj4YwEk99e7bJw8WGe'],
@@ -98,6 +99,7 @@ export default defineNuxtPlugin(nuxtApp => {
   addRouteMiddleware('analytics-env', (to, from) => {
     const analytics = useAnalytics()
 
+
     const routePath = to.fullPath
 
     if (routePath !== '' && analytics.activeSource === null) {
@@ -116,8 +118,16 @@ export default defineNuxtPlugin(nuxtApp => {
         const writeKey = writeKeys.get(currentDirectory)
         console.log(`Loading write key in plugin for ${currentDirectory}: `, writeKey)
         const analyticsInstance = AnalyticsBrowser.load({ writeKey })
-        analytics.activeSource = analyticsInstance
-        analytics.setup()
+
+        
+        const {activeSource} = analytics
+        const signalsPlugin = new SignalsPlugin()
+        // console.log(signalsPlugin)
+        analyticsInstance.register(signalsPlugin)
+
+
+        // activeSource.value = analyticsInstance
+        analytics.setup(analyticsInstance)
       } else {
         console.log('No valid write key found')
         // analytics.activeSource = AnalyticsBrowser.load({ writeKey: writeKeys.get('Demoshop')})
