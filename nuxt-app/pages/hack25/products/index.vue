@@ -1,0 +1,31 @@
+<script setup>
+import { useAnalytics } from '~/stores/analytics.js'
+import { useProfileTraitsStore } from '~/stores/profileTraits';
+const analytics = useAnalytics()
+const profiles = useProfileTraitsStore()
+
+
+definePageMeta({
+    layout: "hack25",
+    middleware: ["page-analytics"],
+})
+
+useHead({
+    title: 'Add an Item'
+})
+
+onMounted(() => {
+    analytics.page('Product List')
+
+    //profiles.startSyncing(3)
+})
+</script>
+
+<template>
+    <div>
+        <Hack25ProductsMain />
+    </div>
+</template>
+
+
+<style lang="scss" scoped></style>

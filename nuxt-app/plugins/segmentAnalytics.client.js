@@ -83,6 +83,12 @@ export default defineNuxtPlugin(nuxtApp => {
     ['avis', env == 'PROD' ? 'TEYLatpCy2M6XYjdDihQHeElGSuBd5R9' : '7KvR7vtbQNflQjE8jwkeZRjBuiKQwnuc'],
     ['avis', env == 'PROD' ? 'TEYLatpCy2M6XYjdDihQHeElGSuBd5R9' : '7KvR7vtbQNflQjE8jwkeZRjBuiKQwnuc'],
     ['avis', env == 'PROD' ? 'TEYLatpCy2M6XYjdDihQHeElGSuBd5R9' : '7KvR7vtbQNflQjE8jwkeZRjBuiKQwnuc'],
+    ['hack25', env == 'PROD' ? '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU' : '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU'],
+    ['hack25', env == 'PROD' ? '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU' : '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU'],
+    ['hack25', env == 'PROD' ? '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU' : '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU'],
+    ['hack25', env == 'PROD' ? '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU' : '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU'],
+    ['hack25', env == 'PROD' ? '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU' : '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU'],
+    ['hack25', env == 'PROD' ? '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU' : '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU'],   
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
