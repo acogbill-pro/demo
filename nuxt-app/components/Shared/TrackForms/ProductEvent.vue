@@ -19,7 +19,7 @@ const product = computed(() => products.productFromSKU(props.sku) || { name: 'Lo
 
 const form = ref(null)
 const eventName = ref('Product Review')
-const eventProperties = ref('{"contents":"Review contents here"}')
+const eventProperties = ref(`{"contents":"Review contents here", "SKU":${props.sku}}`)
 const valid = ref(true)
 const showCalendar = ref(false)
 const serverSide = ref(true)
