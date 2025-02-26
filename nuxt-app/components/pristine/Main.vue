@@ -13,43 +13,27 @@ products.loadProducts(
     [
         {
             SKU: '0001',
-            name: 'Premium Stretch Jeans',
-            description: 'Resilient stretch denim made incredibly soft. Yes, jeans can be unbelievably comfortable.',
-            category: 'pants',
-            subCategory: 'jeans',
-            fit: 'slim',
-            priceUSD: 149,
-            image: 'jeans.jpg',
+            name: 'Bananas',
+            description: '1 Bunch - per Pound',
+            category: 'produce',
+            priceUSD: 10,
+            image: 'bananas.jpg',
         },
         {
             SKU: '0002',
-            name: 'The Chino 2.0',
-            description: 'Our signature washed chino, updated for smart performance & maximum versatility.',
-            category: 'pants',
-            subCategory: 'chinos',
-            fit: 'tailored',
-            priceUSD: 99,
-            image: 'chino.jpg'
+            name: 'Plantains',
+            description: '1 Bunch - per Pound',
+            category: 'produce',
+            priceUSD: 15,
+            image: 'plantains.jpg'
         },
         {
             SKU: '0003',
-            name: 'Riviera Short Sleeve Shirt',
-            description: 'Our best seller for a reason. A few reasons, actually: Original prints, comfy stretch & a better fit.',
-            category: 'shirts',
-            subCategory: 'casual',
-            fit: 'slim',
-            priceUSD: 85,
-            image: 'casual.jpg'
-        },
-        {
-            SKU: '0004',
-            name: 'Jetsetter Premium Dress Shirt',
-            description: 'A luxurious dress shirt with premium cotton from one of Portugals most celebrated mills.',
-            category: 'shirts',
-            subCategory: 'formal',
-            fit: 'tailored',
-            priceUSD: 179,
-            image: 'formal.jpg'
+            name: 'Chocolate Chips',
+            description: '1 Bag',
+            category: 'baking',
+            priceUSD: 20,
+            image: 'choc_chips.jpg'
         },
     ]
 )
@@ -105,7 +89,7 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
                 <v-row>
 
                     <v-col cols="8">
-                        <v-container height="600" />
+                        <!-- <v-container height="600" /> -->
                         <!-- <v-fade-transition>
                         <v-img :src="heroImagePath" width="800" />
                     </v-fade-transition> -->
@@ -146,7 +130,7 @@ const hasRecommendation = computed(() => cart.recommendedProduct instanceof Obje
 
 <style lang="scss" scoped>
 .hero {
-    background: url('../pristine/images/gifts.svg');
+    background: url('../pristine/images/grocery.jpg');
     background-size: cover;
     // height: 100vh;
     height: 600px;

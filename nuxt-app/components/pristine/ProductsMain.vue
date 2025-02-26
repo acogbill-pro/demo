@@ -6,80 +6,28 @@ productCatalog.loadProducts(
     [
         {
             SKU: '0001',
-            name: 'Premium Stretch Jeans',
-            description: 'Resilient stretch denim made incredibly soft. Yes, jeans can be unbelievably comfortable.',
-            category: 'pants',
-            subCategory: 'jeans',
-            fit: 'slim',
-            priceUSD: 149,
-            image: 'jeans.jpg',
+            name: 'Bananas',
+            description: '1 Bunch - per Pound',
+            category: 'produce',
+            priceUSD: 10,
+            image: 'bananas.jpg',
         },
         {
             SKU: '0002',
-            name: 'The Chino 2.0',
-            description: 'Our signature washed chino, updated for smart performance & maximum versatility.',
-            category: 'pants',
-            subCategory: 'chinos',
-            fit: 'tailored',
-            priceUSD: 99,
-            image: 'chino.jpg'
+            name: 'Plantains',
+            description: '1 Bunch - per Pound',
+            category: 'produce',
+            priceUSD: 15,
+            image: 'plantains.jpg'
         },
         {
             SKU: '0003',
-            name: 'Riviera Short Sleeve Shirt',
-            description: 'Our best seller for a reason. A few reasons, actually: Original prints, comfy stretch & a better fit.',
-            category: 'shirts',
-            subCategory: 'casual',
-            fit: 'slim',
-            priceUSD: 85,
-            image: 'casual.jpg'
+            name: 'Chocolate Chips',
+            description: '1 Bag',
+            category: 'baking',
+            priceUSD: 20,
+            image: 'choc_chips.jpg'
         },
-        {
-            SKU: '0004',
-            name: 'Jetsetter Premium Dress Shirt',
-            description: 'A luxurious dress shirt with premium cotton from one of Portugals most celebrated mills.',
-            category: 'shirts',
-            subCategory: 'formal',
-            fit: 'tailored',
-            priceUSD: 179,
-            image: 'formal.jpg'
-        },
-        // {
-        //     SKU: '0001',
-        //     name: 'Bee Berry Sting Bowl',
-        //     description: 'Savor the ripe mango and fresh berries over a pitaya base, topped with a honey drizzle and Purely Elizabeth Granola.',
-        //     category: 'Smoothie Bowls',
-        //     subCategory: 'berry',
-        //     priceUSD: 10,
-        //     image: 'bee-berry-sting-bowl-ingredients-final.png',
-        // },
-        // {
-        //     SKU: '0002',
-        //     name: 'Gladiator Chocolate',
-        //     description: 'Fuel up for it, grab hold of it and show it your strength with the help of this protein-rich Smoothie.',
-        //     category: 'Get Fit Blends',
-        //     subCategory: 'chocolate',
-        //     priceUSD: 15,
-        //     image: 'sk-fitness-gladiator-chocolate-with-ingredients.png'
-        // },
-        // {
-        //     SKU: '0003',
-        //     name: 'Blueberry Lemonade',
-        //     description: 'Filled with tasty, whole ingredients, this Smoothie blends flavor and joy into every moment.',
-        //     category: 'Enjoy a Treat Blends',
-        //     subCategory: 'berry',
-        //     priceUSD: 20,
-        //     image: 'blueberry-lemonade-with-ingredients.png'
-        // },
-        // {
-        //     SKU: '0004',
-        //     name: 'Choc-A-Laka',
-        //     description: 'The other half is knowing this Smoothie will help fuel their future and feed their mind.',
-        //     category: 'Kids Blends',
-        //     subCategory: 'chocolate',
-        //     priceUSD: 20,
-        //     image: 'sk-kids-choc-a-laka-with-ingredients.png'
-        // },
     ]
 )
 

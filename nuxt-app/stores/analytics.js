@@ -176,11 +176,12 @@ export const useAnalytics = defineStore('analyticsStore', {
         }
 
         if (phone) {
-          this.userID = phone
-          this.IDLabel = 'phone'
-          this.identify(traitsObject, true)
-          this.track("Signed In", traitsObject.value)
-          return
+          console.log('login with phone commented out in analytics store')
+          // this.userID = phone
+          // this.IDLabel = 'phone'
+          // this.identify(traitsObject, true)
+          // this.track("Signed In", traitsObject.value)
+          // return
         }
 
         this.anonymousID = anonymous_id

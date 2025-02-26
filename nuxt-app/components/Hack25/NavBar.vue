@@ -32,7 +32,7 @@ const props = defineProps({
                                                                                                                                                                     <v-icon>mdi-redo-variant</v-icon>
                                                                                                                                                                 </v-btn>
                                                                                                                                                                 <v-spacer />-->
-            <v-btn text rounded to="/hack25/account" color="light-blue-lighten-2" nuxt icon="mdi-account" />
+            <v-btn text rounded to="/hack25/account" color="pink-lighten-2" nuxt icon="mdi-account" />
             <Hack25CartButton v-if="cart" />
             <!--<v-btn color="secondary" text rounded @click="emit('toggleTheme', 'nav bar')">Toggle Theme</v-btn>-->
         </v-app-bar>
