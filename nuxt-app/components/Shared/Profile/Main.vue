@@ -122,7 +122,7 @@ function toggleList() {
 <template>
     <div>
 
-        <v-card class="my-0">
+        <v-card class="my-3">
             <v-card-title>
                 <h5>
                     Profile: <span :class="profile.hasLoaded ? 'branded' : null">{{ IDforPrint }}</span>
@@ -175,7 +175,7 @@ function toggleList() {
             <v-expand-transition>
                 <div v-show="!collapse">
 
-                    <v-tabs v-model="tab" bg-color="#6ac8dd">
+                    <v-tabs v-model="tab" bg-color="#06ae4d">
                         <v-tab value="traits">
                             Traits
                         </v-tab>
@@ -202,6 +202,6 @@ function toggleList() {
 
 <style lang="scss" scoped>
 .branded {
-    color: #6ac8dd;
+    color: #06ae4d;
 }
 </style>

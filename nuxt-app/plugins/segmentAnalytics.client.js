@@ -89,6 +89,15 @@ export default defineNuxtPlugin(nuxtApp => {
     ['hack25', env == 'PROD' ? '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU' : '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU'],
     ['hack25', env == 'PROD' ? '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU' : '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU'],
     ['hack25', env == 'PROD' ? '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU' : '5BmK8BNKFuMCcB0aPWbpG4nqESVncVhU'],   
+    ['craccount', env == 'PROD' ? '69iRV43nqwH66TyEd0VDgYDdqZrdpou9' : 'FuePK6qEwegECtsJV1ydp2CeOgCM1Dvd'],
+    ['cr', env == 'PROD' ? '69iRV43nqwH66TyEd0VDgYDdqZrdpou9' : 'FuePK6qEwegECtsJV1ydp2CeOgCM1Dvd'],
+    ['crshop', env == 'PROD' ? '69iRV43nqwH66TyEd0VDgYDdqZrdpou9': 'FuePK6qEwegECtsJV1ydp2CeOgCM1Dvd'],
+    ['crproducts', env == 'PROD' ? '69iRV43nqwH66TyEd0VDgYDdqZrdpou9' : 'FuePK6qEwegECtsJV1ydp2CeOgCM1Dvd'],
+    ['crservice', 'FuePK6qEwegECtsJV1ydp2CeOgCM1Dvd'],
+    ['crproductscart', env == 'PROD' ? '69iRV43nqwH66TyEd0VDgYDdqZrdpou9' : 'FuePK6qEwegECtsJV1ydp2CeOgCM1Dvd'],
+    ['crproductscheckout', env == 'PROD' ? '69iRV43nqwH66TyEd0VDgYDdqZrdpou9' : 'FuePK6qEwegECtsJV1ydp2CeOgCM1Dvd'],
+    ['crjourneystart', 'FuePK6qEwegECtsJV1ydp2CeOgCM1Dvd'],
+    ['crai', 'FuePK6qEwegECtsJV1ydp2CeOgCM1Dvd'],
   ])
   // const wifiWriteKey = nuxtApp.$config.wifiWriteKey
   // const wifiAnalytics = AnalyticsBrowser.load({ writeKey: wifiWriteKey })//.catch((err) => ...);
