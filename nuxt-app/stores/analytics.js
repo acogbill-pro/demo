@@ -27,7 +27,7 @@ export const useAnalytics = defineStore('analyticsStore', {
         return state.IDLabel
       },
       bestIDIsAnonymous: (state) => {
-        return state.IDLabel === 'anonymous_id'
+        return !state.userID//state.IDLabel === 'anonymous_id'
       },
       hasIDs(state) {
         return !(state.bestID === null || state.bestID === '')
@@ -61,13 +61,13 @@ export const useAnalytics = defineStore('analyticsStore', {
 
         this.identify()
       },
-      page(pageTitle, propertyObject = null) {
+      page(pageTitle, propertyObject = null, category = null) {
         try {
-          this.analytics.page(pageTitle, propertyObject)
+          this.analytics.page(category, propertyObject, pageTitle)
         } catch {
           console.log('Segment Page call failed; retrying')
           setTimeout(() => {
-            this.page(pageTitle, propertyObject)
+            this.page(category, propertyObject, pageTitle)
           }, 2000)
         }
       },

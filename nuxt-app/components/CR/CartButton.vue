@@ -11,7 +11,7 @@ onMounted(() => {
 
 <template>
     <v-btn rounded to="/cr/products/cart" nuxt color="#06ae4d">
-        <v-icon icon="mdi-cart" /> {{ cart.totalQuantity }} - ${{ cart.totalValue }}
+        <v-icon icon="mdi-heart" /> {{ cart.totalQuantity }}
     </v-btn>
 </template>
 

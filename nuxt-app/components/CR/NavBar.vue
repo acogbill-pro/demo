@@ -1,4 +1,6 @@
 <script setup>
+const profile = useProfileStore()
+
 const props = defineProps({
     cart: {
         type: Boolean,
@@ -32,7 +34,10 @@ const props = defineProps({
                                                                                                                                                                     <v-icon>mdi-redo-variant</v-icon>
                                                                                                                                                                 </v-btn>
                                                                                                                                                                 <v-spacer />-->
-            <v-btn text rounded to="/cr/account" color="#06ae4d" nuxt icon="mdi-account" />
+            <v-btn v-if="profile.hasLoaded" text rounded to="/cr/account" color="#06ae4d" nuxt icon="mdi-account" />
+            <v-btn v-else text rounded to="/cr/account" color="white" class="text-transform: capitalize" nuxt><span
+                    class="text-transform: capitalize">Sign
+                    in</span></v-btn>
             <CRCartButton v-if="cart" />
             <!--<v-btn color="secondary" text rounded @click="emit('toggleTheme', 'nav bar')">Toggle Theme</v-btn>-->
         </v-app-bar>

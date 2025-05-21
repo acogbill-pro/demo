@@ -122,7 +122,7 @@ function toggleList() {
 <template>
     <div>
 
-        <v-card class="my-3">
+        <v-card>
             <v-card-title>
                 <h5>
                     Profile: <span :class="profile.hasLoaded ? 'branded' : null">{{ IDforPrint }}</span>
@@ -182,6 +182,9 @@ function toggleList() {
                         <v-tab value="events">
                             Events
                         </v-tab>
+                        <v-tab value="chat">
+                            Chat
+                        </v-tab>
                     </v-tabs>
                     <v-window v-model="tab">
                         <v-window-item value="traits">
@@ -189,6 +192,9 @@ function toggleList() {
                         </v-window-item>
                         <v-window-item value="events">
                             <SharedProfileEvents />
+                        </v-window-item>
+                        <v-window-item value="chat">
+                            <SharedProfileChat />
                         </v-window-item>
                     </v-window>
                     <!-- <v-card-text>

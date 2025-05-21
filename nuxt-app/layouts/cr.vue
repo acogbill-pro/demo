@@ -20,10 +20,6 @@ useHead({
     },
 })
 
-function leaving(e) {
-    e.returnValue = ""
-}
-
 onMounted(() => {
     profiles.startSyncingArticleStore()
 
@@ -41,6 +37,7 @@ onMounted(() => {
             <v-main>
                 <slot />
             </v-main>
+
             <!-- <KFCFooter /> -->
         </v-app>
     </div>

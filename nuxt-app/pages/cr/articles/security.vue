@@ -2,10 +2,15 @@
 import { useAnalytics } from '~/stores/analytics.js'
 import { useProductCatalog } from '~~/stores/products';
 import { useProfileTraitsStore } from '~/stores/profileTraits';
+import { sl } from 'vuetify/locale';
 
 const analytics = useAnalytics()
 const { activeSource } = analytics
 const profiles = useProfileTraitsStore()
+
+const slug = "security"
+const capital = "Security"
+
 
 definePageMeta({
     layout: "cr",
@@ -13,11 +18,11 @@ definePageMeta({
 })
 
 useHead({
-    title: 'Landing Page'
+    title: 'Articles: ' + capital
 })
 
 onMounted(() => {
-    analytics.page('POC Home')
+    analytics.page('Articles', {}, capital)
 
 
     //profiles.startSyncing(3)
@@ -25,17 +30,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
-        <CRBrowseBar />
-        <CRMain />
-    </div>
-    <!-- <v-navigation-drawer>
-        <v-list-item title="My Application" subtitle="Vuetify" v-if="drawer" location="right"></v-list-item>
-        <v-divider></v-divider>
-        <v-list-item link title="List Item 1"></v-list-item>
-        <v-list-item link title="List Item 2"></v-list-item>
-        <v-list-item link title="List Item 3"></v-list-item>
-    </v-navigation-drawer> -->
+    <CRBrowseBar />
+    <CRArticleSearch :slug="slug" />
 </template>
 
 

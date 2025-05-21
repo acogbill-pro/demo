@@ -40,6 +40,9 @@ export const useProfileTraitsStore = defineStore('profileTraitsStore', {
       productSKUsOwned: (state) => {
         return scripts.listToArray(state.traits.products_owned ?? '')
       },
+      personalizationCategory: (state) => {
+        return state.traits.top_category ?? 'default'
+      },
     },
   
     actions: {

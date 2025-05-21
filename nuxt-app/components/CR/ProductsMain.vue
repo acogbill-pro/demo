@@ -5,7 +5,7 @@ const { all: products } = productCatalog
 productCatalog.loadProducts(
     [
         {
-            SKU: '0001',
+            articleId: '0001',
             name: 'Bananas',
             description: '1 Bunch - per Pound',
             category: 'produce',

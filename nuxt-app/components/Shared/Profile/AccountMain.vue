@@ -13,7 +13,7 @@ function toggleCollapse() {
 }
 
 const isLoggedIn = computed(() => {
-    return !analytics.bestIDIsAnonymous
+    return profile.hasLoaded
 })
 
 function logout() {
@@ -23,35 +23,22 @@ function logout() {
 
 <template>
     <v-container fluid>
-        <v-row v-if="!isLoggedIn || (isLoggedIn && !collapse)" class="bg">
+        <v-row class="bg">
             <v-col>
                 <UserEmailLogin />
             </v-col>
             <v-col>
-                <UserRegister />
+                <UserRegister v-if="!isLoggedIn" />
+                <v-card-text v-else>
+
+                    <SharedProfileUserSummary />
+                    <SharedProfilePrompter />
+                    <SharedProfileConsent />
+                </v-card-text>
             </v-col>
             `<v-col>
                 <SharedSidebar />
             </v-col>`
-        </v-row>
-        <v-row v-else>
-            <v-col cols="1" />
-            <v-col cols="6">
-                <SharedSidebar />
-            </v-col>`
-            <v-col cols="4">
-                <v-card>
-                    <!-- <v-card-title>Logged In</v-card-title> -->
-                    <v-card-text>
-
-                        <SharedProfileUserSummary />
-                        <SharedProfilePrompter />
-                        <SharedProfileConsent />
-                    </v-card-text>
-                </v-card>
-            </v-col>
-
-            <v-col cols="1" />
         </v-row>
         <v-row v-if="isLoggedIn" class="my-5">
             <v-btn @click="logout()" class="mr-3">Logout</v-btn>

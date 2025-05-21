@@ -2,35 +2,35 @@
 const topLinks = [
     {
         label: 'Cars',
-        url: '/cr/cars',
+        url: '/cr/articles/cars',
     },
     {
         label: 'Home & Garden',
-        url: '/cr/home',
+        url: '/cr/articles/home',
     },
     {
         label: 'Appliances',
-        url: '/cr/appliances',
+        url: '/cr/articles/appliances',
     },
     {
         label: 'Electronics',
-        url: '/cr/electronics',
+        url: '/cr/articles/electronics',
     },
     {
         label: 'Babies',
-        url: '/cr/babies',
+        url: '/cr/articles/babies',
     },
     {
         label: 'Digital Security',
-        url: '/cr/security',
+        url: '/cr/articles/security',
     },
     {
         label: 'Deals',
-        url: '/cr/deals',
+        url: '/cr/articles/deals',
     },
     {
         label: 'More+',
-        url: '/cr/more',
+        url: '/cr/articles/deals',
     },
 ]
 
