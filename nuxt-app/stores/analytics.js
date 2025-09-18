@@ -1,5 +1,6 @@
 // Wrapper store for analytics.js
 import { AnalyticsBrowser } from '@segment/analytics-next'
+import { SignalsPlugin } from '@segment/analytics-signals'
 import {defineStore} from 'pinia'
 import {useProfileStore} from '~/stores/profile'
 import { useProfileTraitsStore } from '~/stores/profileTraits.js'
@@ -43,7 +44,13 @@ export const useAnalytics = defineStore('analyticsStore', {
       loadWriteKey(writeKey) {
         console.log('Loading write key: ', writeKey)
         this.manualWriteKey = writeKey
-        this.activeSource = AnalyticsBrowser.load({writeKey})
+        const analyticsInstance = new AnalyticsBrowser()
+
+        // add on Signals
+        const signalsPlugin = new SignalsPlugin();
+        analyticsInstance.register(signalsPlugin);
+        
+        this.activeSource = analyticsInstance.load({writeKey})
         this.setup()
       },
       unloadWriteKey() {
@@ -73,97 +80,13 @@ export const useAnalytics = defineStore('analyticsStore', {
       },
       track(eventName, propertyObject = null) {
         console.log('track call', eventName)
-        try {
-          this.analytics.track(eventName, propertyObject) 
-        } catch {
-          console.log('Segment Track call failed; retrying')
-          setTimeout(() => {
-            this.track(eventName, propertyObject)
-          }, 2000)
-        }
+        return
       },
       async trackServerSide(eventName, propertyObject = null) {
-        try {
-          const body = {
-            event: eventName,
-            properties: propertyObject,
-          }
-
-          if (!this.bestIDIsAnonymous){
-            body.userId = this.userID
-          } else {
-            // console.log('setting body ID to anonymousId', this.anonymousID)
-            body.anonymousId = this.anonymousID
-          }
-
-          // console.log('body', body)
-  
-          const options = {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json',
-            //   'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
-            },
-            body: JSON.stringify(body)
-          }
-  
-          const response = await fetch('/api/analytics/track', options)
-
-          if (response.ok) {
-            // console.log('fetch went OK')
-            const {data} = await response.json()
-            this.allEvents.unshift(eventName + ' (Server)')
-            return data
-          } else {
-            return Promise.reject({error: 'Server-side Track error: ' + response.status})
-          }
-        } catch {
-          console.log('Segment Server-side Track call failed; retrying')
-          setTimeout(() => {
-            this.trackServerSide(eventName, propertyObject)
-          }, 2000)
-        }
+        return
       },
       async trackTransaction(eventName, propertyObject = null) {
-        try {
-          const body = {
-            event: eventName,
-            properties: propertyObject,
-          }
-
-          if (!this.bestIDIsAnonymous){
-            body.userId = this.userID
-          } else {
-            body.anonymousId = this.anonymousId
-          }
-
-          // console.log('body', body)
-  
-          const options = {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json',
-            //   'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
-            },
-            body: JSON.stringify(body)
-          }
-  
-          const response = await fetch('/api/jpmc/transaction', options)
-
-          if (response.ok) {
-            // console.log('fetch went OK')
-            const {data} = await response.json()
-            this.allEvents.unshift(eventName + ' (Transaction)')
-            return data
-          } else {
-            return Promise.reject({error: 'Transaction error: ' + response.status})
-          }
-        } catch {
-          console.log('Segment Transaction failed; retrying')
-          setTimeout(() => {
-            this.trackTransaction(eventName, propertyObject)
-          }, 2000)
-        }
+        return
       },
       async loginWithTraits(traitsObject) {
         const {user_id, anonymous_id, phone} = traitsObject
@@ -188,86 +111,10 @@ export const useAnalytics = defineStore('analyticsStore', {
         this.identify(traitsObject, true)
       },
       identify(newTraits = {}, syncAfter = false) {
-        const profileTraits = useProfileTraitsStore()
-        const traitsObject = Object.assign(profileTraits.cleanTraits ?? {}, newTraits)
-        console.log('identify call',traitsObject)
-        const profile = useProfileStore()
-
-        // if (useID !== null) {  // ID override
-        //   this.analytics.identify(useID, traitsObject)     
-
-        //   if (syncAfter) {
-        //     setTimeout(() => {
-        //       profiles.startSyncing(3)
-        //     }, 2000)
-        //   }
-        //   return
-        // }
-
-        if (this.userID !== null) {  // can be anonymous
-          this.analytics.identify(this.userID, traitsObject).then((result) => console.log(result))     
-
-          if (syncAfter) {
-            setTimeout(() => {
-              profile.startSyncing(3)
-            }, 2000)
-          }
-          
-        } else {
-          //console.log('adding traits to anon')
-          this.analytics.identify(traitsObject) // automatically prepends the anonymous ID
-
-          if (syncAfter) {
-            setTimeout(() => {
-              profile.startSyncing(10)
-            }, 2000)
-          }
-        }
+        return
       },
       async identifyServerSide(traitsObject = {}, syncAfter = false) {
-        const profile = useProfileStore()
-        try {
-          const body = {
-            traits: traitsObject,
-          }
-
-          if (!this.bestIDIsAnonymous){
-            body.userId = this.userID
-          } else {
-            body.anonymousId = this.anonymousId
-          }
-
-          // console.log('body', body)
-  
-          const options = {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json',
-            //   'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
-            },
-            body: JSON.stringify(body)
-          }
-  
-          const response = await fetch('/api/analytics/identify', options)
-
-          if (response.ok) {
-            // console.log('fetch went OK')
-            const {data} = await response.json()
-            if (syncAfter) {
-              setTimeout(() => {
-                profile.startSyncing(10)
-              }, 2000)
-            }
-            return data
-          } else {
-            return Promise.reject({error: 'Server-side Track error: ' + response.status})
-          }
-        } catch {
-          console.log('Segment Server-side Track call failed; retrying')
-          setTimeout(() => {
-            this.trackServerSide(eventName, propertyObject)
-          }, 2000)
-        }
+        return
       },
       group(accountId, accountTraits = {}) {
         if (this.userID === null && this.anonymousID === '') return
