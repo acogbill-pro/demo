@@ -80,10 +80,56 @@ export const useAnalytics = defineStore('analyticsStore', {
       },
       track(eventName, propertyObject = null) {
         console.log('track call', eventName)
-        return
+        try {
+          this.analytics.track(eventName, propertyObject) 
+        } catch {
+          console.log('Segment Track call failed; retrying')
+          setTimeout(() => {
+            this.track(eventName, propertyObject)
+          }, 2000)
+        }
       },
       async trackServerSide(eventName, propertyObject = null) {
-        return
+        try {
+          const body = {
+            event: eventName,
+            properties: propertyObject,
+          }
+
+          if (!this.bestIDIsAnonymous){
+            body.userId = this.userID
+          } else {
+            // console.log('setting body ID to anonymousId', this.anonymousID)
+            body.anonymousId = this.anonymousID
+          }
+
+          // console.log('body', body)
+  
+          const options = {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+            //   'Authorization': `Basic ${Buffer.from(`${runtimeConfig.profileKey}:`).toString('base64')}`,
+            },
+            body: JSON.stringify(body)
+          }
+  
+          const response = await fetch('/api/analytics/track', options)
+
+          if (response.ok) {
+            // console.log('fetch went OK')
+            const {data} = await response.json()
+            this.allEvents.unshift(eventName + ' (Server)')
+            return data
+          } else {
+            return Promise.reject({error: 'Server-side Track error: ' + response.status})
+          }
+        } catch {
+          console.log('Segment Server-side Track call failed; retrying')
+          setTimeout(() => {
+            this.trackServerSide(eventName, propertyObject)
+          }, 2000)
+        }
       },
       async trackTransaction(eventName, propertyObject = null) {
         return
