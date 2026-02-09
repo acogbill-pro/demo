@@ -129,24 +129,22 @@ export default defineNuxtPlugin(nuxtApp => {
       // console.log(currentDirectory)
       // const isWifi = routeAsArray.length > 1 ? routeAsArray[1] === 'wifi' : false
       // console.log(AnalyticsBrowser.load)
-      if (writeKeys.has(currentDirectory)) {
-        const writeKey = writeKeys.get(currentDirectory)
+
+      // if (writeKeys.has(currentDirectory)) {
+        const writeKey = 'hPJYl2dkQVcetyZge9PNTMHwOLPgTy9F'//writeKeys.get(currentDirectory)
         console.log(`Loading write key in plugin for ${currentDirectory}: `, writeKey)
         const analyticsInstance = AnalyticsBrowser.load({ writeKey })
 
         
         const {activeSource} = analytics
         const signalsPlugin = new SignalsPlugin()
-        // console.log(signalsPlugin)
         analyticsInstance.register(signalsPlugin)
-
-
         // activeSource.value = analyticsInstance
         analytics.setup(analyticsInstance)
-      } else {
-        console.log('No valid write key found')
-        // analytics.activeSource = AnalyticsBrowser.load({ writeKey: writeKeys.get('Demoshop')})
-      }
+      // } else {
+      //   console.log('No valid write key found')
+      //   // analytics.activeSource = AnalyticsBrowser.load({ writeKey: writeKeys.get('Demoshop')})
+      // }
 
     }
 
