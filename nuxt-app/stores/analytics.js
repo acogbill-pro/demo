@@ -4,7 +4,7 @@ import { SignalsPlugin } from '@segment/analytics-signals'
 import {defineStore} from 'pinia'
 import {useProfileStore} from '~/stores/profile'
 import { useProfileTraitsStore } from '~/stores/profileTraits.js'
-// import { SignalsPlugin } from '@segment/analytics-signals'
+import { SignalsPlugin } from '@segment/analytics-signals'
 
 export const useAnalytics = defineStore('analyticsStore', {
     state: () => ({
